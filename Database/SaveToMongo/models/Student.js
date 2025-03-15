@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Định nghĩa Schema cho Student
 const StudentSchema = new mongoose.Schema({
-    student_id: String,
+    student_id: {type: String, unique: true},
     name: String,
     gender: String,
     birth_date: String,
