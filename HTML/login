@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
         .flex-navbar {
@@ -9,33 +9,98 @@
             justify-content: space-between;
             padding: 10px;
         }
+
         .flex-navbar img {
             width: 40px;
             height: 40px;
         }
+
         .flex-navbar div {
             color: rgb(0, 0, 0);
             margin: 0 15px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
+
         .flex-navbar .nav-center {
             display: flex;
             justify-content: center;
             flex-grow: 1;
         }
+
+        .login-form {
+            width: 50%;
+            margin: 0 auto;
+            border: 12 solid rgb(184, 217, 255);
+            border-radius: 10px;
+        }
     </style>
 </head>
+
 <body>
     <div class="flex-navbar">
         <img src="web_logo.jpg" alt="icon">
         <div class="nav-center">
-            <div>Home</div>
+            <div style="color: rgb(82, 82, 255);">Home</div>
             <div>About us</div>
             <div>Service</div>
             <div>How it works?</div>
             <div>Contact</div>
         </div>
     </div>
+    <p style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color: gray; font-weight: bold;">
+        Chào mừng các UITers! Hãy đăng nhập tài khoản để bắt đầu hành trình của bạn!</p>
+    <br><br>
+    <div>
+        <form class="login-form" action="/login" method="POST"
+            style="display: flex; flex-direction: column; padding: 10px; border: 3px solid rgb(179, 207, 255); border-radius: 15px;">
+            <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 36px; align-self: center;">Đăng
+                nhập</h2>
+            <label for="username"
+                style="font-family: Verdana, Geneva, Tahoma, sans-serif; text-align: left; padding-left: 190px;">Email</label>
+            <input type="text" id="username" name="username" required
+                style="margin: 10px 0; padding: 5px; width: 50%; align-self: center; border-radius: 20px;"
+                placeholder="mssv@uit.edu.vn hoặc gv/admin@uit.edu.vn"><br>
+            <label for="password" style="font-family: Verdana, Geneva, Tahoma, sans-serif; padding-left: 190px;">Mật khẩu</label>
+            <div style="position: relative; width: 50%; align-self: center; padding-right: 10px;">
+                <input type="password" id="password" name="password" required
+                    style="margin: 10px 0; padding: 5px; width: 100%; border-radius: 20px;" placeholder="********">
+                <button type="button" id="togglePassword" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); 
+                    background: none; border: none; cursor: pointer; font-size: 14px; color: rgb(138, 138, 255);">
+                    Show
+                </button>
+            </div>
+            <br>
+            <label class="remember-me" style="font-family: Verdana, Geneva, Tahoma, sans-serif; display: flex; padding-left: 465px;">
+                <input type="checkbox" name="remember-me" >Ghi nhớ tôi</label> <br>
+            <button type="submit" name="role" value="student"
+                style="width: 50%; font-size: 16px;padding: 10px 20px; background-color: rgb(82, 82, 255); color: white; border-radius: 20px; cursor: pointer;align-self: center;">Đăng
+                nhập Sinh viên</button> <br>
+            <button type="submit" name="role" value="teacher"
+                style="width: 50%; font-size: 16px;padding: 10px 20px; background-color: rgb(82, 82, 255); color: white; border-radius: 20px; cursor: pointer;align-self: center;">Đăng
+                nhập Giảng viên</button> <br>
+            <button type="submit" name="role" value="admin"
+                style="width: 50%; font-size: 16px;padding: 10px 20px; background-color: rgb(82, 82, 255); color: white; border-radius: 20px; cursor: pointer;align-self: center;">Đăng
+                nhập Admin</button>
+            <br><br>
+        </form>
+    </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
 </body>
+<footer>
+    <div>
+        
+    </div>
+</footer>
 </html>
