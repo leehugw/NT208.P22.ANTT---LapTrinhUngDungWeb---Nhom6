@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .flex-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .flex-navbar img {
+            width: 40px;
+            height: 40px;
+        }
+        .flex-navbar div {
+            color: rgb(0, 0, 0);
+            margin: 0 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .flex-navbar .nav-center {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-navbar">
+        <img src="web_logo.jpg" alt="icon">
+        <div class="nav-center">
+            <div>Home</div>
+            <div>About us</div>
+            <div>Service</div>
+            <div>How it works?</div>
+            <div>Contact</div>
+        </div>
+    </div>
+</body>
+</html>
