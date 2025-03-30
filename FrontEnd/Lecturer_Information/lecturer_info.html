@@ -57,9 +57,13 @@
             <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home">
                 <i class="fa-solid fa-house-chimney"></i>Trang chủ
             </a>
-            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#class-list">
-                <i class="fa-solid fa-list"></i> Danh sách lớp học
-            </a>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100" 
+            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+            <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="studentDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Hồ sơ Giảng viên</a>
+            </div>
         </nav>
     </header>
 
