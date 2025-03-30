@@ -1,0 +1,70 @@
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important; /* Đảm bảo màu được áp dụng */
+    background-color: transparent !important; /* Loại bỏ màu nền mặc định */
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.stat-card {
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    padding: 1rem;
+    background-color: #f8f9fc;
+    transition: all 0.2s ease-in-out;
+}
+.stat-card:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-5px);
+}
+.stat-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.stat-card p {
+    margin-bottom: 0;
+    color: #858796;
+}
+.table thead th {
+    background-color: #3D67BA;
+    color: white;
+}
+.table tbody tr {
+    transition: all 0.2s ease-in-out;
+}
+.table tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+.progress-container {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+.text-left {
+    text-align: left;
+}
+
+.form-check-input {
+    background-color: #e2e6ea; /* Màu nền của checkbox chưa được chọn */
+    border-color: #3D67BA; /* Màu viền của checkbox chưa được chọn */
+}
