@@ -17,7 +17,7 @@ document.getElementById("toggle-password").addEventListener("click", function() 
     let passwordInput = document.getElementById("password");
     let eyeIcon = this.querySelector("i"); // Lấy icon bên trong nút
 
-    if (passwordInput.type === "password") {
+    if (passwordInput.type === "password") {    
         passwordInput.type = "text";
         eyeIcon.classList.remove("bi-eye-slash");
         eyeIcon.classList.add("bi-eye"); // Mắt mở
