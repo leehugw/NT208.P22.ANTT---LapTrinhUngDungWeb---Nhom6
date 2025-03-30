@@ -1,0 +1,110 @@
+
+.text-primary {
+    color: #3D67BA !important;
+}
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+.container {
+    padding: auto;
+    margin: auto;
+}
+
+.font-lexend {
+    font-family: 'Lexend', sans-serif;
+}
+/* Chỉnh in đậm hơn */
+h2, label, .form-check-label {
+    font-weight: 600;
+}
+
+/* Chỉnh icon con mắt */
+.input-group-text i {
+    color: #3D67BA;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+}
+
+/* Hover icon */
+.input-group-text:hover i {
+    color: #2B4F91;
+    font-weight: 900;
+}
+
+/* Bo tròn input và có viền đẹp */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #3D67BA;
+    box-shadow: 0 0 8px rgba(61, 103, 186, 0.5);
+}
+
+/* Bo tròn checkbox */
+.form-check-input {
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3D67BA;
+}
+
+.form-check-input:checked {
+    background-color: #3D67BA;
+    border-color: #3D67BA;
+}
+
+/* Hiệu ứng hover và transition cho nút đăng nhập */
+.btn-primary {
+    background-color: #3D67BA;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #2B4F91;
+    box-shadow: 0 4px 10px rgba(61, 103, 186, 0.4);
+    transform: scale(1.05);
+}
+
+/* Bo tròn và đổ bóng cho khung đăng nhập */
+.login-form {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+    padding: 20px;
+}
+
+.footer-nav {
+    background-color: #3D67BA; /* Đổi màu nền */
+    color: white; /* Màu chữ */
+    padding: 10px 15px; /* Khoảng cách nội dung */
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-nav a {
+    color: white; /* Màu chữ của link */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+.footer-nav a:hover {
+    text-decoration: underline; /* Hiệu ứng hover */
+}
