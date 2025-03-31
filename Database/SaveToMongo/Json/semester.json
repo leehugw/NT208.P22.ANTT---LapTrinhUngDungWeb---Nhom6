@@ -1,0 +1,56 @@
+[
+  {
+    "semester_id": "HK120242025",
+    "semester_name": "Học kỳ 1 - Năm học 2024-2025",
+    "start_year": 2024,
+    "end_year": 2025
+  },
+  {
+    "semester_id": "HK220232024",
+    "semester_name": "Học kỳ 2 - Năm học 2023-2024",
+    "start_year": 2023,
+    "end_year": 2024
+  },
+  {
+    "semester_id": "HK120232024",
+    "semester_name": "Học kỳ 1 - Năm học 2023-2024",
+    "start_year": 2023,
+    "end_year": 2024
+  },
+  {
+    "semester_id": "HK220222023",
+    "semester_name": "Học kỳ 2 - Năm học 2022-2023",
+    "start_year": 2022,
+    "end_year": 2023
+  },
+  {
+    "semester_id": "HK120222023",
+    "semester_name": "Học kỳ 1 - Năm học 2022-2023",
+    "start_year": 2022,
+    "end_year": 2023
+  },
+  {
+    "semester_id": "HK220212022",
+    "semester_name": "Học kỳ 2 - Năm học 2021-2022",
+    "start_year": 2021,
+    "end_year": 2022
+  },
+  {
+    "semester_id": "HK120212022",
+    "semester_name": "Học kỳ 1 - Năm học 2021-2022",
+    "start_year": 2021,
+    "end_year": 2022
+  },
+  {
+    "semester_id": "HK220202021",
+    "semester_name": "Học kỳ 2 - Năm học 2020-2021",
+    "start_year": 2020,
+    "end_year": 2021
+  },
+  {
+    "semester_id": "HK120202021",
+    "semester_name": "Học kỳ 1 - Năm học 2020-2021",
+    "start_year": 2020,
+    "end_year": 2021
+  }
+]

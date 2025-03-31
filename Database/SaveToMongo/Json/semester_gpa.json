@@ -1,0 +1,47 @@
+[
+  {
+    "semester_id": "HK120242025",
+    "student_id": "25525555",
+    "semester_gpa": "2.53"
+  },
+  {
+    "semester_id": "HK220232024",
+    "student_id": "25525555",
+    "semester_gpa": "2.25"
+  },
+  {
+    "semester_id": "HK120232024",
+    "student_id": "25525555",
+    "semester_gpa": "4.30"
+  },
+  {
+    "semester_id": "HK220222023",
+    "student_id": "25525555",
+    "semester_gpa": "4.26"
+  },
+  {
+    "semester_id": "HK120222023",
+    "student_id": "25525555",
+    "semester_gpa": "1.63"
+  },
+  {
+    "semester_id": "HK220212022",
+    "student_id": "25525555",
+    "semester_gpa": "4.69"
+  },
+  {
+    "semester_id": "HK120212022",
+    "student_id": "25525555",
+    "semester_gpa": "6.03"
+  },
+  {
+    "semester_id": "HK220202021",
+    "student_id": "25525555",
+    "semester_gpa": "4.84"
+  },
+  {
+    "semester_id": "HK120202021",
+    "student_id": "25525555",
+    "semester_gpa": "3.43"
+  }
+]
