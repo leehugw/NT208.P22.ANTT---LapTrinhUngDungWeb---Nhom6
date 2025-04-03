@@ -1,0 +1,102 @@
+[
+  {
+    "username": "tungmv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV001"
+  },
+  {
+    "username": "sonlv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV002"
+  },
+  {
+    "username": "cuongtv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV003"
+  },
+  {
+    "username": "minhlt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV004"
+  },
+  {
+    "username": "yenlv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV005"
+  },
+  {
+    "username": "longtt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV006"
+  },
+  {
+    "username": "cuonghv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV007"
+  },
+  {
+    "username": "ngadv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV008"
+  },
+  {
+    "username": "uyentv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV009"
+  },
+  {
+    "username": "uyendt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV010"
+  },
+  {
+    "username": "binhtt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV011"
+  },
+  {
+    "username": "phuonglt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV012"
+  },
+  {
+    "username": "yenbv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV013"
+  },
+  {
+    "username": "thaohv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV014"
+  },
+  {
+    "username": "cuongbv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV015"
+  },
+  {
+    "username": "dungtt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV016"
+  },
+  {
+    "username": "cuongpv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV017"
+  },
+  {
+    "username": "cuongnv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV018"
+  },
+  {
+    "username": "xuanlt@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV019"
+  },
+  {
+    "username": "tumv@uit.edu.vn",
+    "role": "lecturer",
+    "lecturer_id": "GV020"
+  }
+]
