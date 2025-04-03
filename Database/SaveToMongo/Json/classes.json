@@ -1,0 +1,156 @@
+[
+  {
+    "class_id": "KHMT01",
+    "class_name": "KHMT.1",
+    "faculty_id": "KHOA_KHMT",
+    "training_system": "Đại trà",
+    "major_id": "KHMT"
+  },
+  {
+    "class_id": "KHMT02",
+    "class_name": "KHMT.2",
+    "faculty_id": "KHOA_KHMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "KHMT"
+  },
+  {
+    "class_id": "TTNT01",
+    "class_name": "TTNT.1",
+    "faculty_id": "KHOA_KHMT",
+    "training_system": "Đại trà",
+    "major_id": "TTNT"
+  },
+  {
+    "class_id": "TTNT02",
+    "class_name": "TTNT.2",
+    "faculty_id": "KHOA_KHMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "TTNT"
+  },
+  {
+    "class_id": "KTPM01",
+    "class_name": "KTPM.1",
+    "faculty_id": "KHOA_CNPM",
+    "training_system": "Chất lượng cao",
+    "major_id": "KTPM"
+  },
+  {
+    "class_id": "KTPM02",
+    "class_name": "KTPM.2",
+    "faculty_id": "KHOA_CNPM",
+    "training_system": "Đại trà",
+    "major_id": "KTPM"
+  },
+  {
+    "class_id": "KTMT01",
+    "class_name": "KTMT.1",
+    "faculty_id": "KHOA_KTMT",
+    "training_system": "Đại trà",
+    "major_id": "KTMT"
+  },
+  {
+    "class_id": "KTMT02",
+    "class_name": "KTMT.2",
+    "faculty_id": "KHOA_KTMT",
+    "training_system": "Đại trà",
+    "major_id": "KTMT"
+  },
+  {
+    "class_id": "TKVM01",
+    "class_name": "TKVM.1",
+    "faculty_id": "KHOA_KTMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "TKVM"
+  },
+  {
+    "class_id": "TKVM02",
+    "class_name": "TKVM.2",
+    "faculty_id": "KHOA_KTMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "TKVM"
+  },
+  {
+    "class_id": "CNTT01",
+    "class_name": "CNTT.1",
+    "faculty_id": "KHOA_KTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "CNTT"
+  },
+  {
+    "class_id": "CNTT02",
+    "class_name": "CNTT.2",
+    "faculty_id": "KHOA_KTTT",
+    "training_system": "Đại trà",
+    "major_id": "CNTT"
+  },
+  {
+    "class_id": "KHDL01",
+    "class_name": "KHDL.1",
+    "faculty_id": "KHOA_KTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "KHDL"
+  },
+  {
+    "class_id": "KHDL02",
+    "class_name": "KHDL.2",
+    "faculty_id": "KHOA_KTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "KHDL"
+  },
+  {
+    "class_id": "TMDT01",
+    "class_name": "TMDT.1",
+    "faculty_id": "KHOA_HTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "TMDT"
+  },
+  {
+    "class_id": "TMDT02",
+    "class_name": "TMDT.2",
+    "faculty_id": "KHOA_HTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "TMDT"
+  },
+  {
+    "class_id": "HTTT01",
+    "class_name": "HTTT.1",
+    "faculty_id": "KHOA_HTTT",
+    "training_system": "Chất lượng cao",
+    "major_id": "HTTT"
+  },
+  {
+    "class_id": "HTTT02",
+    "class_name": "HTTT.2",
+    "faculty_id": "KHOA_HTTT",
+    "training_system": "Đại trà",
+    "major_id": "HTTT"
+  },
+  {
+    "class_id": "ATTT01",
+    "class_name": "ATTT.1",
+    "faculty_id": "KHOA_MMT",
+    "training_system": "Đại trà",
+    "major_id": "ATTT"
+  },
+  {
+    "class_id": "ATTT02",
+    "class_name": "ATTT.2",
+    "faculty_id": "KHOA_MMT",
+    "training_system": "Đại trà",
+    "major_id": "ATTT"
+  },
+  {
+    "class_id": "MMTT01",
+    "class_name": "MMTT.1",
+    "faculty_id": "KHOA_MMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "MMTT"
+  },
+  {
+    "class_id": "MMTT02",
+    "class_name": "MMTT.2",
+    "faculty_id": "KHOA_MMT",
+    "training_system": "Chất lượng cao",
+    "major_id": "MMTT"
+  }
+]
