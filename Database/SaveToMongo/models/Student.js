@@ -4,7 +4,7 @@ const StudentSchema = new mongoose.Schema({
     student_id: { type: String, required: true, unique: true, trim: true },
     name: { type: String, required: true, trim: true },
     gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
-    birth_date: { type: Date, required: true },
+    birth_date: { type: String, required: true },
     birthplace: { type: String, trim: true },
     class_id: { type: String, trim: true },
 }, {collection:"students"}, { timestamps: true });
