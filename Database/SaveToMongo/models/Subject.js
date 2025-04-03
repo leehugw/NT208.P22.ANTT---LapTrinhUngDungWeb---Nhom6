@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const SubjectSchema = new mongoose.Schema({
-  subjects_id: { type: String, required: true, unique: true },
-  subjects_name: { type: String, required: true },
-  subjectsEL_name: { type: String, required: true },
+  subject_id: { type: String, required: true, unique: true },
+  subject_name: { type: String, required: true },
+  subjectEL_name: { type: String, required: true },
   faculty_id: { type: String, ref: "Faculty", required: true }, // Liên kết đến Faculty
-  subjects_type: { type: String, required: true },
+  subject_type: { type: String, required: true },
   old_id: { type: [String], default: [] },
   equivalent_id: { type: [String], default: [] },
   prerequisite_id: { type: [String], default: [] },

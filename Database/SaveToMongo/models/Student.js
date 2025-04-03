@@ -1,20 +1,14 @@
 const mongoose = require('mongoose');
 
-// Định nghĩa Schema cho Student
 const StudentSchema = new mongoose.Schema({
-    student_id: {type: String, unique: true},
-    name: String,
-    gender: String,
-    birth_date: String,
-    birthplace: String,
-    status: String,
-    class: String,
-    faculty: String,
-    training_system: String
-});
+    student_id: { type: String, required: true, unique: true, trim: true },
+    name: { type: String, required: true, trim: true },
+    gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
+    birth_date: { type: Date, required: true },
+    birthplace: { type: String, trim: true },
+    class_id: { type: String, trim: true },
+}, {collection:"students"}, { timestamps: true });
 
-// Tạo model từ Schema
 const Student = mongoose.model('Student', StudentSchema);
 
-// Xuất module
 module.exports = Student;
