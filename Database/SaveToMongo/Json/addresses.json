@@ -1,0 +1,402 @@
+[
+  {
+    "student_id": "25525001",
+    "permanent_address": "Số nhà 179 đường số 15",
+    "ward": "03",
+    "district": "02",
+    "city": "01",
+    "temporary_address": "Số 102, Đường Nguyễn Khuyến, Hải Châu, Đà Nẵng"
+  },
+  {
+    "student_id": "25525002",
+    "permanent_address": "Số nhà 27 đường số 4",
+    "ward": "07",
+    "district": "09",
+    "city": "06",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525003",
+    "permanent_address": "Số nhà 53 đường số 20",
+    "ward": "01",
+    "district": "24",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525004",
+    "permanent_address": "Số nhà 157 đường số 17",
+    "ward": "04",
+    "district": "03",
+    "city": "06",
+    "temporary_address": "Số 166, Đường Hoàng Văn Thụ, Quảng Điền, Huế"
+  },
+  {
+    "student_id": "25525005",
+    "permanent_address": "Số nhà 13 đường số 7",
+    "ward": "03",
+    "district": "05",
+    "city": "04",
+    "temporary_address": "Số 68, Đường Hoàng Văn Thụ, Ninh Kiều, Cần Thơ"
+  },
+  {
+    "student_id": "25525006",
+    "permanent_address": "Số nhà 294 đường số 9",
+    "ward": "08",
+    "district": "12",
+    "city": "08",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525007",
+    "permanent_address": "Số nhà 181 đường số 5",
+    "ward": "06",
+    "district": "14",
+    "city": "03",
+    "temporary_address": "Số 110, Đường Hàm Nghi, Long Thành, Đồng Nai"
+  },
+  {
+    "student_id": "25525008",
+    "permanent_address": "Số nhà 113 đường số 5",
+    "ward": "09",
+    "district": "23",
+    "city": "03",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525009",
+    "permanent_address": "Số nhà 129 đường số 7",
+    "ward": "04",
+    "district": "08",
+    "city": "02",
+    "temporary_address": "Số 27, Đường Hàm Nghi, Đống Đa, Hà Nội"
+  },
+  {
+    "student_id": "25525010",
+    "permanent_address": "Số nhà 55 đường số 13",
+    "ward": "04",
+    "district": "13",
+    "city": "07",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525011",
+    "permanent_address": "Số nhà 40 đường số 10",
+    "ward": "05",
+    "district": "10",
+    "city": "03",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525012",
+    "permanent_address": "Số nhà 287 đường số 19",
+    "ward": "04",
+    "district": "23",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525013",
+    "permanent_address": "Số nhà 219 đường số 2",
+    "ward": "05",
+    "district": "21",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525014",
+    "permanent_address": "Số nhà 9 đường số 5",
+    "ward": "09",
+    "district": "10",
+    "city": "05",
+    "temporary_address": "Số 185, Đường Nguyễn Khuyến, Hai Bà Trưng, Hà Nội"
+  },
+  {
+    "student_id": "25525015",
+    "permanent_address": "Số nhà 66 đường số 20",
+    "ward": "03",
+    "district": "11",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525016",
+    "permanent_address": "Số nhà 293 đường số 12",
+    "ward": "04",
+    "district": "07",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525017",
+    "permanent_address": "Số nhà 176 đường số 15",
+    "ward": "10",
+    "district": "03",
+    "city": "05",
+    "temporary_address": "Số 72, Đường Trần Hưng Đạo, Quận 1, Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525018",
+    "permanent_address": "Số nhà 106 đường số 12",
+    "ward": "04",
+    "district": "11",
+    "city": "07",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525019",
+    "permanent_address": "Số nhà 12 đường số 6",
+    "ward": "02",
+    "district": "08",
+    "city": "05",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525020",
+    "permanent_address": "Số nhà 256 đường số 15",
+    "ward": "05",
+    "district": "09",
+    "city": "06",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525021",
+    "permanent_address": "Số nhà 76 đường số 10",
+    "ward": "01",
+    "district": "08",
+    "city": "01",
+    "temporary_address": "Số 117, Đường Trần Hưng Đạo, Nha Trang, Khánh Hòa"
+  },
+  {
+    "student_id": "25525022",
+    "permanent_address": "Số nhà 137 đường số 11",
+    "ward": "07",
+    "district": "02",
+    "city": "06",
+    "temporary_address": "Số 106, Đường Nam Kỳ Khởi Nghĩa, Hòa Vang, Đà Nẵng"
+  },
+  {
+    "student_id": "25525023",
+    "permanent_address": "Số nhà 143 đường số 10",
+    "ward": "05",
+    "district": "21",
+    "city": "06",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525024",
+    "permanent_address": "Số nhà 219 đường số 2",
+    "ward": "10",
+    "district": "08",
+    "city": "10",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525025",
+    "permanent_address": "Số nhà 299 đường số 9",
+    "ward": "04",
+    "district": "07",
+    "city": "10",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525026",
+    "permanent_address": "Số nhà 278 đường số 16",
+    "ward": "07",
+    "district": "22",
+    "city": "04",
+    "temporary_address": "Số 122, Đường Phan Chu Trinh, Quận 3, Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525027",
+    "permanent_address": "Số nhà 129 đường số 18",
+    "ward": "06",
+    "district": "08",
+    "city": "09",
+    "temporary_address": "Số 61, Đường Cách Mạng Tháng 8, Nhơn Trạch, Đồng Nai"
+  },
+  {
+    "student_id": "25525028",
+    "permanent_address": "Số nhà 225 đường số 15",
+    "ward": "03",
+    "district": "11",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525029",
+    "permanent_address": "Số nhà 29 đường số 12",
+    "ward": "04",
+    "district": "14",
+    "city": "09",
+    "temporary_address": "Số 177, Đường Nguyễn Hữu Cảnh, Đồ Sơn, Hải Phòng"
+  },
+  {
+    "student_id": "25525030",
+    "permanent_address": "Số nhà 172 đường số 20",
+    "ward": "05",
+    "district": "19",
+    "city": "06",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525031",
+    "permanent_address": "Số nhà 150 đường số 20",
+    "ward": "07",
+    "district": "15",
+    "city": "06",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525032",
+    "permanent_address": "Số nhà 212 đường số 2",
+    "ward": "07",
+    "district": "11",
+    "city": "09",
+    "temporary_address": "Số 92, Đường Cách Mạng Tháng 8, Thanh Khê, Đà Nẵng"
+  },
+  {
+    "student_id": "25525033",
+    "permanent_address": "Số nhà 201 đường số 3",
+    "ward": "06",
+    "district": "12",
+    "city": "02",
+    "temporary_address": "Số 175, Đường Lý Thường Kiệt, Ninh Hòa, Khánh Hòa"
+  },
+  {
+    "student_id": "25525034",
+    "permanent_address": "Số nhà 234 đường số 2",
+    "ward": "04",
+    "district": "12",
+    "city": "04",
+    "temporary_address": "Số 58, Đường Nguyễn Đình Chiểu, Phong Điền, Huế"
+  },
+  {
+    "student_id": "25525035",
+    "permanent_address": "Số nhà 30 đường số 14",
+    "ward": "02",
+    "district": "08",
+    "city": "05",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525036",
+    "permanent_address": "Số nhà 160 đường số 13",
+    "ward": "09",
+    "district": "03",
+    "city": "08",
+    "temporary_address": "Số 2, Đường Trường Chinh, Phú Lộc, Huế"
+  },
+  {
+    "student_id": "25525037",
+    "permanent_address": "Số nhà 148 đường số 8",
+    "ward": "03",
+    "district": "01",
+    "city": "06",
+    "temporary_address": "Số 173, Đường Nguyễn Đình Chiểu, Trảng Bom, Đồng Nai"
+  },
+  {
+    "student_id": "25525038",
+    "permanent_address": "Số nhà 124 đường số 10",
+    "ward": "03",
+    "district": "08",
+    "city": "09",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525039",
+    "permanent_address": "Số nhà 12 đường số 6",
+    "ward": "06",
+    "district": "01",
+    "city": "05",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525040",
+    "permanent_address": "Số nhà 119 đường số 8",
+    "ward": "03",
+    "district": "19",
+    "city": "02",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525041",
+    "permanent_address": "Số nhà 35 đường số 16",
+    "ward": "03",
+    "district": "11",
+    "city": "05",
+    "temporary_address": "Số 116, Đường Phạm Ngũ Lão, Nha Trang, Khánh Hòa"
+  },
+  {
+    "student_id": "25525042",
+    "permanent_address": "Số nhà 187 đường số 15",
+    "ward": "09",
+    "district": "09",
+    "city": "04",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525043",
+    "permanent_address": "Số nhà 213 đường số 17",
+    "ward": "01",
+    "district": "14",
+    "city": "01",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525044",
+    "permanent_address": "Số nhà 63 đường số 14",
+    "ward": "10",
+    "district": "10",
+    "city": "01",
+    "temporary_address": "Số 43, Đường Lê Quý Đôn, Kiến An, Hải Phòng"
+  },
+  {
+    "student_id": "25525045",
+    "permanent_address": "Số nhà 150 đường số 16",
+    "ward": "05",
+    "district": "20",
+    "city": "03",
+    "temporary_address": "Số 72, Đường Tôn Đức Thắng, Cái Răng, Cần Thơ"
+  },
+  {
+    "student_id": "25525046",
+    "permanent_address": "Số nhà 188 đường số 14",
+    "ward": "04",
+    "district": "13",
+    "city": "05",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525047",
+    "permanent_address": "Số nhà 3 đường số 16",
+    "ward": "09",
+    "district": "11",
+    "city": "05",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525048",
+    "permanent_address": "Số nhà 295 đường số 14",
+    "ward": "08",
+    "district": "07",
+    "city": "09",
+    "temporary_address": "Số 144, Đường Hoàng Văn Thụ, An Lão, Hải Phòng"
+  },
+  {
+    "student_id": "25525049",
+    "permanent_address": "Số nhà 251 đường số 20",
+    "ward": "09",
+    "district": "23",
+    "city": "08",
+    "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+  },
+  {
+    "student_id": "25525050",
+    "permanent_address": "Số nhà 145 đường số 16",
+    "ward": "10",
+    "district": "01",
+    "city": "07",
+    "temporary_address": "Số 3, Đường Nam Kỳ Khởi Nghĩa, Cẩm Phả, Quảng Ninh"
+  }
+]
