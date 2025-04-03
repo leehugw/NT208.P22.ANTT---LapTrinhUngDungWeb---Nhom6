@@ -1,0 +1,402 @@
+[
+  {
+    "student_id": "25525001",
+    "name": "Mai Văn Phương",
+    "gender": "Nam",
+    "birth_date": "09-01-2004",
+    "birthplace": "05",
+    "class_id": "KTMT02"
+  },
+  {
+    "student_id": "25525002",
+    "name": "Lê Thị Linh",
+    "gender": "Nữ",
+    "birth_date": "18-07-2005",
+    "birthplace": "30",
+    "class_id": "MMTT01"
+  },
+  {
+    "student_id": "25525003",
+    "name": "Hoàng Thị Yến",
+    "gender": "Nữ",
+    "birth_date": "30-06-2005",
+    "birthplace": "14",
+    "class_id": "HTTT02"
+  },
+  {
+    "student_id": "25525004",
+    "name": "Lê Văn Nam",
+    "gender": "Nam",
+    "birth_date": "27-08-2006",
+    "birthplace": "46",
+    "class_id": "KTPM01"
+  },
+  {
+    "student_id": "25525005",
+    "name": "Đinh Văn Bảo",
+    "gender": "Nam",
+    "birth_date": "19-11-2006",
+    "birthplace": "29",
+    "class_id": "CNTT01"
+  },
+  {
+    "student_id": "25525006",
+    "name": "Mai Thị Uyên",
+    "gender": "Nữ",
+    "birth_date": "29-03-2006",
+    "birthplace": "62",
+    "class_id": "ATTT01"
+  },
+  {
+    "student_id": "25525007",
+    "name": "Trịnh Thị Hoa",
+    "gender": "Nữ",
+    "birth_date": "21-03-2006",
+    "birthplace": "13",
+    "class_id": "KHDL02"
+  },
+  {
+    "student_id": "25525008",
+    "name": "Vũ Văn Khánh",
+    "gender": "Nam",
+    "birth_date": "16-12-2004",
+    "birthplace": "06",
+    "class_id": "KHDL01"
+  },
+  {
+    "student_id": "25525009",
+    "name": "Ngô Thị Ngọc",
+    "gender": "Nữ",
+    "birth_date": "24-01-2006",
+    "birthplace": "34",
+    "class_id": "HTTT01"
+  },
+  {
+    "student_id": "25525010",
+    "name": "Bùi Văn Quang",
+    "gender": "Nam",
+    "birth_date": "08-02-2004",
+    "birthplace": "53",
+    "class_id": "CNTT02"
+  },
+  {
+    "student_id": "25525011",
+    "name": "Trần Văn Hiếu",
+    "gender": "Nam",
+    "birth_date": "26-09-2004",
+    "birthplace": "41",
+    "class_id": "MMTT01"
+  },
+  {
+    "student_id": "25525012",
+    "name": "Nguyễn Thị My",
+    "gender": "Nữ",
+    "birth_date": "19-01-2004",
+    "birthplace": "19",
+    "class_id": "TKVM01"
+  },
+  {
+    "student_id": "25525013",
+    "name": "Bùi Văn Sơn",
+    "gender": "Nam",
+    "birth_date": "17-04-2005",
+    "birthplace": "05",
+    "class_id": "ATTT01"
+  },
+  {
+    "student_id": "25525014",
+    "name": "Mai Thị Nga",
+    "gender": "Nữ",
+    "birth_date": "08-01-2006",
+    "birthplace": "11",
+    "class_id": "KHTN01"
+  },
+  {
+    "student_id": "25525015",
+    "name": "Bùi Văn Hiếu",
+    "gender": "Nam",
+    "birth_date": "21-07-2006",
+    "birthplace": "23",
+    "class_id": "HTTT02"
+  },
+  {
+    "student_id": "25525016",
+    "name": "Lê Văn Hiếu",
+    "gender": "Nam",
+    "birth_date": "09-06-2005",
+    "birthplace": "17",
+    "class_id": "MMTT01"
+  },
+  {
+    "student_id": "25525017",
+    "name": "Hồ Văn Hiếu",
+    "gender": "Nam",
+    "birth_date": "23-08-2006",
+    "birthplace": "55",
+    "class_id": "KHMT01"
+  },
+  {
+    "student_id": "25525018",
+    "name": "Ngô Thị Anh",
+    "gender": "Nữ",
+    "birth_date": "28-01-2006",
+    "birthplace": "53",
+    "class_id": "CNTT02"
+  },
+  {
+    "student_id": "25525019",
+    "name": "Mai Thị Anh",
+    "gender": "Nữ",
+    "birth_date": "25-09-2004",
+    "birthplace": "51",
+    "class_id": "KHDL02"
+  },
+  {
+    "student_id": "25525020",
+    "name": "Đinh Thị Như",
+    "gender": "Nữ",
+    "birth_date": "23-01-2005",
+    "birthplace": "45",
+    "class_id": "ATTT01"
+  },
+  {
+    "student_id": "25525021",
+    "name": "Trần Thị Thảo",
+    "gender": "Nữ",
+    "birth_date": "25-04-2005",
+    "birthplace": "48",
+    "class_id": "ATTT02"
+  },
+  {
+    "student_id": "25525022",
+    "name": "Ngô Thị Nhi",
+    "gender": "Nữ",
+    "birth_date": "23-08-2004",
+    "birthplace": "20",
+    "class_id": "KHTN01"
+  },
+  {
+    "student_id": "25525023",
+    "name": "Đỗ Thị Xuân",
+    "gender": "Nữ",
+    "birth_date": "09-09-2005",
+    "birthplace": "55",
+    "class_id": "KHDL01"
+  },
+  {
+    "student_id": "25525024",
+    "name": "Đinh Thị Thảo",
+    "gender": "Nữ",
+    "birth_date": "25-05-2005",
+    "birthplace": "49",
+    "class_id": "KHMT02"
+  },
+  {
+    "student_id": "25525025",
+    "name": "Mai Văn Quang",
+    "gender": "Nam",
+    "birth_date": "06-04-2005",
+    "birthplace": "15",
+    "class_id": "ATTT02"
+  },
+  {
+    "student_id": "25525026",
+    "name": "Lê Thị Uyên",
+    "gender": "Nữ",
+    "birth_date": "07-12-2005",
+    "birthplace": "50",
+    "class_id": "ATTN02"
+  },
+  {
+    "student_id": "25525027",
+    "name": "Trần Văn Quang",
+    "gender": "Nam",
+    "birth_date": "05-04-2005",
+    "birthplace": "34",
+    "class_id": "ATTN02"
+  },
+  {
+    "student_id": "25525028",
+    "name": "Ngô Văn Việt",
+    "gender": "Nam",
+    "birth_date": "23-06-2004",
+    "birthplace": "18",
+    "class_id": "ATTN02"
+  },
+  {
+    "student_id": "25525029",
+    "name": "Hoàng Thị Nhi",
+    "gender": "Nữ",
+    "birth_date": "24-09-2005",
+    "birthplace": "24",
+    "class_id": "ATTN01"
+  },
+  {
+    "student_id": "25525030",
+    "name": "Phạm Văn Khoa",
+    "gender": "Nam",
+    "birth_date": "03-09-2005",
+    "birthplace": "30",
+    "class_id": "KHMT02"
+  },
+  {
+    "student_id": "25525031",
+    "name": "Nguyễn Văn Nam",
+    "gender": "Nam",
+    "birth_date": "23-12-2006",
+    "birthplace": "12",
+    "class_id": "KHTN02"
+  },
+  {
+    "student_id": "25525032",
+    "name": "Bùi Văn Bình",
+    "gender": "Nam",
+    "birth_date": "28-08-2006",
+    "birthplace": "53",
+    "class_id": "ATTN01"
+  },
+  {
+    "student_id": "25525033",
+    "name": "Trần Thị Uyên",
+    "gender": "Nữ",
+    "birth_date": "09-01-2004",
+    "birthplace": "14",
+    "class_id": "KHDL02"
+  },
+  {
+    "student_id": "25525034",
+    "name": "Trần Thị Linh",
+    "gender": "Nữ",
+    "birth_date": "24-07-2006",
+    "birthplace": "64",
+    "class_id": "KHDL02"
+  },
+  {
+    "student_id": "25525035",
+    "name": "Lê Thị Như",
+    "gender": "Nữ",
+    "birth_date": "14-11-2005",
+    "birthplace": "63",
+    "class_id": "CNTT02"
+  },
+  {
+    "student_id": "25525036",
+    "name": "Lý Văn Anh",
+    "gender": "Nam",
+    "birth_date": "29-04-2005",
+    "birthplace": "31",
+    "class_id": "ATTN01"
+  },
+  {
+    "student_id": "25525037",
+    "name": "Vũ Thị Thảo",
+    "gender": "Nữ",
+    "birth_date": "04-01-2005",
+    "birthplace": "58",
+    "class_id": "HTTT01"
+  },
+  {
+    "student_id": "25525038",
+    "name": "Bùi Văn Phương",
+    "gender": "Nam",
+    "birth_date": "02-10-2006",
+    "birthplace": "55",
+    "class_id": "KHTN01"
+  },
+  {
+    "student_id": "25525039",
+    "name": "Đặng Thị Hoa",
+    "gender": "Nữ",
+    "birth_date": "24-11-2005",
+    "birthplace": "01",
+    "class_id": "KTPM02"
+  },
+  {
+    "student_id": "25525040",
+    "name": "Đinh Thị Thảo",
+    "gender": "Nữ",
+    "birth_date": "21-12-2004",
+    "birthplace": "20",
+    "class_id": "ATTT01"
+  },
+  {
+    "student_id": "25525041",
+    "name": "Lê Văn Dũng",
+    "gender": "Nam",
+    "birth_date": "05-12-2004",
+    "birthplace": "41",
+    "class_id": "HTTT01"
+  },
+  {
+    "student_id": "25525042",
+    "name": "Ngô Văn Khánh",
+    "gender": "Nam",
+    "birth_date": "15-02-2004",
+    "birthplace": "27",
+    "class_id": "KHDL01"
+  },
+  {
+    "student_id": "25525043",
+    "name": "Trần Văn Bảo",
+    "gender": "Nam",
+    "birth_date": "28-07-2006",
+    "birthplace": "13",
+    "class_id": "KHMT02"
+  },
+  {
+    "student_id": "25525044",
+    "name": "Trịnh Văn Hiếu",
+    "gender": "Nam",
+    "birth_date": "29-08-2006",
+    "birthplace": "56",
+    "class_id": "KHDL02"
+  },
+  {
+    "student_id": "25525045",
+    "name": "Đặng Văn Thành",
+    "gender": "Nam",
+    "birth_date": "25-12-2004",
+    "birthplace": "48",
+    "class_id": "KHMT02"
+  },
+  {
+    "student_id": "25525046",
+    "name": "Đặng Thị Phương",
+    "gender": "Nữ",
+    "birth_date": "12-09-2005",
+    "birthplace": "39",
+    "class_id": "KHTN02"
+  },
+  {
+    "student_id": "25525047",
+    "name": "Trịnh Thị Yến",
+    "gender": "Nữ",
+    "birth_date": "17-04-2006",
+    "birthplace": "22",
+    "class_id": "MMTT01"
+  },
+  {
+    "student_id": "25525048",
+    "name": "Đặng Thị Ngọc",
+    "gender": "Nữ",
+    "birth_date": "14-01-2005",
+    "birthplace": "10",
+    "class_id": "KHDL01"
+  },
+  {
+    "student_id": "25525049",
+    "name": "Lê Thị Chi",
+    "gender": "Nữ",
+    "birth_date": "27-01-2005",
+    "birthplace": "15",
+    "class_id": "TKVM01"
+  },
+  {
+    "student_id": "25525050",
+    "name": "Trịnh Thị Yến",
+    "gender": "Nữ",
+    "birth_date": "14-07-2005",
+    "birthplace": "51",
+    "class_id": "KTMT02"
+  }
+]
