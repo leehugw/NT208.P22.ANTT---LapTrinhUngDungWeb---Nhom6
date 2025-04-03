@@ -13,23 +13,19 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Lấy lecturer_id từ URL
+// Load lecturer profile
+document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const lecturer_id = urlParams.get('lecturer_id');
 
-    if (!lecturer_id) {
-        alert("Vui lòng cung cấp lecturer_id qua URL (?lecturer_id=...)");
-        return;
+    if (lecturer_id) {
+        fetchLecturerProfile(lecturer_id);
     }
-    
-    // Gọi API lấy thông tin giảng viên
-    await loadLecturerProfileById(lecturer_id);
 });
 
-async function loadLecturerProfileById(lecturer_id) {
+async function fetchLecturerProfile(lecturer_id) {
     try {
-        const response = await fetch(`/api/profile?lecturer_id=${encodeURIComponent(lecturer_id)}`);
+        const response = await fetch(`/api/lecturer/profile-data?lecturer_id=${lecturer_id}`);
         const data = await response.json();
         
         if (!response.ok || !data.success) {
@@ -40,7 +36,6 @@ async function loadLecturerProfileById(lecturer_id) {
             throw new Error("ID này không thuộc giảng viên");
         }
         
-        // Hiển thị thông tin giảng viên
         displayLecturerData(data.data);
     } catch (error) {
         console.error('Error:', error);
@@ -48,9 +43,7 @@ async function loadLecturerProfileById(lecturer_id) {
     }
 }
 
-function displayLecturerData(data) {
-    const lecturer = data;
-    
+function displayLecturerData(lecturer) {
     if (!lecturer) {
         console.error("Không có dữ liệu giảng viên");
         return;
@@ -65,8 +58,6 @@ function displayLecturerData(data) {
             } else {
                 element.textContent = value || 'Chưa cập nhật';
             }
-        } else {
-            console.warn(`Element #${id} not found`);
         }
     }
 
