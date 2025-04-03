@@ -27,3 +27,37 @@ document.getElementById("toggle-password").addEventListener("click", function() 
         eyeIcon.classList.add("bi-eye-slash"); // Mắt nhắm
     }
 });
+
+// Thêm vào login.js hoặc phần script trong login.html
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const role = document.getElementById('choose-role').value;
+    
+    try {
+        const response = await fetch('/api/auth/login', {   
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            window.location.href = '/student_info.html';
+        } else {
+            alert(data.message || 'Đăng nhập thất bại');
+        }
+    } catch (error) {
+        console.error('Lỗi đăng nhập:', error);
+        alert('Có lỗi xảy ra khi đăng nhập');
+    }
+});

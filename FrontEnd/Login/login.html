@@ -14,9 +14,9 @@
 
 
 
-    <link href="PClogin.css" rel="stylesheet">
-    <link href="mobilelogin.css" rel="stylesheet">
-    <link href="login.css" rel="stylesheet">
+    <link href="/css/PClogin.css" rel="stylesheet">
+    <link href="/css/mobilelogin.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
 
 </head>
 
@@ -24,7 +24,7 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="logo.png" width="80">
+                <img alt="Logo" height="80" src="/images/logo.png" width="80">
             </div>
             <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -55,12 +55,12 @@
         <div class="p-4 border rounded bg-light shadow mx-auto" 
              style="max-width: 500px; width: 100%;">
             
-            <form action="submit_booking.php" method="POST">
+            <form id="login-form" action="submit_booking.php" method="POST">
                 <h2 class="text-center">Đăng nhập</h2>
     
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="email@gm.uit.edu.vn" required>
+                    <input type="email" id="username" name="email" class="form-control" placeholder="email@gm.uit.edu.vn" required>
                 </div>
     
                 <div class="mb-3">
@@ -101,6 +101,6 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
-    <script src="login.js"></script>
-
-</html>
+    <script src="/js/auth.js""></script>
+    <script src="/js/login.js""></script>
+</html> 
