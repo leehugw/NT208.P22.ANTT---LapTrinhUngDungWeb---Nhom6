@@ -13,40 +13,62 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM đã tải xong!");
+    
     // Lấy student_id từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const student_id = urlParams.get('student_id');
+    console.log("Student ID từ URL:", student_id);
 
-    if (!student_id) {
-        alert("Vui lòng cung cấp student_id qua URL (?student_id=...)");
-        return;
+    if (student_id) {
+        console.log("Bắt đầu fetch dữ liệu...");
+        fetchStudentProfile(student_id);
+    } else {
+        console.error("Không tìm thấy student_id trong URL");
+        // Nếu không có student_id, có thể lấy từ localStorage hoặc session nếu đã đăng nhập
     }
-    
-    // Gọi API lấy thông tin sinh viên
-    await loadStudentProfileById(student_id);
 });
 
-async function loadStudentProfileById(student_id) {
+async function fetchStudentProfile(student_id) {
     try {
-        const response = await fetch(`/api/profile?student_id=${encodeURIComponent(student_id)}`);
-        const data = await response.json();
+        console.log(`Fetching data for student_id: ${student_id}`);
+        const response = await fetch(`/api/student/profile-data?student_id=${student_id}`);
         
-        if (!response.ok || !data.success) {
-            throw new Error(data.message || 'Lỗi khi tải thông tin');
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error response:', errorData);
+            throw new Error(errorData.message || 'Failed to fetch student data');
         }
+
+        const data = await response.json();
+        console.log('Received data:', data);
         
-        // Hiển thị thông tin sinh viên
-        displayStudentData(data.data);
+        if (data.success && data.type === "student") {
+            displayStudentData(data.data);
+        } else {
+            throw new Error(data.message || "Invalid data format");
+        }
     } catch (error) {
-        console.error('Error:', error);
-        alert('Lỗi khi tải thông tin sinh viên: ' + error.message);
+        console.error('Error fetching student profile:', error);
+        alert('Error loading student data: ' + error.message);
     }
 }
 
 function displayStudentData(data) {
-    const { student, contact, address, family, identity } = data;
+    const student = data.student;
+    const contact = data.contact;
+    const address = data.address;
+    const family = data.family;
+    const identity = data.identity;
     
+    if (!student) {
+        console.error("Không có dữ liệu sinh viên");
+        return;
+    }
+
     // Hàm helper để đặt giá trị an toàn
     function setValue(id, value) {
         const element = document.getElementById(id);
@@ -54,89 +76,85 @@ function displayStudentData(data) {
             if (element.tagName === 'INPUT') {
                 element.value = value || '';
             } else {
-                element.textContent = value || '';
+                element.textContent = value || 'Chưa cập nhật';
             }
-        } else {
-            console.warn(`Element #${id} not found`);
         }
     }
 
-    // Thông tin chính
-    setValue('student-name', student?.name);
-    setValue('student-email', contact?.school_email || contact?.personal_email);
-    setValue('username', student?.name);
-    
+    // Hiển thị thông tin chính
+    setValue('student-name', student.name);
+    setValue('student-id', student.student_id);
+    setValue('class-name', student.class_name);
+    setValue('faculty-name', student.faculty_name);
+    setValue('training-system', student.training_system);
+
+    setValue('fullname', student.name);
+    setValue('class', student.class_name);
+    setValue('origin', student.origin || identity?.origin);
+    setValue('union-join-date', identity?.union_join_date);
+    setValue('party-join-date', identity?.party_join_date);
+
     // Thông tin cá nhân
-    setValue('fullname', student?.name);
-    setValue('birth-date', student?.birth_date);
-    setValue('birth-place', student?.birthplace);
-    setValue('class', student?.class_name);
-    setValue('student-id', student?.student_id);
-    setValue('training-system', student?.training_system);
-    setValue('faculty-name', student?.faculty_name);
+    setValue('birth-place', student.birthplace);
+    setValue('birth-date', student.birth_date);
     
-    // Debug: Kiểm tra dữ liệu nhận được
-    console.log("Gender data from API:", student?.gender);
-    
-    // Xử lý giới tính cải tiến
+    // Xử lý giới tính
     const genderElement = document.getElementById('gender-display');
     const maleRadio = document.getElementById('nam-display');
     const femaleRadio = document.getElementById('nu-display');
     
-    if (!maleRadio || !femaleRadio) {
-        console.error('Không tìm thấy radio buttons giới tính');
-        return;
+    if (maleRadio && femaleRadio) {
+        const normalizedGender = student?.gender?.toString().trim().toLowerCase();
+        maleRadio.checked = false;
+        femaleRadio.checked = false;
+
+        if (normalizedGender === 'nữ' || normalizedGender === 'nu' || normalizedGender === 'female') {
+            femaleRadio.checked = true;
+            if (genderElement) genderElement.textContent = 'Nữ';
+        } else {
+            maleRadio.checked = true; // Mặc định là Nam
+            if (genderElement) genderElement.textContent = 'Nam';
+        }
     }
 
-    // Chuẩn hóa giá trị giới tính
-    const normalizedGender = student?.gender?.toString().trim().toLowerCase();
-    console.log("Normalized gender:", normalizedGender);
-
-    // Reset trạng thái
-    maleRadio.checked = false;
-    femaleRadio.checked = false;
-
-    // Thiết lập theo dữ liệu
-    if (normalizedGender === 'nữ' || normalizedGender === 'nu') {
-        femaleRadio.checked = true;
-        if (genderElement) genderElement.textContent = 'Nữ';
-    } else {
-        maleRadio.checked = true; // Mặc định là Nam
-        if (genderElement) genderElement.textContent = 'Nam';
-    }
-    
     // Thông tin liên lạc
-    setValue('school-email', contact?.school_email);
-    setValue('personal-email', contact?.personal_email);
-    setValue('phone', contact?.phone);
-    
-    // Địa chỉ
-    setValue('ward', address?.ward);
-    setValue('district', address?.district);
-    setValue('city', address?.city);
-    setValue('permanent-address', address?.permanent_address);
-    setValue('temporary-address', address?.temporary_address);
-    
+    if (contact) {
+        setValue('school-email', contact.school_email);
+        setValue('personal-email', contact.personal_email);
+        setValue('phone', contact.phone);
+        setValue('student-email', contact?.school_email || 'Chưa cập nhật');
+    }
+
+    // Thông tin địa chỉ
+    if (address) {
+        setValue('permanent-address', address.permanent_address);
+        setValue('ward', address.ward);
+        setValue('district', address.district);
+        setValue('city', address.city);
+        setValue('temporary-address', address.temporary_address);
+    }
+
     // Thông tin gia đình
-    setValue('father-name', family?.father_name);
-    setValue('father-phone', family?.father_phone);
-    setValue('father-job', family?.father_job);
-    setValue('father-address', family?.father_address);
-    setValue('mother-name', family?.mother_name);
-    setValue('mother-phone', family?.mother_phone);
-    setValue('mother-job', family?.mother_job);
-    setValue('mother-address', family?.mother_address);
-    setValue('guardian-name', family?.guardian_name);
-    setValue('guardian-phone', family?.guardian_phone);
-    setValue('guardian-address', family?.guardian_address);
-    
+    if (family) {
+        setValue('father-name', family.father_name);
+        setValue('father-job', family.father_job);
+        setValue('father-phone', family.father_phone);
+        setValue('father-address', family.father_address);
+        setValue('mother-name', family.mother_name);
+        setValue('mother-job', family.mother_job);
+        setValue('mother-phone', family.mother_phone);
+        setValue('mother-address', family.mother_address);
+        setValue('guardian-name', family.guardian_name);
+        setValue('guardian-phone', family.guardian_phone);
+        setValue('guardian-address', family.guardian_address);
+    }
+
     // Thông tin căn cước
-    setValue('identity-number', identity?.identity_number);
-    setValue('identity-issue-place', identity?.identity_issue_place);
-    setValue('identity-issue-date', identity?.identity_issue_date);
-    setValue('ethnicity', identity?.ethnicity);
-    setValue('religion', identity?.religion);
-    setValue('origin', identity?.origin);
-    setValue('union-join-date', identity?.union_join_date);
-    setValue('party-join-date', identity?.party_join_date);
+    if (identity) {
+        setValue('identity-number', identity.identity_number);
+        setValue('identity-issue-date', identity.identity_issue_date);
+        setValue('identity-issue-place', identity.identity_issue_place);
+        setValue('ethnicity', identity.ethnicity);
+        setValue('religion', identity.religion);
+    }
 }
