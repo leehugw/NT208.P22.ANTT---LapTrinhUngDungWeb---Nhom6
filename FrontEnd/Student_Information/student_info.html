@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Hệ Thống ChatBot UIT</title>
+    <title>Hồ sơ Sinh viên</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -12,11 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 
-
-
-    <link href="PC_student_info.css" rel="stylesheet">
-    <link href="mobile_student_info.css" rel="stylesheet">
-    <link href="student_info.css" rel="stylesheet">
+    <link href="/css/PC_student_info.css" rel="stylesheet">
+    <link href="/css/mobile_student_info.css" rel="stylesheet">
+    <link href="/css/student_info.css" rel="stylesheet">
 
 </head>
 
@@ -24,7 +22,7 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="logo.png" width="80">
+                <img alt="Logo" height="80" src="/images/logo.png" width="80">
             </div>
             <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -67,9 +65,9 @@
     <div class="profile-container container mt-5 pt-5">
         <div class="profile-header text-center mb-4">
             <h1>Hồ sơ Sinh viên</h1>
-            <img src="avatar.jpg" alt="Avatar" class="avatar rounded-circle mt-4" style="width: 100px; height: 100px;">
-            <h3 class="mt-3">Nguyễn Văn A</h3>
-            <p class="email">25552555@gm.uit.edu.vn</p>
+            <img src="/images/avatar.jpg" alt="Avatar" class="avatar rounded-circle mt-4" style="width: 100px; height: 100px;">
+            <h3 class="mt-3" id="student-name">Đang tải thông tin...</h3>
+            <p class="email" id="student-email">Đang tải email...</p>
         </div>
 
         <div class="container">
@@ -78,113 +76,113 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Họ và tên:</label><input type="text" class="form-control" value="Nguyễn Văn A" readonly></div>
-                            <div class="mb-3"><label>Nơi sinh:</label><input type="text" class="form-control" value="TP Hồ Chí Minh" readonly></div>
-                            <div class="mb-3"><label>Tình trạng:</label><input type="text" class="form-control" value="Cảnh báo" readonly></div>
-                            <div class="mb-3"><label>Lớp:</label><input type="text" class="form-control" value="MMT&TT2023.3" readonly></div>
-                            <div class="mb-3"><label>Số CCCD:</label><input type="text" class="form-control" value="0123456788" readonly></div>
-                            <div class="mb-3"><label>Nơi cấp:</label><input type="text" class="form-control" value="Cục cảnh sát ĐKQL cư trú và DLQG về dân cư" readonly></div>
-                            <div class="mb-3"><label>Xuất thân:</label><input type="text" class="form-control" value="Cán bộ - Công chức" readonly></div>
-                            <div class="mb-3"><label>Ngày vào Đoàn:</label><input type="text" class="form-control" value="26-03-2023" readonly></div>
-                            <div class="mb-3"><label>Ngày vào Đảng:</label><input type="text" class="form-control" value="26-03-2023" readonly></div>
+                            <div class="mb-3"><label>Họ và tên:</label><input type="text" class="form-control" id="fullname" readonly></div>
+                            <div class="mb-3"><label>Nơi sinh:</label><input type="text" class="form-control" id="birth-place" readonly></div>
+                            <div class="mb-3"><label>Lớp:</label><input type="text" class="form-control" id="class" readonly></div>
+                            <div class="mb-3"><label>Số CCCD:</label><input type="text" class="form-control" id="identity-number" readonly></div>
+                            <div class="mb-3"><label>Nơi cấp:</label><input type="text" class="form-control" id="identity-issue-place" readonly></div>
+                            <div class="mb-3"><label>Ngày cấp CCCD:</label><input type="text" class="form-control" id="identity-issue-date" readonly></div>
+                            <div class="mb-3"><label>Ngày vào Đoàn:</label><input type="text" class="form-control" id="union-join-date" readonly></div>
+                            <div class="mb-3"><label>Ngày vào Đảng:</label><input type="text" class="form-control" id="party-join-date" readonly></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Ngày sinh:</label><input type="text" class="form-control" value="23/12/2005" readonly></div>
+                            <div class="mb-3"><label>Ngày sinh:</label><input type="text" class="form-control" id="birth-date" readonly></div>
                             <div class="mb-3 mt-custom">
                                 <label>Giới tính:</label>
                                 <div class="gender-options d-flex align-items-center gap-3">
-                                    <label for="nam" class="d-flex align-items-center gap-1">
-                                        <input type="radio" id="nam" name="gender"> Nam
+                                    <label class="d-flex align-items-center gap-1">
+                                        <input type="radio" id="nam-display" name="gender-display" disabled> Nam
                                     </label>
-                                    <label for="nu" class="d-flex align-items-center gap-1">
-                                        <input type="radio" id="nu" name="gender" checked> Nữ
+                                    <label class="d-flex align-items-center gap-1">
+                                        <input type="radio" id="nu-display" name="gender-display" disabled> Nữ
                                     </label>
                                 </div>
+                                <!-- Thêm phần hiển thị text nếu cần -->
+                                <span id="gender-display" class="d-none"></span>
                             </div>
-                            
-                            <div class="mb-3"><label>MSSV:</label><input type="text" class="form-control" value="23222222" readonly></div>
-                            <div class="mb-3"><label>Hệ ĐT:</label><input type="text" class="form-control" value="Chất lượng cao" readonly></div>
-                            <div class="mb-3"><label>Khoa:</label><input type="text" class="form-control" value="MMT&TT" readonly></div>
-                            <div class="mb-3"><label>Ngày cấp:</label><input type="text" class="form-control" value="17/12/2018" readonly></div>
-                            <div class="mb-3"><label>Dân tộc:</label><input type="text" class="form-control" value="Kinh" readonly></div>
-                            <div class="mb-3"><label>Tôn giáo:</label><input type="text" class="form-control" value="Không" readonly></div>
+                            <div class="mb-3"><label>MSSV:</label><input type="text" class="form-control" id="student-id" readonly></div>
+                            <div class="mb-3"><label>Hệ đào tạo:</label><input type="text" class="form-control" id="training-system" readonly></div>
+                            <div class="mb-3"><label>Khoa:</label><input type="text" class="form-control" id="faculty-name" readonly></div>
+                            <div class="mb-3"><label>Xuất thân:</label><input type="text" class="form-control" id="origin" readonly></div>
+                            <div class="mb-3"><label>Dân tộc:</label><input type="text" class="form-control" id="ethnicity" readonly></div>
+                            <div class="mb-3"><label>Tôn giáo:</label><input type="text" class="form-control" id="religion" readonly></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    
         <div class="container">
             <h2>Thông tin liên lạc</h2>
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="mb-3"><label>Email trường:</label><input type="text" class="form-control" value="25525555@gm.uit.edu.vn" readonly></div>
+                    <div class="mb-3"><label>Email trường:</label><input type="text" class="form-control" id="school-email" readonly></div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Email cá nhân:</label><input type="text" class="form-control" value="anv@gmail.com" readonly></div>
+                            <div class="mb-3"><label>Email cá nhân:</label><input type="text" class="form-control" id="personal-email" readonly></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" value="+ 099 918 6536" readonly></div>
+                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" id="phone" readonly></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    
         <div class="container">
             <h2>Địa chỉ</h2>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="mb-3"><label>Phường:</label><input type="text" class="form-control" value="Phường 2" readonly></div>
+                            <div class="mb-3"><label>Phường:</label><input type="text" class="form-control" id="ward" readonly></div>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-3"><label>Quận/ Huyện:</label><input type="text" class="form-control" value="17" readonly></div>
+                            <div class="mb-3"><label>Quận/ Huyện:</label><input type="text" class="form-control" id="district" readonly></div>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-3"><label>Thành phố:</label><input type="text" class="form-control" value="TP. Hồ Chí Minh" readonly></div>
+                            <div class="mb-3"><label>Thành phố:</label><input type="text" class="form-control" id="city" readonly></div>
                         </div>
                     </div>
-                    <div class="mb-3"><label>Thường trú:</label><input type="text" class="form-control" value="số nhà 99 đường số 9, Phường 26812, Quận 17, TP. Hồ Chí Minh" readonly></div>
-                    <div class="mb-3"><label>Tạm trú:</label><input type="text" class="form-control" value="Ký túc xá đại học quốc gia TP. Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức" readonly></div>
+                    <div class="mb-3"><label>Thường trú:</label><input type="text" class="form-control" id="permanent-address" readonly></div>
+                    <div class="mb-3"><label>Tạm trú:</label><input type="text" class="form-control" id="temporary-address" readonly></div>
                 </div>
             </div>
         </div>
-
+    
         <div class="container">
             <h2>Thông tin gia đình</h2>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Họ tên cha:</label><input type="text" class="form-control" value="Trần Quang N" readonly></div>
+                            <div class="mb-3"><label>Họ tên cha:</label><input type="text" class="form-control" id="father-name" readonly></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" value="+ 091 146 4181" readonly></div>
+                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" id="father-phone" readonly></div>
                         </div>
                     </div>
-                    <div class="mb-3"><label>Nghề nghiệp:</label><input type="text" class="form-control" value="Giáo viên" readonly></div>
-                    <div class="mb-3"><label>Địa chỉ cha:</label><input type="text" class="form-control" value="32/17 đường số 993 thành phố Hồ Chí Minh" readonly></div>
+                    <div class="mb-3"><label>Nghề nghiệp:</label><input type="text" class="form-control" id="father-job" readonly></div>
+                    <div class="mb-3"><label>Địa chỉ cha:</label><input type="text" class="form-control" id="father-address" readonly></div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Họ tên mẹ:</label><input type="text" class="form-control" value="Phan Thị K" readonly></div>
+                            <div class="mb-3"><label>Họ tên mẹ:</label><input type="text" class="form-control" id="mother-name" readonly></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" value="+ 098 828 8806" readonly></div>
+                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" id="mother-phone" readonly></div>
                         </div>
                     </div>
-                    <div class="mb-3"><label>Nghề nghiệp:</label><input type="text" class="form-control" value="Bác sĩ bệnh viện quận Rạch Chiếc" readonly></div>
-                    <div class="mb-3"><label>Địa chỉ mẹ:</label><input type="text" class="form-control" value="32/17 đường số 993 thành phố Hồ Chí Minh" readonly></div>
+                    <div class="mb-3"><label>Nghề nghiệp:</label><input type="text" class="form-control" id="mother-job" readonly></div>
+                    <div class="mb-3"><label>Địa chỉ mẹ:</label><input type="text" class="form-control" id="mother-address" readonly></div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Họ tên người bảo hộ:</label><input type="text" class="form-control" value="Phan Thị K" readonly></div>
+                            <div class="mb-3"><label>Họ tên người bảo hộ:</label><input type="text" class="form-control" id="guardian-name" readonly></div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" value="+ 098 828 8806" readonly></div>
+                            <div class="mb-3"><label>Số điện thoại:</label><input type="text" class="form-control" id="guardian-phone" readonly></div>
                         </div>
                     </div>
-                    <div class="mb-3"><label>Địa chỉ người bảo hộ:</label><input type="text" class="form-control" value="32/17 đường số 993 thành phố Hồ Chí Minh" readonly></div>
+                    <div class="mb-3"><label>Địa chỉ người bảo hộ:</label><input type="text" class="form-control" id="guardian-address" readonly></div>
                 </div>
             </div>
         </div>
@@ -196,6 +194,6 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
-    <script src="student_info.js"></script>
+    <script src="/js/student_info.js"></script>
 
 </html> 
