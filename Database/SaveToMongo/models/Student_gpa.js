@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Schema cho bảng thống kê GPA tích lũy của sinh viên
-const Student_GpaSchema = new mongoose.Schema({
+const Student_gpaSchema = new mongoose.Schema({
   student_id: { type: String, ref: 'Student', required: true, unique: true },
   total_credits_attempted: { type: Number, default: 0, min: 0 },
   total_credits_earned: { type: Number, default: 0, min: 0 },
@@ -11,4 +11,4 @@ const Student_GpaSchema = new mongoose.Schema({
 
 const Student_gpa = mongoose.model('Student_gpa', Student_gpaSchema);
 
-module.exports = Student_Gpa;
+module.exports = Student_gpa;
