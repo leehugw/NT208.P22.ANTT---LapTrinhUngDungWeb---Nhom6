@@ -43,5 +43,7 @@ router.get('/profile-data', async (req, res) => {
         });
     }
 });
+// Lấy thông tin GPA của sinh viên
+router.get(':student_id/academicstatistic/', StudentGPAViewController.getStudentGPA);
 
 module.exports = router;
