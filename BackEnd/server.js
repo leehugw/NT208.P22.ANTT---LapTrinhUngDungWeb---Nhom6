@@ -35,6 +35,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
 
+
 // Khởi động server
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
