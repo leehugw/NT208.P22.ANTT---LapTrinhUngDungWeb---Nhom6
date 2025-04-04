@@ -35,21 +35,6 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
 
-// Profile Page Routes
-app.get('/profile', (req, res) => {
-  const { student_id, lecturer_id } = req.query;
-  
-  if (!student_id && !lecturer_id) {
-    return res.status(400).send("student_id hoặc lecturer_id là bắt buộc");
-  }
-
-  if (student_id) {
-    return res.sendFile(path.join(__dirname, '../FrontEnd/Student_Information/student_info.html'));
-  } else {
-    return res.sendFile(path.join(__dirname, '../FrontEnd/Lecturer_Information/lecturer_info.html'));
-  }
-}); 
-
 // Khởi động server
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

@@ -17,31 +17,4 @@ router.get('/profile', (req, res) => {
     res.sendFile(pagePath);
 });
 
-// Route API để lấy dữ liệu profile
-router.get('/profile-data', async (req, res) => {
-    try {
-        const { student_id } = req.query;
-        
-        if (student_id) {
-            const data = await StudentInformationService.getStudentProfile(student_id);
-            return res.json({ 
-                success: true, 
-                type: "student", 
-                data 
-            });
-        }
-        
-        res.status(400).json({ 
-            success: false, 
-            message: "Yêu cầu không hợp lệ - cần cung cấp student_id hoặc lecturer_id" 
-        });
-    } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu profile:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: error.message || "Lỗi server khi xử lý yêu cầu" 
-        });
-    }
-});
-
 module.exports = router;
