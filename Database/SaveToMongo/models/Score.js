@@ -11,7 +11,7 @@ const ScoreSchema = new mongoose.Schema({
   score_HP: { type: String, required: true }, // Điểm học phần (có thể là "Miễn")
 
   status: { type: String, enum: ["Đậu", "Rớt"], required: true } // Trạng thái
-}, {collection: "scores"}); // Thêm thời gian tạo/cập nhật
+}, {collection: "scores"}); 
 
 const Score = mongoose.model("Score", ScoreSchema);
 module.exports = Score;
