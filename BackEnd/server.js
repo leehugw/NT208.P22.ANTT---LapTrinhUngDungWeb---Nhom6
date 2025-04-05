@@ -14,6 +14,8 @@ connectDB();
 app.use(cors());
 app.use(bodyParser.json());
 
+const frontendPath = path.join(__dirname, '../Frontend');
+app.use(express.static(frontendPath));
 
 // Cấu hình static files chung
 const staticDirs = [
