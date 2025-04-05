@@ -7,6 +7,7 @@ const StudentSchema = new mongoose.Schema({
     birth_date: { type: String, required: true },
     birthplace: { type: String, trim: true },
     class_id: { type: String, trim: true },
+    has_english_certificate: { type: Boolean, required: true },
 }, {collection:"students"}, { timestamps: true });
 
 const Student = mongoose.model('Student', StudentSchema);

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+
 const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
 
 // Route để phục vụ trang HTML

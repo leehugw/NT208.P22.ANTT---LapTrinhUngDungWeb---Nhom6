@@ -12,7 +12,7 @@ const SubjectSchema = new mongoose.Schema({
   previous_id: { type: [String], default: [] },
   theory_credits: { type: Number, required: true, min: 0 },
   practice_credits: { type: Number, required: true, min: 0 }
-}, {collection:"subjects"}, { timestamps: true });
+}, {collection:"subjects", timestamps: true });
 
 const Subject = mongoose.model("Subject", SubjectSchema);
 
