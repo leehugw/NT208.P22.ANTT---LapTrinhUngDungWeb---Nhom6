@@ -27,11 +27,11 @@ $subjects('table.tablesorter tbody tr').each((index, element) => {
 
     // Trích xuất thông tin từ các cột
     const subject = {
-        subjects_id: $subjects(cols[1]).text().trim(),
-        subjects_name: $subjects(cols[2]).text().trim(),
-        subjectsEL_name: $subjects(cols[3]).text().trim(),
+        subject_id: $subjects(cols[1]).text().trim(),
+        subject_name: $subjects(cols[2]).text().trim(),
+        subjectEL_name: $subjects(cols[3]).text().trim(),
         faculty_id: "KHOA_" + $subjects(cols[5]).text().trim(),
-        subjects_type: $subjects(cols[6]).text().trim(),
+        subject_type: $subjects(cols[6]).text().trim(),
         old_id:  $subjects(cols[7]).html().trim().split(/<br\s*\/?>/i).map(s => s.trim()),
         equivalent_id:  $subjects(cols[8]).html().trim().split(/<br\s*\/?>/i).map(s => s.trim()),
         prerequisite_id: $subjects(cols[9]).html().trim().split(/<br\s*\/?>/i).map(s => s.trim()),

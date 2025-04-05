@@ -90,22 +90,22 @@ $('table').eq(1).find('tr').each((index, row) => {
         const scoreHP = safeParseScore($(cols[8]).text());
         const credits = parseInt($(cols[3]).text().trim()) || 0;
         const status = (typeof scoreHP === "number" && scoreHP < 5) ? "Rớt" : "Đậu";
+
+        const isRetaken = $(row).attr('style')?.includes('background-color:#ffbfdf') ? true : false;
         
         const score = {
-            score_id: scoreId,
-            subject_id: subjectId,
             student_id: studentId,
-            credits: credits,
+            subject_id: subjectId,
             semester_id: currentSemesterId,
             score_QT: parseFloat($(cols[4]).text().trim()) || null,
             score_GK: parseFloat($(cols[5]).text().trim()) || null,
             score_TH: parseFloat($(cols[6]).text().trim()) || null,
             score_CK: parseFloat($(cols[7]).text().trim()) || null,
             score_HP: scoreHP,
-            status: status
+            status: status,
+            isRetaken: isRetaken
         };
 
-        const isRetaken = $(row).attr('style')?.includes('background-color:#ffbfdf');
 
         scoreData.push(score);
         semesterCourses.push(score);
