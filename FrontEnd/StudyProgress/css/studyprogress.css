@@ -87,17 +87,34 @@
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
-.highlight {
+.highlight-pass {
     font-weight: bold;
-    color: #388e3c;
-    font-size: 1.25rem;
+    color: #388e3c !important; /* Màu xanh cho điểm trên 5 */
+    font-size: 1rem;
 }
+
+.highlight-fail {
+    font-weight: bold;
+    color: #e53935 !important; /* Màu đỏ cho điểm dưới 5 */
+    font-size: 1rem;
+}
+
 .filter-button {
     border: 2px solid #3D67BA;
     background-color: white;
     color: #3D67BA;
 }
 .filter-button:hover {
+    background-color: #3D67BA;
+    color: white;
+}
+
+.export-button {
+    background-color: #3D67BA;
+    border: #3D67BA;
+    color: white;
+}
+.export-button:hover {
     background-color: #3D67BA;
     color: white;
 }

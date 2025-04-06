@@ -13,7 +13,13 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
+let scoresemesterData = []; // Khai báo biến toàn cục để chứa dữ liệu điểm theo học kỳ
+
 document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search-input');  // Lấy input tìm kiếm
+    const semesterScores = document.getElementById("semester-scores"); // Lấy phần tử chứa bảng điểm
+
+
     // Lấy student_id từ URL
     const path = window.location.pathname;
     const studentId = path.split('/')[3];  // Lấy student_id từ params
@@ -26,7 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(`/api/student/${studentId}/group-by-semester-data`)  // Lấy thông tin điểm theo học kỳ
         ])
             .then(responses => Promise.all(responses.map(res => res.json())))
-            .then(([progressData, academicData, scoresemesterData]) => {
+            .then(([progressData, academicData, semesterData]) => {
+                scoresemesterData = semesterData; // Lưu trữ dữ liệu semesterData
+
                 // Cập nhật checkbox "Đã nộp chứng chỉ anh văn"
                 const englishProficiencyCheckbox = document.getElementById('englishProficiency');
                 englishProficiencyCheckbox.checked = progressData.has_english_certificate;
@@ -37,11 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Cập nhật thanh tiến độ hình tròn
                 const progressBar = document.getElementById('progress-bar');
                 const progressText = document.getElementById('progress-text');
-
-                // Tính toán stroke-dashoffset và stroke-dasharray cho vòng tròn
                 progressBar.style.strokeDasharray = `${progress}, 100`;
-
-                // Cập nhật phần trăm tiến độ
                 progressText.textContent = `${progress}%`;
 
                 // Hiển thị các dữ liệu GPA lên trang web
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     progressDetails.major_core,
                                     progressDetails.elective_credits
                                 ],
-                                backgroundColor: '#4fd1c5',
+                                backgroundColor: '#80C1FE',
                             },
                             {
                                 label: 'Tín chỉ yêu cầu',
@@ -77,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     requiredProgress.required_major_core,
                                     requiredProgress.required_elective_credits
                                 ],
-                                backgroundColor: '#fc8181',
+                                backgroundColor: '#2B57D6',
                             }
                         ]
                     },
@@ -112,17 +116,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
+
                 const semesterScores = document.getElementById("semester-scores"); // Chọn phần tử với ID semester-scores
 
                 scoresemesterData.forEach(semester => {
-
                     const semesterWrapper = document.createElement("div");
                     semesterWrapper.className = "mb-4";
 
                     const semesterTitle = document.createElement("h3");
                     semesterTitle.className = "text-dark";
                     semesterTitle.textContent = semester.semester.semester_name;
-                    
+
                     const tableHTML = `
                     <div class="table-responsive mb-4">
                         <table class="table table-hover">
@@ -148,18 +152,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <td>${sub.score_GK ?? '-'}</td>
                                         <td>${sub.score_TH ?? '-'}</td>
                                         <td>${sub.score_CK}</td>
-                                        <td class="highlight">${sub.score_HP}</td>
+                                        <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
                                     </tr>
                                 `).join("")}
                             </tbody>
                         </table>
                     </div>
-                `;
+                    `;
 
                     semesterWrapper.appendChild(semesterTitle);
                     semesterWrapper.appendChild(document.createRange().createContextualFragment(tableHTML));
 
-                    // Thêm vào DOM chính
                     semesterScores.appendChild(semesterWrapper);
                 });
             })
@@ -169,4 +172,103 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         alert('Student ID không hợp lệ');
     }
+
+    // Lắng nghe sự kiện input để tìm kiếm theo mã môn học hoặc tên môn học
+    searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.toLowerCase();  // Chuyển giá trị tìm kiếm thành chữ thường
+
+        // Xóa tất cả các học kỳ hiện tại trong semesterScores
+        semesterScores.innerHTML = '';
+
+        // Lọc dữ liệu dựa trên từ khóa tìm kiếm
+        scoresemesterData.forEach(semester => {
+            const semesterWrapper = document.createElement("div");
+            semesterWrapper.className = "mb-4";
+
+            const semesterTitle = document.createElement("h3");
+            semesterTitle.className = "text-dark";
+            semesterTitle.textContent = semester.semester.semester_name;
+
+            // Lọc các môn học theo mã môn học hoặc tên môn học
+            const filteredSubjects = semester.subjects.filter(sub =>
+                sub.subject_code.toLowerCase().includes(searchTerm) ||
+                sub.subject_name.toLowerCase().includes(searchTerm)
+            );
+
+            // Nếu có môn học thỏa mãn tìm kiếm
+            if (filteredSubjects.length > 0) {
+                const tableHTML = `
+                    <div class="table-responsive mb-4">
+                        <table class="table table-hover">
+                            <thead class="table-primary text-primary">
+                                <tr>
+                                    <th scope="col">Mã môn học</th>
+                                    <th scope="col">Tên môn học</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Điểm QT</th>
+                                    <th scope="col">Điểm GK</th>
+                                    <th scope="col">Điểm TH</th>
+                                    <th scope="col">Điểm CK</th>
+                                    <th scope="col">Điểm HP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${filteredSubjects.map(sub => `
+                                    <tr>
+                                        <td>${sub.subject_code}</td>
+                                        <td>${sub.subject_name}</td>
+                                        <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
+                                        <td>${sub.score_QT ?? '-'}</td>
+                                        <td>${sub.score_GK ?? '-'}</td>
+                                        <td>${sub.score_TH ?? '-'}</td>
+                                        <td>${sub.score_CK}</td>
+                                        <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
+                                    </tr>
+                                `).join("")}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+
+                semesterWrapper.appendChild(semesterTitle);
+                semesterWrapper.appendChild(document.createRange().createContextualFragment(tableHTML));
+
+                semesterScores.appendChild(semesterWrapper);
+            }
+        });
+    });
 });
+
+
+// Export button click handler
+document.getElementById('export-excel-btn').addEventListener('click', function () {
+    if (scoresemesterData.length === 0) {
+        alert('Dữ liệu chưa được tải, vui lòng thử lại sau.');
+        return;
+    }
+
+    const dataToExport = [];
+
+    scoresemesterData.forEach(semester => {
+        semester.subjects.forEach(sub => {
+            const subjectData = {
+                "Mã môn học": sub.subject_code,
+                "Tên môn học": sub.subject_name,
+                "Trạng thái": sub.status,
+                "Điểm QT": sub.score_QT ?? '-',
+                "Điểm GK": sub.score_GK ?? '-',
+                "Điểm TH": sub.score_TH ?? '-',
+                "Điểm CK": sub.score_CK ?? '-',
+                "Điểm HP": sub.score_HP ?? '-'
+            };
+            dataToExport.push(subjectData);
+        });
+    });
+
+    const ws = XLSX.utils.json_to_sheet(dataToExport);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Scores");
+    XLSX.writeFile(wb, "subject_scores.xlsx");
+});
+
+
