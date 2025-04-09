@@ -1,42 +1,45 @@
+//StudentInformationService.js
 const Student = require("../../../Database/SaveToMongo/models/Student");
-const Class = require("../../../Database/SaveToMongo/models/Class");
 const Faculty = require("../../../Database/SaveToMongo/models/Faculty");
-const Address = require("../../../Database/SaveToMongo/models/Address");
-const Family = require("../../../Database/SaveToMongo/models/Family");
-const Identity = require("../../../Database/SaveToMongo/models/Identity");
-const Contact = require("../../../Database/SaveToMongo/models/Contact");
 
 class StudentInformationService {
-    static async getStudentProfile(student_id) {
-      const student = await Student.findOne({ student_id });
-      if (!student) {
-        throw new Error("Không tìm thấy sinh viên");
+  static async getStudentProfile(student_id) {
+    try {
+      const student = await Student.findOne({ student_id }).lean();
+      if (!student) throw new NotFoundError('Không tìm thấy sinh viên');
+  
+      let faculty_name = null;
+      
+      if (student.major_id) {
+        // Tìm tất cả các khoa có chứa major_id của sinh viên
+        const faculties = await Faculty.find({
+          $or: [
+            { majors: student.major_id },       // Tìm trong mảng majors
+            { faculty_id: `KHOA_${student.major_id}` } // Tìm theo faculty_id
+          ]
+        }).lean();
+  
+        // Lấy khoa đầu tiên tìm thấy (hoặc có thể xử lý phức tạp hơn nếu cần)
+        const faculty = faculties[0];
+        
+        faculty_name = faculty?.faculty_name || null;
       }
-  
-      const classInfo = await Class.findOne({ class_id: student.class_id });
-      const faculty = await Faculty.findOne({ faculty_id: classInfo.faculty_id });
-      const faculty_name = faculty.faculty_name; 
-  
-      const [address, family, identity, contact] = await Promise.all([
-        Address.findOne({ student_id }),
-        Family.findOne({ student_id }),
-        Identity.findOne({ student_id }),
-        Contact.findOne({ student_id })
-      ]);
   
       return {
         student: {
-          ...student.toObject(),
-          class_name: classInfo?.class_name,
-          training_system: classInfo?.training_system,
-          faculty_name: faculty_name
+          ...student,
+          faculty_name: faculty_name || 'Chưa xác định'
         },
-        contact: contact?.toObject() || null,
-        address: address?.toObject() || null,
-        family: family?.toObject() || null,
-        identity: identity?.toObject() || null
+        contact: student.contact || null,
+        address: student.address || null,
+        identity: student.identity || null,
+        family: student.family || null
       };
+    } catch (error) {
+      console.error('Lỗi khi lấy thông tin sinh viên:', error);
+      throw new DatabaseError('Không thể lấy thông tin hồ sơ sinh viên');
     }
   }
-  
-  module.exports = StudentInformationService;
+}
+
+module.exports = StudentInformationService;

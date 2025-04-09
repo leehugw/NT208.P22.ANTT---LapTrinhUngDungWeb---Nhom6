@@ -1,3 +1,4 @@
+// StudentInformationController.js
 const StudentInformationService = require('../../Services/student/StudentInformationService');
 
 class StudentInformationController {
