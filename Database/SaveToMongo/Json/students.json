@@ -1,402 +1,2602 @@
 [
   {
-    "student_id": "25525001",
-    "name": "Mai Văn Phương",
-    "gender": "Nam",
-    "birth_date": "09-01-2004",
-    "birthplace": "05",
-    "class_id": "KTMT02"
+    "student_id": "23520694",
+    "name": "Vũ Thị Anh",
+    "gender": "Female",
+    "birth_date": "09-11-2005",
+    "birthplace": "Đồng Nai",
+    "class_name": "HTTT2023.1",
+    "class_id": "HTTT20231",
+    "major_id": "HTTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23520694@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuthianh@gmail.com",
+      "phone": "0993783821"
+    },
+    "address": {
+      "permanent_address": "Số 575, đường Nguyễn Huệ, Phường 1, Quận 8, Khánh Hòa",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000292159735",
+      "identity_issue_date": "25-07-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Công nhân",
+      "union_join_date": "10-05-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Thanh Q",
+        "job": "Kỹ sư phần mềm",
+        "phone": "0951670612",
+        "address": "Số 985, đường Võ Văn Tần, Phường 2, Quận 11, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Phạm Thị M",
+        "job": "Kinh doanh tự do",
+        "phone": "0931751775",
+        "address": "Số 985, đường Võ Văn Tần, Phường 2, Quận 11, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525002",
-    "name": "Lê Thị Linh",
-    "gender": "Nữ",
-    "birth_date": "18-07-2005",
-    "birthplace": "30",
-    "class_id": "MMTT01"
+    "student_id": "23524111",
+    "name": "Ngô Văn Hiếu",
+    "gender": "Male",
+    "birth_date": "02-04-2005",
+    "birthplace": "Đà Nẵng",
+    "class_name": "CNTT2023.2",
+    "class_id": "CNTT20232",
+    "major_id": "CNTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23524111@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "ngovanhieu@gmail.com",
+      "phone": "0935158568"
+    },
+    "address": {
+      "permanent_address": "Số 7, đường Lê Lợi, Phường 19, Quận 3, Huế",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000787950842",
+      "identity_issue_date": "14-09-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "28-06-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phan Công P",
+        "job": "Kiến trúc sư",
+        "phone": "0926752191",
+        "address": "Số 07, đường Trần Hưng Đạo, Phường 15, Quận 6, Bình Dương"
+      },
+      "mother": {
+        "name": "Huỳnh Thị D",
+        "job": "Y tá",
+        "phone": "0912873126",
+        "address": "Số 07, đường Trần Hưng Đạo, Phường 15, Quận 6, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525003",
-    "name": "Hoàng Thị Yến",
-    "gender": "Nữ",
-    "birth_date": "30-06-2005",
-    "birthplace": "14",
-    "class_id": "HTTT02"
+    "student_id": "21525294",
+    "name": "Hồ Văn Minh",
+    "gender": "Male",
+    "birth_date": "26-12-2003",
+    "birthplace": "Hải Phòng",
+    "class_name": "KTMT2021.2",
+    "class_id": "KTMT20212",
+    "major_id": "KTMT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21525294@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hovanminh@gmail.com",
+      "phone": "0967664803"
+    },
+    "address": {
+      "permanent_address": "Số 85, đường Phạm Ngọc Thạch, Phường 12, Cầu Giấy, Hà Nội",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000716482799",
+      "identity_issue_date": "04-12-2015",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nghệ sĩ",
+      "union_join_date": "02-07-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Trần Quang G",
+        "job": "Kỹ sư phần mềm",
+        "phone": "0956909446",
+        "address": "Số 66, đường Nguyễn Huệ, Phường 4, Hoàn Kiếm, Hà Nội"
+      },
+      "mother": {
+        "name": "Trần Thị M",
+        "job": "Kinh doanh tự do",
+        "phone": "0997819524",
+        "address": "Số 66, đường Nguyễn Huệ, Phường 4, Hoàn Kiếm, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525004",
-    "name": "Lê Văn Nam",
-    "gender": "Nam",
-    "birth_date": "27-08-2006",
-    "birthplace": "46",
-    "class_id": "KTPM01"
+    "student_id": "23526261",
+    "name": "Trịnh Văn Minh",
+    "gender": "Male",
+    "birth_date": "03-04-2005",
+    "birthplace": "Cần Thơ",
+    "class_name": "ATTN2023.2",
+    "class_id": "ATTN20232",
+    "major_id": "ATTT",
+    "program_id": "CTDT2023",
+    "program_type": "CNTN",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23526261@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "trinhvanminh@gmail.com",
+      "phone": "0988484098"
+    },
+    "address": {
+      "permanent_address": "Số 5, đường Trần Hưng Đạo, Phường 16, Quận 7, Quảng Ninh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000558565211",
+      "identity_issue_date": "31-05-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "",
+      "party_join_date": "09-08-2022"
+    },
+    "family": {
+      "father": {
+        "name": "Phan Hữu K",
+        "job": "Giám đốc công ty",
+        "phone": "0927420619",
+        "address": "Số 8, đường Trần Hưng Đạo, Phường 1, Hồng Bàng, Hải Phòng"
+      },
+      "mother": {
+        "name": "Trần Thị B",
+        "job": "Kinh doanh tự do",
+        "phone": "0957767791",
+        "address": "Số 16, đường Võ Văn Tần, Phường 6, Ninh Kiều, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525005",
-    "name": "Đinh Văn Bảo",
-    "gender": "Nam",
-    "birth_date": "19-11-2006",
-    "birthplace": "29",
-    "class_id": "CNTT01"
+    "student_id": "23520520",
+    "name": "Đỗ Văn Nam",
+    "gender": "Male",
+    "birth_date": "08-08-2005",
+    "birthplace": "Lâm Đồng",
+    "class_name": "KTMT2023.2",
+    "class_id": "KTMT20232",
+    "major_id": "KTMT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23520520@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dovannam@gmail.com",
+      "phone": "0997828202"
+    },
+    "address": {
+      "permanent_address": "Số 47, đường Lê Lợi, Phường 10, Bình Thủy, Cần Thơ",
+      "temporary_address": "Số 133, Đường Lý Thường Kiệt, Đống Đa, Hà Nội"
+    },
+    "identity": {
+      "identity_number": "000744038221",
+      "identity_issue_date": "28-06-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "20-01-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Quang C",
+        "job": "Trưởng phòng kinh doanh",
+        "phone": "0986305384",
+        "address": "Số 832, đường Lý Thường Kiệt, Phường 19, Quận 4, Khánh Hòa"
+      },
+      "mother": {
+        "name": "Hoàng Thị N",
+        "job": "Bác sĩ",
+        "phone": "0920211511",
+        "address": "Số 832, đường Lý Thường Kiệt, Phường 19, Quận 4, Khánh Hòa"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525006",
-    "name": "Mai Thị Uyên",
-    "gender": "Nữ",
-    "birth_date": "29-03-2006",
-    "birthplace": "62",
-    "class_id": "ATTT01"
+    "student_id": "22526172",
+    "name": "Vũ Văn Quang",
+    "gender": "Male",
+    "birth_date": "11-02-2004",
+    "birthplace": "Thanh Hóa",
+    "class_name": "CNTT2022.1",
+    "class_id": "CNTT20221",
+    "major_id": "CNTT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22526172@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuvanquang@gmail.com",
+      "phone": "0973465599"
+    },
+    "address": {
+      "permanent_address": "Số 6, đường Hai Bà Trưng, Phường 2, Sơn Trà, Đà Nẵng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000624728192",
+      "identity_issue_date": "30-05-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Gia-rai",
+      "religion": "Thiên chúa giáo",
+      "origin": "Công nhân",
+      "union_join_date": "04-10-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Hữu F",
+        "job": "Giảng viên đại học",
+        "phone": "0978779170",
+        "address": "Số 0, đường Phạm Ngọc Thạch, Phường 13, Quận 8, Đồng Nai"
+      },
+      "mother": {
+        "name": "Huỳnh Thị D",
+        "job": "Kinh doanh tự do",
+        "phone": "0972063919",
+        "address": "Số 256, đường Võ Văn Tần, Phường 16, Quận 3, Hồ Chí Minh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525007",
-    "name": "Trịnh Thị Hoa",
-    "gender": "Nữ",
-    "birth_date": "21-03-2006",
-    "birthplace": "13",
-    "class_id": "KHDL02"
+    "student_id": "23521956",
+    "name": "Ngô Văn Tuấn",
+    "gender": "Male",
+    "birth_date": "11-10-2005",
+    "birthplace": "Khánh Hòa",
+    "class_name": "HTTT2023.1",
+    "class_id": "HTTT20231",
+    "major_id": "HTTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23521956@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "ngovantuan@gmail.com",
+      "phone": "0930172902"
+    },
+    "address": {
+      "permanent_address": "Số 429, đường Lê Lợi, Phường 13, Ô Môn, Cần Thơ",
+      "temporary_address": "Số 72, Đường Lê Lợi, Hồng Bàng, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000820402846",
+      "identity_issue_date": "25-06-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Trần Minh T",
+        "job": "Kỹ sư phần mềm",
+        "phone": "0974103973",
+        "address": "Số 5, đường Nguyễn Huệ, Phường 7, Quận 5, Hồ Chí Minh"
+      },
+      "mother": {
+        "name": "Lê Thị B",
+        "job": "Nhân viên văn phòng",
+        "phone": "0941271250",
+        "address": "Số 5, đường Nguyễn Huệ, Phường 7, Quận 5, Hồ Chí Minh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525008",
-    "name": "Vũ Văn Khánh",
-    "gender": "Nam",
-    "birth_date": "16-12-2004",
-    "birthplace": "06",
-    "class_id": "KHDL01"
+    "student_id": "22528283",
+    "name": "Ngô Thị Thảo",
+    "gender": "Female",
+    "birth_date": "10-03-2004",
+    "birthplace": "Hồ Chí Minh",
+    "class_name": "KTMT2022.1",
+    "class_id": "KTMT20221",
+    "major_id": "KTMT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22528283@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "ngothithao@gmail.com",
+      "phone": "0959423505"
+    },
+    "address": {
+      "permanent_address": "Số 0, đường Phạm Ngọc Thạch, Phường 9, Hai Bà Trưng, Hà Nội",
+      "temporary_address": "Số 25, Đường Lê Lợi, Ngô Quyền, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000794088786",
+      "identity_issue_date": "31-08-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Tiểu thương",
+      "union_join_date": "06-07-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Nguyễn Thanh G",
+        "job": "Phó giám đốc Sở; Trưởng phòng kinh doanh",
+        "phone": "0967325472",
+        "address": "Số 169, đường Hai Bà Trưng, Phường 20, Quận 9, Đồng Nai"
+      },
+      "mother": {
+        "name": "Trần Thị M",
+        "job": "Y tá",
+        "phone": "0964071459",
+        "address": "Số 169, đường Hai Bà Trưng, Phường 20, Quận 9, Đồng Nai"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525009",
-    "name": "Ngô Thị Ngọc",
-    "gender": "Nữ",
-    "birth_date": "24-01-2006",
-    "birthplace": "34",
-    "class_id": "HTTT01"
+    "student_id": "23528470",
+    "name": "Phạm Thị Xuân",
+    "gender": "Female",
+    "birth_date": "12-10-2005",
+    "birthplace": "Lâm Đồng",
+    "class_name": "KHDL2023.1",
+    "class_id": "KHDL20231",
+    "major_id": "KHDL",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23528470@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "phamthixuan@gmail.com",
+      "phone": "0943418410"
+    },
+    "address": {
+      "permanent_address": "Số 8, đường Trần Hưng Đạo, Phường 16, Quận 1, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000234257655",
+      "identity_issue_date": "30-07-2012",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "08-03-2022",
+      "party_join_date": "25-04-2021"
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Duy E",
+        "job": "Chánh văn phòng Sở; Kỹ sư xây dựng",
+        "phone": "0927105853",
+        "address": "Số 101, đường Nguyễn Huệ, Phường 6, Quận 1, Đồng Nai"
+      },
+      "mother": {
+        "name": "Trần Thị H",
+        "job": "Kinh doanh tự do",
+        "phone": "0955084123",
+        "address": "Số 101, đường Nguyễn Huệ, Phường 6, Quận 1, Đồng Nai"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525010",
-    "name": "Bùi Văn Quang",
-    "gender": "Nam",
-    "birth_date": "08-02-2004",
-    "birthplace": "53",
-    "class_id": "CNTT02"
+    "student_id": "23526213",
+    "name": "Hồ Văn Khánh",
+    "gender": "Male",
+    "birth_date": "28-10-2005",
+    "birthplace": "Đà Nẵng",
+    "class_name": "ATTT2023.2",
+    "class_id": "ATTT20232",
+    "major_id": "ATTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23526213@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hovankhanh@gmail.com",
+      "phone": "0913099002"
+    },
+    "address": {
+      "permanent_address": "Số 3, đường Nguyễn Huệ, Phường 14, Quận 5, Quảng Ninh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000603740042",
+      "identity_issue_date": "03-09-2010",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Thiên chúa giáo",
+      "origin": "Tiểu thương",
+      "union_join_date": "23-05-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Văn F",
+        "job": "Chuyên viên tài chính",
+        "phone": "0942193230",
+        "address": "Số 831, đường Phạm Ngọc Thạch, Phường 8, Quận 5, Huế"
+      },
+      "mother": {
+        "name": "Hoàng Thị F",
+        "job": "Bác sĩ",
+        "phone": "0935445249",
+        "address": "Số 831, đường Phạm Ngọc Thạch, Phường 8, Quận 5, Huế"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525011",
-    "name": "Trần Văn Hiếu",
-    "gender": "Nam",
-    "birth_date": "26-09-2004",
-    "birthplace": "41",
-    "class_id": "MMTT01"
+    "student_id": "22523841",
+    "name": "Hoàng Văn Khánh",
+    "gender": "Male",
+    "birth_date": "03-02-2004",
+    "birthplace": "Bình Dương",
+    "class_name": "TTNT2022.2",
+    "class_id": "TTNT20222",
+    "major_id": "TTNT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22523841@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hoangvankhanh@gmail.com",
+      "phone": "0973413997"
+    },
+    "address": {
+      "permanent_address": "Số 181, đường Võ Văn Tần, Phường 20, Bình Thủy, Cần Thơ",
+      "temporary_address": "Số 194, Đường Phạm Ngọc Thạch, Quận 11, Huế"
+    },
+    "identity": {
+      "identity_number": "000313296383",
+      "identity_issue_date": "03-04-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "27-06-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Công S",
+        "job": "Ủy viên ban chấp hành Đảng Bộ; Kiến trúc sư",
+        "phone": "0949744271",
+        "address": "Số 09, đường Phạm Ngọc Thạch, Phường 20, Cái Răng, Cần Thơ"
+      },
+      "mother": {
+        "name": "Phan Thị B",
+        "job": "Nội trợ",
+        "phone": "0953765505",
+        "address": "Số 09, đường Phạm Ngọc Thạch, Phường 20, Cái Răng, Cần Thơ"
+      },
+      "guardian": {
+        "name": "Đặng Q",
+        "phone": "0932817270",
+        "address": "Số 4, đường Lý Thường Kiệt, Phường 4, Thanh Khê, Đà Nẵng"
+      }
+    }
   },
   {
-    "student_id": "25525012",
-    "name": "Nguyễn Thị My",
-    "gender": "Nữ",
-    "birth_date": "19-01-2004",
-    "birthplace": "19",
-    "class_id": "TKVM01"
+    "student_id": "23525685",
+    "name": "Nguyễn Văn Anh",
+    "gender": "Male",
+    "birth_date": "11-05-2005",
+    "birthplace": "Hồ Chí Minh",
+    "class_name": "KHDL2023.2",
+    "class_id": "KHDL20232",
+    "major_id": "KHDL",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23525685@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "nguyenvananh@gmail.com",
+      "phone": "0956020237"
+    },
+    "address": {
+      "permanent_address": "Số 835, đường Nguyễn Huệ, Phường 10, Kiến An, Hải Phòng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000554571131",
+      "identity_issue_date": "09-06-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "17-08-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Đặng Hữu K",
+        "job": "Giảng viên đại học",
+        "phone": "0983091271",
+        "address": "Số 7, đường Hai Bà Trưng, Phường 14, Quận 7, Đồng Nai"
+      },
+      "mother": {
+        "name": "Trần Thị F",
+        "job": "Kế toán",
+        "phone": "0987339503",
+        "address": "Số 7, đường Hai Bà Trưng, Phường 14, Quận 7, Đồng Nai"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525013",
-    "name": "Bùi Văn Sơn",
-    "gender": "Nam",
-    "birth_date": "17-04-2005",
-    "birthplace": "05",
-    "class_id": "ATTT01"
+    "student_id": "22520316",
+    "name": "Đỗ Thị Huyền",
+    "gender": "Female",
+    "birth_date": "09-07-2004",
+    "birthplace": "Bình Dương",
+    "class_name": "MMTT2022.2",
+    "class_id": "MMTT20222",
+    "major_id": "MMTT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22520316@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dothihuyen@gmail.com",
+      "phone": "0929400728"
+    },
+    "address": {
+      "permanent_address": "Số 099, đường Lý Thường Kiệt, Phường 15, Quận 12, Huế",
+      "temporary_address": "Số 59, Đường Lý Thường Kiệt, Quận 5, Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000970783768",
+      "identity_issue_date": "12-04-2010",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nghệ sĩ",
+      "union_join_date": "04-08-2021",
+      "party_join_date": "20-09-2021"
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Quang F",
+        "job": "Trưởng phòng Tài chính; Trưởng phòng kinh doanh",
+        "phone": "0951346939",
+        "address": "Số 89, đường Phạm Ngọc Thạch, Phường 1, Quận 11, Khánh Hòa"
+      },
+      "mother": {
+        "name": "Phạm Thị D",
+        "job": "Dược sĩ",
+        "phone": "0945722744",
+        "address": "Số 89, đường Phạm Ngọc Thạch, Phường 1, Quận 11, Khánh Hòa"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525014",
-    "name": "Mai Thị Nga",
-    "gender": "Nữ",
-    "birth_date": "08-01-2006",
-    "birthplace": "11",
-    "class_id": "KHTN01"
+    "student_id": "22523535",
+    "name": "Lý Văn Việt",
+    "gender": "Male",
+    "birth_date": "17-03-2004",
+    "birthplace": "Hải Phòng",
+    "class_name": "KTPM2022.1",
+    "class_id": "KTPM20221",
+    "major_id": "KTPM",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22523535@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "lyvanviet@gmail.com",
+      "phone": "0969700788"
+    },
+    "address": {
+      "permanent_address": "Số 88, đường Hai Bà Trưng, Phường 11, Quận 9, Bình Dương",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000120850466",
+      "identity_issue_date": "26-03-2015",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "07-07-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Lê Đức K",
+        "job": "Chuyên viên tài chính",
+        "phone": "0949503691",
+        "address": "Số 4, đường Phạm Ngọc Thạch, Phường 2, Quận 12, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Phạm Thị G",
+        "job": "Dược sĩ",
+        "phone": "0968214002",
+        "address": "Số 162, đường Võ Văn Tần, Phường 5, Cái Răng, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525015",
+    "student_id": "23529751",
+    "name": "Đặng Thị Nga",
+    "gender": "Female",
+    "birth_date": "16-01-2005",
+    "birthplace": "Hồ Chí Minh",
+    "class_name": "KHDL2023.2",
+    "class_id": "KHDL20232",
+    "major_id": "KHDL",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23529751@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dangthinga@gmail.com",
+      "phone": "0984547293"
+    },
+    "address": {
+      "permanent_address": "Số 076, đường Trần Hưng Đạo, Phường 18, Sơn Trà, Đà Nẵng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000737249805",
+      "identity_issue_date": "16-02-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Công nhân",
+      "union_join_date": "24-11-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Duy T",
+        "job": "Kỹ sư xây dựng",
+        "phone": "0938390915",
+        "address": "Số 1, đường Trần Hưng Đạo, Phường 17, Hải Châu, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Nguyễn Thị K",
+        "job": "Dược sĩ",
+        "phone": "0923632893",
+        "address": "Số 1, đường Trần Hưng Đạo, Phường 17, Hải Châu, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "Phan G",
+        "phone": "0981834647",
+        "address": "Số 47, đường Hai Bà Trưng, Phường 20, Cầu Giấy, Hà Nội"
+      }
+    }
+  },
+  {
+    "student_id": "23529805",
+    "name": "Ngô Thị Hoa",
+    "gender": "Female",
+    "birth_date": "28-10-2005",
+    "birthplace": "Bình Định",
+    "class_name": "ATTT2023.1",
+    "class_id": "ATTT20231",
+    "major_id": "ATTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23529805@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "ngothihoa@gmail.com",
+      "phone": "0920242928"
+    },
+    "address": {
+      "permanent_address": "Số 359, đường Phạm Ngọc Thạch, Phường 18, Quận 12, Đồng Nai",
+      "temporary_address": "Số 157, Đường Nguyễn Huệ, Bình Thủy, Cần Thơ"
+    },
+    "identity": {
+      "identity_number": "000360443065",
+      "identity_issue_date": "27-04-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Doanh nhân",
+      "union_join_date": "21-06-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Trần Duy G",
+        "job": "Trưởng phòng Tài chính; Bác sĩ",
+        "phone": "0950570587",
+        "address": "Số 3, đường Trần Hưng Đạo, Phường 5, Ngô Quyền, Hải Phòng"
+      },
+      "mother": {
+        "name": "Huỳnh Thị Q",
+        "job": "Nội trợ",
+        "phone": "0999895780",
+        "address": "Số 3, đường Trần Hưng Đạo, Phường 5, Ngô Quyền, Hải Phòng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
+  },
+  {
+    "student_id": "22525781",
+    "name": "Đinh Thị Phương",
+    "gender": "Female",
+    "birth_date": "10-01-2004",
+    "birthplace": "Quảng Ninh",
+    "class_name": "KHMT2022.2",
+    "class_id": "KHMT20222",
+    "major_id": "KHMT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22525781@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dinhthiphuong@gmail.com",
+      "phone": "0962687779"
+    },
+    "address": {
+      "permanent_address": "Số 7, đường Lý Thường Kiệt, Phường 2, Hồng Bàng, Hải Phòng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000342943329",
+      "identity_issue_date": "15-12-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "27-05-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Duy P",
+        "job": "Giảng viên đại học",
+        "phone": "0960405592",
+        "address": "Số 2, đường Lý Thường Kiệt, Phường 10, Cái Răng, Cần Thơ"
+      },
+      "mother": {
+        "name": "Lê Thị B",
+        "job": "Chuyên viên nhân sự",
+        "phone": "0918847188",
+        "address": "Số 2, đường Lý Thường Kiệt, Phường 10, Cái Răng, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
+  },
+  {
+    "student_id": "23522555",
     "name": "Bùi Văn Hiếu",
-    "gender": "Nam",
-    "birth_date": "21-07-2006",
-    "birthplace": "23",
-    "class_id": "HTTT02"
+    "gender": "Male",
+    "birth_date": "13-10-2005",
+    "birthplace": "Hồ Chí Minh",
+    "class_name": "KHDL2023.1",
+    "class_id": "KHDL20231",
+    "major_id": "KHDL",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23522555@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "buivanhieu@gmail.com",
+      "phone": "0984593445"
+    },
+    "address": {
+      "permanent_address": "Số 744, đường Phạm Ngọc Thạch, Phường 6, Quận 5, Quảng Ninh",
+      "temporary_address": "Số 188, Đường Phạm Ngọc Thạch, Ngô Quyền, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000182361004",
+      "identity_issue_date": "28-12-2016",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "17-06-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Duy T",
+        "job": "Trưởng phòng kinh doanh",
+        "phone": "0967357505",
+        "address": "Số 4, đường Trần Hưng Đạo, Phường 7, Quận 12, Bình Dương"
+      },
+      "mother": {
+        "name": "Phạm Thị H",
+        "job": "Nhân viên văn phòng",
+        "phone": "0965718790",
+        "address": "Số 4, đường Trần Hưng Đạo, Phường 7, Quận 12, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525016",
-    "name": "Lê Văn Hiếu",
-    "gender": "Nam",
-    "birth_date": "09-06-2005",
-    "birthplace": "17",
-    "class_id": "MMTT01"
+    "student_id": "23529216",
+    "name": "Vũ Thị Xuân",
+    "gender": "Female",
+    "birth_date": "28-11-2005",
+    "birthplace": "Hồ Chí Minh",
+    "class_name": "HTTT2023.1",
+    "class_id": "HTTT20231",
+    "major_id": "HTTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23529216@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuthixuan@gmail.com",
+      "phone": "0930826244"
+    },
+    "address": {
+      "permanent_address": "Số 215, đường Lý Thường Kiệt, Phường 16, Quận 9, Bình Dương",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000824262980",
+      "identity_issue_date": "09-08-2015",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Công nhân",
+      "union_join_date": "26-08-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phan Anh T",
+        "job": "Trưởng phòng Tài chính; Doanh nhân",
+        "phone": "0961635314",
+        "address": "Số 4, đường Lê Lợi, Phường 8, Ngũ Hành Sơn, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Lê Thị P",
+        "job": "Kinh doanh tự do",
+        "phone": "0952352720",
+        "address": "Số 4, đường Lê Lợi, Phường 8, Ngũ Hành Sơn, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525017",
-    "name": "Hồ Văn Hiếu",
-    "gender": "Nam",
-    "birth_date": "23-08-2006",
-    "birthplace": "55",
-    "class_id": "KHMT01"
+    "student_id": "21526719",
+    "name": "Đặng Văn Tuấn",
+    "gender": "Male",
+    "birth_date": "24-08-2003",
+    "birthplace": "Thanh Hóa",
+    "class_name": "TMDT2021.1",
+    "class_id": "TMDT20211",
+    "major_id": "TMDT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21526719@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dangvantuan@gmail.com",
+      "phone": "0923150227"
+    },
+    "address": {
+      "permanent_address": "Số 749, đường Phạm Ngọc Thạch, Phường 16, Quận 8, Quảng Ninh",
+      "temporary_address": "Số 172, Đường Hai Bà Trưng, Hoàn Kiếm, Hà Nội"
+    },
+    "identity": {
+      "identity_number": "000136039524",
+      "identity_issue_date": "28-12-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Tiểu thương",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Bảo Q",
+        "job": "Kiến trúc sư",
+        "phone": "0945732657",
+        "address": "Số 02, đường Trần Hưng Đạo, Phường 13, Ba Đình, Hà Nội"
+      },
+      "mother": {
+        "name": "Phạm Thị D",
+        "job": "Dược sĩ",
+        "phone": "0952992758",
+        "address": "Số 02, đường Trần Hưng Đạo, Phường 13, Ba Đình, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525018",
-    "name": "Ngô Thị Anh",
-    "gender": "Nữ",
-    "birth_date": "28-01-2006",
-    "birthplace": "53",
-    "class_id": "CNTT02"
+    "student_id": "22529783",
+    "name": "Trịnh Thị Linh",
+    "gender": "Female",
+    "birth_date": "08-02-2004",
+    "birthplace": "Thanh Hóa",
+    "class_name": "TTNT2022.2",
+    "class_id": "TTNT20222",
+    "major_id": "TTNT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22529783@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "trinhthilinh@gmail.com",
+      "phone": "0940917553"
+    },
+    "address": {
+      "permanent_address": "Số 67, đường Lý Thường Kiệt, Phường 13, Tân Bình, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000449152239",
+      "identity_issue_date": "21-08-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Doanh nhân",
+      "union_join_date": "12-06-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Công T",
+        "job": "Phó chủ tịch UBND quận; Chuyên viên tài chính",
+        "phone": "0997609364",
+        "address": "Số 29, đường Hai Bà Trưng, Phường 3, Quận 10, Đồng Nai"
+      },
+      "mother": {
+        "name": "Phạm Thị G",
+        "job": "Nội trợ",
+        "phone": "0956941516",
+        "address": "Số 1, đường Võ Văn Tần, Phường 11, Quận 8, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525019",
-    "name": "Mai Thị Anh",
-    "gender": "Nữ",
-    "birth_date": "25-09-2004",
-    "birthplace": "51",
-    "class_id": "KHDL02"
+    "student_id": "21520859",
+    "name": "Hồ Thị Phương",
+    "gender": "Female",
+    "birth_date": "10-04-2003",
+    "birthplace": "Nghệ An",
+    "class_name": "CNTT2021.2",
+    "class_id": "CNTT20212",
+    "major_id": "CNTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21520859@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hothiphuong@gmail.com",
+      "phone": "0939038418"
+    },
+    "address": {
+      "permanent_address": "Số 647, đường Võ Văn Tần, Phường 18, Quận 9, Đồng Nai",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000477371870",
+      "identity_issue_date": "18-06-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Phật giáo",
+      "origin": "Trí thức",
+      "union_join_date": "27-03-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phạm Hữu G",
+        "job": "Kỹ sư phần mềm",
+        "phone": "0926809818",
+        "address": "Số 53, đường Lý Thường Kiệt, Phường 10, Quận 3, Huế"
+      },
+      "mother": {
+        "name": "Huỳnh Thị D",
+        "job": "Nội trợ",
+        "phone": "0979669857",
+        "address": "Số 829, đường Võ Văn Tần, Phường 17, Ninh Kiều, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525020",
-    "name": "Đinh Thị Như",
-    "gender": "Nữ",
-    "birth_date": "23-01-2005",
-    "birthplace": "45",
-    "class_id": "ATTT01"
+    "student_id": "22523914",
+    "name": "Lý Thị Nhi",
+    "gender": "Female",
+    "birth_date": "23-12-2004",
+    "birthplace": "Hải Phòng",
+    "class_name": "ATTN2022.2",
+    "class_id": "ATTN20222",
+    "major_id": "ATTT",
+    "program_id": "CTDT2022",
+    "program_type": "CNTN",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22523914@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "lythinhi@gmail.com",
+      "phone": "0934238438"
+    },
+    "address": {
+      "permanent_address": "Số 26, đường Võ Văn Tần, Phường 15, Thanh Khê, Đà Nẵng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000401185794",
+      "identity_issue_date": "12-10-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Hồi giáo",
+      "origin": "Doanh nhân",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phạm Anh C",
+        "job": "Doanh nhân",
+        "phone": "0980329162",
+        "address": "Số 74, đường Lý Thường Kiệt, Phường 9, Quận 1, Huế"
+      },
+      "mother": {
+        "name": "Nguyễn Thị S",
+        "job": "Kinh doanh tự do",
+        "phone": "0939968069",
+        "address": "Số 552, đường Trần Hưng Đạo, Phường 9, Kiến An, Hải Phòng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525021",
-    "name": "Trần Thị Thảo",
-    "gender": "Nữ",
-    "birth_date": "25-04-2005",
-    "birthplace": "48",
-    "class_id": "ATTT02"
+    "student_id": "22527677",
+    "name": "Phạm Văn Minh",
+    "gender": "Male",
+    "birth_date": "23-02-2004",
+    "birthplace": "Hà Nội",
+    "class_name": "HTTT2022.2",
+    "class_id": "HTTT20222",
+    "major_id": "HTTT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22527677@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "phamvanminh@gmail.com",
+      "phone": "0953246628"
+    },
+    "address": {
+      "permanent_address": "Số 004, đường Lê Lợi, Phường 20, Tân Bình, Hồ Chí Minh",
+      "temporary_address": "Số 80, Đường Lý Thường Kiệt, Quận 4, Đồng Nai"
+    },
+    "identity": {
+      "identity_number": "000836327149",
+      "identity_issue_date": "10-03-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Nùng",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "21-11-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Huỳnh Văn A",
+        "job": "Giảng viên đại học",
+        "phone": "0979493166",
+        "address": "Số 125, đường Nguyễn Huệ, Phường 17, Thanh Khê, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Phan Thị A",
+        "job": "Kiểm toán viên",
+        "phone": "0934487873",
+        "address": "Số 125, đường Nguyễn Huệ, Phường 17, Thanh Khê, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525022",
-    "name": "Ngô Thị Nhi",
-    "gender": "Nữ",
-    "birth_date": "23-08-2004",
-    "birthplace": "20",
-    "class_id": "KHTN01"
+    "student_id": "22527393",
+    "name": "Bùi Thị Chi",
+    "gender": "Female",
+    "birth_date": "28-07-2004",
+    "birthplace": "Quảng Ninh",
+    "class_name": "KHMT2022.1",
+    "class_id": "KHMT20221",
+    "major_id": "KHMT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22527393@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "buithichi@gmail.com",
+      "phone": "0991516331"
+    },
+    "address": {
+      "permanent_address": "Số 911, đường Nguyễn Huệ, Phường 9, Ô Môn, Cần Thơ",
+      "temporary_address": "Số 77, Đường Phạm Ngọc Thạch, Lê Chân, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000891494281",
+      "identity_issue_date": "06-05-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Hồi giáo",
+      "origin": "Doanh nhân",
+      "union_join_date": "01-12-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Văn Q",
+        "job": "Trưởng phòng Tài chính; Giám đốc công ty",
+        "phone": "0967812783",
+        "address": "Số 412, đường Trần Hưng Đạo, Phường 5, Quận 10, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Huỳnh Thị G",
+        "job": "Kinh doanh tự do",
+        "phone": "0912926885",
+        "address": "Số 412, đường Trần Hưng Đạo, Phường 5, Quận 10, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525023",
-    "name": "Đỗ Thị Xuân",
-    "gender": "Nữ",
-    "birth_date": "09-09-2005",
-    "birthplace": "55",
-    "class_id": "KHDL01"
-  },
-  {
-    "student_id": "25525024",
-    "name": "Đinh Thị Thảo",
-    "gender": "Nữ",
-    "birth_date": "25-05-2005",
-    "birthplace": "49",
-    "class_id": "KHMT02"
-  },
-  {
-    "student_id": "25525025",
-    "name": "Mai Văn Quang",
-    "gender": "Nam",
-    "birth_date": "06-04-2005",
-    "birthplace": "15",
-    "class_id": "ATTT02"
-  },
-  {
-    "student_id": "25525026",
-    "name": "Lê Thị Uyên",
-    "gender": "Nữ",
-    "birth_date": "07-12-2005",
-    "birthplace": "50",
-    "class_id": "ATTN02"
-  },
-  {
-    "student_id": "25525027",
+    "student_id": "21521069",
     "name": "Trần Văn Quang",
-    "gender": "Nam",
+    "gender": "Male",
+    "birth_date": "18-11-2003",
+    "birthplace": "Quảng Ninh",
+    "class_name": "CNTT2021.1",
+    "class_id": "CNTT20211",
+    "major_id": "CNTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21521069@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "tranvanquang@gmail.com",
+      "phone": "0972396613"
+    },
+    "address": {
+      "permanent_address": "Số 71, đường Trần Hưng Đạo, Phường 6, Bình Thủy, Cần Thơ",
+      "temporary_address": "Số 192, Đường Hai Bà Trưng, Quận 6, Bình Dương"
+    },
+    "identity": {
+      "identity_number": "000267870777",
+      "identity_issue_date": "19-02-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Cao đài",
+      "origin": "Tiểu thương",
+      "union_join_date": "12-10-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phạm Công K",
+        "job": "Cán bộ nhà nước",
+        "phone": "0985857304",
+        "address": "Số 80, đường Trần Hưng Đạo, Phường 1, Hải Châu, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Hoàng Thị Q",
+        "job": "Kế toán",
+        "phone": "0937457735",
+        "address": "Số 80, đường Trần Hưng Đạo, Phường 1, Hải Châu, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
+  },
+  {
+    "student_id": "23522537",
+    "name": "Lê Văn Thành",
+    "gender": "Male",
     "birth_date": "05-04-2005",
-    "birthplace": "34",
-    "class_id": "ATTN02"
+    "birthplace": "Bình Dương",
+    "class_name": "TTNT2023.1",
+    "class_id": "TTNT20231",
+    "major_id": "TTNT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23522537@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "levanthanh@gmail.com",
+      "phone": "0949007765"
+    },
+    "address": {
+      "permanent_address": "Số 522, đường Nguyễn Huệ, Phường 5, Quận 8, Huế",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000862139375",
+      "identity_issue_date": "15-07-2010",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Tin lành",
+      "origin": "Công nhân",
+      "union_join_date": "08-03-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Nguyễn Duy M",
+        "job": "Phó giám đốc Sở; Bác sĩ",
+        "phone": "0999387127",
+        "address": "Số 5, đường Lý Thường Kiệt, Phường 9, Quận 9, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Hoàng Thị M",
+        "job": "Giáo viên",
+        "phone": "0932627032",
+        "address": "Số 5, đường Lý Thường Kiệt, Phường 9, Quận 9, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525028",
-    "name": "Ngô Văn Việt",
-    "gender": "Nam",
-    "birth_date": "23-06-2004",
-    "birthplace": "18",
-    "class_id": "ATTN02"
+    "student_id": "23520340",
+    "name": "Hoàng Văn Bình",
+    "gender": "Male",
+    "birth_date": "06-10-2005",
+    "birthplace": "Hải Phòng",
+    "class_name": "KTMT2023.2",
+    "class_id": "KTMT20232",
+    "major_id": "KTMT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23520340@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hoangvanbinh@gmail.com",
+      "phone": "0935298773"
+    },
+    "address": {
+      "permanent_address": "Số 533, đường Võ Văn Tần, Phường 20, Quận 2, Quảng Ninh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000979807698",
+      "identity_issue_date": "23-08-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Hồi giáo",
+      "origin": "Trí thức",
+      "union_join_date": "03-09-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phan Minh M",
+        "job": "Chánh văn phòng Sở; Cán bộ nhà nước",
+        "phone": "0984731035",
+        "address": "Số 0, đường Phạm Ngọc Thạch, Phường 20, Quận 1, Bình Dương"
+      },
+      "mother": {
+        "name": "Phạm Thị N",
+        "job": "Nhân viên văn phòng",
+        "phone": "0994097407",
+        "address": "Số 38, đường Lê Lợi, Phường 7, Cái Răng, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525029",
-    "name": "Hoàng Thị Nhi",
-    "gender": "Nữ",
-    "birth_date": "24-09-2005",
-    "birthplace": "24",
-    "class_id": "ATTN01"
+    "student_id": "23524702",
+    "name": "Hồ Thị Như",
+    "gender": "Female",
+    "birth_date": "03-07-2005",
+    "birthplace": "Thừa Thiên Huế",
+    "class_name": "ATTT2023.2",
+    "class_id": "ATTT20232",
+    "major_id": "ATTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23524702@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hothinhu@gmail.com",
+      "phone": "0999146497"
+    },
+    "address": {
+      "permanent_address": "Số 0, đường Trần Hưng Đạo, Phường 14, Quận 8, Quảng Ninh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000494955314",
+      "identity_issue_date": "07-02-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Cao đài",
+      "origin": "Tiểu thương",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Công E",
+        "job": "Trưởng phòng Tài chính; Kỹ sư phần mềm",
+        "phone": "0960372482",
+        "address": "Số 0, đường Hai Bà Trưng, Phường 15, Quận 7, Bình Dương"
+      },
+      "mother": {
+        "name": "Lê Thị C",
+        "job": "Kế toán",
+        "phone": "0976540384",
+        "address": "Số 0, đường Hai Bà Trưng, Phường 15, Quận 7, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525030",
-    "name": "Phạm Văn Khoa",
-    "gender": "Nam",
-    "birth_date": "03-09-2005",
-    "birthplace": "30",
-    "class_id": "KHMT02"
+    "student_id": "23528325",
+    "name": "Trịnh Văn Khoa",
+    "gender": "Male",
+    "birth_date": "16-08-2005",
+    "birthplace": "Khánh Hòa",
+    "class_name": "KTPM2023.2",
+    "class_id": "KTPM20232",
+    "major_id": "KTPM",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23528325@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "trinhvankhoa@gmail.com",
+      "phone": "0975692439"
+    },
+    "address": {
+      "permanent_address": "Số 890, đường Phạm Ngọc Thạch, Phường 10, Quận 10, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000809254453",
+      "identity_issue_date": "27-02-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Doanh nhân",
+      "union_join_date": "11-12-2021",
+      "party_join_date": "06-06-2022"
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Hữu E",
+        "job": "Chánh văn phòng Sở; Bác sĩ",
+        "phone": "0995440291",
+        "address": "Số 028, đường Lý Thường Kiệt, Phường 9, Sơn Trà, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Phạm Thị F",
+        "job": "Dược sĩ",
+        "phone": "0997758919",
+        "address": "Số 028, đường Lý Thường Kiệt, Phường 9, Sơn Trà, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525031",
-    "name": "Nguyễn Văn Nam",
-    "gender": "Nam",
-    "birth_date": "23-12-2006",
-    "birthplace": "12",
-    "class_id": "KHTN02"
+    "student_id": "22523013",
+    "name": "Phạm Văn Việt",
+    "gender": "Male",
+    "birth_date": "28-02-2004",
+    "birthplace": "An Giang",
+    "class_name": "KTMT2022.1",
+    "class_id": "KTMT20221",
+    "major_id": "KTMT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22523013@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "phamvanviet@gmail.com",
+      "phone": "0911909661"
+    },
+    "address": {
+      "permanent_address": "Số 70, đường Lý Thường Kiệt, Phường 19, Quận 5, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000110249075",
+      "identity_issue_date": "22-03-2015",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Tày",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "16-10-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Công D",
+        "job": "Doanh nhân",
+        "phone": "0933032129",
+        "address": "Số 5, đường Lê Lợi, Phường 12, Quận 4, Bình Dương"
+      },
+      "mother": {
+        "name": "Trần Thị H",
+        "job": "Kinh doanh tự do",
+        "phone": "0923677733",
+        "address": "Số 5, đường Lê Lợi, Phường 12, Quận 4, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525032",
-    "name": "Bùi Văn Bình",
-    "gender": "Nam",
-    "birth_date": "28-08-2006",
-    "birthplace": "53",
-    "class_id": "ATTN01"
+    "student_id": "21526906",
+    "name": "Lê Thị Nga",
+    "gender": "Female",
+    "birth_date": "14-03-2003",
+    "birthplace": "Cần Thơ",
+    "class_name": "ATTT2021.1",
+    "class_id": "ATTT20211",
+    "major_id": "ATTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21526906@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "lethinga@gmail.com",
+      "phone": "0995444815"
+    },
+    "address": {
+      "permanent_address": "Số 14, đường Phạm Ngọc Thạch, Phường 11, Quận 5, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000197402182",
+      "identity_issue_date": "29-04-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Khơ-me",
+      "religion": "Không",
+      "origin": "Tiểu thương",
+      "union_join_date": "09-10-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Nguyễn Thanh L",
+        "job": "Cán bộ nhà nước",
+        "phone": "0929359427",
+        "address": "Số 5, đường Hai Bà Trưng, Phường 6, Quận 11, Bình Dương"
+      },
+      "mother": {
+        "name": "Nguyễn Thị E",
+        "job": "Y tá",
+        "phone": "0954276374",
+        "address": "Số 5, đường Hai Bà Trưng, Phường 6, Quận 11, Bình Dương"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525033",
-    "name": "Trần Thị Uyên",
-    "gender": "Nữ",
-    "birth_date": "09-01-2004",
-    "birthplace": "14",
-    "class_id": "KHDL02"
+    "student_id": "21521351",
+    "name": "Đinh Thị Hoa",
+    "gender": "Female",
+    "birth_date": "24-01-2003",
+    "birthplace": "Đồng Nai",
+    "class_name": "CNTT2021.2",
+    "class_id": "CNTT20212",
+    "major_id": "CNTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21521351@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dinhthihoa@gmail.com",
+      "phone": "0985761024"
+    },
+    "address": {
+      "permanent_address": "Số 20, đường Nguyễn Huệ, Phường 4, Quận 2, Đồng Nai",
+      "temporary_address": "Số 128, Đường Lý Thường Kiệt, Lê Chân, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000132689551",
+      "identity_issue_date": "31-01-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Hoa",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "04-01-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Lê Hữu Q",
+        "job": "Cán bộ nhà nước",
+        "phone": "0939336133",
+        "address": "Số 156, đường Hai Bà Trưng, Phường 10, Đống Đa, Hà Nội"
+      },
+      "mother": {
+        "name": "Lê Thị N",
+        "job": "Kiểm toán viên",
+        "phone": "0970338889",
+        "address": "Số 07, đường Lê Lợi, Phường 2, Ô Môn, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525034",
-    "name": "Trần Thị Linh",
-    "gender": "Nữ",
-    "birth_date": "24-07-2006",
-    "birthplace": "64",
-    "class_id": "KHDL02"
+    "student_id": "21529459",
+    "name": "Trần Văn Anh",
+    "gender": "Male",
+    "birth_date": "14-11-2003",
+    "birthplace": "An Giang",
+    "class_name": "HTTT2021.1",
+    "class_id": "HTTT20211",
+    "major_id": "HTTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "21529459@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "tranvananh@gmail.com",
+      "phone": "0988582683"
+    },
+    "address": {
+      "permanent_address": "Số 72, đường Trần Hưng Đạo, Phường 13, Lê Chân, Hải Phòng",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000724076887",
+      "identity_issue_date": "05-06-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Hòa hảo",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phạm Duy A",
+        "job": "Bác sĩ",
+        "phone": "0943965753",
+        "address": "Số 703, đường Trần Hưng Đạo, Phường 7, Ninh Kiều, Cần Thơ"
+      },
+      "mother": {
+        "name": "Phan Thị Q",
+        "job": "Dược sĩ",
+        "phone": "0941956246",
+        "address": "Số 703, đường Trần Hưng Đạo, Phường 7, Ninh Kiều, Cần Thơ"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525035",
-    "name": "Lê Thị Như",
-    "gender": "Nữ",
-    "birth_date": "14-11-2005",
-    "birthplace": "63",
-    "class_id": "CNTT02"
+    "student_id": "21521426",
+    "name": "Lý Thị Chi",
+    "gender": "Female",
+    "birth_date": "15-05-2003",
+    "birthplace": "Quảng Ninh",
+    "class_name": "KTPM2021.2",
+    "class_id": "KTPM20212",
+    "major_id": "KTPM",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "21521426@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "lythichi@gmail.com",
+      "phone": "0946435237"
+    },
+    "address": {
+      "permanent_address": "Số 4, đường Hai Bà Trưng, Phường 9, Bình Thủy, Cần Thơ",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000789663423",
+      "identity_issue_date": "18-05-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "08-04-2022",
+      "party_join_date": "19-10-2020"
+    },
+    "family": {
+      "father": {
+        "name": "Võ Thanh B",
+        "job": "Kiến trúc sư",
+        "phone": "0978771940",
+        "address": "Số 9, đường Võ Văn Tần, Phường 7, Quận 2, Bình Dương"
+      },
+      "mother": {
+        "name": "Lê Thị F",
+        "job": "Giáo viên",
+        "phone": "0987918281",
+        "address": "Số 94, đường Lê Lợi, Phường 15, Quận 2, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525036",
-    "name": "Lý Văn Anh",
-    "gender": "Nam",
-    "birth_date": "29-04-2005",
-    "birthplace": "31",
-    "class_id": "ATTN01"
+    "student_id": "23525477",
+    "name": "Trần Thị Phương",
+    "gender": "Female",
+    "birth_date": "15-01-2005",
+    "birthplace": "Đà Nẵng",
+    "class_name": "CNTT2023.1",
+    "class_id": "CNTT20231",
+    "major_id": "CNTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23525477@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "tranthiphuong@gmail.com",
+      "phone": "0924253481"
+    },
+    "address": {
+      "permanent_address": "Số 6, đường Lê Lợi, Phường 1, Đống Đa, Hà Nội",
+      "temporary_address": "Số 88, Đường Lê Lợi, Quận 12, Khánh Hòa"
+    },
+    "identity": {
+      "identity_number": "000165953987",
+      "identity_issue_date": "20-06-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Nông dân",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Anh Q",
+        "job": "Kiến trúc sư",
+        "phone": "0929959532",
+        "address": "Số 42, đường Hai Bà Trưng, Phường 12, Thanh Khê, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Hoàng Thị N",
+        "job": "Y tá",
+        "phone": "0976837931",
+        "address": "Số 9, đường Lê Lợi, Phường 14, Cầu Giấy, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525037",
-    "name": "Vũ Thị Thảo",
-    "gender": "Nữ",
-    "birth_date": "04-01-2005",
-    "birthplace": "58",
-    "class_id": "HTTT01"
+    "student_id": "21526037",
+    "name": "Đỗ Thị Giang",
+    "gender": "Female",
+    "birth_date": "07-02-2003",
+    "birthplace": "Thừa Thiên Huế",
+    "class_name": "KTMT2021.1",
+    "class_id": "KTMT20211",
+    "major_id": "KTMT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21526037@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dothigiang@gmail.com",
+      "phone": "0942927952"
+    },
+    "address": {
+      "permanent_address": "Số 09, đường Phạm Ngọc Thạch, Phường 13, Quận 4, Khánh Hòa",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000913521703",
+      "identity_issue_date": "17-04-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "26-05-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phan Đức N",
+        "job": "Chuyên viên tài chính",
+        "phone": "0977369140",
+        "address": "Số 6, đường Nguyễn Huệ, Phường 9, Quận 3, Hồ Chí Minh"
+      },
+      "mother": {
+        "name": "Trần Thị H",
+        "job": "Kinh doanh tự do",
+        "phone": "0932451036",
+        "address": "Số 6, đường Nguyễn Huệ, Phường 9, Quận 3, Hồ Chí Minh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525038",
-    "name": "Bùi Văn Phương",
-    "gender": "Nam",
-    "birth_date": "02-10-2006",
-    "birthplace": "55",
-    "class_id": "KHTN01"
+    "student_id": "21521488",
+    "name": "Lý Thị Hoa",
+    "gender": "Female",
+    "birth_date": "03-03-2003",
+    "birthplace": "Bình Định",
+    "class_name": "KHDL2021.1",
+    "class_id": "KHDL20211",
+    "major_id": "KHDL",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21521488@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "lythihoa@gmail.com",
+      "phone": "0986877201"
+    },
+    "address": {
+      "permanent_address": "Số 7, đường Hai Bà Trưng, Phường 12, Hoàn Kiếm, Hà Nội",
+      "temporary_address": "Số 123, Đường Nguyễn Huệ, Quận 4, Khánh Hòa"
+    },
+    "identity": {
+      "identity_number": "000419663767",
+      "identity_issue_date": "11-06-2018",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Doanh nhân",
+      "union_join_date": "17-11-2022",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Đức D",
+        "job": "Kiến trúc sư",
+        "phone": "0997177788",
+        "address": "Số 46, đường Võ Văn Tần, Phường 11, Quận 2, Huế"
+      },
+      "mother": {
+        "name": "Phạm Thị F",
+        "job": "Nội trợ",
+        "phone": "0971198195",
+        "address": "Số 46, đường Võ Văn Tần, Phường 11, Quận 2, Huế"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525039",
-    "name": "Đặng Thị Hoa",
-    "gender": "Nữ",
-    "birth_date": "24-11-2005",
-    "birthplace": "01",
-    "class_id": "KTPM02"
+    "student_id": "23528086",
+    "name": "Vũ Thị Yến",
+    "gender": "Female",
+    "birth_date": "22-09-2005",
+    "birthplace": "Nghệ An",
+    "class_name": "MMTT2023.1",
+    "class_id": "MMTT20231",
+    "major_id": "MMTT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "23528086@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuthiyen@gmail.com",
+      "phone": "0947828391"
+    },
+    "address": {
+      "permanent_address": "Số 8, đường Lý Thường Kiệt, Phường 9, Hoàn Kiếm, Hà Nội",
+      "temporary_address": "Số 166, Đường Phạm Ngọc Thạch, Quận 10, Đồng Nai"
+    },
+    "identity": {
+      "identity_number": "000519124501",
+      "identity_issue_date": "14-08-2015",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "H'Mông",
+      "religion": "Thiên chúa giáo",
+      "origin": "Nông dân",
+      "union_join_date": "09-11-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Đặng Công P",
+        "job": "Chuyên viên tài chính",
+        "phone": "0910305303",
+        "address": "Số 450, đường Phạm Ngọc Thạch, Phường 9, Quận 11, Khánh Hòa"
+      },
+      "mother": {
+        "name": "Lê Thị M",
+        "job": "Kinh doanh tự do",
+        "phone": "0935042928",
+        "address": "Số 450, đường Phạm Ngọc Thạch, Phường 9, Quận 11, Khánh Hòa"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525040",
-    "name": "Đinh Thị Thảo",
-    "gender": "Nữ",
-    "birth_date": "21-12-2004",
-    "birthplace": "20",
-    "class_id": "ATTT01"
+    "student_id": "21526039",
+    "name": "Vũ Văn Lâm",
+    "gender": "Male",
+    "birth_date": "21-10-2003",
+    "birthplace": "Quảng Ninh",
+    "class_name": "MMTT2021.2",
+    "class_id": "MMTT20212",
+    "major_id": "MMTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "21526039@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuvanlam@gmail.com",
+      "phone": "0922167085"
+    },
+    "address": {
+      "permanent_address": "Số 862, đường Nguyễn Huệ, Phường 14, Quận 11, Quảng Ninh",
+      "temporary_address": "Số 189, Đường Lý Thường Kiệt, Lê Chân, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000388904310",
+      "identity_issue_date": "14-08-2010",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Mường",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "",
+      "party_join_date": "24-07-2020"
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Duy K",
+        "job": "Trưởng phòng Tài chính; Cán bộ nhà nước",
+        "phone": "0985187800",
+        "address": "Số 6, đường Phạm Ngọc Thạch, Phường 3, Quận 2, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Phạm Thị M",
+        "job": "Kinh doanh tự do",
+        "phone": "0917010065",
+        "address": "Số 6, đường Phạm Ngọc Thạch, Phường 3, Quận 2, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525041",
-    "name": "Lê Văn Dũng",
-    "gender": "Nam",
-    "birth_date": "05-12-2004",
-    "birthplace": "41",
-    "class_id": "HTTT01"
+    "student_id": "21525158",
+    "name": "Nguyễn Văn Dũng",
+    "gender": "Male",
+    "birth_date": "09-03-2003",
+    "birthplace": "Bình Định",
+    "class_name": "TTNT2021.2",
+    "class_id": "TTNT20212",
+    "major_id": "TTNT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21525158@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "nguyenvandung@gmail.com",
+      "phone": "0963977709"
+    },
+    "address": {
+      "permanent_address": "Số 0, đường Võ Văn Tần, Phường 19, Quận 9, Bình Dương",
+      "temporary_address": "Số 145, Đường Võ Văn Tần, Quận 3, Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000297407524",
+      "identity_issue_date": "25-02-2012",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phạm Công B",
+        "job": "Giám đốc công ty",
+        "phone": "0912464160",
+        "address": "Số 723, đường Trần Hưng Đạo, Phường 13, Quận 3, Quảng Ninh"
+      },
+      "mother": {
+        "name": "Huỳnh Thị F",
+        "job": "Dược sĩ",
+        "phone": "0989470439",
+        "address": "Số 723, đường Trần Hưng Đạo, Phường 13, Quận 3, Quảng Ninh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525042",
-    "name": "Ngô Văn Khánh",
-    "gender": "Nam",
-    "birth_date": "15-02-2004",
-    "birthplace": "27",
-    "class_id": "KHDL01"
+    "student_id": "21520802",
+    "name": "Đặng Văn Sơn",
+    "gender": "Male",
+    "birth_date": "21-05-2003",
+    "birthplace": "Đà Nẵng",
+    "class_name": "HTTT2021.1",
+    "class_id": "HTTT20211",
+    "major_id": "HTTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21520802@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dangvanson@gmail.com",
+      "phone": "0945884389"
+    },
+    "address": {
+      "permanent_address": "Số 8, đường Phạm Ngọc Thạch, Phường 17, Cầu Giấy, Hà Nội",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000208902712",
+      "identity_issue_date": "11-01-2013",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Thiên chúa giáo",
+      "origin": "Nghệ sĩ",
+      "union_join_date": "16-08-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Quang F",
+        "job": "Giám đốc công ty",
+        "phone": "0992469628",
+        "address": "Số 911, đường Phạm Ngọc Thạch, Phường 18, Quận 5, Đồng Nai"
+      },
+      "mother": {
+        "name": "Hoàng Thị P",
+        "job": "Chuyên viên nhân sự",
+        "phone": "0986036390",
+        "address": "Số 911, đường Phạm Ngọc Thạch, Phường 18, Quận 5, Đồng Nai"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525043",
-    "name": "Trần Văn Bảo",
-    "gender": "Nam",
-    "birth_date": "28-07-2006",
-    "birthplace": "13",
-    "class_id": "KHMT02"
+    "student_id": "22527893",
+    "name": "Ngô Thị Huyền",
+    "gender": "Female",
+    "birth_date": "16-09-2004",
+    "birthplace": "Cần Thơ",
+    "class_name": "MMTT2022.2",
+    "class_id": "MMTT20222",
+    "major_id": "MMTT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22527893@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "ngothihuyen@gmail.com",
+      "phone": "0943428566"
+    },
+    "address": {
+      "permanent_address": "Số 064, đường Lê Lợi, Phường 16, Quận 1, Hồ Chí Minh",
+      "temporary_address": "Số 104, Đường Nguyễn Huệ, Quận 5, Đồng Nai"
+    },
+    "identity": {
+      "identity_number": "000970517146",
+      "identity_issue_date": "11-06-2019",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Trí thức",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Trần Hữu A",
+        "job": "Phó giám đốc Sở; Giám đốc công ty",
+        "phone": "0952518068",
+        "address": "Số 45, đường Lý Thường Kiệt, Phường 19, Hoàn Kiếm, Hà Nội"
+      },
+      "mother": {
+        "name": "Phạm Thị N",
+        "job": "Kinh doanh tự do",
+        "phone": "0980090694",
+        "address": "Số 45, đường Lý Thường Kiệt, Phường 19, Hoàn Kiếm, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525044",
-    "name": "Trịnh Văn Hiếu",
-    "gender": "Nam",
-    "birth_date": "29-08-2006",
-    "birthplace": "56",
-    "class_id": "KHDL02"
+    "student_id": "22529015",
+    "name": "Đặng Văn Khánh",
+    "gender": "Male",
+    "birth_date": "15-05-2004",
+    "birthplace": "Cần Thơ",
+    "class_name": "KTMT2022.1",
+    "class_id": "KTMT20221",
+    "major_id": "KTMT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22529015@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dangvankhanh@gmail.com",
+      "phone": "0931719872"
+    },
+    "address": {
+      "permanent_address": "Số 391, đường Lê Lợi, Phường 2, Kiến An, Hải Phòng",
+      "temporary_address": "Số 58, Đường Võ Văn Tần, Sơn Trà, Đà Nẵng"
+    },
+    "identity": {
+      "identity_number": "000887385910",
+      "identity_issue_date": "02-04-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Hòa hảo",
+      "origin": "Nghệ sĩ",
+      "union_join_date": "23-01-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Phan Đức M",
+        "job": "Kỹ sư xây dựng",
+        "phone": "0945894463",
+        "address": "Số 455, đường Lê Lợi, Phường 1, Hoàn Kiếm, Hà Nội"
+      },
+      "mother": {
+        "name": "Phan Thị B",
+        "job": "Nội trợ",
+        "phone": "0962600997",
+        "address": "Số 455, đường Lê Lợi, Phường 1, Hoàn Kiếm, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525045",
-    "name": "Đặng Văn Thành",
-    "gender": "Nam",
-    "birth_date": "25-12-2004",
-    "birthplace": "48",
-    "class_id": "KHMT02"
+    "student_id": "21528158",
+    "name": "Đặng Văn Phương",
+    "gender": "Male",
+    "birth_date": "14-04-2003",
+    "birthplace": "Hải Phòng",
+    "class_name": "HTTT2021.2",
+    "class_id": "HTTT20212",
+    "major_id": "HTTT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21528158@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dangvanphuong@gmail.com",
+      "phone": "0914738446"
+    },
+    "address": {
+      "permanent_address": "Số 889, đường Hai Bà Trưng, Phường 9, Quận 5, Quảng Ninh",
+      "temporary_address": "Số 112, Đường Nguyễn Huệ, Quận 9, Huế"
+    },
+    "identity": {
+      "identity_number": "000905083640",
+      "identity_issue_date": "04-12-2012",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Dao",
+      "religion": "Thiên chúa giáo",
+      "origin": "Trí thức",
+      "union_join_date": "23-09-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Lê Thanh B",
+        "job": "Chuyên viên tài chính",
+        "phone": "0917501998",
+        "address": "Số 5, đường Nguyễn Huệ, Phường 4, Ngô Quyền, Hải Phòng"
+      },
+      "mother": {
+        "name": "Nguyễn Thị N",
+        "job": "Nhân viên văn phòng",
+        "phone": "0948479506",
+        "address": "Số 5, đường Nguyễn Huệ, Phường 4, Ngô Quyền, Hải Phòng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525046",
-    "name": "Đặng Thị Phương",
-    "gender": "Nữ",
-    "birth_date": "12-09-2005",
-    "birthplace": "39",
-    "class_id": "KHTN02"
+    "student_id": "22521229",
+    "name": "Trần Văn Tuấn",
+    "gender": "Male",
+    "birth_date": "16-02-2004",
+    "birthplace": "Nghệ An",
+    "class_name": "ATTT2022.2",
+    "class_id": "ATTT20222",
+    "major_id": "ATTT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "22521229@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "tranvantuan@gmail.com",
+      "phone": "0980917408"
+    },
+    "address": {
+      "permanent_address": "Số 21, đường Lý Thường Kiệt, Phường 14, Quận 1, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000568612227",
+      "identity_issue_date": "18-11-2014",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Cao đài",
+      "origin": "Nông dân",
+      "union_join_date": "18-11-2020",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Thanh L",
+        "job": "Chánh văn phòng Sở; Trưởng phòng kinh doanh",
+        "phone": "0925875996",
+        "address": "Số 8, đường Trần Hưng Đạo, Phường 20, Quận 1, Hồ Chí Minh"
+      },
+      "mother": {
+        "name": "Hoàng Thị B",
+        "job": "Kế toán",
+        "phone": "0930751189",
+        "address": "Số 8, đường Trần Hưng Đạo, Phường 20, Quận 1, Hồ Chí Minh"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525047",
-    "name": "Trịnh Thị Yến",
-    "gender": "Nữ",
-    "birth_date": "17-04-2006",
-    "birthplace": "22",
-    "class_id": "MMTT01"
+    "student_id": "21524982",
+    "name": "Nguyễn Văn Minh",
+    "gender": "Male",
+    "birth_date": "24-02-2003",
+    "birthplace": "Thanh Hóa",
+    "class_name": "TMDT2021.2",
+    "class_id": "TMDT20212",
+    "major_id": "TMDT",
+    "program_id": "CTDT2021",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21524982@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "nguyenvanminh@gmail.com",
+      "phone": "0997395512"
+    },
+    "address": {
+      "permanent_address": "Số 2, đường Trần Hưng Đạo, Phường 19, Thanh Khê, Đà Nẵng",
+      "temporary_address": "Số 110, Đường Lê Lợi, Cái Răng, Cần Thơ"
+    },
+    "identity": {
+      "identity_number": "000372090575",
+      "identity_issue_date": "06-11-2016",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Tày",
+      "religion": "Không",
+      "origin": "Công nhân",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Vũ Hữu D",
+        "job": "Kiến trúc sư",
+        "phone": "0963678960",
+        "address": "Số 94, đường Trần Hưng Đạo, Phường 5, Quận 4, Đồng Nai"
+      },
+      "mother": {
+        "name": "Huỳnh Thị P",
+        "job": "Dược sĩ",
+        "phone": "0960498564",
+        "address": "Số 94, đường Trần Hưng Đạo, Phường 5, Quận 4, Đồng Nai"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525048",
-    "name": "Đặng Thị Ngọc",
-    "gender": "Nữ",
-    "birth_date": "14-01-2005",
-    "birthplace": "10",
-    "class_id": "KHDL01"
+    "student_id": "22526113",
+    "name": "Hồ Thị Yến",
+    "gender": "Female",
+    "birth_date": "18-01-2004",
+    "birthplace": "Lâm Đồng",
+    "class_name": "TMDT2022.2",
+    "class_id": "TMDT20222",
+    "major_id": "TMDT",
+    "program_id": "CTDT2022",
+    "program_type": "CQUI",
+    "has_english_certificate": true,
+    "contact": {
+      "school_email": "22526113@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "hothiyen@gmail.com",
+      "phone": "0930479292"
+    },
+    "address": {
+      "permanent_address": "Số 5, đường Nguyễn Huệ, Phường 18, Quận 6, Khánh Hòa",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000274265362",
+      "identity_issue_date": "06-07-2012",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Công nhân",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Hoàng Công B",
+        "job": "Chuyên viên tài chính",
+        "phone": "0996016049",
+        "address": "Số 79, đường Lý Thường Kiệt, Phường 8, Cầu Giấy, Hà Nội"
+      },
+      "mother": {
+        "name": "Lê Thị K",
+        "job": "Kinh doanh tự do",
+        "phone": "0945051125",
+        "address": "Số 79, đường Lý Thường Kiệt, Phường 8, Cầu Giấy, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525049",
-    "name": "Lê Thị Chi",
-    "gender": "Nữ",
-    "birth_date": "27-01-2005",
-    "birthplace": "15",
-    "class_id": "TKVM01"
+    "student_id": "21527523",
+    "name": "Vũ Thị Như",
+    "gender": "Female",
+    "birth_date": "27-08-2003",
+    "birthplace": "Bình Dương",
+    "class_name": "KHTN2021.1",
+    "class_id": "KHTN20211",
+    "major_id": "KHMT",
+    "program_id": "CTDT2021",
+    "program_type": "CNTN",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "21527523@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "vuthinhu@gmail.com",
+      "phone": "0932035414"
+    },
+    "address": {
+      "permanent_address": "Số 3, đường Võ Văn Tần, Phường 12, Quận 5, Hồ Chí Minh",
+      "temporary_address": "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    },
+    "identity": {
+      "identity_number": "000418750840",
+      "identity_issue_date": "30-08-2017",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Cao đài",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Đặng Hữu Q",
+        "job": "Trưởng phòng kinh doanh",
+        "phone": "0928963382",
+        "address": "Số 456, đường Lý Thường Kiệt, Phường 6, Hai Bà Trưng, Hà Nội"
+      },
+      "mother": {
+        "name": "Hoàng Thị P",
+        "job": "Kiểm toán viên",
+        "phone": "0985971667",
+        "address": "Số 456, đường Lý Thường Kiệt, Phường 6, Hai Bà Trưng, Hà Nội"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   },
   {
-    "student_id": "25525050",
-    "name": "Trịnh Thị Yến",
-    "gender": "Nữ",
-    "birth_date": "14-07-2005",
-    "birthplace": "51",
-    "class_id": "KTMT02"
+    "student_id": "23521021",
+    "name": "Đỗ Văn Quang",
+    "gender": "Male",
+    "birth_date": "24-05-2005",
+    "birthplace": "Khánh Hòa",
+    "class_name": "TTNT2023.1",
+    "class_id": "TTNT20231",
+    "major_id": "TTNT",
+    "program_id": "CTDT2023",
+    "program_type": "CQUI",
+    "has_english_certificate": false,
+    "contact": {
+      "school_email": "23521021@gm.uit.edu.vn",
+      "alias_email": "",
+      "personal_email": "dovanquang@gmail.com",
+      "phone": "0956451185"
+    },
+    "address": {
+      "permanent_address": "Số 3, đường Nguyễn Huệ, Phường 4, Cái Răng, Cần Thơ",
+      "temporary_address": "Số 148, Đường Phạm Ngọc Thạch, Hồng Bàng, Hải Phòng"
+    },
+    "identity": {
+      "identity_number": "000671460971",
+      "identity_issue_date": "19-02-2011",
+      "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+      "ethnicity": "Kinh",
+      "religion": "Không",
+      "origin": "Cán bộ - Công chức",
+      "union_join_date": "23-05-2021",
+      "party_join_date": ""
+    },
+    "family": {
+      "father": {
+        "name": "Võ Quang E",
+        "job": "Bác sĩ",
+        "phone": "0933725635",
+        "address": "Số 04, đường Hai Bà Trưng, Phường 12, Thanh Khê, Đà Nẵng"
+      },
+      "mother": {
+        "name": "Huỳnh Thị N",
+        "job": "Bác sĩ",
+        "phone": "0976959612",
+        "address": "Số 04, đường Hai Bà Trưng, Phường 12, Thanh Khê, Đà Nẵng"
+      },
+      "guardian": {
+        "name": "",
+        "phone": "",
+        "address": ""
+      }
+    }
   }
 ]
