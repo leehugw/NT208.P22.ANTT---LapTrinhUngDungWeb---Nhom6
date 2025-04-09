@@ -1,0 +1,25 @@
+body {
+    background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .feedback-card {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #ffffff;
+  }
+  
+  .input-group-text {
+    background-color: #e9f0ff;
+  }
+  
+  .btn-primary {
+    background-color: #1d6ce2;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0f58c5;
+  }
+  

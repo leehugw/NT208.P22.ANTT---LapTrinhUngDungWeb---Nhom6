@@ -1,0 +1,14 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  table th,
+  table td {
+    vertical-align: middle;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #e0f0ff;
+    cursor: pointer;
+  }
+  
