@@ -72,3 +72,55 @@
     background-color: #e2e6ea; /* Màu nền của checkbox chưa được chọn */
     border-color: #3D67BA; /* Màu viền của checkbox chưa được chọn */
 }
+
+.status-badge-pass {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border-radius: 12px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+.status-badge-fail {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border-radius: 12px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+.highlight-pass {
+    font-weight: bold;
+    color: #388e3c !important; /* Màu xanh cho điểm trên 5 */
+    font-size: 1rem;
+}
+
+.highlight-fail {
+    font-weight: bold;
+    color: #e53935 !important; /* Màu đỏ cho điểm dưới 5 */
+    font-size: 1rem;
+}
+
+.filter-button {
+    border: 2px solid #3D67BA;
+    background-color: white;
+    color: #3D67BA;
+}
+.filter-button:hover {
+    background-color: #3D67BA;
+    color: white;
+}
+
+.export-button {
+    background-color: #3D67BA;
+    border: #3D67BA;
+    color: white;
+}
+.export-button:hover {
+    background-color: #3D67BA;
+    color: white;
+}
+
+h3 {
+    color: #000;
+    font-size: 1.5rem;
+}
+  

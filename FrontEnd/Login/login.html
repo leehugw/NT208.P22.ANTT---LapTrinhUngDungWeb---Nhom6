@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Hệ Thống ChatBot UIT</title>
+    <title>Đăng nhập</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -14,9 +14,9 @@
 
 
 
-    <link href="/css/PClogin.css" rel="stylesheet">
-    <link href="/css/mobilelogin.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
+    <link href="PClogin.css" rel="stylesheet">
+    <link href="mobilelogin.css" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
 
 </head>
 
@@ -24,7 +24,7 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/images/logo.png" width="80">
+                <img alt="Logo" height="80" src="logo.png" width="80">
             </div>
             <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -55,40 +55,10 @@
         <div class="p-4 border rounded bg-light shadow mx-auto" 
              style="max-width: 500px; width: 100%;">
             
-            <form id="login-form" action="submit_booking.php" method="POST">
+            <form id="login-form">
                 <h2 class="text-center">Đăng nhập</h2>
-    
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" id="username" name="email" class="form-control" placeholder="email@gm.uit.edu.vn" required>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password:</label>
-                    <div class="input-group">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
-                        <span class="input-group-text" id="toggle-password">
-                            <i class="bi bi-eye-slash"></i>
-                        </span>
-                    </div>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="choose-role" class="form-label">Vai trò:</label>
-                    <select id="choose-role" name="choose-role" class="form-select" required>
-                        <option value="" disabled selected>--- Chọn vai trò ---</option>
-                        <option value="sv">Sinh Viên</option>
-                        <option value="gv">Giảng Viên</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-    
-                <div class="form-check mt-3 d-flex justify-content-end">
-                    <input class="form-check-input" type="checkbox" id="remember-me">
-                    <label class="form-check-label ms-2" for="remember-me">Ghi nhớ tôi</label>
-                </div>
-    
-                <button type="submit" class="btn btn-primary w-100 mt-3">Đăng nhập</button>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Đăng nhập bằng Google</button>
             </form>    
         </div>
     </div>
@@ -101,6 +71,5 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
-    <script src="/js/auth.js""></script>
-    <script src="/js/login.js""></script>
+    <script src="login.js"></script>
 </html> 
