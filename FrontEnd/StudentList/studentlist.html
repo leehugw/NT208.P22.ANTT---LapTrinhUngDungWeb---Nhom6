@@ -78,35 +78,71 @@
                 <h1>Danh sách sinh viên</h1>
             </div>
         </div>
-        <div class="d-flex justify-content-center mb-3 gap-3">
-            <div class="input-group">
-                <input class="form-control" placeholder="Tìm kiếm mssv ..." type="text" />
-                <button class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-times"></i>
-                </button>
+        <div class="row justify-content-center align-items-center mb-3 g-2">
+            <div class="col-12">
+                <div class="d-flex flex-nowrap flex-md-nowrap gap-2 align-items-center justify-content-center">
+                    <div class="input-group flex-grow-1">
+                        <input class="form-control" placeholder="Tìm kiếm mssv ..." type="text" />
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <!-- Nút filter (ẩn trên desktop) -->
+                    <button class="btn btn-outline-secondary d-md-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#mobileFilter">
+                        <i class="fas fa-filter"></i>
+                    </button>
+
+                    <!-- Select filters: hiện trên desktop -->
+                    <div class="d-none d-md-flex gap-2">
+                        <select class="form-select custom-select-width">
+                            <option selected="">Lớp học</option>
+                        </select>
+                        <select class="form-select custom-select-width">
+                            <option selected="">Ngành học</option>
+                        </select>
+                        <select class="form-select custom-select-width">
+                            <option selected="">Khoa</option>
+                        </select>
+                        <select class="form-select custom-select-width">
+                            <option selected="">Trạng thái</option>
+                        </select>
+                    </div>
+
+                    <!-- Nút search -->
+                    <button class="btn button text-white" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
-            <select class="form-select">
-                <option selected="">Lớp học</option>
-            </select>
-            <select class="form-select">
-                <option selected="">Ngành học</option>
-            </select>
-            <select class="form-select">
-                <option selected="">Khoa</option>
-            </select>
-            <select class="form-select">
-                <option selected="">Trạng thái</option>
-            </select>
-            <button class="btn button text-white">
-                <i class="fas fa-search"></i>
-            </button>
+
+            <!-- Mobile filter -->
+            <div class="collapse d-md-none mt-2" id="mobileFilter">
+                <div class="d-flex flex-column gap-2">
+                    <select class="form-select">
+                        <option selected="">Lớp học</option>
+                    </select>
+                    <select class="form-select">
+                        <option selected="">Ngành học</option>
+                    </select>
+                    <select class="form-select">
+                        <option selected="">Khoa</option>
+                    </select>
+                    <select class="form-select">
+                        <option selected="">Trạng thái</option>
+                    </select>
+                </div>
+            </div>
         </div>
+
+
         <div class="background text-white p-3 rounded-top fw-bold">
             <span class="fs-3 fw-bold">70</span> sinh viên
         </div>
         <div class="p-3">
             <div class="table-responsive">
-                <table class="table mb-0 align-middle fw-bold">
+                <table class="table mb-0 fw-bold table-responsive">
                     <thead>
                         <tr>
                             <th scope="col" class="thread border-0">Sinh viên</th>
@@ -121,11 +157,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="custom-row">
-                            <td class="d-flex align-items-center border-start">
-                                <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
-                                    src="https://placehold.co/50x50" width="50" />
-                                Nguyễn Văn A
+                        <tr class="custom-row align-middle">
+                            <td class="border-start">
+                                <div class="d-flex align-items-center">
+                                    <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
+                                        src="https://placehold.co/50x50" width="50" />
+                                    Nguyễn Văn A
+                                </div>
                             </td>
                             <td>20520001</td>
                             <td>20520001@gm.uit.edu.vn</td>
@@ -140,16 +178,19 @@
                             </td>
                             <td class="text-center border-end">
                                 <a class="text">
-                                  <i class="fas fa-chart-line"></i>
+                                    <i class="fas fa-chart-line"></i>
                                 </a>
-                              </td>
+                            </td>
                         </tr>
-                        <tr class="custom-row mb-2">
-                            <td class="d-flex align-items-center border-start">
-                                <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
+                        <tr class="custom-row mb-2 align-middle">
+                            <td class="border-start middle-align    ">
+                                <div class="d-flex align-items-center">
+                                  <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
                                     src="https://placehold.co/50x50" width="50" />
-                                Nguyễn Văn A
-                            </td>
+                                  Nguyễn Văn A
+                                </div>
+                              </td>
+                              
                             <td>20520001</td>
                             <td>20520001@gm.uit.edu.vn</td>
                             <td>Đang học</td>
@@ -163,9 +204,9 @@
                             </td>
                             <td class="text-center border-end">
                                 <a class="text">
-                                  <i class="fas fa-chart-line"></i>
+                                    <i class="fas fa-chart-line"></i>
                                 </a>
-                              </td>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

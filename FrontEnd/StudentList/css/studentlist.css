@@ -35,6 +35,10 @@
     background-color: #3D67BA;
 }
 
+.button:hover{
+    background-color: #2b4a8c;
+}
+
 .thread{
     color: #3D67BA !important;
 }
@@ -52,3 +56,8 @@ table {
     border-spacing: 0 5px; /* tạo khoảng cách giữa các hàng (vertical spacing) */
     border-collapse: separate; /* bắt buộc để border-spacing có tác dụng */
 }
+
+.custom-select-width {
+    min-width: 160px;
+  }
+  
