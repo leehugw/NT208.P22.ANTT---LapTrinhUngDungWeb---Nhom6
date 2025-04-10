@@ -86,13 +86,13 @@ function displayStudentData(data) {
     setValue('student-id', student.student_id);
     setValue('class-name', student.class_name);
     setValue('faculty-name', student.faculty_name);
-    setValue('training-system', student.training_system);
+    setValue('training-system', student.program_type);
 
     setValue('fullname', student.name);
     setValue('class', student.class_name);
-    setValue('origin', student.origin || identity?.origin);
+    setValue('origin', identity?.origin);
     setValue('union-join-date', identity?.union_join_date);
-    setValue('party-join-date', identity?.party_join_date);
+    setValue('party-join-date', identity?.party_join_date);    
 
     // Thông tin cá nhân
     setValue('birth-place', student.birthplace);
@@ -128,25 +128,25 @@ function displayStudentData(data) {
     // Thông tin địa chỉ
     if (address) {
         setValue('permanent-address', address.permanent_address);
-        setValue('ward', address.ward);
-        setValue('district', address.district);
-        setValue('city', address.city);
         setValue('temporary-address', address.temporary_address);
     }
 
     // Thông tin gia đình
     if (family) {
-        setValue('father-name', family.father_name);
-        setValue('father-job', family.father_job);
-        setValue('father-phone', family.father_phone);
-        setValue('father-address', family.father_address);
-        setValue('mother-name', family.mother_name);
-        setValue('mother-job', family.mother_job);
-        setValue('mother-phone', family.mother_phone);
-        setValue('mother-address', family.mother_address);
-        setValue('guardian-name', family.guardian_name);
-        setValue('guardian-phone', family.guardian_phone);
-        setValue('guardian-address', family.guardian_address);
+        setValue('father-name', family.father?.name);
+        setValue('father-job', family.father?.job);
+        setValue('father-phone', family.father?.phone);
+        setValue('father-address', family.father?.address);
+        
+        setValue('mother-name', family.mother?.name);
+        setValue('mother-job', family.mother?.job);
+        setValue('mother-phone', family.mother?.phone);
+        setValue('mother-address', family.mother?.address);
+        
+        setValue('guardian-name', family.guardian?.name);
+        setValue('guardian-phone', family.guardian?.phone);
+        setValue('guardian-address', family.guardian?.address);
+        
     }
 
     // Thông tin căn cước

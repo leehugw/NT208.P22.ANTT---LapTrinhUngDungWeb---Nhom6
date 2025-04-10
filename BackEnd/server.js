@@ -14,18 +14,10 @@ connectDB();
 app.use(cors());
 app.use(bodyParser.json());
 
-const frontendPath = path.join(__dirname, '../Frontend');
+const frontendPath = path.join(__dirname, '../FrontEnd');
+console.log(frontendPath); // Xem đường dẫn đúng chưa
+
 app.use(express.static(frontendPath));
-
-// Cấu hình static files chung
-const staticDirs = [
-  { route: '/student-info', path: '../FrontEnd/Student_Information' },
-  { route: '/lecturer-info', path: '../FrontEnd/Lecturer_Information' },
-];
-
-staticDirs.forEach(dir => {
-  app.use(dir.route, express.static(path.join(__dirname, dir.path)));
-});
 
 // Import Routes
 const adminRoutes = require('./Routes/admin');
