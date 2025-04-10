@@ -10,6 +10,7 @@ router.put('all/academicstatistic/', StudentGPAUpdateController.updateAllGPAs);
 // Cập nhật GPA cho một sinh viên
 router.put(':student_id/academicstatistic/', StudentGPAUpdateController.updateStudentGPA);
 
+
 // API hiển thị danh sách phản hồi cho admin
 router.get('/feedbacks', async (req, res) => {
     try {
@@ -20,5 +21,6 @@ router.get('/feedbacks', async (req, res) => {
       res.status(500).json({ error: 'Lỗi server khi lấy danh sách phản hồi' });
     }
   });
+
 
 module.exports = router;

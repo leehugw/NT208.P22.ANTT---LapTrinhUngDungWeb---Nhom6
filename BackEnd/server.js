@@ -8,6 +8,8 @@ const app = express();
 
 // Kết nối database
 const connectDB = require('../Database/connectDB');
+console.log("Resolved path:", path.resolve(__dirname, '../Database/connectDB'));
+
 connectDB();
 
 // Middleware
@@ -15,8 +17,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const frontendPath = path.join(__dirname, '../FrontEnd');
-console.log(frontendPath); // Xem đường dẫn đúng chưa
-
 app.use(express.static(frontendPath));
 
 // Import Routes
@@ -31,6 +31,6 @@ app.use('/api/lecturer', lecturerRoutes);
 
 
 // Khởi động server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(3001, () => {
+  console.log('Server is running on port 3001');
 });

@@ -1,4 +1,3 @@
-const { getDB } = require('../Database/connectDB');
 
 exports.getAllFeedbacks = async () => {
   const db = getDB();

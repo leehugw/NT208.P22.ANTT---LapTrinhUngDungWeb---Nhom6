@@ -27,20 +27,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (studentId) {
         // Gọi API để lấy thông tin sinh viên, tiến độ tốt nghiệp và GPA
         Promise.all([
-            fetch(`/api/student/${studentId}/graduation-progress-data`),  // Lấy thông tin tiến độ tốt nghiệp
-            fetch(`/api/student/${studentId}/academicstatistic-data`),  // Lấy thông tin GPA
+            fetch(`/api/student/${studentId}/student-academic-data`),
             fetch(`/api/student/${studentId}/group-by-semester-data`)  // Lấy thông tin điểm theo học kỳ
         ])
             .then(responses => Promise.all(responses.map(res => res.json())))
-            .then(([progressData, academicData, semesterData]) => {
+            .then(([academicData, semesterData]) => {
                 scoresemesterData = semesterData; // Lưu trữ dữ liệu semesterData
 
+                console.log(academicData); // Kiểm tra dữ liệu trả về từ API
                 // Cập nhật checkbox "Đã nộp chứng chỉ anh văn"
                 const englishProficiencyCheckbox = document.getElementById('englishProficiency');
-                englishProficiencyCheckbox.checked = progressData.has_english_certificate;
+                englishProficiencyCheckbox.checked = academicData.has_english_certificate;
 
                 // Tính toán phần trăm tiến độ tốt nghiệp
-                const progress = progressData.graduation_progress;
+                const progress = academicData.data.graduation_progress;
 
                 // Cập nhật thanh tiến độ hình tròn
                 const progressBar = document.getElementById('progress-bar');
@@ -48,15 +48,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 progressBar.style.strokeDasharray = `${progress}, 100`;
                 progressText.textContent = `${progress}%`;
 
+                const data = academicData.data;
+
                 // Hiển thị các dữ liệu GPA lên trang web
-                document.querySelector('.total-credits-attempted').textContent = academicData.total_credits_attempted;
-                document.querySelector('.total-credits-earned').textContent = academicData.total_credits_earned;
-                document.querySelector('.gpa').textContent = academicData.gpa;
-                document.querySelector('.cumulative-gpa').textContent = academicData.cumulative_gpa;
+                document.querySelector('.total-credits-attempted').textContent = data.total_credits_attempted;
+                document.querySelector('.total-credits-earned').textContent = data.total_credits_earned;
+                document.querySelector('.gpa').textContent = data.gpa;
+                document.querySelector('.cumulative-gpa').textContent = data.cumulative_gpa;
 
                 const ctx = document.getElementById('progressChart').getContext('2d');
-                const progressDetails = progressData.progress_details;
-                const requiredProgress = progressData.required_progress_details;
+                const progressDetails = academicData.data.progress_details;
+                const requiredProgress = academicData.required_progress_details;
 
                 const progressChart = new Chart(ctx, {
                     type: 'bar',
@@ -117,11 +119,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
 
-                const semesterScores = document.getElementById("semester-scores"); // Chọn phần tử với ID semester-scores
+                const semesterGpaMap = {};
+                academicData.data.semester_gpas.forEach(item => {
+                    semesterGpaMap[item.semester_id] = item.semester_gpa;
+                });
 
                 scoresemesterData.forEach(semester => {
                     const semesterWrapper = document.createElement("div");
                     semesterWrapper.className = "mb-4";
+                    const gpa = semesterGpaMap[semester.semester.semester_id] ?? '-';
+
 
                     const semesterTitle = document.createElement("h3");
                     semesterTitle.className = "text-dark";
@@ -155,6 +162,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
                                     </tr>
                                 `).join("")}
+                                <tr class="table-secondary">
+                                    <td colspan="7" class="text-start fw-bold">Trung bình học kỳ</td>
+                                    <td class="fw-bold text-primary">${gpa}</td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>

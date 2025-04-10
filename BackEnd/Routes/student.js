@@ -2,19 +2,14 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const StudentInformationService = require('../Services/student/StudentInformationService');
-const StudentGPAViewController = require('../Controllers/student/StudentGPAViewController');
-const GraduationProgressController = require('../Controllers/student/GraduationProgressController');
 const ScoreController = require('../Controllers/student/ScoreController');
-const StudentFeedbackController = require('../Controllers/feedback/feedbackController');
+const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
 
-// Route để hien thi thong ke tin chi, điểm trung bình của sinh viên
-router.get('/:student_id/academicstatistic-data', StudentGPAViewController.getStudentGPA);
-
-// Route để tính toán tiến độ tốt nghiệp của sinh viên
-router.get('/:student_id/graduation-progress-data', GraduationProgressController.calculateGraduationProgressController);
 
 //Route lấy bản điểm của sinh viên theo học kỳ
 router.get("/:studentId/group-by-semester-data", ScoreController.getScoresByStudentGrouped);
+
+router.get("/:student_id/student-academic-data", StudentAcademicController.updateStudentAcademicController);
 
 router.get('/:student_id/academicstatistic', (req, res) => {
     const { student_id } = req.params;
@@ -72,6 +67,5 @@ router.get('/profile-data', async (req, res) => {
         });
     }
 });
-// Sinh viên gửi phản hồi
-router.post('/feedback', StudentFeedbackController.createFeedback);
+
 module.exports = router;
