@@ -1,4 +1,4 @@
-const Feedback = require('../models/Feedback');
+const Feedback = require('../../../Database/SaveToMongo/models/Feedback');
 
 exports.saveFeedback = async (feedbackData) => {
   const newFeedback = new Feedback(feedbackData);

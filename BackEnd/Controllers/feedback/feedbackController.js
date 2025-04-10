@@ -1,4 +1,4 @@
-const feedbackService = require('../services/feedbackService');
+const feedbackService = require('../../Services/lecturer/feedbackService');
 
 exports.createFeedback = async (req, res) => {
   const { role, name, email, type, message } = req.body;

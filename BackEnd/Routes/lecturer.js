@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
-
+const LectureFeedbackController = require('../Controllers/feedback/feedbackController');
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {
     const { lecturer_id } = req.query;
@@ -44,5 +44,8 @@ router.get('/profile-data', async (req, res) => {
         });
     }
 });
+
+//Giảng viên gửi phản hồi
+router.post('/feedback', LectureFeedbackController.createFeedback);
 
 module.exports = router;

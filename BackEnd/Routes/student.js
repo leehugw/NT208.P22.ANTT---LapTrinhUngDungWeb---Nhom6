@@ -5,6 +5,7 @@ const StudentInformationService = require('../Services/student/StudentInformatio
 const StudentGPAViewController = require('../Controllers/student/StudentGPAViewController');
 const GraduationProgressController = require('../Controllers/student/GraduationProgressController');
 const ScoreController = require('../Controllers/student/ScoreController');
+const StudentFeedbackController = require('../Controllers/feedback/feedbackController');
 
 // Route để hien thi thong ke tin chi, điểm trung bình của sinh viên
 router.get('/:student_id/academicstatistic-data', StudentGPAViewController.getStudentGPA);
@@ -71,5 +72,6 @@ router.get('/profile-data', async (req, res) => {
         });
     }
 });
-
+// Sinh viên gửi phản hồi
+router.post('/feedback', StudentFeedbackController.createFeedback);
 module.exports = router;

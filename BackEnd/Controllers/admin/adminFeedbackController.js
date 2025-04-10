@@ -1,4 +1,4 @@
-const adminFeedbackService = require('../services/adminFeedbackService');
+const adminFeedbackService = require('../../Services/admin/adminFeedbackService');
 
 exports.getAllFeedbacks = async (req, res) => {
   try {
