@@ -12,43 +12,30 @@ router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res
 });
 
 // Route để phục vụ trang HTML
-router.get('/profile', (req, res) => {
-    const { lecturer_id } = req.query;
-    
-    if (!lecturer_id) {
-        return res.status(400).send("lecturer_id là bắt buộc");
-    }
-
-    // Tạo đường dẫn đến file HTML
+router.get('/profile', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
     const pagePath = path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html');
-    
     res.sendFile(pagePath);
 });
 
 // Route API để lấy dữ liệu profile
-router.get('/profile-data', async (req, res) => {
+router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async (req, res) => {
     try {
-        const { lecturer_id } = req.query;
-        
-        if (lecturer_id) {
-            const data = await LecturerInformationService.getLecturerProfile(lecturer_id);
-            return res.json({ 
-                success: true, 
-                type: "lecturer", 
-                data 
+        if (!req.user?.lecturer_id) {
+            return res.status(403).json({
+                success: false,
+                message: "Không có quyền truy cập"
             });
         }
         
-        res.status(400).json({ 
-            success: false, 
-            message: "Yêu cầu không hợp lệ - cần cung cấp lecturer_id" 
+        const profile = await LecturerInformationService.getLecturerProfile(req.user.lecturer_id);
+        res.json({ 
+            success: true, 
+            type: "lecturer",
+            data: profile 
         });
     } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu profile:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: error.message || "Lỗi server khi xử lý yêu cầu" 
-        });
+        console.error(error);
+        res.status(500).json({ success: false, message: "Lỗi server" });
     }
 });
 

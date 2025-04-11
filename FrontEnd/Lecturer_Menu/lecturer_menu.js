@@ -12,3 +12,49 @@ document.getElementById('menu-close').addEventListener('click', function () {
         menu.style.display = 'none';
     }, 300);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+
+    if (urlToken) {
+        console.log("🔑 Lấy được token từ URL:", urlToken);
+        localStorage.setItem('token', urlToken); // hoặc sessionStorage nếu bạn thích
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    const token = localStorage.getItem('token');
+    console.log("🗂 Token hiện tại trong localStorage:", token);
+
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+        window.location.href = "http://localhost:3000/";
+        return;
+    }
+
+    // Nếu có token → gọi API lấy dữ liệu:
+    fetchLecturerProfile(token);
+});
+
+document.getElementById("btn-lecturer-card").addEventListener("click", function(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";
+    } else {
+        window.location.href = "/api/lecturer/profile?token=" + token;
+    }
+});
+
+document.getElementById("btn-lecturer-info").addEventListener("click", function(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";
+    } else {
+        // Sửa thành redirect đến trang HTML thay vì API endpoint
+        window.location.href = "/api/lecturer/profile?token=" + token;
+    }
+});

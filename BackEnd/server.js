@@ -21,7 +21,11 @@ const connectDB = require('../Database/connectDB');
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
 app.use(express.json()); // For parsing application/json
@@ -62,6 +66,6 @@ app.use('/api/lecturer', lecturerRoutes);
 app.use("/api/auth", authRoutes);
 
 // Khởi động server
-app.listen(3001, () => {
-  console.log('Server is running on port 3001');
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });

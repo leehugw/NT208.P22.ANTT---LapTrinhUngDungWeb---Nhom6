@@ -48,43 +48,29 @@ router.get('/:student_id/chatbot', (req, res) => {
 });
 
 // Route để phục vụ trang HTML
-router.get('/profile', (req, res) => {
-    const { student_id } = req.query;
-    
-    if (!student_id) {
-        return res.status(400).send("student_id là bắt buộc");
-    }
-
-    // Tạo đường dẫn đến file HTML
-    const pagePath = path.join(__dirname, '../../FrontEnd/Student_Information/student_info.html');
-    
-    res.sendFile(pagePath);
+router.get('/profile', authenticateToken, authorizeRoles('student'), (req, res) => {
+    res.sendFile(path.join(__dirname, '../../FrontEnd/Student_Information/student_info.html'));
 });
 
-// Route API để lấy dữ liệu profile
-router.get('/profile-data', async (req, res) => {
+// Route API để lấy dữ liệu sinh viên
+router.get('/profile/api', authenticateToken, authorizeRoles('student'), async (req, res) => {
     try {
-        const { student_id } = req.query;
-        
-        if (student_id) {
-            const data = await StudentInformationService.getStudentProfile(student_id);
-            return res.json({ 
-                success: true, 
-                type: "student", 
-                data 
+        if (!req.user?.student_id) {
+            return res.status(403).json({
+                success: false,
+                message: "Không có quyền truy cập"
             });
         }
         
-        res.status(400).json({ 
-            success: false, 
-            message: "Yêu cầu không hợp lệ - cần cung cấp student_id hoặc lecturer_id" 
+        const profile = await StudentInformationService.getStudentProfile(req.user.student_id);
+        res.json({ 
+            success: true, 
+            type: "student",
+            data: profile 
         });
     } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu profile:', error);
-        res.status(500).json({ 
-            success: false, 
-            message: error.message || "Lỗi server khi xử lý yêu cầu" 
-        });
+        console.error(error);
+        res.status(500).json({ success: false, message: "Lỗi server" });
     }
 });
 

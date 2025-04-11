@@ -15,7 +15,14 @@ passport.use(new GoogleStrategy({
   // Nếu chưa có user, không tự tạo, chỉ cho phép user đã được định danh sẵn trong DB
   if (!user) {
     return done(null, false, { message: "Tài khoản chưa được cấp quyền. Liên hệ admin." });
-  }
+  } 
 
-  return done(null, user); // Lấy role từ DB
+  // Trả về object chứa thông tin cần thiết cho token
+  return done(null, {
+    _id: user._id,
+    username: user.username,
+    role: user.role,
+    student_id: user.student_id,
+    lecturer_id: user.lecturer_id
+  });
 }));

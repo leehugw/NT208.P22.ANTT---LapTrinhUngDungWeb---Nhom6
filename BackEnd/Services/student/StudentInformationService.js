@@ -1,11 +1,13 @@
 //StudentInformationService.js
 const Student = require("../../../Database/SaveToMongo/models/Student");
 const Faculty = require("../../../Database/SaveToMongo/models/Faculty");
+const { NotFoundError, DatabaseError } = require('../../../BackEnd/Services/student/errors.js'); // điều chỉnh đường dẫn phù hợp
 
 class StudentInformationService {
   static async getStudentProfile(student_id) {
     try {
       const student = await Student.findOne({ student_id }).lean();
+      console.log("studentId từ token:", student_id);
       if (!student) throw new NotFoundError('Không tìm thấy sinh viên');
   
       let faculty_name = null;

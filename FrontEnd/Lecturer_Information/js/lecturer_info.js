@@ -15,28 +15,53 @@ document.getElementById('menu-close').addEventListener('click', function () {
 
 // Load lecturer profile
 document.addEventListener('DOMContentLoaded', function() {
+    // Lấy token từ URL hoặc localStorage
     const urlParams = new URLSearchParams(window.location.search);
-    const lecturer_id = urlParams.get('lecturer_id');
-
-    if (lecturer_id) {
-        fetchLecturerProfile(lecturer_id);
+    const urlToken = urlParams.get('token');
+    const token = urlToken || localStorage.getItem('token');
+    
+    if (!token) {
+        alert("Vui lòng đăng nhập để xem thông tin");
+        window.location.href = "http://localhost:3000/";
+        return;
     }
+
+    // Lưu token nếu có từ URL
+    if (urlToken) {
+        localStorage.setItem('token', urlToken);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    fetchLecturerProfile(token);
 });
 
-async function fetchLecturerProfile(lecturer_id) {
+
+async function fetchLecturerProfile(token) {
     try {
-        const response = await fetch(`/api/lecturer/profile-data?lecturer_id=${lecturer_id}`);
-        const data = await response.json();
+        const response = await fetch('/api/lecturer/profile-data', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         
-        if (!response.ok || !data.success) {
-            throw new Error(data.message || 'Lỗi khi tải thông tin');
+        if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem('token');
+                alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
+                window.location.href = 'http://localhost:3000/';
+                return;
+            }
+            throw new Error('Lỗi khi tải thông tin');
         }
 
-        if (data.type !== "lecturer") {
-            throw new Error("ID này không thuộc giảng viên");
-        }
+        const data = await response.json();
         
-        displayLecturerData(data.data);
+        if (data.success && data.type === "lecturer") {
+            displayLecturerData(data.data);
+        } else {
+            throw new Error(data.message || "Dữ liệu không hợp lệ");
+        }
     } catch (error) {
         console.error('Error:', error);
         alert('Lỗi khi tải thông tin giảng viên: ' + error.message);
