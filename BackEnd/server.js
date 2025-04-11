@@ -8,8 +8,6 @@ const app = express();
 
 // Kết nối database
 const connectDB = require('../Database/connectDB');
-console.log("Resolved path:", path.resolve(__dirname, '../Database/connectDB'));
-
 connectDB();
 
 // Middleware
