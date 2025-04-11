@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <td>${sub.score_QT ?? '-'}</td>
                                         <td>${sub.score_GK ?? '-'}</td>
                                         <td>${sub.score_TH ?? '-'}</td>
-                                        <td>${sub.score_CK}</td>
+                                        <td>${sub.score_CK ?? '-'}</td>
                                         <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
                                     </tr>
                                 `).join("")}
@@ -224,20 +224,21 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <th scope="col">Điểm HP</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                ${filteredSubjects.map(sub => `
-                                    <tr>
-                                        <td>${sub.subject_code}</td>
-                                        <td>${sub.subject_name}</td>
-                                        <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
-                                        <td>${sub.score_QT ?? '-'}</td>
-                                        <td>${sub.score_GK ?? '-'}</td>
-                                        <td>${sub.score_TH ?? '-'}</td>
-                                        <td>${sub.score_CK}</td>
-                                        <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
-                                    </tr>
-                                `).join("")}
-                            </tbody>
+                            ${filteredSubjects.map(sub => {
+                                `<tr>
+                                    <td>${sub.subject_code}</td>
+                                    <td>${sub.subject_name}</td>
+                                    <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
+                                    <td>${sub.score_QT ?? '-'}</td>
+                                    <td>${sub.score_GK ?? '-'}</td>
+                                    <td>${sub.score_TH ?? '-'}</td>
+                                    <td>${typeof sub.score_CK === 'number' ? sub.score_CK : '-'}</td>
+                                    <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">
+                                        ${sub.score_HP !== null && sub.score_HP !== undefined ? Number(sub.score_HP) : '-'}
+                                    </td>
+                                </tr>`;
+                                 }).join("")}
+                            
                         </table>
                     </div>
                 `;
