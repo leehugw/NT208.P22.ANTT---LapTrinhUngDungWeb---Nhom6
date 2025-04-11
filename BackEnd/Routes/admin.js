@@ -3,6 +3,12 @@ const express = require('express');
 const router = express.Router();
 const StudentGPAUpdateController = require('../Controllers/admin/StudentGPAUpdateController');
 const adminFeedbackService = require('../Services/admin/adminFeedbackService');
+const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
+
+// Middleware để xác thực và phân quyền
+router.get('/admin_menu', authenticateToken, authorizeRoles('admin'), (req, res) => {
+  res.json({ message: 'Chào admin' });
+});
 
 // Cập nhật GPA cho tất cả sinh viên
 router.put('all/academicstatistic/', StudentGPAUpdateController.updateAllGPAs);

@@ -4,6 +4,13 @@ const path = require('path');
 
 const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
 const LectureFeedbackController = require('../Controllers/feedback/feedbackController');
+const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
+
+// Middleware để xác thực và phân quyền
+router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
+    res.json({ message: 'Chào giảng viên' });
+});
+
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {
     const { lecturer_id } = req.query;

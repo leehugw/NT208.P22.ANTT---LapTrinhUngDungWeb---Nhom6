@@ -6,6 +6,16 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const app = express();
 
+//Xử lí passport
+const mongoose = require("mongoose");
+const passport = require("passport");
+require('./passport');
+const authRoutes = require('./Routes/auth');
+app.use('/auth', authRoutes);
+
+app.use(express.json());
+app.use(passport.initialize());
+
 // Kết nối database
 const connectDB = require('../Database/connectDB');
 console.log("Resolved path:", path.resolve(__dirname, '../Database/connectDB'));
@@ -24,11 +34,30 @@ const adminRoutes = require('./Routes/admin');
 const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
 
+// Direct route to home.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
+});
+
+// Route to student_menu.html file
+app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
+app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lecturer_Menu')));
+app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
+
+
+// Route to trigger Google login
+
+//const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=278181169185-sqeskqdu8rnck8l5cakqhplhbjskn2ni.apps.googleusercontent.com&redirect_uri=http://localhost:3000/callback&response_type=code&scope=email`;
+
+app.get("/auth/google", 
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
 // Register Routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
-
+app.use("/api/auth", authRoutes);
 
 // Khởi động server
 app.listen(3001, () => {

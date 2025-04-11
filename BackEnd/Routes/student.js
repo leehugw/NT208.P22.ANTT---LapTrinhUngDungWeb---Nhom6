@@ -4,7 +4,12 @@ const path = require('path');
 const StudentInformationService = require('../Services/student/StudentInformationService');
 const ScoreController = require('../Controllers/student/ScoreController');
 const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
+const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 
+// Middleware để xác thực và phân quyền
+router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
+    res.json({ message: 'Chào sinh viên hoặc giảng viên' });
+});
 
 //Route lấy bản điểm của sinh viên theo học kỳ
 router.get("/:studentId/group-by-semester-data", ScoreController.getScoresByStudentGrouped);
