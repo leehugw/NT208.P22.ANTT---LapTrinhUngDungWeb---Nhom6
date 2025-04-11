@@ -1,7 +1,6 @@
 // routes/admin.js
 const express = require('express');
 const router = express.Router();
-const StudentGPAUpdateController = require('../Controllers/admin/StudentGPAUpdateController');
 const adminFeedbackService = require('../Services/admin/adminFeedbackService');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 
@@ -9,12 +8,6 @@ const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 router.get('/admin_menu', authenticateToken, authorizeRoles('admin'), (req, res) => {
   res.json({ message: 'Chào admin' });
 });
-
-// Cập nhật GPA cho tất cả sinh viên
-router.put('all/academicstatistic/', StudentGPAUpdateController.updateAllGPAs);
-
-// Cập nhật GPA cho một sinh viên
-router.put(':student_id/academicstatistic/', StudentGPAUpdateController.updateStudentGPA);
 
 
 // API hiển thị danh sách phản hồi cho admin

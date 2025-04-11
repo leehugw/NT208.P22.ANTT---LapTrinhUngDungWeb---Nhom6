@@ -25,17 +25,50 @@ async function calculateStudentAcademic(student_id) {
     const semesterGPAData = {};
 
     const firstAttemptScores = {};
+    const highestPassedScores = {};
+
     scores.forEach(score => {
+        const scoreHP = parseFloat(score.score_HP);
+        const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
+        if (!subject) return;
+
+        const credits = subject.theory_credits + subject.practice_credits;
+
+        // Lưu điểm lần đầu
         if (!firstAttemptScores[score.subject_id]) {
-            if (!score.isRetaken && !isNaN(parseFloat(score.score_HP))) {
-                firstAttemptScores[score.subject_id] = score;
+            if (!score.isRetaken && !isNaN(scoreHP)) {
+                firstAttemptScores[score.subject_id] = { credits, scoreHP };
+                totalCreditsAttempted += credits;
+                totalWeightedScoreWithoutRetakes += scoreHP * credits;
             }
+        }
+
+        // Điểm đạt cao nhất
+        if ((!isNaN(scoreHP) && scoreHP >= 5) || score.score_HP === "Miễn") {
+            const current = highestPassedScores[score.subject_id];
+
+            // Nếu chưa có hoặc điểm hiện tại cao hơn điểm đang lưu
+            if (!current || (parseFloat(current.score_HP) < scoreHP)) {
+                highestPassedScores[score.subject_id] = score;
+            }
+        }
+
+        // GPA theo học kỳ
+        const sem = score.semester_id;
+        if (!semesterGPAData[sem]) {
+            semesterGPAData[sem] = { totalCredits: 0, weightedScore: 0 };
+        }
+        if (!isNaN(scoreHP) && score.score_HP !== "Miễn") {
+            semesterGPAData[sem].totalCredits += credits;
+            semesterGPAData[sem].weightedScore += scoreHP * credits;
         }
     });
 
     Object.values(firstAttemptScores).forEach(score => {
-        const subject = subjects.find(s => s.subject_id === score.subject_id);
-        if (!subject) return;
+        const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
+        if (!subject) {
+            return;
+        }
 
         const credits = subject.theory_credits + subject.practice_credits;
         const scoreHP = parseFloat(score.score_HP);
@@ -44,30 +77,18 @@ async function calculateStudentAcademic(student_id) {
         totalWeightedScoreWithoutRetakes += scoreHP * credits;
     });
 
-    scores.forEach(score => {
-        const subject = subjects.find(s => s.subject_id === score.subject_id);
+    Object.values(highestPassedScores).forEach(score => {
+        const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
         if (!subject) return;
 
         const credits = subject.theory_credits + subject.practice_credits;
         const scoreHP = parseFloat(score.score_HP);
-        const status = score.status;
-        const isRetaken = score.isRetaken;
 
-        const sem = score.semester_id;
-        if (!semesterGPAData[sem]) {
-            semesterGPAData[sem] = { totalCredits: 0, weightedScore: 0 };
-        }
+        totalCreditsEarned += credits;
 
-        if ((!isNaN(scoreHP) && scoreHP >= 5) || score.score_HP === "Miễn") {
-            totalCreditsEarned += credits;
-            if (score.score_HP !== "Miễn") {
-                totalCreditsEarnedExcludingExemptions += credits;
-                totalWeightedScore += scoreHP * credits;
-            }
-        }
-        if (!isNaN(scoreHP) && score.score_HP !== "Miễn") {
-            semesterGPAData[sem].totalCredits += credits;
-            semesterGPAData[sem].weightedScore += scoreHP * credits;
+        if (score.score_HP !== "Miễn") {
+            totalCreditsEarnedExcludingExemptions += credits;
+            totalWeightedScore += scoreHP * credits;
         }
     });
 
