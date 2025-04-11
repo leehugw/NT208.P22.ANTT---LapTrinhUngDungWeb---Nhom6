@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchLecturerProfile(token) {
     try {
-        const response = await fetch('/api/lecturer/profile-data', {
+        const response = await fetch('http://localhost:3000/api/lecturer/profile/api', {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'

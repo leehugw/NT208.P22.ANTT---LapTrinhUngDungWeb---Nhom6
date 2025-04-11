@@ -13,8 +13,7 @@ router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res
 
 // Route để phục vụ trang HTML
 router.get('/profile', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
-    const pagePath = path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html');
-    res.sendFile(pagePath);
+    res.sendFile(path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html'));
 });
 
 // Route API để lấy dữ liệu profile
