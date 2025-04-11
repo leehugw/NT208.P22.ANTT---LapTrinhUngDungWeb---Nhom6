@@ -6,6 +6,7 @@ const ScoreController = require('../Controllers/student/ScoreController');
 const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
+const chatController = require('../Controllers/student/studentChatController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -86,5 +87,10 @@ router.get('/profile-data', async (req, res) => {
         });
     }
 });
+
+// Routes chatbot conversation
+router.post('/conversation', chatController.createConversation); // Tạo conversation mới
+router.post('/conversation/:session_id/messages', chatController.addMessage); // Thêm message
+router.get('/conversation/:session_id', chatController.getChatHistory); // Lấy lịch sử chat
 
 module.exports = router;

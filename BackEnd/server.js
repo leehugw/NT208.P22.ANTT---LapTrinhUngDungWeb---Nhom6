@@ -24,6 +24,9 @@ connectDB();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For form data
+
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
 
@@ -55,6 +58,7 @@ app.get("/auth/google",
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
+
 app.use("/api/auth", authRoutes);
 
 // Khởi động server

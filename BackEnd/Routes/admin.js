@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const adminFeedbackService = require('../Services/admin/adminFeedbackService');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
+const adminChatController = require('../Controllers/admin/adminChatController');
 
 // Middleware để xác thực và phân quyền
 router.get('/admin_menu', authenticateToken, authorizeRoles('admin'), (req, res) => {
@@ -21,5 +22,8 @@ router.get('/feedbacks', async (req, res) => {
     }
   });
 
+router.get('/chat/conversations', adminChatController.getAllSessions); // Lấy danh sách tất cả các cuộc trò chuyện
+router.get('/chat/conversations/:session_id', adminChatController.getSessionDetails); // Lấy chi tiết cuộc trò chuyện theo session_id
+router.get('/chat/students/:student_id/conversations', adminChatController.getStudentConversations); // Lấy danh sách cuộc trò chuyện của một sinh viên theo student_id
 
 module.exports = router;
