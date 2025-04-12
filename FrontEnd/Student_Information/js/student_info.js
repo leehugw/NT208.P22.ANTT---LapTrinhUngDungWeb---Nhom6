@@ -14,7 +14,7 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Lấy token từ URL hoặc localStorage
     const urlParams = new URLSearchParams(window.location.search);
     const urlToken = urlParams.get('token');
@@ -36,6 +36,30 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchStudentProfile(token);
 });
 
+function openFeedbackPopup() {
+    if (document.getElementById('feedbackPopup')) {
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
+    }
+
+    fetch('/FeedbackForm/feedbackForm.html')
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
+    window.closeFeedbackForm = function () {
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
+    };
+}
+
 async function fetchStudentProfile(token) {
     try {
         console.log('🔄 Đang gửi token:', token);
@@ -46,9 +70,9 @@ async function fetchStudentProfile(token) {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         console.log('Response status:', response.status);
-        
+
         if (!response.ok) {
             // Nếu token hết hạn hoặc không hợp lệ
             if (response.status === 401 || response.status === 403) {
@@ -58,7 +82,7 @@ async function fetchStudentProfile(token) {
                 window.location.href = 'http://localhost:3000/';
                 return;
             }
-            
+
             const errorData = await response.json();
             console.error('Error response:', errorData);
             throw new Error(errorData.message || 'Failed to fetch student data');
@@ -66,7 +90,7 @@ async function fetchStudentProfile(token) {
 
         const data = await response.json();
         console.log('Received data:', data);
-        
+
         if (data.success && data.type === "student") {
             displayStudentData(data.data);
             localStorage.setItem('token', token); // hoặc sessionStorage
@@ -83,7 +107,7 @@ async function fetchStudentProfile(token) {
 function displayStudentData(data) {
     const { student, contact, address, family, identity } = data;
 
-    
+
     if (!student) {
         console.error("Không có dữ liệu sinh viên");
         return;
@@ -93,15 +117,16 @@ function displayStudentData(data) {
     function setValue(id, value) {
         const element = document.getElementById(id);
         if (!element) return;
-        
+
         const displayValue = value ?? 'Chưa cập nhật';
-        
+
         if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
             element.value = displayValue;
         } else {
             element.textContent = displayValue;
         }
     }
+
 
     // Thông tin cơ bản
     setValue('student-name', student.name);
@@ -114,11 +139,11 @@ function displayStudentData(data) {
     // Thông tin cá nhân
     setValue('birth-place', student.birthplace);
     setValue('birth-date', formatDate(student.birth_date));
-    
+
     // Xử lý giới tính cải tiến
     const genderValue = student?.gender?.toString().trim().toLowerCase();
     const isFemale = ['nữ', 'nu', 'female'].includes(genderValue);
-    
+
     document.getElementById('gender-display').textContent = isFemale ? 'Nữ' : 'Nam';
     if (document.getElementById('nam-display')) {
         document.getElementById('nam-display').checked = !isFemale;
@@ -145,12 +170,12 @@ function displayStudentData(data) {
         setValue('father-job', family.father?.job);
         setValue('father-phone', family.father?.phone);
         setValue('father-address', family.father?.address);
-        
+
         setValue('mother-name', family.mother?.name);
         setValue('mother-job', family.mother?.job);
         setValue('mother-phone', family.mother?.phone);
         setValue('mother-address', family.mother?.address);
-        
+
         setValue('guardian-name', family.guardian?.name);
         setValue('guardian-phone', family.guardian?.phone);
         setValue('guardian-address', family.guardian?.address);

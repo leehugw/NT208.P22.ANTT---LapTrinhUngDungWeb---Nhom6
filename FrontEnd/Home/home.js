@@ -13,7 +13,34 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-window.addEventListener('scroll', function() {
+
+function openFeedbackPopup() {
+  if (document.getElementById('feedbackPopup')) {
+    document.getElementById('feedbackPopup').style.display = 'flex';
+    return;
+  }
+
+  fetch('/FeedbackForm/feedbackForm.html')
+    .then(res => res.text())
+    .then(html => {
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      document.body.appendChild(wrapper);
+
+      const script = document.createElement('script');
+      script.src = '/FeedbackForm/Feedback.js';
+      document.body.appendChild(script);
+    });
+
+  window.closeFeedbackForm = function () {
+    const popup = document.getElementById('feedbackPopup');
+    if (popup) popup.remove();
+  };
+}
+
+
+
+window.addEventListener('scroll', function () {
     let sections = document.querySelectorAll('section'); // Chọn tất cả các phần có id (các phần bạn muốn theo dõi)
     let navbarLinks = document.querySelectorAll('.navbar-container .nav-link'); // Các liên kết trong navbar
     let currentSection = "";

@@ -63,7 +63,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
 
-app.use('/api/feedback', require('./Routes/feedback'));
+app.use('/api', require('./Routes/feedback'));
 
 app.use("/api/auth", authRoutes);
 

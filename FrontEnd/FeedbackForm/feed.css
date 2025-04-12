@@ -1,8 +1,10 @@
 body {
-    background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Robonto', sans-serif;
   }
   
+.color-text{
+  color:#3D67BA;
+}
   .feedback-card {
     max-width: 500px;
     width: 100%;
@@ -15,7 +17,7 @@ body {
   }
   
   .btn-primary {
-    background-color: #1d6ce2;
+    background-color: #3D67BA;
     border: none;
   }
   

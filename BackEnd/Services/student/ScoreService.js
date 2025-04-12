@@ -1,9 +1,9 @@
 const { get } = require("mongoose");
 const Score = require("../../../Database/SaveToMongo/models/Score");
 
-const getScoresByStudentGrouped = async (studentId) => {
+const getScoresByStudentGrouped = async (student_id) => {
   return await Score.aggregate([
-    { $match: { student_id: studentId.toString() } },
+    { $match: { student_id: student_id.toString() } },
     {
       $lookup: {
         from: "subjects",

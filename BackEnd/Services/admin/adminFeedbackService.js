@@ -1,6 +1,6 @@
+const Feedback = require('../../../Database/SaveToMongo/models/Feedback');
 
 exports.getAllFeedbacks = async () => {
-  const db = getDB();
-  const feedbacksCollection = db.collection('feedbacks');
-  return await feedbacksCollection.find({}).toArray();
+  return await Feedback.find().sort({ createdAt: -1 });
 };
+

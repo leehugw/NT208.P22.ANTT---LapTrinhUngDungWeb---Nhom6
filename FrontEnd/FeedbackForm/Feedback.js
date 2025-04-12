@@ -13,11 +13,10 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
     responseMessage.innerHTML = '';
   
     try {
-      const res = await fetch('/api/feedback', {
+      const res = await fetch('/api/feedbacks-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-admin-token': 'your-admin-token-here'
         },
         body: JSON.stringify(data)
       });

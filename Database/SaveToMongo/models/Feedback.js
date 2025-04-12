@@ -7,6 +7,6 @@ const feedbackSchema = new mongoose.Schema({
   type: { type: String, enum: ['bug', 'feedback'], required: true },
   message: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
-});
+},{collection:"feedbacks", timestamps: true });
 
 module.exports = mongoose.model('Feedback', feedbackSchema);

@@ -1,11 +1,12 @@
 const { updateStudentAcademic } = require('../../Services/student/StudentAcademicService');
 const Student = require('../../../Database/SaveToMongo/models/Student');
+const User = require('../../../Database/SaveToMongo/models/Users');
 const TrainingProgram = require('../../../Database/SaveToMongo/models/TrainingProgram');
 
 
 const updateStudentAcademicController = async (req, res) => {
     try {
-        const student_id = req.params.student_id || req.body.student_id;
+        const student_id = req.user.student_id;
         if (!student_id) {
             return res.status(400).json({ message: 'student_id là bắt buộc.' });
         }
@@ -15,6 +16,10 @@ const updateStudentAcademicController = async (req, res) => {
             return res.status(404).json({ message: "Student not found" });
         }
 
+        const user = await User.findOne({ student_id });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
         // Find the program using student.program_id and the major using student.major_id
         const program = await TrainingProgram.findOne({ program_id: student.program_id });
         if (!program) {
@@ -29,6 +34,8 @@ const updateStudentAcademicController = async (req, res) => {
 
         const result = await updateStudentAcademic(student_id);
         return res.status(200).json({
+            user_gmail: user.username,
+            student_name: student.name,
             has_english_certificate: student.has_english_certificate,
             required_progress_details: major.progress_details,
             data: result
