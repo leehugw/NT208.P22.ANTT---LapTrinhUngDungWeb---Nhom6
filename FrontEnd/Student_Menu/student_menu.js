@@ -18,22 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlToken = urlParams.get('token');
 
     if (urlToken) {
-        console.log("🔑 Lấy được token từ URL:", urlToken);
         localStorage.setItem('token', urlToken); // hoặc sessionStorage nếu bạn thích
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
     const token = localStorage.getItem('token');
-    console.log("🗂 Token hiện tại trong localStorage:", token);
-
     if (!token) {
         alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
         window.location.href = "http://localhost:3000/";
         return;
     }
-
-    // Nếu có token → gọi API lấy dữ liệu:
-    fetchStudentProfile(token);
 });
 
 document.getElementById("btn-student-card").addEventListener("click", function(e) {
@@ -58,3 +52,19 @@ document.getElementById("btn-student-info").addEventListener("click", function(e
         window.location.href = "/api/student/profile?token=" + token;
     }
 });
+
+document.querySelectorAll(".btn-student-progress").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/student/academicstatistic?token=" + token;
+        }
+    });
+});
+
+
+

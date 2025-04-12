@@ -1,11 +1,15 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../Database/SaveToMongo/models/Users'); // MODEL LẤY DỮ LIỆU TỪ DB
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
+
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3001/api/auth/google/callback",
+  callbackURL: "http://localhost:3000/api/auth/google/callback",
 }, async (accessToken, refreshToken, profile, done) => {
   const email = profile.emails[0].value;
   const googleId = profile.id;

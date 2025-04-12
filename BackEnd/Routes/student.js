@@ -5,7 +5,7 @@ const StudentInformationService = require('../Services/student/StudentInformatio
 const ScoreController = require('../Controllers/student/ScoreController');
 const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
-const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
+const HandleChatRequestController = require('../Controllers/student/ChatBotController');
 const chatController = require('../Controllers/student/studentChatController');
 
 // Middleware để xác thực và phân quyền
@@ -14,36 +14,31 @@ router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res)
 });
 
 //Route lấy bản điểm của sinh viên theo học kỳ
-router.get("/:studentId/group-by-semester-data", ScoreController.getScoresByStudentGrouped);
+router.get("/group-by-semester-data", authenticateToken,
+    authorizeRoles('student'), ScoreController.getScoresByStudentGrouped);
 
-router.get("/:student_id/student-academic-data", StudentAcademicController.updateStudentAcademicController);
+router.get("/student-academic-data", authenticateToken,
+    authorizeRoles('student'), StudentAcademicController.updateStudentAcademicController);
 
-router.get('/:student_id/academicstatistic', (req, res) => {
-    const { student_id } = req.params;
-    
-    if (!student_id) {
-        return res.status(400).send("student_id là bắt buộc");
-    }
-
-    // Gọi controller để xử lý
+router.get('/academicstatistic', authenticateToken, authorizeRoles('student'), (req, res) => {
     const pagePath = path.join(__dirname, '../../FrontEnd/StudyProgress/studyprogress.html');
-    
     res.sendFile(pagePath);
 });
+    
 
 //Route hien thi cau hoi va tra loi chatbot
 router.post('/:student_id/chatbot-data', HandleChatRequestController.handleChatRequest);
 
 router.get('/:student_id/chatbot', (req, res) => {
     const { student_id } = req.params;
-    
+
     if (!student_id) {
         return res.status(400).send("student_id là bắt buộc");
     }
 
     // Gọi controller để xử lý
     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
-    
+
     res.sendFile(pagePath);
 });
 
@@ -61,12 +56,12 @@ router.get('/profile/api', authenticateToken, authorizeRoles('student'), async (
                 message: "Không có quyền truy cập"
             });
         }
-        
+
         const profile = await StudentInformationService.getStudentProfile(req.user.student_id);
-        res.json({ 
-            success: true, 
+        res.json({
+            success: true,
             type: "student",
-            data: profile 
+            data: profile
         });
     } catch (error) {
         console.error(error);

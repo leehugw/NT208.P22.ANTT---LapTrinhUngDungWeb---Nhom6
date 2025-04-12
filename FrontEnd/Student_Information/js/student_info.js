@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const urlToken = urlParams.get('token');
     const token = urlToken || localStorage.getItem('token');
-    console.log("🎫 Token lấy từ URL hoặc localStorage:", token);
 
     if (!token) {
         alert("Vui lòng đăng nhập để xem thông tin");

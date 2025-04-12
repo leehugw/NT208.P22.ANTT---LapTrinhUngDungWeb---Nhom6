@@ -13,9 +13,24 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Lấy token từ localStorage
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert("Vui lòng đăng nhập để xem thông tin");
+        window.location.href = "http://localhost:3000/";
+        return;
+    }
+
+    // Gọi API lấy dữ liệu
+    StudentAcademicData(token);
+});
+
+
 let scoresemesterData = []; // Khai báo biến toàn cục để chứa dữ liệu điểm theo học kỳ
 
-document.addEventListener('DOMContentLoaded', function () {
+function StudentAcademicData(token) {
     const searchInput = document.getElementById('search-input');  // Lấy input tìm kiếm
     const semesterScores = document.getElementById("semester-scores"); // Lấy phần tử chứa bảng điểm
 
@@ -27,15 +42,26 @@ document.addEventListener('DOMContentLoaded', function () {
     if (studentId) {
         // Gọi API để lấy thông tin sinh viên, tiến độ tốt nghiệp và GPA
         Promise.all([
-            fetch(`/api/student/${studentId}/student-academic-data`),
-            fetch(`/api/student/${studentId}/group-by-semester-data`)  // Lấy thông tin điểm theo học kỳ
-        ])
+            fetch(`/api/student/student-academic-data`, {
+                headers: { Authorization: `Bearer ${token}` }
+            }),
+            fetch(`/api/student/group-by-semester-data`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        ])        
             .then(responses => Promise.all(responses.map(res => res.json())))
             .then(([academicData, semesterData]) => {
                 scoresemesterData = semesterData; // Lưu trữ dữ liệu semesterData
 
                 console.log(academicData); // Kiểm tra dữ liệu trả về từ API
                 // Cập nhật checkbox "Đã nộp chứng chỉ anh văn"
+
+                const nameElement = document.getElementById('student-name');
+                nameElement.textContent = academicData.student_name;
+
+                const emailElement = document.getElementById('student-email');
+                emailElement.textContent = academicData.user_gmail;
+
                 const englishProficiencyCheckbox = document.getElementById('englishProficiency');
                 englishProficiencyCheckbox.checked = academicData.has_english_certificate;
 
@@ -250,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
+}
 
 
 // Export button click handler
