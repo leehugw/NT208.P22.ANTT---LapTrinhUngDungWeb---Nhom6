@@ -1,0 +1,467 @@
+{
+    "success": true,
+    "studentInfo": {
+        "name": "Ngô Văn Hiếu",
+        "studentId": "23524111",
+        "major": "Công nghệ thông tin",
+        "program": "Chương trình đào tạo đại học khóa 2023",
+        "currentSemester": 2,
+        "remainingSemesters": 6,
+        "englishStatus": "Completed (Certificate)"
+    },
+    "creditSummary": {
+        "majorCredits": 0,
+        "electiveCredits": 0,
+        "totalCredits": 19,
+        "remainingMajorCredits": 18,
+        "remainingElectiveCredits": 6,
+        "targetMajorCredits": 3,
+        "targetElectiveCredits": 1
+    },
+    "courseRecommendations": {
+        "allRequiredCourses": [
+            "SS008",
+            "SS009",
+            "SS010",
+            "SS006",
+            "MA006",
+            "MA004",
+            "IT001",
+            "PE231",
+            "PE232",
+            "ME001",
+            "SS004",
+            "IT002",
+            "IT003",
+            "IT004",
+            "IT005",
+            "IT012",
+            "IT007",
+            "IE005",
+            "IE101",
+            "IE103",
+            "IE104",
+            "IE105",
+            "IE106",
+            "IE108",
+            "IS402",
+            "IE201",
+            "IE212",
+            "IS217",
+            "IS254",
+            "IE221",
+            "IE224",
+            "IE309",
+            "BUS1125",
+            "IE231",
+            "IE203",
+            "IS208",
+            "IS336",
+            "IE301",
+            "IE302",
+            "IE102",
+            "IE204",
+            "IE213",
+            "IS353",
+            "IS334",
+            "IE303",
+            "IE307",
+            "IS251",
+            "IS352",
+            "IS351",
+            "IE205",
+            "IE304",
+            "IE305",
+            "TLH025",
+            "IE310",
+            "IE207",
+            "IE505",
+            "IE401",
+            "IE402",
+            "IE403",
+            "IE405",
+            "IE406"
+        ],
+        "eligibleAfterPrerequisites": [
+            "BUS1125",
+            "IE005",
+            "IE101",
+            "IE102",
+            "IE103",
+            "IE104",
+            "IE105",
+            "IE106",
+            "IE108",
+            "IE201",
+            "IE203",
+            "IE204",
+            "IE205",
+            "IE207",
+            "IE212",
+            "IE213",
+            "IE221",
+            "IE224",
+            "IE231",
+            "IE301",
+            "IE302",
+            "IE303",
+            "IE304",
+            "IE305",
+            "IE307",
+            "IE309",
+            "IE310",
+            "IE401",
+            "IE402",
+            "IE403",
+            "IE405",
+            "IE406",
+            "IE505",
+            "IS208",
+            "IS217",
+            "IS251",
+            "IS254",
+            "IS334",
+            "IS336",
+            "IS351",
+            "IS352",
+            "IS353",
+            "IS402",
+            "IT001",
+            "IT002",
+            "IT003",
+            "IT004",
+            "IT005",
+            "IT007",
+            "IT012",
+            "MA004",
+            "MA006",
+            "ME001",
+            "PE231",
+            "PE232",
+            "SS004",
+            "SS006",
+            "SS008",
+            "SS009",
+            "SS010",
+            "TLH025"
+        ],
+        "ineligibleDueToPrerequisites": [],
+        "availableAfterFilter": [
+            "BUS1125",
+            "IE101",
+            "IE102",
+            "IE103",
+            "IE105",
+            "IE108",
+            "IE204",
+            "IE212",
+            "IE213",
+            "IE303",
+            "IE402",
+            "IE403",
+            "IS208",
+            "IS336",
+            "IS353",
+            "IS402",
+            "IT001",
+            "IT002",
+            "IT003",
+            "IT004",
+            "IT005",
+            "IT007",
+            "IT012",
+            "MA004",
+            "MA006",
+            "PE231",
+            "SS004",
+            "SS006",
+            "SS008",
+            "SS009",
+            "SS010",
+            "TLH025"
+        ],
+        "courseDifficulty": {
+            "BUS1125": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE101": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE102": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE103": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE105": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE108": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE204": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE212": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE213": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE303": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE402": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IE403": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IS208": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IS336": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IS353": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IS402": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "IT001": {
+                "difficulty": 0.9,
+                "averageScore": 4.25,
+                "studentCount": 2
+            },
+            "IT002": {
+                "difficulty": 0.5,
+                "averageScore": 7.266666666666667,
+                "studentCount": 3
+            },
+            "IT003": {
+                "difficulty": 0.9,
+                "averageScore": 4.2,
+                "studentCount": 3
+            },
+            "IT004": {
+                "difficulty": 0.9,
+                "averageScore": 4.2,
+                "studentCount": 3
+            },
+            "IT005": {
+                "difficulty": 0.5,
+                "averageScore": 7.5,
+                "studentCount": 2
+            },
+            "IT007": {
+                "difficulty": 0.9,
+                "averageScore": 4.25,
+                "studentCount": 2
+            },
+            "IT012": {
+                "difficulty": 0.5,
+                "averageScore": 7.8,
+                "studentCount": 1
+            },
+            "MA004": {
+                "difficulty": 0.7,
+                "averageScore": 5.9,
+                "studentCount": 1
+            },
+            "MA006": {
+                "difficulty": 0.7,
+                "averageScore": 5.8,
+                "studentCount": 3
+            },
+            "PE231": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "SS004": {
+                "difficulty": 0.7,
+                "averageScore": 6.85,
+                "studentCount": 2
+            },
+            "SS006": {
+                "difficulty": 0.7,
+                "averageScore": 6.4,
+                "studentCount": 2
+            },
+            "SS008": {
+                "difficulty": 0.7,
+                "averageScore": 6.5,
+                "studentCount": 1
+            },
+            "SS009": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            },
+            "SS010": {
+                "difficulty": 0.5,
+                "averageScore": 7,
+                "studentCount": 1
+            },
+            "TLH025": {
+                "difficulty": 0.5,
+                "averageScore": null,
+                "studentCount": 0
+            }
+        }
+    },
+    "schedule": {
+        "3": {
+            "courses": [
+                {
+                    "courseId": "BUS1125",
+                    "subjectName": "Khởi nghiệp kinh doanh",
+                    "credits": 3,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "class_id": "BUS1125.P21",
+                            "day": "Wed",
+                            "time": "07:30 - 10:45",
+                            "room": "B6.06",
+                            "lecturer": "Lê Thị Hải Yến"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE101",
+                    "subjectName": "Cơ sở hạ tầng công nghệ thông tin",
+                    "credits": 3,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "class_id": "IE101.P22",
+                            "day": "Mon",
+                            "time": "08:15 - 11:30",
+                            "room": "B1.04",
+                            "lecturer": "Nguyễn Thị Anh Thư"
+                        },
+                        {
+                            "class_id": "IE101.P21",
+                            "day": "Mon",
+                            "time": "13:00 - 16:15",
+                            "room": "B1.06",
+                            "lecturer": "Nguyễn Thị Anh Thư"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE103",
+                    "subjectName": "Quản lý thông tin",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "class_id": "IE103.P21",
+                            "day": "Wed",
+                            "time": "13:00 - 16:15",
+                            "room": "B1.02",
+                            "lecturer": "Tạ Thu Thủy"
+                        },
+                        {
+                            "class_id": "IE103.P22",
+                            "day": "Thu",
+                            "time": "07:30 - 10:45",
+                            "room": "B1.02",
+                            "lecturer": "Phạm Nhật Duy"
+                        },
+                        {
+                            "class_id": "IE103.P21.1",
+                            "day": "Thu",
+                            "time": "13:00 - 17:00",
+                            "room": "B2.06",
+                            "lecturer": "Tạ Thu Thủy"
+                        },
+                        {
+                            "class_id": "IE103.P21.2",
+                            "day": "Thu",
+                            "time": "13:00 - 17:00",
+                            "room": "B2.06",
+                            "lecturer": "Tạ Thu Thủy"
+                        },
+                        {
+                            "class_id": "IE103.P22.1",
+                            "day": "Thu",
+                            "time": "13:00 - 17:00",
+                            "room": "B2.08",
+                            "lecturer": "Nguyễn Thành Luân"
+                        },
+                        {
+                            "class_id": "IE103.P22.2",
+                            "day": "Thu",
+                            "time": "13:00 - 17:00",
+                            "room": "B2.08",
+                            "lecturer": "Nguyễn Thành Luân"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE105",
+                    "subjectName": "Nhập môn bảo đảm và an ninh thông tin",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "class_id": "IE105.P22",
+                            "day": "Tue",
+                            "time": "07:30 - 10:45",
+                            "room": "B1.04",
+                            "lecturer": "Nguyễn Tấn Cầm"
+                        },
+                        {
+                            "class_id": "IE105.P21",
+                            "day": "Tue",
+                            "time": "13:00 - 16:15",
+                            "room": "B3.14",
+                            "lecturer": "Nguyễn Tấn Cầm"
+                        }
+                    ]
+                }
+            ],
+            "totalCredits": 14,
+            "majorCredits": 14,
+            "electiveCredits": 0,
+            "targetMajorCredits": 3,
+            "targetElectiveCredits": 1
+        }
+    },
+    "generatedAt": "2025-04-13T08:02:11.351Z"
+}

@@ -3,16 +3,33 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
-const generateOptimizedScheduleFromExcel = require('../Controllers/student/ScheduleController');
+
+
+const { generateOptimizedScheduleFromExcel } = require('../Services/student/ScheduleService');
 const StudentInformationService = require('../Services/student/StudentInformationService');
 const ScoreController = require('../Controllers/student/ScoreController');
 const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
 //const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
 
+const CourseRecommendationService = require('../Services/student/CourseRecommendationService');
 
-//Route lấy bản điểm của sinh viên theo học kỳ
+// Cấu hình multer với validation
+const upload = multer({
+    dest: 'uploads/',
+    limits: { fileSize: 5 * 1024 * 1024 }, // Giới hạn 5MB
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (ext !== '.xlsx' && ext !== '.xls') {
+            return cb(new Error('Only Excel files (.xlsx, .xls) are allowed'));
+        }
+        cb(null, true);
+    }
+});
+
+// Route lấy bản điểm
 router.get("/:studentId/group-by-semester-data", ScoreController.getScoresByStudentGrouped);
 
+// Route thông tin học tập
 router.get("/:student_id/student-academic-data", StudentAcademicController.updateStudentAcademicController);
 
 router.get('/:student_id/academicstatistic', (req, res) => {
@@ -44,19 +61,29 @@ router.get('/:student_id/academicstatistic', (req, res) => {
 //     res.sendFile(pagePath);
 // });
 
-const upload = multer({
-    dest: 'uploads/',
-    fileFilter: (req, file, cb) => {
-        const ext = path.extname(file.originalname);
-        if (ext !== '.xlsx' && ext !== '.xls') {
-            return cb(new Error('Only Excel files are allowed'));
-        }
-        cb(null, true);
-    }
-});
+// router.get('/:student_id/chatbot', (req, res) => {
+//     const { student_id } = req.params;
 
-router.post('/:studentId/optimize', upload.single('file'), generateOptimizedScheduleFromExcel.handleOptimizeSchedule);
+//     if (!student_id) {
+//         return res.status(400).send("student_id là bắt buộc");
+//     }
 
+//     // Gọi controller để xử lý
+//     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
+
+//     res.sendFile(pagePath);
+// });
+
+// API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
+router.post('/:studentId/schedule-fixed',
+    upload.single('file'),
+    CourseRecommendationService.getFixedSchedule
+);
+// API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
+router.post('/:studentId/schedule-optimize',
+    upload.single('file'),
+    CourseRecommendationService.generateOptimizedSchedule
+);
 
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {

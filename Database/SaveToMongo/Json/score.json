@@ -598,5 +598,53 @@
     "score_HP": "2.9",
     "status": "Rớt",
     "isRetaken": true
+  },
+  {
+    "student_id": "23524111",
+    "subject_id": "SS003",
+    "semester_id": "HK120232024",
+    "score_QT": 6,
+    "score_GK": null,
+    "score_TH": null,
+    "score_CK": 8.5,
+    "score_HP": "7.5",
+    "status": "Đậu",
+    "isRetaken": false
+  },
+  {
+    "student_id": "23524111",
+    "subject_id": "SS007",
+    "semester_id": "HK120232024",
+    "score_QT": 6,
+    "score_GK": null,
+    "score_TH": null,
+    "score_CK": 8.5,
+    "score_HP": "7.5",
+    "status": "Đậu",
+    "isRetaken": false
+  },
+  {
+    "student_id": "23524111",
+    "subject_id": "MA003",
+    "semester_id": "HK120232024",
+    "score_QT": 6,
+    "score_GK": null,
+    "score_TH": null,
+    "score_CK": 8.5,
+    "score_HP": "7.5",
+    "status": "Đậu",
+    "isRetaken": false
+  },
+  {
+    "student_id": "23524111",
+    "subject_id": "MA005",
+    "semester_id": "HK220232024",
+    "score_QT": 6,
+    "score_GK": null,
+    "score_TH": null,
+    "score_CK": 8.5,
+    "score_HP": "7.5",
+    "status": "Đậu",
+    "isRetaken": false
   }
 ]

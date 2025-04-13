@@ -1,4 +1,4 @@
 Database/HTML/
 Database/node_modules/
 node_modules/
-Database/.env
+Database/.env.env
