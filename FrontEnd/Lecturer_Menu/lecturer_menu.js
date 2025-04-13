@@ -82,3 +82,16 @@ document.getElementById("btn-lecturer-info").addEventListener("click", function(
         window.location.href = "/api/lecturer/profile?token=" + token;
     }
 });
+
+document.querySelectorAll(".btn-lecturer-classlist").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/lecturer/classlist?token=" + token;
+        }
+    });
+});
