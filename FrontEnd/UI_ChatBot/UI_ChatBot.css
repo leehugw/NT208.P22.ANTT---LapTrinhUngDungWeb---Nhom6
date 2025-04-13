@@ -1,0 +1,231 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 60px;
+    background-color: #e0e0e0; 
+    padding: 20px 0;
+    border-radius: 30px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); 
+    z-index: 999;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  .sidebar ul li a {
+    display: block;
+    color: rgb(121, 116, 116);
+    font-size: 24px; 
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 50%;
+    background-color:#e0e0e0; 
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #4686ca; 
+  }
+  
+  /* Logo và tiêu đề */
+  .logo-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .chatbot-logo {
+    width: 180px;
+    height: auto;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .chatbot-title {
+    font-size: 24px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+  
+  /* Khung chat */
+  .chatbox-container {
+    background-color: white;
+    border: 1px solid #2e70ff;
+    border-radius: 12px;
+    width: 1100px;
+    height: 300px;
+    max-width: 95%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    padding: 30px;
+    overflow: hidden;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-left: 80px; 
+  }
+  
+  .chat-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    flex-grow: 1;
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 60px;
+  }
+  
+  /* Chat của bot */
+  .chat-response p {
+    display: inline-block;
+    background-color: #f0f4ff;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 5px;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+  /* Gạch mờ */
+  .divider {
+    width: 90%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 auto 4px auto;
+  }
+  
+  /* FAQ */
+  .faq {
+    margin-bottom: 0;
+    margin-top: auto;
+  }
+  
+  .faq-title {
+    margin-bottom: 8px;
+    font-weight: normal;
+    margin-top: 0;
+  }
+  
+  .faq-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .faq-buttons button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  
+  /* Nhập tin nhắn */
+  .chat-input {
+    position: absolute;
+    bottom: 10px;
+    left: 1;
+    right: 1;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 30px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 30px;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .send-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #2e70ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .send-btn svg {
+    fill: white;
+  }
+  
+  .message {
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+  }
+  
+  .message.user {
+    align-self: flex-end;
+    background-color: #d1eaff;
+  }
+  
+  .message.bot {
+    align-self: flex-start;
+    background-color: #f0f4ff;
+  }
+  
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .icon-btn i {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .icon-btn:hover {
+    background-color: #d0d0d0;
+  }
