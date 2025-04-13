@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatBot UIT</title>
+  <link rel="stylesheet" href="UI_ChatBot.css" />
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="#" class="sidebar-icon" onclick="openChatHistory()"><i class="fas fa-history"></i></a></li>
+      <li><a href="#" class="sidebar-icon"><i class="fas fa-plus-circle"></i></a></li> <!-- Add icon -->
+      <li><a href="#" class="sidebar-icon"><i class="fas fa-question-circle"></i></a></li> <!-- Question icon -->
+    </ul>
+  </div>
+
+  <!-- Logo và tiêu đề -->
+  <div class="logo-title">
+    <img src="logo.png" alt="ChatBot Logo" class="chatbot-logo" />
+    <h2 class="chatbot-title">ChatBot UIT</h2>
+  </div>
+
+  <!-- Khung chat chính -->
+  <div class="chatbox-container">
+    <div class="chat-box">
+      <div class="chat-response">
+        <p><strong>Tôi có thể giúp gì cho bạn?</strong></p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="faq">
+        <div class="divider"></div>
+        <p class="faq-title">Các câu hỏi thường gặp</p>
+        <div class="faq-buttons">
+          <button ondblclick="fillMessage(this)">Đăng ký môn thế nào?</button>
+          <button ondblclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
+          <button ondblclick="fillMessage(this)">Chính sách học bổng năm nay</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Khung nhập tin nhắn -->
+    <div class="chat-input">
+      <input type="text" placeholder="Nhập gì đó..." id="user-input" />
+      <button class="send-btn" onclick="sendMessage()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+        </svg>
+      </button>
+    </div>    
+  </div>
+
+  <script src="UI_ChatBot.js"></script>
+</body>
+</html>
