@@ -15,27 +15,27 @@ document.getElementById('menu-close').addEventListener('click', function () {
 
 function openFeedbackPopup() {
     if (document.getElementById('feedbackPopup')) {
-      document.getElementById('feedbackPopup').style.display = 'flex';
-      return;
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
     }
-  
+
     fetch('/FeedbackForm/feedbackForm.html')
-      .then(res => res.text())
-      .then(html => {
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        document.body.appendChild(wrapper);
-  
-        const script = document.createElement('script');
-        script.src = '/FeedbackForm/Feedback.js';
-        document.body.appendChild(script);
-      });
-  
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
     window.closeFeedbackForm = function () {
-      const popup = document.getElementById('feedbackPopup');
-      if (popup) popup.remove();
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
     };
-  }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // Lấy token từ localStorage
@@ -72,7 +72,7 @@ function StudentAcademicData(token) {
             fetch(`/api/student/group-by-semester-data`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-        ])        
+        ])
             .then(responses => Promise.all(responses.map(res => res.json())))
             .then(([academicData, semesterData]) => {
                 scoresemesterData = semesterData; // Lưu trữ dữ liệu semesterData
@@ -275,7 +275,7 @@ function StudentAcademicData(token) {
                                 </tr>
                             </thead>
                             ${filteredSubjects.map(sub => {
-                                `<tr>
+                    `<tr>
                                     <td>${sub.subject_code}</td>
                                     <td>${sub.subject_name}</td>
                                     <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
@@ -287,7 +287,7 @@ function StudentAcademicData(token) {
                                         ${sub.score_HP !== null && sub.score_HP !== undefined ? Number(sub.score_HP) : '-'}
                                     </td>
                                 </tr>`;
-                                 }).join("")}
+                }).join("")}
                             
                         </table>
                     </div>
