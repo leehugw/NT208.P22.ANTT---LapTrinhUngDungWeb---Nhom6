@@ -7,10 +7,10 @@ const ScoreSchema = new mongoose.Schema({
   score_QT: { type: Number, default: null, min: 0, max: 10 }, // Điểm quá trình
   score_GK: { type: Number, default: null, min: 0, max: 10 }, // Điểm giữa kỳ
   score_TH: { type: Number, default: null, min: 0, max: 10 }, // Điểm thực hành
-  score_CK: { type: Number, required: true, min: 0, max: 10 }, // Điểm cuối kỳ
-  score_HP: { type: String, required: true }, // Điểm học phần (có thể là "Miễn")
+  score_CK: { type: Number, default: null, min: 0, max: 10 }, // Điểm cuối kỳ
+  score_HP: { type: String}, // Điểm học phần (có thể là "Miễn")
 
-  status: { type: String, enum: ["Đậu", "Rớt"], required: true } // Trạng thái
+  status: { type: String, enum: ["Đậu", "Rớt", "None"], required: true } // Trạng thái
 }, {collection: "scores"}); 
 
 const Score = mongoose.model("Score", ScoreSchema);

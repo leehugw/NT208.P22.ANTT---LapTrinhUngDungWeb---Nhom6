@@ -59,5 +59,12 @@ table {
 
 .custom-select-width {
     min-width: 160px;
-  }
+}
+
+.form-control-sm{
+    width: 50%  !important;
+    box-sizing: border-box;
+    padding: 0 !important
+}
+
   

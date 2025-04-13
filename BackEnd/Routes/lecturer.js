@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
-const LectureFeedbackController = require('../Controllers/feedback/feedbackController');
+const LecturerScoreController = require('../Controllers/lecturer/LecturerScoreController');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 
 // Middleware để xác thực và phân quyền
@@ -15,6 +15,22 @@ router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res
 router.get('/profile', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html'));
 });
+
+router.get('/classlist', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
+    res.sendFile(path.join(__dirname, '../../FrontEnd/Class_List/classlist.html'));
+});
+
+// Lấy danh sách học kỳ giảng viên có dạy
+router.get("/semesters", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getSemestersByLecturer);
+
+// Lấy danh sách lớp học giảng viên dạy trong 1 học kỳ
+router.get("/classes", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getClassesBySemester);
+
+// Lấy danh sách sinh viên trong lớp + điểm
+router.get("/classes/:classId/students", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getStudentsByClass);
+
+// Cập nhật hoặc tạo điểm
+router.put("/update/scores", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.updateScore);
 
 // Route API để lấy dữ liệu profile
 router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async (req, res) => {
@@ -38,7 +54,6 @@ router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async 
     }
 });
 
-//Giảng viên gửi phản hồi
-router.post('/feedback', LectureFeedbackController.createFeedback);
+
 
 module.exports = router;

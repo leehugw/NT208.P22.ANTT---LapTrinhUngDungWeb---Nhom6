@@ -11,11 +11,11 @@ const deleteData = async () => {
         const collection = db.collection("scores"); // Truy cập collection
 
         // Xóa tất cả documents trong collection
-        //const result = await collection.deleteMany({});
-        //console.log(`Đã xóa ${result.deletedCount} tài liệu.`);
+        // const result = await collection.deleteMany({});
+        // console.log(`Đã xóa ${result.deletedCount} tài liệu.`);
 
-        const result = await collection.deleteMany({ student_id: "22520316" });
-        console.log(`✅ Đã xóa ${result.deletedCount} tài liệu có student_id = 22520316.`);
+        const result = await collection.deleteMany({ student_id: "23520851" });
+        console.log(`✅ Đã xóa ${result.deletedCount} tài liệu có student_id = 23520851`);
         
 
     } catch (error) {
