@@ -1,0 +1,181 @@
+.body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.background {
+    background-color: #3D67BA;
+}
+
+.button {
+    background-color: #3D67BA;
+}
+
+.button:hover {
+    background-color: #2b4a8c;
+}
+
+.thread {
+    color: #3D67BA !important;
+}
+
+.custom-row {
+    box-shadow: 0 0 0 1px #dee2e6;
+    background-color: #fff;
+}
+
+.text {
+    color: #3D67BA;
+}
+
+table {
+    border-spacing: 0 5px;
+    border-collapse: separate;
+}
+
+.custom-select-width {
+    min-width: 160px;
+}
+
+.form-control-sm {
+    width: 50% !important;
+    box-sizing: border-box;
+    padding: 0 !important;
+}
+
+/* Thanh chứa số lượng sinh viên */
+.lecturer-count {
+    background-color: #3D67BA;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.lecturer-count span {
+    font-size: 1.5rem;
+}
+
+/* Bảng và cột */
+.table th, .table td {
+    padding: 1rem;
+    text-align: center;
+}
+
+/* --- CẬP NHẬT MỚI --- */
+
+/* Rút ngắn khoảng cách giữa tiêu đề và bảng */
+#classList {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Khoảng cách mềm giữa tiêu đề và bảng */
+.table-responsive {
+    margin-top: 10px;
+}
+
+/* Tăng độ nổi bật của tiêu đề nếu muốn */
+#classList {
+    color: #3D67BA;
+    font-weight: 600;
+    text-align: center;
+}
+
+.footer {
+    background-color: #3D67BA;
+    color: white;
+  }
+  
+  .footer .form-control {
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+  
+  .footer a {
+    color: white;
+  }
+  
+  .footer .btn {
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+  
+  .footer-nav {
+    background-color: #3D67BA;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  /* Footer */
+.footer-nav {
+    background-color: #3D67BA;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Đặt giá trị z-index thấp hơn nút feedback */
+}
+
+#feedbackBtn {
+    position: fixed;  /* Đảm bảo nó luôn nằm trên màn hình */
+    bottom: 150px;     /* Cách footer một khoảng (tuỳ chỉnh) */
+    right: 20px;      /* Đặt nút ở góc phải */
+    z-index: 9999 !important;  /* Đảm bảo nó có z-index cao nhất */
+    cursor: pointer; /* Thêm con trỏ pointer để người dùng biết là có thể click */
+    
+}
+
+/* Footer - Chỉnh sửa lại footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #3D67BA;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    z-index: 1; /* Đặt giá trị z-index thấp để footer ở dưới cùng */
+}
+
+/* Điều chỉnh lại các phần tử khác như navbar nếu cần */
+#mainNavbar {
+    z-index: 1030; /* Đảm bảo navbar vẫn ở trên footer nhưng dưới nút feedback */
+}
+
+.active-menu {
+    color: #3d67ba !important;
+    font-weight: bold;
+  }
+  .text-uit-blue {
+    color: #3d67ba !important;
+    font-weight: bold;
+  }
+  

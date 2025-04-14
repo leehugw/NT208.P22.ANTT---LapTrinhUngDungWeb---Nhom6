@@ -13,6 +13,12 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
+document.getElementById('dropdownMenuLink').addEventListener('click', function () {
+    let menu = document.querySelector('.dropdown-menu');
+    menu.classList.toggle('show');
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const semesterSelect = document.getElementById("semesterSelect");
     const classSelect = document.getElementById("classSelect");

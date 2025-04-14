@@ -101,6 +101,23 @@
     </footer>
 
     <script src="UI_ChatBot.js"></script>
+    <!-- Script ẩn/hiện navbar khi cuộn -->
+  <script>
+    let lastScrollTop = 0;
+    const navbar = document.getElementById("mainNavbar");
+
+    window.addEventListener("scroll", function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        navbar.style.top = "-80px";
+      } else {
+        navbar.style.top = "0";
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+  </script>
     <script>
         // Kiểm tra token khi tải trang
         document.addEventListener('DOMContentLoaded', function () {

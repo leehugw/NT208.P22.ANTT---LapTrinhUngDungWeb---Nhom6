@@ -1,157 +1,158 @@
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Danh sách lớp học</title>
-    <!-- Bootstrap 5.3.0 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Xem thông tin giảng viên</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Font Awesome (latest) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="../FeedbackForm/feed.css" rel="stylesheet">
+  <link href="classlist.css" rel="stylesheet">
+  <link href="/CLas_List/css/mobileclasslist.css" rel="stylesheet">
+  <link href="/Class_List/css/PCclasslist.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    thead th {
+      color: #3d67ba !important;
+      font-weight: bold;
+    }
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- jQuery (latest) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- Popper.js (latest stable) -->
-    <script src="https://unpkg.com/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- XLSX.js (update if needed) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <!-- hoặc bản mới hơn -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> -->
-
-    <link href="/FeedbackForm/feed.css" rel="stylesheet">
-    <link href="/Class_List/css/classlist.css" rel="stylesheet">
-    <link href="/Class_List/css/mobileclasslist.css" rel="stylesheet">
-    <link href="/Class_List/css/PCclasslist.css" rel="stylesheet">
-
+    /* Hiệu ứng ẩn/hiện navbar */
+    #mainNavbar {
+      transition: top 0.4s ease-in-out;
+      z-index: 1030;
+    }
+  </style>
 </head>
-
 <body>
-    <header class="bg-white shadow navbar fixed-top">
-        <div class="container d-flex justify-content-between align-items-center py-2 px-6">
-            <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
-            </div>
-            <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
-                <div class="dropdown mx-2">
-                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
-                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Giảng viên
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
-                        <li><a class="dropdown-item" href="#">Theo dõi lớp học</a></li>
-                    </ul>
-
-            </nav>
-            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
-                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-
-        </div>
-        <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
-            style="width: 75%; height: 100%; display: none;">
-            <div class="d-flex justify-content-start align-items-center p-4">
-                <span class="h4 fw-bold">Chatbot UIT</span>
-                <button class="btn btn-link text-dark ms-auto" id="menu-close">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-            </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home"><i
-                    class="fa-solid fa-house-chimney"></i>
-                Trang chủ</a>
-
-            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
-                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-                <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
-            </button>
-            <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Hồ sơ</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Theo dõi lớp học</a>
-            </div>
+  <div class="header-container">
+    <!-- Navbar -->
+    <header id="mainNavbar" class="navbar fixed-top">
+      <div class="container d-flex justify-content-between align-items-center py-2 px-6">
+        <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
+          <a class="nav-link mx-2 text-decoration-none" href="#home">Home</a>
+          <a class="nav-link mx-2 text-decoration-none" href="#home">About us</a>
+          <a class="nav-link mx-2 text-decoration-none" href="#home">Service</a>
+          <a class="nav-link mx-2 text-decoration-none" href="#home">How it works?</a>
+          <a class="nav-link mx-2 text-decoration-none" href="#home">Contact</a>
+          <div class="dropdown mx-2">
+            <a class="btn dropdown-toggle bg-white text-uit-blue border-0" href="#" role="button"
+                   id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Giảng viên
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Theo dõi lớp học</a></li>
+                  <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+                 
+              </ul>
+          </div>
+          
         </nav>
+        <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
     </header>
-    <div class="container py-4">
-        <div class="d-flex align-items-center justify-content-center min-vh-100 bg-white">
-            <div class="text-center">
-                <!-- Danh sách lớp học -->
-                <h1 class="mb-4">Danh sách lớp học</h1>
+  </div>
 
-                <!-- Avatar nằm trên chữ -->
-                <div class="mb-4">
-                    <img src="/Lecturer_Information/images/avatar.webp" alt="Avatar" class="rounded-circle"
-                        style="width: 200px; height: 200px;">
-                </div>
-                <h1 class="h4 fw-bold" id="lecturerName">Nguyễn Văn B</h1> <!-- Tên dưới avatar -->
+  <!-- Bảng -->
+  <div class="container py-4">
+    <div class="d-flex align-items-center justify-content-center min-vh-100 bg-white">
+      <div class="text-center">
+        <h1 class="mb-4">Danh sách lớp học</h1>
+        <h1 class="h4 fw-bold" id="lecturerName">Nguyễn Văn B</h1>
+        <p class="text-muted" id="lecturerEmail">bnv@uit.edu.vn</p>
 
-                <p class="text-muted" id="lecturerEmail">bnv@uit.edu.vn</p>
-
-                <div class="d-flex justify-content-center mt-3">
-                    <select class="form-select me-2" id="semesterSelect" style="width: auto;">
-                        <option value="">Chọn học kỳ</option>
-                    </select>
-                    <select class="form-select" id="classSelect" style="width: auto;">
-                        <option value="">Chọn lớp</option>
-                    </select>
-                </div>
-
-                <!-- Tên lớp đang chọn -->
-                <p class="mt-3 text-muted" id="classInfo">Lớp đang chọn: ... - Học kỳ ... - Năm học ...</p>
-
-                <!-- Danh sách sinh viên -->
-                <h2 class="mt-5 h5 fw-semibold" id="classList">Danh sách sinh viên thuộc lớp</h2>
-            </div>
+        <div class="d-flex justify-content-center mt-3">
+          <select class="form-select me-2" id="semesterSelect" style="width: auto;">
+            <option value="">Chọn học kỳ</option>
+          </select>
+          <select class="form-select" id="classSelect" style="width: auto;">
+            <option value="">Chọn lớp</option>
+          </select>
         </div>
-        <div class="background text-white p-3 rounded-top fw-bold">
-            <span class="fs-3 fw-bold" id="size">70</span> sinh viên
-        </div>
-        <div class="p-3">
-            <div class="table-responsive">
-                <table class="table mb-0 fw-bold table-responsive">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="thread border-0">Sinh viên</th>
-                            <th scope="col" class="thread border-0 text-center">MSSV</th>
-                            <th scope="col" class="thread border-0 text-center">Email</th>
-                            <th scope="col" class="thread border-0 text-center">Trạng thái</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm QT</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm GK</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm TH</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm CK</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm HP</th>
-                            <th scope="col" class="thread border-0 text-center">Hành động</th> <!-- Cột Hành vi -->
-                        </tr>
-                    </thead>
-                    <tbody id="studentTableBody">
-                        <!-- JS sẽ render danh sách sinh viên -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
+        <p class="mt-3 text-muted" id="classInfo">Lớp đang chọn: ... - Học kỳ ... - Năm học ...</p>
+
+        <!-- Tên danh sách lớp -->
+<div class="text-center mt-4 mb-1">
+    <h2 class="h5 fw-semibold" id="classList">Danh sách sinh viên thuộc lớp</h2>
+  </div>
+  
+ <!-- Tổng số sinh viên -->
+<div class="text-white p-2 rounded-top fw-bold" style="background-color: #3d67ba; display: flex; align-items: center; margin-bottom: 5px;">
+    <span class="fs-3" id="lecturerCount" style="margin-right: 5px;">0</span> Sinh viên
+</div>
+
+<!-- Bảng sinh viên -->
+<div class="p-0" style="margin-top: 0;"> 
+    <div class="table-responsive">
+        <table class="table mb-0 fw-bold table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col" class="thread border-0">Sinh viên</th>
+                    <th scope="col" class="thread border-0 text-center">MSSV</th>
+                    <th scope="col" class="thread border-0 text-center">Email</th>
+                    <th scope="col" class="thread border-0 text-center">Trạng thái</th>
+                    <th scope="col" class="thread border-0 text-center">Điểm QT</th>
+                    <th scope="col" class="thread border-0 text-center">Điểm GK</th>
+                    <th scope="col" class="thread border-0 text-center">Điểm TH</th>
+                    <th scope="col" class="thread border-0 text-center">Điểm CK</th>
+                    <th scope="col" class="thread border-0 text-center">Điểm HP</th>
+                    <th scope="col" class="thread border-0 text-center">Tiến độ học tập</th>
+                </tr>
+          </thead>
+          <tbody id="lecturerTableBody">
+            <!-- Dữ liệu render ở đây -->
+          </tbody>
+        </table>
+      </div>
     </div>
- 
-    <!-- Icon mở form -->
-    <a onclick="openFeedbackPopup()" style="cursor: pointer;"
-        class="position-fixed bottom-0 end-0 m-3 btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow"
-        title="Gửi phản hồi" id="feedbackBtn">
-        <i class="fas fa-comment-dots fs-4 text-white"></i>
-    </a>
-    <script src="/Class_List/classlist.js"></script>
-</body>
+  </div>
 
+  <a onclick="openFeedbackPopup()" style="cursor: pointer;"
+    class="position-fixed bottom-0 end-0 m-3 btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow"
+    title="Gửi phản hồi" id="feedbackBtn">
+    <i class="fas fa-comment-dots fs-4 text-white"></i>
+  </a>
+
+  <footer class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
+    <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>
+    <a href="#" class="text-light text-decoration-none d-flex align-items-center">
+      <span class="me-1">Help</span>
+      <i class="fas fa-question-circle"></i>
+    </a>
+  </footer>
+
+  <script src="classlist.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script ẩn/hiện navbar khi cuộn -->
+  <script>
+    let lastScrollTop = 0;
+    const navbar = document.getElementById("mainNavbar");
+
+    window.addEventListener("scroll", function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        navbar.style.top = "-80px";
+      } else {
+        navbar.style.top = "0";
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+  </script>
+</body>
 </html>
