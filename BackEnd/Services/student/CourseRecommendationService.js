@@ -151,6 +151,9 @@ function filterRequiredCourses(academicInfo) {
     let coursesToTake = requiredCourses.filter(courseId => !passedCourses.includes(courseId));
     coursesToTake = [...new Set([...coursesToTake, ...failedCourses])];
 
+    // Đánh dấu các môn đã rớt
+    const failedCoursesSet = new Set(failedCourses);
+    
     if (!hasEnglishCertificate) {
         const requiredEnglishCourse = getRequiredEnglishCourse(currentSemester + 1, englishCourses);
         coursesToTake = coursesToTake.filter(courseId => !['ENG01', 'ENG02', 'ENG03'].includes(courseId));
@@ -161,7 +164,10 @@ function filterRequiredCourses(academicInfo) {
         coursesToTake = coursesToTake.filter(courseId => !['ENG01', 'ENG02', 'ENG03'].includes(courseId));
     }
 
-    return coursesToTake;
+    return {
+        courses: coursesToTake,
+        failedCourses: failedCoursesSet
+    };
 }
 
 async function checkPrerequisites(courseIds, passedCourses) {
@@ -407,12 +413,11 @@ async function categorizeCourses(courseIds, courseDifficulty) {
     return coursesByType;
 }
 
-// New strict scheduling functions
 async function generateStrictSchedule(studentId, availableCourses, academicInfo) {
-    const { passedCourses, failedCourses, currentSemester, englishCourses } = academicInfo;
+    const { passedCourses, currentSemester } = academicInfo;
     const nextSemester = currentSemester + 1;
     
-    const coursesToTake = filterRequiredCourses(academicInfo);
+    const { courses: coursesToTake, failedCourses } = filterRequiredCourses(academicInfo);
     const { eligibleCourses } = await checkPrerequisites(coursesToTake, passedCourses);
     
     const availableSubjectIds = [...new Set(availableCourses.map(c => c.subject_id))];
@@ -425,7 +430,13 @@ async function generateStrictSchedule(studentId, availableCourses, academicInfo)
     const schedule = initializeScheduleStructure(nextSemester, creditTargets);
     const semesterSchedule = schedule[nextSemester];
     
+    // 1. Ưu tiên xếp Anh văn trước
     await scheduleEnglishCourses(semesterSchedule, categorized, availableCourses);
+    
+    // 2. Ưu tiên xếp các môn đã rớt
+    await scheduleFailedCourses(semesterSchedule, categorized, availableCourses, failedCourses);
+    
+    // 3. Xếp các môn còn lại theo thứ tự ưu tiên
     await scheduleFoundationCourses(semesterSchedule, categorized, availableCourses, academicInfo);
     await scheduleMajorCourses(semesterSchedule, categorized, availableCourses, academicInfo);
     await scheduleElectiveCourses(semesterSchedule, categorized, availableCourses, academicInfo);
@@ -433,6 +444,30 @@ async function generateStrictSchedule(studentId, availableCourses, academicInfo)
     ensureMinimumCredits(semesterSchedule, categorized, availableCourses);
     
     return schedule;
+}
+
+// Xếp các môn đã rớt
+async function scheduleFailedCourses(semesterSchedule, categorized, availableCourses, failedCourses) {
+    // Lấy tất cả các môn đã rớt từ tất cả các danh mục
+    const allFailedCourses = [
+        ...categorized.majorCore.Hard.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.majorCore.Medium.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.majorCore.Easy.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.majorFoundation.Hard.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.majorFoundation.Medium.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.majorFoundation.Easy.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.generalEducation.Hard.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.generalEducation.Medium.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.generalEducation.Easy.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.elective.Hard.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.elective.Medium.filter(c => failedCourses.has(c.courseId)),
+        ...categorized.elective.Easy.filter(c => failedCourses.has(c.courseId))
+    ];
+    
+    for (const course of allFailedCourses) {
+        if (semesterSchedule.totalCredits >= 28) break;
+        await addCourseStrictly(semesterSchedule, course, availableCourses);
+    }
 }
 
 async function scheduleEnglishCourses(semesterSchedule, categorized, availableCourses) {
@@ -450,12 +485,21 @@ async function scheduleEnglishCourses(semesterSchedule, categorized, availableCo
 
 async function scheduleFoundationCourses(semesterSchedule, categorized, availableCourses, academicInfo) {
     const foundationCourses = [
-        ...categorized.majorFoundation.Hard,
-        ...categorized.majorFoundation.Medium,
-        ...categorized.majorFoundation.Easy,
-        ...categorized.generalEducation.Hard.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
-        ...categorized.generalEducation.Medium.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
-        ...categorized.generalEducation.Easy.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId))
+        ...categorized.majorFoundation.Hard.filter(c => !academicInfo.failedCourses.includes(c.courseId)),
+        ...categorized.majorFoundation.Medium.filter(c => !academicInfo.failedCourses.includes(c.courseId)),
+        ...categorized.majorFoundation.Easy.filter(c => !academicInfo.failedCourses.includes(c.courseId)),
+        ...categorized.generalEducation.Hard.filter(c => 
+            !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId) && 
+            !academicInfo.failedCourses.includes(c.courseId)
+        ),
+        ...categorized.generalEducation.Medium.filter(c => 
+            !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId) && 
+            !academicInfo.failedCourses.includes(c.courseId)
+        ),
+        ...categorized.generalEducation.Easy.filter(c => 
+            !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId) && 
+            !academicInfo.failedCourses.includes(c.courseId)
+        )
     ];
     
     for (const course of foundationCourses) {
