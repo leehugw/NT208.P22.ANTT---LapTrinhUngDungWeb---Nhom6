@@ -1,4 +1,3 @@
-// CourseRecommendationController.js
 const Student = require("../../../Database/SaveToMongo/models/Student");
 const Score = require('../../../Database/SaveToMongo/models/Score');
 const Subject = require('../../../Database/SaveToMongo/models/Subject');
@@ -70,16 +69,6 @@ function isTimeConflict(schedule, day, newTime, newSlots) {
     );
 }
 
-function shuffleArray(array) {
-    return array.sort(() => Math.random() - 0.5);
-}
-
-function isSlotOccupied(schedule, day, slots) {
-    return schedule.some(existingClass => 
-        existingClass.day === day && existingClass.slots.some(slot => slots.includes(slot))
-    );
-}
-
 // Core functions
 async function getStudentAcademicInfo(studentId) {
     const student = await Student.findOne({ student_id: studentId });
@@ -95,7 +84,6 @@ async function getStudentAcademicInfo(studentId) {
         subjectMap[sub.subject_id] = sub;
     });
     
-    // Sau đó gán thủ công:
     scores.forEach(score => {
         score.subject = subjectMap[score.subject_id] || null;
     });
@@ -327,20 +315,6 @@ function parseExcelSheetData(worksheet) {
     return classList;
 }
 
-function getAvailableClassPairs(theoryClasses, practiceClasses) {
-    const pairs = [];
-    theoryClasses.forEach(theoryClass => {
-        const matchingPractices = practiceClasses.filter(p => p.class_id.startsWith(`${theoryClass.class_id}.`));
-        if (matchingPractices.length > 0) {
-            pairs.push({
-                theory: theoryClass,
-                practices: matchingPractices
-            });
-        }
-    });
-    return pairs;
-}
-
 function calculateCreditTargets(academicInfo) {
     const completedMajorCredits = academicInfo.Academic.progress_details.major_core;
     const completerMajorFoundation = academicInfo.Academic.progress_details.major_foundation;
@@ -430,203 +404,327 @@ async function categorizeCourses(courseIds, courseDifficulty) {
         }
     });
 
-    // Shuffle courses within each category for randomness
-    Object.values(coursesByType).forEach(type => {
-        Object.values(type).forEach(difficulty => shuffleArray(difficulty));
-    });
-
     return coursesByType;
 }
 
-async function applyCourseByPriority(schedule, categorizedCourses, availableCourses, academicInfo) {
-    const nextSemester = Object.keys(schedule)[0];
+// New strict scheduling functions
+async function generateStrictSchedule(studentId, availableCourses, academicInfo) {
+    const { passedCourses, failedCourses, currentSemester, englishCourses } = academicInfo;
+    const nextSemester = currentSemester + 1;
+    
+    const coursesToTake = filterRequiredCourses(academicInfo);
+    const { eligibleCourses } = await checkPrerequisites(coursesToTake, passedCourses);
+    
+    const availableSubjectIds = [...new Set(availableCourses.map(c => c.subject_id))];
+    const filteredEligibleCourses = eligibleCourses.filter(courseId => availableSubjectIds.includes(courseId));
+    
+    const courseDifficulty = await calculateCourseDifficulty(filteredEligibleCourses);
+    const categorized = await categorizeCourses(filteredEligibleCourses, courseDifficulty);
+    
+    const creditTargets = calculateCreditTargets(academicInfo);
+    const schedule = initializeScheduleStructure(nextSemester, creditTargets);
     const semesterSchedule = schedule[nextSemester];
     
-    // Thêm hàm helper để kiểm tra phân bổ ngày học
-    function getBestDayForCourse(courseClasses, currentSchedule) {
-        const dayCounts = {
-            Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0
-        };
-        
-        // Đếm số môn hiện có mỗi ngày
-        currentSchedule.courses.forEach(c => {
-            c.classes.forEach(cls => {
-                dayCounts[cls.day]++;
-            });
-        });
-        
-        // Tìm ngày có ít môn nhất mà không bị trùng lịch
-        const availableDays = courseClasses
-            .map(c => c.day)
-            .filter(day => !isTimeConflict(currentSchedule.courses, day, courseClasses[0].time, courseClasses[0].slots));
-            
-        if (availableDays.length === 0) return null;
-        
-        return availableDays.reduce((a, b) => dayCounts[a] < dayCounts[b] ? a : b);
-    }
+    await scheduleEnglishCourses(semesterSchedule, categorized, availableCourses);
+    await scheduleFoundationCourses(semesterSchedule, categorized, availableCourses, academicInfo);
+    await scheduleMajorCourses(semesterSchedule, categorized, availableCourses, academicInfo);
+    await scheduleElectiveCourses(semesterSchedule, categorized, availableCourses, academicInfo);
+    
+    ensureMinimumCredits(semesterSchedule, categorized, availableCourses);
+    
+    return schedule;
+}
 
-    // Helper function to add course to schedule
-    const addCourse = async (course) => {
-        const classes = availableCourses.filter(c => c.subject_id === course.courseId);
-
-        //Debug
-        console.log(`\n📘 Đang xét môn: ${course.courseId} - ${course.subject.subject_name}`);
-        console.log(`📊 Tìm được ${classes.length} lớp từ file Excel`);
-
-        if (classes.length === 0) {
-            console.log(`❌ Không tìm thấy lớp nào trong Excel cho môn ${course.courseId}`);
-            return false;
-        }
-
-        // Separate theory and practice classes
-        const theoryClasses = classes.filter(c => !/\.\d+$/.test(c.class_id));
-        const practiceClasses = classes.filter(c => /\.\d+$/.test(c.class_id));        
-        
-        // Nếu KHÔNG có lớp lý thuyết mà có thực hành, ta xử lý toàn bộ là lý thuyết (vì môn có thể không tách)
-        if (theoryClasses.length === 0 && practiceClasses.length > 0) {
-            console.log(`⚠️ Không có lớp lý thuyết rõ ràng cho ${course.courseId}, gán toàn bộ lớp thành LT`);
-            theoryClasses = practiceClasses;
-            practiceClasses = [];
-        }
-
-        const classPairs = getAvailableClassPairs(theoryClasses, practiceClasses);
-        if (classPairs.length === 0) {
-            console.log(`⚠️ Không tìm được cặp lớp LT + TH hợp lệ cho môn ${course.courseId}`);
-            return false;
-          }
-        console.log(`🔗 Số cặp LT + TH hợp lệ: ${classPairs.length}`);
-
-        // Sắp xếp các cặp lớp theo ngày có ít môn nhất
-        classPairs.sort((a, b) => {
-            const dayA = getBestDayForCourse([a.theory, ...a.practices], semesterSchedule);
-            const dayB = getBestDayForCourse([b.theory, ...b.practices], semesterSchedule);
-            return dayA && dayB ? dayA.localeCompare(dayB) : 0;
-        });
-
-        for (const pair of classPairs) {
-            const bestDay = getBestDayForCourse([pair.theory, ...pair.practices], semesterSchedule);
-            if (!bestDay) continue;
-
-            const theoryOccupied = isTimeConflict(semesterSchedule.courses, bestDay, pair.theory.time, pair.theory.slots);
-            const practiceOccupied = pair.practices.some(p => 
-                isTimeConflict(semesterSchedule.courses, bestDay, p.time, p.slots)
-            );
-            
-            if (!theoryOccupied && !practiceOccupied) {
-                // Thêm lớp vào schedule
-                semesterSchedule.courses.push({
-                    courseId: course.courseId,
-                    subjectName: course.subject.subject_name,
-                    credits: course.credits,
-                    isElective: course.subject.subject_type === 'Elective',
-                    classes: [pair.theory, ...pair.practices].map(c => ({
-                        ...c,
-                        day: bestDay // Sử dụng ngày được chọn tối ưu
-                    }))
-                });
-
-                // Cập nhật số tín chỉ
-                semesterSchedule.totalCredits += course.credits;
-                // ... (phần còn lại giữ nguyên)
-                return true;
-            }
-        }
-        return false;
-    };
-
-    // 1. Add English courses first
+async function scheduleEnglishCourses(semesterSchedule, categorized, availableCourses) {
     const englishCourses = [
-        ...categorizedCourses.generalEducation.Hard.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
-        ...categorizedCourses.generalEducation.Medium.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
-        ...categorizedCourses.generalEducation.Easy.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId))
+        ...categorized.generalEducation.Hard.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
+        ...categorized.generalEducation.Medium.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
+        ...categorized.generalEducation.Easy.filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId))
     ];
     
     for (const course of englishCourses) {
         if (semesterSchedule.totalCredits >= 28) break;
-        await addCourse(course);
+        await addCourseStrictly(semesterSchedule, course, availableCourses, true);
     }
+}
 
-    // 2. Add failed courses
-    const failedCourses = [
-        ...categorizedCourses.majorCore.Hard.filter(c => academicInfo.failedCourses.includes(c.courseId)),
-        ...categorizedCourses.majorCore.Medium.filter(c => academicInfo.failedCourses.includes(c.courseId)),
-        ...categorizedCourses.majorCore.Easy.filter(c => academicInfo.failedCourses.includes(c.courseId)),
-        ...categorizedCourses.majorFoundation.Hard.filter(c => academicInfo.failedCourses.includes(c.courseId)),
-        ...categorizedCourses.majorFoundation.Medium.filter(c => academicInfo.failedCourses.includes(c.courseId)),
-        ...categorizedCourses.majorFoundation.Easy.filter(c => academicInfo.failedCourses.includes(c.courseId))
+async function scheduleFoundationCourses(semesterSchedule, categorized, availableCourses, academicInfo) {
+    const foundationCourses = [
+        ...categorized.majorFoundation.Hard,
+        ...categorized.majorFoundation.Medium,
+        ...categorized.majorFoundation.Easy,
+        ...categorized.generalEducation.Hard.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
+        ...categorized.generalEducation.Medium.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId)),
+        ...categorized.generalEducation.Easy.filter(c => !['ENG01', 'ENG02', 'ENG03'].includes(c.courseId))
     ];
-
-    for (const course of failedCourses) {
+    
+    for (const course of foundationCourses) {
         if (semesterSchedule.totalCredits >= 28) break;
-        await addCourse(course);
-    }
-
-    // 3. Add foundation and general education courses (same priority)
-    const foundationAndGeneral = [
-        ...categorizedCourses.majorFoundation.Hard,
-        ...categorizedCourses.majorFoundation.Medium,
-        ...categorizedCourses.majorFoundation.Easy,
-        ...categorizedCourses.generalEducation.Hard,
-        ...categorizedCourses.generalEducation.Medium,
-        ...categorizedCourses.generalEducation.Easy
-    ];
-
-    for (const course of foundationAndGeneral) {
-        if (semesterSchedule.totalCredits >= 28 || 
-            semesterSchedule.majorfoundationCredits >= semesterSchedule.targetMajorFoundation ||
+        if (semesterSchedule.majorfoundationCredits >= semesterSchedule.targetMajorFoundation &&
             semesterSchedule.generalEducationCredits >= semesterSchedule.targetGeneralCredits) break;
-        await addCourse(course);
-    }
-
-    // 4. Add major core courses
-    const majorCoreCourses = [
-        ...categorizedCourses.majorCore.Hard,
-        ...categorizedCourses.majorCore.Medium,
-        ...categorizedCourses.majorCore.Easy
-    ];
-
-    for (const course of majorCoreCourses) {
-        if (semesterSchedule.totalCredits >= 28 || 
-            semesterSchedule.majorCredits >= semesterSchedule.targetMajorCore) break;
-        await addCourse(course);
-    }
-
-    // 5. Add elective courses
-    const electiveCourses = [
-        ...categorizedCourses.elective.Hard,
-        ...categorizedCourses.elective.Medium,
-        ...categorizedCourses.elective.Easy
-    ];
-
-    for (const course of electiveCourses) {
-        if (semesterSchedule.totalCredits >= 28 || 
-            semesterSchedule.electiveCredits >= semesterSchedule.targetElectiveCredits) break;
-        await addCourse(course);
-    }
-
-    // Ensure minimum credits (14)
-    if (semesterSchedule.totalCredits < 14) {
-        const allRemainingCourses = [
-            ...categorizedCourses.majorCore.Hard,
-            ...categorizedCourses.majorCore.Medium,
-            ...categorizedCourses.majorCore.Easy,
-            ...categorizedCourses.majorFoundation.Hard,
-            ...categorizedCourses.majorFoundation.Medium,
-            ...categorizedCourses.majorFoundation.Easy,
-            ...categorizedCourses.generalEducation.Hard,
-            ...categorizedCourses.generalEducation.Medium,
-            ...categorizedCourses.generalEducation.Easy,
-            ...categorizedCourses.elective.Hard,
-            ...categorizedCourses.elective.Medium,
-            ...categorizedCourses.elective.Easy
-        ];
-
-        for (const course of allRemainingCourses) {
-            if (semesterSchedule.totalCredits >= 14) break;
-            await addCourse(course);
+            
+        if (!hasConflictWithEnglish(semesterSchedule, course, availableCourses)) {
+            await addCourseStrictly(semesterSchedule, course, availableCourses);
         }
     }
 }
+
+async function scheduleMajorCourses(semesterSchedule, categorized, availableCourses, academicInfo) {
+    const majorCourses = [
+        ...categorized.majorCore.Hard,
+        ...categorized.majorCore.Medium,
+        ...categorized.majorCore.Easy
+    ];
+    
+    for (const course of majorCourses) {
+        if (semesterSchedule.totalCredits >= 28) break;
+        if (semesterSchedule.majorCredits >= semesterSchedule.targetMajorCore) break;
+            
+        await addCourseStrictly(semesterSchedule, course, availableCourses);
+    }
+}
+
+async function scheduleElectiveCourses(semesterSchedule, categorized, availableCourses, academicInfo) {
+    const electiveCourses = [
+        ...categorized.elective.Hard,
+        ...categorized.elective.Medium,
+        ...categorized.elective.Easy
+    ];
+    
+    for (const course of electiveCourses) {
+        if (semesterSchedule.totalCredits >= 28) break;
+        if (semesterSchedule.electiveCredits >= semesterSchedule.targetElectiveCredits) break;
+            
+        await addCourseStrictly(semesterSchedule, course, availableCourses);
+    }
+}
+
+async function addCourseStrictly(semesterSchedule, course, availableCourses, isEnglishCourse = false) {
+    const classes = availableCourses.filter(c => c.subject_id === course.courseId);
+    if (classes.length === 0) return false;
+
+    let theoryClasses = classes.filter(c => !/\.\d+$/.test(c.class_id));
+    let practiceClasses = classes.filter(c => /\.\d+$/.test(c.class_id));
+
+    if (theoryClasses.length === 0 && practiceClasses.length > 0) {
+        theoryClasses = practiceClasses;
+        practiceClasses = [];
+    }
+
+    for (const theoryClass of theoryClasses) {
+        // Kiểm tra xem lớp lý thuyết có trùng không
+        if (isTimeConflict(semesterSchedule.courses, theoryClass.day, theoryClass.time, theoryClass.slots)) continue;
+
+        // Tìm 1 lớp thực hành phù hợp (không trùng)
+        let selectedPractice = null;
+        for (const p of practiceClasses) {
+            const isSameGroup = p.class_id.startsWith(`${theoryClass.class_id}.`);
+            if (!isSameGroup) continue;
+            if (isTimeConflict(semesterSchedule.courses, p.day, p.time, p.slots)) continue;
+            selectedPractice = p;
+            break;
+        }
+
+        // Gom lớp lý thuyết + thực hành (nếu có)
+        const classesToAdd = selectedPractice ? [theoryClass, selectedPractice] : [theoryClass];
+
+        semesterSchedule.courses.push({
+            courseId: course.courseId,
+            subjectName: course.subject.subject_name,
+            credits: course.credits,
+            isElective: course.subject.subject_type === 'Elective',
+            classes: classesToAdd
+        });
+
+        updateCreditCounts(semesterSchedule, course);
+        return true;
+    }
+
+    return false;
+}
+
+
+function findAvailableDay(semesterSchedule, theoryClass, practiceClasses) {
+    const daysOrder = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    for (const day of daysOrder) {
+        const theoryConflict = isTimeConflict(semesterSchedule.courses, day, theoryClass.time, theoryClass.slots);
+        if (theoryConflict) continue;
+        
+        let practiceConflict = false;
+        for (const practice of practiceClasses) {
+            if (isTimeConflict(semesterSchedule.courses, day, practice.time, practice.slots)) {
+                practiceConflict = true;
+                break;
+            }
+        }
+        if (practiceConflict) continue;
+        
+        return day;
+    }
+    
+    return null;
+}
+
+function hasConflictWithEnglish(semesterSchedule, course, availableCourses) {
+    const englishClasses = semesterSchedule.courses
+        .filter(c => ['ENG01', 'ENG02', 'ENG03'].includes(c.courseId))
+        .flatMap(c => c.classes);
+
+    const courseClasses = availableCourses.filter(c => c.subject_id === course.courseId);
+    
+    return courseClasses.some(cls => 
+        englishClasses.some(engClass => 
+            isTimeOverlap(engClass.time, cls.time)
+        )
+    );
+}
+
+function updateCreditCounts(semesterSchedule, course) {
+    semesterSchedule.totalCredits += course.credits;
+    
+    switch (course.subject.subject_type) {
+        case "CN": case "CNTC": case "ĐA":
+            semesterSchedule.majorCredits += course.credits;
+            break;
+        case "CSNN": case "CSN":
+            semesterSchedule.majorfoundationCredits += course.credits;
+            break;
+        case "ĐC":
+            semesterSchedule.generalEducationCredits += course.credits;
+            break;
+        case "TTTN": case "TN": case "KLTN": case "CĐTN":
+            semesterSchedule.electiveCredits += course.credits;
+            break;
+    }
+}
+
+function ensureMinimumCredits(semesterSchedule, categorized, availableCourses) {
+    if (semesterSchedule.totalCredits >= 14) return;
+
+    const allCourses = [
+        ...categorized.majorCore.Hard,
+        ...categorized.majorCore.Medium,
+        ...categorized.majorCore.Easy,
+        ...categorized.majorFoundation.Hard,
+        ...categorized.majorFoundation.Medium,
+        ...categorized.majorFoundation.Easy,
+        ...categorized.generalEducation.Hard,
+        ...categorized.generalEducation.Medium,
+        ...categorized.generalEducation.Easy,
+        ...categorized.elective.Hard,
+        ...categorized.elective.Medium,
+        ...categorized.elective.Easy
+    ];
+
+    const scheduledCourses = new Set(semesterSchedule.courses.map(c => c.courseId));
+    const remainingCourses = allCourses.filter(c => !scheduledCourses.has(c.courseId));
+
+    for (const course of remainingCourses) {
+        if (semesterSchedule.totalCredits >= 14) break;
+        addCourseStrictly(semesterSchedule, course, availableCourses);
+    }
+}
+
+function buildWeeklySchedule(scheduleData) {
+    const weeklySchedule = {
+        Mon: [], Tue: [], Wed: [], Thu: [], Fri: [], Sat: [],
+        summary: {
+            totalCourses: 0,
+            daysWithClasses: 0,
+            creditsPerDay: {}
+        }
+    };
+
+    for (const course of scheduleData) {
+        for (const cls of course.classes) {
+            if (weeklySchedule[cls.day]) {
+                weeklySchedule[cls.day].push({
+                    time: cls.time,
+                    subject: course.subjectName,
+                    classId: cls.class_id,
+                    room: cls.room,
+                    lecturer: cls.lecturer,
+                    credits: course.credits
+                });
+                
+                if (!weeklySchedule.summary.creditsPerDay[cls.day]) {
+                    weeklySchedule.summary.creditsPerDay[cls.day] = 0;
+                }
+                weeklySchedule.summary.creditsPerDay[cls.day] += course.credits;
+            }
+        }
+        weeklySchedule.summary.totalCourses++;
+    }
+
+    weeklySchedule.summary.daysWithClasses = Object.keys(weeklySchedule.summary.creditsPerDay).length;
+
+    for (const day in weeklySchedule) {
+        if (Array.isArray(weeklySchedule[day])) {
+            weeklySchedule[day].sort((a, b) => {
+                const [aHour, aMin] = a.time.split(' - ')[0].split(':').map(Number);
+                const [bHour, bMin] = b.time.split(' - ')[0].split(':').map(Number);
+                return (aHour * 60 + aMin) - (bHour * 60 + bMin);
+            });
+        }
+    }
+
+    return weeklySchedule;
+}
+
+// Main API function
+exports.generateOptimizedSchedule = async (studentId, excelFilePath) => {
+    try {
+        const workbook = XLSX.readFile(excelFilePath);
+        const worksheetLT = workbook.Sheets[workbook.SheetNames[0]];
+        const worksheetTH = workbook.Sheets[workbook.SheetNames[1]];
+
+        const ltCourses = parseExcelSheetData(worksheetLT);
+        const thCourses = parseExcelSheetData(worksheetTH);
+
+        const availableCourses = [...ltCourses, ...thCourses];
+
+        const academicInfo = await getStudentAcademicInfo(studentId);
+        const currentSemester = academicInfo.currentSemester;
+
+        let schedule;
+        if (currentSemester === 1) {
+            const firstSchedule = await generateFirstSemesterSchedule(studentId, availableCourses, academicInfo);
+            if (!firstSchedule || typeof firstSchedule !== 'object') {
+                throw new Error("❌ generateFirstSemesterSchedule không trả ra kết quả hợp lệ");
+            }
+            schedule = firstSchedule;
+        } else {
+            schedule = await generateStrictSchedule(studentId, availableCourses, academicInfo);
+        }
+
+        if (!schedule || typeof schedule !== 'object') {
+            throw new Error("❌ Không tạo được thời khóa biểu – schedule null hoặc không hợp lệ");
+        }
+
+        const semesterKeys = Object.keys(schedule);
+        if (!Array.isArray(semesterKeys) || semesterKeys.length === 0) {
+            throw new Error("❌ Không có học kỳ nào trong schedule");
+        }
+
+        const semesterKey = semesterKeys[0];
+        const semesterData = schedule[semesterKey];
+
+        if (!semesterData?.courses || !Array.isArray(semesterData.courses)) {
+            throw new Error("❌ Không có dữ liệu lớp học nào trong schedule");
+        }
+
+        const scheduleData = semesterData.courses;
+        const weekly = buildWeeklySchedule(scheduleData);
+
+        return { schedule, weeklyTimetable: weekly };
+    } catch (error) {
+        console.error('Error generating schedule:', error);
+        throw error;
+    } finally {
+        try { await fs.unlink(excelFilePath); } catch (err) {}
+    }
+};
 
 async function generateFirstSemesterSchedule(studentId, availableCourses, academicInfo) {
     const firstSemesterCourses = ["SS003", "MA003", "IT001", "PE231"]
@@ -663,122 +761,3 @@ async function generateFirstSemesterSchedule(studentId, availableCourses, academ
         }
     };
 }
-
-
-
-// Dựng thời khóa biểu từ dữ liệu đã xếp
-function buildWeeklySchedule(scheduleData) {
-    const weeklySchedule = {
-        Mon: [], Tue: [], Wed: [], Thu: [], Fri: [], Sat: [],
-        summary: {
-            totalCourses: 0,
-            daysWithClasses: 0,
-            creditsPerDay: {}
-        }
-    };
-
-    // Đếm số môn và tín chỉ mỗi ngày
-    for (const course of scheduleData) {
-        for (const cls of course.classes) {
-            if (weeklySchedule[cls.day]) {
-                weeklySchedule[cls.day].push({
-                    time: cls.time,
-                    subject: course.subjectName,
-                    classId: cls.class_id,
-                    room: cls.room,
-                    lecturer: cls.lecturer,
-                    credits: course.credits
-                });
-                
-                // Cập nhật summary
-                if (!weeklySchedule.summary.creditsPerDay[cls.day]) {
-                    weeklySchedule.summary.creditsPerDay[cls.day] = 0;
-                }
-                weeklySchedule.summary.creditsPerDay[cls.day] += course.credits;
-            }
-        }
-        weeklySchedule.summary.totalCourses++;
-    }
-
-    // Tính số ngày có lớp
-    weeklySchedule.summary.daysWithClasses = Object.keys(weeklySchedule.summary.creditsPerDay).length;
-
-    // Sắp xếp từng ngày theo thời gian bắt đầu
-    for (const day in weeklySchedule) {
-        if (Array.isArray(weeklySchedule[day])) {
-            weeklySchedule[day].sort((a, b) => {
-                const [aHour, aMin] = a.time.split(' - ')[0].split(':').map(Number);
-                const [bHour, bMin] = b.time.split(' - ')[0].split(':').map(Number);
-                return (aHour * 60 + aMin) - (bHour * 60 + bMin);
-            });
-        }
-    }
-
-    return weeklySchedule;
-}
-// Main API function
-exports.generateOptimizedSchedule = async (studentId, excelFilePath) => {
-    try {
-        const workbook = XLSX.readFile(excelFilePath);
-        const worksheetLT = workbook.Sheets[workbook.SheetNames[0]];
-        const worksheetTH = workbook.Sheets[workbook.SheetNames[1]];
-
-        const ltCourses = parseExcelSheetData(worksheetLT);
-        const thCourses = parseExcelSheetData(worksheetTH);
-
-        const availableCourses = [...ltCourses, ...thCourses];
-
-        const academicInfo = await getStudentAcademicInfo(studentId);
-        const currentSemester = academicInfo.currentSemester;
-
-        let schedule;
-        if (currentSemester === 1) {
-    const firstSchedule = await generateFirstSemesterSchedule(studentId, availableCourses, academicInfo);
-    if (!firstSchedule || typeof firstSchedule !== 'object') {
-        throw new Error("❌ generateFirstSemesterSchedule không trả ra kết quả hợp lệ");
-    }
-    schedule = firstSchedule;
-} else {
-            const requiredCourses = await getRequiredCoursesForStudent(studentId);
-            const validCourses = availableCourses.filter(course => requiredCourses.includes(course.subject_id));
-            const coursesToTake = filterRequiredCourses(academicInfo);
-            const { eligibleCourses } = await checkPrerequisites(coursesToTake, academicInfo.passedCourses);
-
-            const availableSubjectIds = [...new Set(availableCourses.map(c => c.subject_id))];
-            const filteredEligibleCourses = eligibleCourses.filter(courseId => availableSubjectIds.includes(courseId));
-
-            const courseDifficulty = await calculateCourseDifficulty(filteredEligibleCourses);
-            const categorized = await categorizeCourses(filteredEligibleCourses, courseDifficulty);
-            const creditTargets = calculateCreditTargets(academicInfo);
-
-            schedule = initializeScheduleStructure(currentSemester + 1, creditTargets);
-            await applyCourseByPriority(schedule, categorized, validCourses, academicInfo);
-        }
-
-        if (!schedule || typeof schedule !== 'object') {
-            throw new Error("❌ Không tạo được thời khóa biểu – schedule null hoặc không hợp lệ");
-        }
-
-        const semesterKeys = Object.keys(schedule);
-        if (!Array.isArray(semesterKeys) || semesterKeys.length === 0) {
-            throw new Error("❌ Không có học kỳ nào trong schedule");
-        }
-
-        const semesterKey = semesterKeys[0];
-        const semesterData = schedule[semesterKey];
-
-        if (!semesterData?.courses || !Array.isArray(semesterData.courses)) {
-            throw new Error("❌ Không có dữ liệu lớp học nào trong schedule");
-        }
-
-        const scheduleData = semesterData.courses;
-        const weekly = buildWeeklySchedule(scheduleData);
-
-        return { schedule, weeklyTimetable: weekly };
-    } catch (error) {
-        console.error('Error generating schedule:', error);
-        throw error;
-    } finally {
-        try { await fs.unlink(excelFilePath); } catch (err) {}
-    }
-};  
