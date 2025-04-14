@@ -1,0 +1,35 @@
+@media (max-width: 767px) {
+    .chatbot-image {
+        order: -1;
+        margin-bottom: 20px;
+    }
+
+    .logo-container img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .navbar-container {
+        margin: 0;
+        padding: auto;
+    }
+
+    .stat-header {
+        margin-top: 1rem;
+    }
+}
+
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+#mobile-menu.open {
+    display: block;
+    /* Khi mở menu, nó sẽ hiện ra ngay */
+}
