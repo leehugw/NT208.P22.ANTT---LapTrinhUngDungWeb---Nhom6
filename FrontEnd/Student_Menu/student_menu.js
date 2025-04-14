@@ -53,6 +53,21 @@ document.getElementById("btn-student-info").addEventListener("click", function(e
     }
 });
 
+// Xử lý sự kiện khi click vào "Chatbot"
+document.getElementById("btn-student-chatbot").addEventListener("click", function(e) {
+    e.preventDefault(); 
+    const token = localStorage.getItem("token"); 
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+    } else {
+        // Nếu có token, điều hướng đến chatbot
+        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
+    }
+});
+
+
+
 function openFeedbackPopup() {
     if (document.getElementById('feedbackPopup')) {
       document.getElementById('feedbackPopup').style.display = 'flex';

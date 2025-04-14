@@ -13,6 +13,35 @@ document.getElementById('menu-close').addEventListener('click', function () {
       menu.style.display = 'none';
   }, 300);
 });
+
+// Kiểm tra token khi tải trang
+document.addEventListener('DOMContentLoaded', function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlToken = urlParams.get('token');
+
+  if (urlToken) {
+      localStorage.setItem('token', urlToken);
+      window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+      alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+      window.location.href = "http://localhost:3000/";
+      return;
+  }
+});
+
+// Hàm kiểm tra token chung
+function checkTokenAndRedirect() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+      alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+      window.location.href = "http://localhost:3000/";
+      return false;
+  }
+  return token;
+}
 // Gửi tin nhắn khi người dùng gửi tin nhắn
 function sendMessage() {
   const inputField = document.getElementById("user-input");
@@ -60,8 +89,3 @@ function openChatHistory() {
   alert("Tính năng xem lịch sử trò chuyện sẽ được cập nhật sau!");
 }
 
-// Gọi hàm để bot trả lời lần đầu tiên khi trang tải
-document.addEventListener("DOMContentLoaded", function() {
-  console.log('Trang đã tải xong');
-  botInitialResponse();  // Bot trả lời ngay khi trang tải
-});

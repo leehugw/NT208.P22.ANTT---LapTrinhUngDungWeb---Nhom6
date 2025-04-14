@@ -74,4 +74,9 @@ router.post('/conversation', chatController.createConversation); // Tạo conver
 router.post('/conversation/:session_id/messages', chatController.addMessage); // Thêm message
 router.get('/conversation/:session_id', chatController.getChatHistory); // Lấy lịch sử chat
 
+// Route để sinh viên truy cập vào chatbot
+router.get('/chatbot', authenticateToken, authorizeRoles('student'), (req, res) => {
+    res.sendFile(path.join(__dirname, '../../FrontEnd/UI_ChatBot/UI_ChatBot.html'));
+});
+
 module.exports = router;
