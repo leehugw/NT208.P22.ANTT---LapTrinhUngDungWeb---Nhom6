@@ -11,7 +11,7 @@ const ScoreController = require('../Controllers/student/ScoreController');
 const StudentAcademicController = require('../Controllers/student/StudentAcademicController');
 //const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
 
-const CourseRecommendationService = require('../Services/student/CourseRecommendationService');
+const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController');
 
 // Cấu hình multer với validation
 const upload = multer({
@@ -75,14 +75,9 @@ router.get('/:student_id/academicstatistic', (req, res) => {
 // });
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
-router.post('/:studentId/schedule-fixed',
-    upload.single('file'),
-    CourseRecommendationService.getFixedSchedule
-);
-// API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
 router.post('/:studentId/schedule-optimize',
     upload.single('file'),
-    CourseRecommendationService.generateOptimizedSchedule
+    CourseRecommendationController.generateOptimizedSchedule
 );
 
 // Route để phục vụ trang HTML

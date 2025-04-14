@@ -1,385 +1,195 @@
 {
-    "success": true,
-    "studentInfo": {
-        "name": "Ngô Văn Hiếu",
-        "studentId": "23524111",
-        "major": "Công nghệ thông tin",
-        "program": "Chương trình đào tạo đại học khóa 2023",
-        "currentSemester": 2,
-        "remainingSemesters": 6,
-        "englishStatus": "Completed (Certificate)"
-    },
-    "creditSummary": {
-        "majorCredits": 0,
-        "electiveCredits": 0,
-        "totalCredits": 19,
-        "remainingMajorCredits": 18,
-        "remainingElectiveCredits": 6,
-        "targetMajorCredits": 3,
-        "targetElectiveCredits": 1
-    },
-    "courseRecommendations": {
-        "allRequiredCourses": [
-            "SS008",
-            "SS009",
-            "SS010",
-            "SS006",
-            "MA006",
-            "MA004",
-            "IT001",
-            "PE231",
-            "PE232",
-            "ME001",
-            "SS004",
-            "IT002",
-            "IT003",
-            "IT004",
-            "IT005",
-            "IT012",
-            "IT007",
-            "IE005",
-            "IE101",
-            "IE103",
-            "IE104",
-            "IE105",
-            "IE106",
-            "IE108",
-            "IS402",
-            "IE201",
-            "IE212",
-            "IS217",
-            "IS254",
-            "IE221",
-            "IE224",
-            "IE309",
-            "BUS1125",
-            "IE231",
-            "IE203",
-            "IS208",
-            "IS336",
-            "IE301",
-            "IE302",
-            "IE102",
-            "IE204",
-            "IE213",
-            "IS353",
-            "IS334",
-            "IE303",
-            "IE307",
-            "IS251",
-            "IS352",
-            "IS351",
-            "IE205",
-            "IE304",
-            "IE305",
-            "TLH025",
-            "IE310",
-            "IE207",
-            "IE505",
-            "IE401",
-            "IE402",
-            "IE403",
-            "IE405",
-            "IE406"
-        ],
-        "eligibleAfterPrerequisites": [
-            "BUS1125",
-            "IE005",
-            "IE101",
-            "IE102",
-            "IE103",
-            "IE104",
-            "IE105",
-            "IE106",
-            "IE108",
-            "IE201",
-            "IE203",
-            "IE204",
-            "IE205",
-            "IE207",
-            "IE212",
-            "IE213",
-            "IE221",
-            "IE224",
-            "IE231",
-            "IE301",
-            "IE302",
-            "IE303",
-            "IE304",
-            "IE305",
-            "IE307",
-            "IE309",
-            "IE310",
-            "IE401",
-            "IE402",
-            "IE403",
-            "IE405",
-            "IE406",
-            "IE505",
-            "IS208",
-            "IS217",
-            "IS251",
-            "IS254",
-            "IS334",
-            "IS336",
-            "IS351",
-            "IS352",
-            "IS353",
-            "IS402",
-            "IT001",
-            "IT002",
-            "IT003",
-            "IT004",
-            "IT005",
-            "IT007",
-            "IT012",
-            "MA004",
-            "MA006",
-            "ME001",
-            "PE231",
-            "PE232",
-            "SS004",
-            "SS006",
-            "SS008",
-            "SS009",
-            "SS010",
-            "TLH025"
-        ],
-        "ineligibleDueToPrerequisites": [],
-        "availableAfterFilter": [
-            "BUS1125",
-            "IE101",
-            "IE102",
-            "IE103",
-            "IE105",
-            "IE108",
-            "IE204",
-            "IE212",
-            "IE213",
-            "IE303",
-            "IE402",
-            "IE403",
-            "IS208",
-            "IS336",
-            "IS353",
-            "IS402",
-            "IT001",
-            "IT002",
-            "IT003",
-            "IT004",
-            "IT005",
-            "IT007",
-            "IT012",
-            "MA004",
-            "MA006",
-            "PE231",
-            "SS004",
-            "SS006",
-            "SS008",
-            "SS009",
-            "SS010",
-            "TLH025"
-        ],
-        "courseDifficulty": {
-            "BUS1125": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE101": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE102": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE103": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE105": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE108": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE204": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE212": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE213": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE303": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE402": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IE403": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IS208": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IS336": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IS353": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IS402": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "IT001": {
-                "difficulty": 0.9,
-                "averageScore": 4.25,
-                "studentCount": 2
-            },
-            "IT002": {
-                "difficulty": 0.5,
-                "averageScore": 7.266666666666667,
-                "studentCount": 3
-            },
-            "IT003": {
-                "difficulty": 0.9,
-                "averageScore": 4.2,
-                "studentCount": 3
-            },
-            "IT004": {
-                "difficulty": 0.9,
-                "averageScore": 4.2,
-                "studentCount": 3
-            },
-            "IT005": {
-                "difficulty": 0.5,
-                "averageScore": 7.5,
-                "studentCount": 2
-            },
-            "IT007": {
-                "difficulty": 0.9,
-                "averageScore": 4.25,
-                "studentCount": 2
-            },
-            "IT012": {
-                "difficulty": 0.5,
-                "averageScore": 7.8,
-                "studentCount": 1
-            },
-            "MA004": {
-                "difficulty": 0.7,
-                "averageScore": 5.9,
-                "studentCount": 1
-            },
-            "MA006": {
-                "difficulty": 0.7,
-                "averageScore": 5.8,
-                "studentCount": 3
-            },
-            "PE231": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "SS004": {
-                "difficulty": 0.7,
-                "averageScore": 6.85,
-                "studentCount": 2
-            },
-            "SS006": {
-                "difficulty": 0.7,
-                "averageScore": 6.4,
-                "studentCount": 2
-            },
-            "SS008": {
-                "difficulty": 0.7,
-                "averageScore": 6.5,
-                "studentCount": 1
-            },
-            "SS009": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            },
-            "SS010": {
-                "difficulty": 0.5,
-                "averageScore": 7,
-                "studentCount": 1
-            },
-            "TLH025": {
-                "difficulty": 0.5,
-                "averageScore": null,
-                "studentCount": 0
-            }
-        }
-    },
     "schedule": {
         "3": {
             "courses": [
                 {
-                    "courseId": "BUS1125",
-                    "subjectName": "Khởi nghiệp kinh doanh",
-                    "credits": 3,
+                    "courseId": "IS208",
+                    "subjectName": "Quản lý dự án công nghệ thông tin",
+                    "credits": 4,
                     "isElective": false,
                     "classes": [
                         {
-                            "class_id": "BUS1125.P21",
-                            "day": "Wed",
-                            "time": "07:30 - 10:45",
-                            "room": "B6.06",
-                            "lecturer": "Lê Thị Hải Yến"
+                            "subject_id": "IS208",
+                            "subject_name": "Quản lý dự án công nghệ thông tin",
+                            "class_id": "IS208.P21",
+                            "lecturer": "Tạ Việt Phương",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Sat",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
+                            "time": "13:00 - 16:15",
+                            "room": "B7.04"
+                        },
+                        {
+                            "subject_id": "IS208",
+                            "subject_name": "Quản lý dự án công nghệ thông tin",
+                            "class_id": "IS208.P21.1",
+                            "lecturer": "Tạ Việt Phương",
+                            "capacity": 40,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-17",
+                            "day": "Sat",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B3.08"
+                        },
+                        {
+                            "subject_id": "IS208",
+                            "subject_name": "Quản lý dự án công nghệ thông tin",
+                            "class_id": "IS208.P21.2",
+                            "lecturer": "Tạ Việt Phương",
+                            "capacity": 40,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-06-07",
+                            "day": "Sat",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B3.08"
                         }
                     ]
                 },
                 {
-                    "courseId": "IE101",
-                    "subjectName": "Cơ sở hạ tầng công nghệ thông tin",
-                    "credits": 3,
+                    "courseId": "IT005",
+                    "subjectName": "Nhập môn mạng máy tính",
+                    "credits": 4,
                     "isElective": false,
                     "classes": [
                         {
-                            "class_id": "IE101.P22",
-                            "day": "Mon",
-                            "time": "08:15 - 11:30",
-                            "room": "B1.04",
-                            "lecturer": "Nguyễn Thị Anh Thư"
+                            "subject_id": "IT005",
+                            "subject_name": "Nhập môn mạng máy tính",
+                            "class_id": "IT005.P25",
+                            "lecturer": "Trần Thị Dung",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-06-07",
+                            "day": "Thu",
+                            "slots": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "time": "07:30 - 09:45",
+                            "room": "B6.10"
                         },
                         {
-                            "class_id": "IE101.P21",
-                            "day": "Mon",
+                            "subject_id": "IT005",
+                            "subject_name": "Nhập môn mạng máy tính",
+                            "class_id": "IT005.P25.1",
+                            "lecturer": "Văn Thiên Luân",
+                            "capacity": 40,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-24",
+                            "day": "Thu",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.22"
+                        },
+                        {
+                            "subject_id": "IT005",
+                            "subject_name": "Nhập môn mạng máy tính",
+                            "class_id": "IT005.P25.2",
+                            "lecturer": "Văn Thiên Luân",
+                            "capacity": 40,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-05-31",
+                            "day": "Thu",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.22"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IT012",
+                    "subjectName": "Tổ chức và Cấu trúc Máy tính II",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IT012",
+                            "subject_name": "Tổ chức và Cấu trúc Máy tính II",
+                            "class_id": "IT012.P22",
+                            "lecturer": "Trần Văn Quang",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Fri",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
                             "time": "13:00 - 16:15",
-                            "room": "B1.06",
-                            "lecturer": "Nguyễn Thị Anh Thư"
+                            "room": "B3.18"
+                        },
+                        {
+                            "subject_id": "IT012",
+                            "subject_name": "Tổ chức và Cấu trúc Máy tính II",
+                            "class_id": "IT012.P22.1",
+                            "lecturer": "Trần Văn Quang",
+                            "capacity": 40,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-24",
+                            "day": "Fri",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B2.12"
+                        },
+                        {
+                            "subject_id": "IT012",
+                            "subject_name": "Tổ chức và Cấu trúc Máy tính II",
+                            "class_id": "IT012.P22.2",
+                            "lecturer": "Trần Văn Quang",
+                            "capacity": 40,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-05-31",
+                            "day": "Fri",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B2.12"
                         }
                     ]
                 },
@@ -390,78 +200,430 @@
                     "isElective": false,
                     "classes": [
                         {
+                            "subject_id": "IE103",
+                            "subject_name": "Quản lý thông tin",
                             "class_id": "IE103.P21",
+                            "lecturer": "Tạ Thu Thủy",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
                             "day": "Wed",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
                             "time": "13:00 - 16:15",
-                            "room": "B1.02",
-                            "lecturer": "Tạ Thu Thủy"
+                            "room": "B1.02"
                         },
                         {
-                            "class_id": "IE103.P22",
-                            "day": "Thu",
-                            "time": "07:30 - 10:45",
-                            "room": "B1.02",
-                            "lecturer": "Phạm Nhật Duy"
-                        },
-                        {
+                            "subject_id": "IE103",
+                            "subject_name": "Quản lý thông tin",
                             "class_id": "IE103.P21.1",
-                            "day": "Thu",
+                            "lecturer": "Tạ Thu Thủy",
+                            "capacity": 30,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-17",
+                            "day": "Wed",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
                             "time": "13:00 - 17:00",
-                            "room": "B2.06",
-                            "lecturer": "Tạ Thu Thủy"
+                            "room": "B2.06"
                         },
                         {
+                            "subject_id": "IE103",
+                            "subject_name": "Quản lý thông tin",
                             "class_id": "IE103.P21.2",
-                            "day": "Thu",
+                            "lecturer": "Tạ Thu Thủy",
+                            "capacity": 30,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-06-07",
+                            "day": "Wed",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
                             "time": "13:00 - 17:00",
-                            "room": "B2.06",
-                            "lecturer": "Tạ Thu Thủy"
-                        },
-                        {
-                            "class_id": "IE103.P22.1",
-                            "day": "Thu",
-                            "time": "13:00 - 17:00",
-                            "room": "B2.08",
-                            "lecturer": "Nguyễn Thành Luân"
-                        },
-                        {
-                            "class_id": "IE103.P22.2",
-                            "day": "Thu",
-                            "time": "13:00 - 17:00",
-                            "room": "B2.08",
-                            "lecturer": "Nguyễn Thành Luân"
+                            "room": "B2.06"
                         }
                     ]
                 },
                 {
-                    "courseId": "IE105",
-                    "subjectName": "Nhập môn bảo đảm và an ninh thông tin",
+                    "courseId": "IT002",
+                    "subjectName": "Lập trình hướng đối tượng",
                     "credits": 4,
                     "isElective": false,
                     "classes": [
                         {
-                            "class_id": "IE105.P22",
-                            "day": "Tue",
-                            "time": "07:30 - 10:45",
-                            "room": "B1.04",
-                            "lecturer": "Nguyễn Tấn Cầm"
+                            "subject_id": "IT002",
+                            "subject_name": "Lập trình hướng đối tượng",
+                            "class_id": "IT002.P21",
+                            "lecturer": "Trần Anh Dũng",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-06-07",
+                            "day": "Mon",
+                            "slots": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "time": "07:30 - 09:45",
+                            "room": "B1.20"
                         },
                         {
-                            "class_id": "IE105.P21",
+                            "subject_id": "IT002",
+                            "subject_name": "Lập trình hướng đối tượng",
+                            "class_id": "IT002.P21.1",
+                            "lecturer": "Đặng Việt Dũng",
+                            "capacity": 40,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-24",
+                            "day": "Mon",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.10"
+                        },
+                        {
+                            "subject_id": "IT002",
+                            "subject_name": "Lập trình hướng đối tượng",
+                            "class_id": "IT002.P21.2",
+                            "lecturer": "Đặng Việt Dũng",
+                            "capacity": 40,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-05-31",
+                            "day": "Mon",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.10"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IT003",
+                    "subjectName": "Cấu trúc dữ liệu và giải thuật",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IT003",
+                            "subject_name": "Cấu trúc dữ liệu và giải thuật",
+                            "class_id": "IT003.P21.TTNT",
+                            "lecturer": "Võ Nguyễn Lê Duy",
+                            "capacity": 50,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-06-07",
                             "day": "Tue",
-                            "time": "13:00 - 16:15",
-                            "room": "B3.14",
-                            "lecturer": "Nguyễn Tấn Cầm"
+                            "slots": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "time": "07:30 - 09:45",
+                            "room": "B1.12"
+                        },
+                        {
+                            "subject_id": "IT003",
+                            "subject_name": "Cấu trúc dữ liệu và giải thuật",
+                            "class_id": "IT003.P21.TTNT.1",
+                            "lecturer": "Trần Doãn Thuyên",
+                            "capacity": 50,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-24",
+                            "day": "Tue",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.20"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE108",
+                    "subjectName": "Phân tích thiết kế phần mềm",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IE108",
+                            "subject_name": "Phân tích thiết kế phần mềm",
+                            "class_id": "IE108.P21",
+                            "lecturer": "Nguyễn Tấn Cầm",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Wed",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "time": "07:30 - 10:45",
+                            "room": "B1.06"
+                        },
+                        {
+                            "subject_id": "IE108",
+                            "subject_name": "Phân tích thiết kế phần mềm",
+                            "class_id": "IE108.P21.1",
+                            "lecturer": "Phạm Nhật Duy",
+                            "capacity": 30,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-17",
+                            "day": "Wed",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B2.02"
+                        },
+                        {
+                            "subject_id": "IE108",
+                            "subject_name": "Phân tích thiết kế phần mềm",
+                            "class_id": "IE108.P21.2",
+                            "lecturer": "Phạm Nhật Duy",
+                            "capacity": 30,
+                            "startDate": "2025-03-10",
+                            "endDate": "2025-06-07",
+                            "day": "Wed",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B2.02"
                         }
                     ]
                 }
             ],
-            "totalCredits": 14,
-            "majorCredits": 14,
+            "totalCredits": 28,
+            "majorfoundationCredits": 0,
+            "majorCredits": 0,
             "electiveCredits": 0,
-            "targetMajorCredits": 3,
+            "generalEducationCredits": 0,
+            "targetMajorFoundation": 8,
+            "targetMajorCore": 3,
+            "targetGeneralCredits": 5,
             "targetElectiveCredits": 1
         }
     },
-    "generatedAt": "2025-04-13T08:02:11.351Z"
+    "weeklyTimetable": {
+        "Mon": [
+            {
+                "time": "07:30 - 09:45",
+                "subject": "Lập trình hướng đối tượng",
+                "classId": "IT002.P21",
+                "room": "B1.20",
+                "lecturer": "Trần Anh Dũng",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Lập trình hướng đối tượng",
+                "classId": "IT002.P21.1",
+                "room": "B2.10",
+                "lecturer": "Đặng Việt Dũng",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Lập trình hướng đối tượng",
+                "classId": "IT002.P21.2",
+                "room": "B2.10",
+                "lecturer": "Đặng Việt Dũng",
+                "credits": 4
+            }
+        ],
+        "Tue": [
+            {
+                "time": "07:30 - 09:45",
+                "subject": "Cấu trúc dữ liệu và giải thuật",
+                "classId": "IT003.P21.TTNT",
+                "room": "B1.12",
+                "lecturer": "Võ Nguyễn Lê Duy",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Cấu trúc dữ liệu và giải thuật",
+                "classId": "IT003.P21.TTNT.1",
+                "room": "B2.20",
+                "lecturer": "Trần Doãn Thuyên",
+                "credits": 4
+            }
+        ],
+        "Wed": [
+            {
+                "time": "07:30 - 10:45",
+                "subject": "Phân tích thiết kế phần mềm",
+                "classId": "IE108.P21",
+                "room": "B1.06",
+                "lecturer": "Nguyễn Tấn Cầm",
+                "credits": 4
+            },
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Phân tích thiết kế phần mềm",
+                "classId": "IE108.P21.1",
+                "room": "B2.02",
+                "lecturer": "Phạm Nhật Duy",
+                "credits": 4
+            },
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Phân tích thiết kế phần mềm",
+                "classId": "IE108.P21.2",
+                "room": "B2.02",
+                "lecturer": "Phạm Nhật Duy",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 16:15",
+                "subject": "Quản lý thông tin",
+                "classId": "IE103.P21",
+                "room": "B1.02",
+                "lecturer": "Tạ Thu Thủy",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Quản lý thông tin",
+                "classId": "IE103.P21.1",
+                "room": "B2.06",
+                "lecturer": "Tạ Thu Thủy",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Quản lý thông tin",
+                "classId": "IE103.P21.2",
+                "room": "B2.06",
+                "lecturer": "Tạ Thu Thủy",
+                "credits": 4
+            }
+        ],
+        "Thu": [
+            {
+                "time": "07:30 - 09:45",
+                "subject": "Nhập môn mạng máy tính",
+                "classId": "IT005.P25",
+                "room": "B6.10",
+                "lecturer": "Trần Thị Dung",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Nhập môn mạng máy tính",
+                "classId": "IT005.P25.1",
+                "room": "B2.22",
+                "lecturer": "Văn Thiên Luân",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Nhập môn mạng máy tính",
+                "classId": "IT005.P25.2",
+                "room": "B2.22",
+                "lecturer": "Văn Thiên Luân",
+                "credits": 4
+            }
+        ],
+        "Fri": [
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Tổ chức và Cấu trúc Máy tính II",
+                "classId": "IT012.P22.1",
+                "room": "B2.12",
+                "lecturer": "Trần Văn Quang",
+                "credits": 4
+            },
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Tổ chức và Cấu trúc Máy tính II",
+                "classId": "IT012.P22.2",
+                "room": "B2.12",
+                "lecturer": "Trần Văn Quang",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 16:15",
+                "subject": "Tổ chức và Cấu trúc Máy tính II",
+                "classId": "IT012.P22",
+                "room": "B3.18",
+                "lecturer": "Trần Văn Quang",
+                "credits": 4
+            }
+        ],
+        "Sat": [
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Quản lý dự án công nghệ thông tin",
+                "classId": "IS208.P21.1",
+                "room": "B3.08",
+                "lecturer": "Tạ Việt Phương",
+                "credits": 4
+            },
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Quản lý dự án công nghệ thông tin",
+                "classId": "IS208.P21.2",
+                "room": "B3.08",
+                "lecturer": "Tạ Việt Phương",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 16:15",
+                "subject": "Quản lý dự án công nghệ thông tin",
+                "classId": "IS208.P21",
+                "room": "B7.04",
+                "lecturer": "Tạ Việt Phương",
+                "credits": 4
+            }
+        ],
+        "summary": {
+            "totalCourses": 7,
+            "daysWithClasses": 6,
+            "creditsPerDay": {
+                "Sat": 12,
+                "Thu": 12,
+                "Fri": 12,
+                "Wed": 24,
+                "Mon": 12,
+                "Tue": 8
+            }
+        }
+    }
 }
