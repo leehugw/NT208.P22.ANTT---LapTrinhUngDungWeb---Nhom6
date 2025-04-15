@@ -3,31 +3,9 @@ const CourseRecommendationService = require('../../Services/student/CourseRecomm
 exports.generateOptimizedSchedule = async (req, res) => {
     let tempFilePath = null;
     try {
-        // 1. Validate input
-        const { studentId } = req.params;
-        if (!studentId) {
-            return res.status(400).json({ success: false, message: 'Student ID is required' });
-        }
-
-        if (!req.file) {
-            return res.status(400).json({ success: false, message: 'Excel file is required' });
-        }
-
-        tempFilePath = req.file.path;
-
-        // 2. Get student academic info (Step 1)
-        const academicInfo = await getStudentAcademicInfo(studentId);
-        if (!academicInfo) {
-            return res.status(404).json({ success: false, message: 'Student not found' });
-        }
-
-        // 3. Filter required courses (including English course handling)
-        const requiredCourses = filterRequiredCourses(academicInfo);
-
-        // 4. Check prerequisites (Step 1 continued)
-        const { eligibleCourses, ineligibleCourses } = await checkPrerequisites(
-            requiredCourses,
-            academicInfo.passedCourses
+        const result = await CourseRecommendationService.generateOptimizedSchedule(
+            req.params.studentId, 
+            req.file.path
         );
 
         // 5. Process Excel file (Step 2)
