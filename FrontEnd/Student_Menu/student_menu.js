@@ -53,6 +53,16 @@ document.getElementById("btn-student-info").addEventListener("click", function(e
     }
 });
 
+document.getElementById("btn-student-chatbotcard").addEventListener("click", function(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";
+    } else {
+        window.location.href = "/api/student/chatbot?token=" + token;
+    }
+});
 // Xử lý sự kiện khi click vào "Chatbot"
 document.getElementById("btn-student-chatbot").addEventListener("click", function(e) {
     e.preventDefault(); 

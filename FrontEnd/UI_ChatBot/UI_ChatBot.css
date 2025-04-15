@@ -357,10 +357,10 @@ footer {
 /* Navbar */
 .navbar {
   position: fixed; /* Để navbar cố định trên đầu trang */
-  top: 0;
+  margin-top: 25px;
   left: 0;
   right: 0;
- 
+  bottom: 0;
   background-color: transparent; /* Lấy nền trong suốt để không có sự phân biệt */
   padding: 0px 10px; /* Loại bỏ padding trên và dưới */
   box-shadow: none; /* Không có bóng đổ */
@@ -371,7 +371,7 @@ footer {
 .header-container {
   position: relative;
   width: 100%;
-  margin-top: 20px; /* Đảm bảo logo không bị che khuất bởi navbar */
+  margin-top: 10px; /* Đảm bảo logo không bị che khuất bởi navbar */
 }
 
 /* Logo và tiêu đề */

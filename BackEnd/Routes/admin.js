@@ -44,7 +44,7 @@ router.get('/lecturers-data', async (req, res) => {
 });
 
 // API trả về giao diện quản lý giảng viên cho admin
-router.get('/lecturers',/*authenticateToken, authorizeRoles('admin'),*/(req, res) => {
+router.get('/lecturers',authenticateToken, authorizeRoles('admin'),(req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/LecturerList/lecturerlist.html'); 
   res.sendFile(pagePath);
 });
