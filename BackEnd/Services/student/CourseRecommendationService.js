@@ -395,7 +395,6 @@ async function generateOptimizedSchedule(student, courseIds, courseDifficulty, a
 
     // 3. Tính target credits cho học kỳ tới
     const maxCreditsPerSemester = 28;
-    const minCreditsPerSemester = 14;
     const remainingSemesters = academicInfo.remainingSemesters;
 
     let targetMajorFoundation = Math.min(
@@ -833,7 +832,7 @@ async function prioritizeByDifficulty(subjects) {
 }
 
 // Helper function for first semester schedule generation
-async function generateFirstSemesterSchedule(studentId, availableCourses, academicInfo) {
+async function generateFirstSemesterSchedule(availableCourses, academicInfo) {
     const firstSemesterCourses = ["SS003", "MA003", "IT001", "PE231"]
         .filter(courseId =>
             !academicInfo.passedCourses.includes(courseId) &&

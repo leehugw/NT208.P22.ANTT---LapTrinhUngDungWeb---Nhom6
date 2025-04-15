@@ -12,6 +12,7 @@ const StudentAcademicController = require('../Controllers/student/StudentAcademi
 //const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
 
 const CourseRecommendationService = require('../Services/student/CourseRecommendationService');
+const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController');
 
 // Cấu hình multer với validation
 const upload = multer({
