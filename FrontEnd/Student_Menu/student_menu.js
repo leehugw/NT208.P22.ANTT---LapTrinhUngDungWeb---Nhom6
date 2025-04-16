@@ -30,29 +30,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.getElementById("btn-student-card").addEventListener("click", function(e) {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
-    } else {
-        window.location.href = "/api/student/profile?token=" + token;
-    }
+document.querySelectorAll(".btn-student-info").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault(); 
+        const token = localStorage.getItem("token"); 
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+        } else {
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/profile?token=" + token;  // Điều hướng đến route chatbot
+        }
+    });
 });
-
-document.getElementById("btn-student-info").addEventListener("click", function(e) {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
-    } else {
-        // Sửa thành redirect đến trang HTML thay vì API endpoint
-        window.location.href = "/api/student/profile?token=" + token;
-    }
-});
-
 document.getElementById("btn-student-chatbotcard").addEventListener("click", function(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");

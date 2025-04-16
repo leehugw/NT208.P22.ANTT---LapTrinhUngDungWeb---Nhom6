@@ -335,3 +335,16 @@ document.getElementById('export-excel-btn').addEventListener('click', function (
 });
 
 
+document.querySelectorAll(".btn-student-info").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault(); 
+        const token = localStorage.getItem("token"); 
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+        } else {
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/profile?token=" + token;  // Điều hướng đến route chatbot
+        }
+    });
+});
