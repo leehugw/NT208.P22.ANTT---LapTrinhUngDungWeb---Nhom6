@@ -18,7 +18,6 @@ document.getElementById('dropdownMenuLink').addEventListener('click', function (
     menu.classList.toggle('show');
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const semesterSelect = document.getElementById("semesterSelect");
     const classSelect = document.getElementById("classSelect");
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const classInfo = document.getElementById("classInfo");
     const classList = document.getElementById("classList");
     const classSize = document.getElementById("size");
-
+    const logoutButton = document.querySelector('.logout-button');
     const token = localStorage.getItem("token"); // hoặc từ cookie
 
     // Goi API lấy thông tin giảng viên
@@ -38,8 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Thông tin giảng viên:", data);
             document.getElementById("lecturerName").textContent = data.data.name;
             document.getElementById("lecturerEmail").textContent = data.data.school_email;
+    });
+        
+    //api đăng xuất
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            // Xóa token khỏi localStorage vì lưu token trong localStorage
+            localStorage.removeItem('token');
+
+            // Thông báo đăng xuất(xóa nếu ko cần)
+            //alert("Đăng xuất thành công!");
+
+            // Chuyển về trang chủ
+            window.location.href = '/';
         });
-    
+    }
 
     // Gọi API lấy học kỳ
     fetch("/api/lecturer/semesters", {

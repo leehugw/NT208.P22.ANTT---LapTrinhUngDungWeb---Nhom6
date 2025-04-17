@@ -23,7 +23,7 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/FrontEnd/Admin_Menu/logo.png" width="80">
+                <img alt="Logo" height="80" src="logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -34,14 +34,14 @@
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
-                        Giảng viên
+                        Admin
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Thống kê</a></li>
                         <li><a class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
                         <li><a class="dropdown-item" href="#">Quản lí Chatbot</a></li>
                         <li><a class="dropdown-item" href="#">Hồ sơ Admin</a></li>
-                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                        <li><a class="dropdown-item logout-button" href="#">Đăng xuất</a></li>
                     </ul>
                 </div>
             </nav>
@@ -74,7 +74,7 @@
             </a>
             <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
                 data-bs-toggle="collapse" data-bs-target="#lecturerDropdown">
-                <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
+                <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="lecturerDropdown">
                 <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Thống kê</a>
@@ -88,7 +88,7 @@
             <div class="collapse" id="lecturerDropdown">
                 <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Hồ sơ Admin</a>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#">
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button" href="#">
                 <i class="fa-solid fa-sign-out"></i> Đăng xuất
             </a>
         </nav>
@@ -105,7 +105,7 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card" href="#">
+            <button class="card btn-admin-student" href="#">
                 <i class="fas fa-user-graduate"></i>
                 <h3>Theo dõi sinh viên</h3>
                 <p>Theo dõi sinh viên</p>
@@ -113,7 +113,7 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card" href="#">
+            <button class="card btn-admin-chat-manage" href="#">
                 <i class="fas fa-robot"></i>
                 <h3>Quản lí Chatbot</h3>
                 <p>Cập nhật tài liệu, chính sách</p>
@@ -121,7 +121,7 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card" href="#">
+            <button class="card btn-admin-profile" href="#">
                 <i class="fas fa-user"></i>
                 <h3>Hồ sơ</h3>
                 <p>Theo dõi hồ sơ admin</p>
