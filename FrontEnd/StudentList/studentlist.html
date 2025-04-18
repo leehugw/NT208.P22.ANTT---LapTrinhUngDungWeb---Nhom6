@@ -15,9 +15,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link href="../FeedbackForm/feed.css" rel="stylesheet">
-    <link href="css/studentlist.css" rel="stylesheet">
-    <link href="css/mobilestudentlist.css" rel="stylesheet">
-    <link href="css/PCstudentlist.css" rel="stylesheet">
+    <link href="/StudentList/css/studentlist.css" rel="stylesheet">
+    <link href="/StudentList/css/mobilestudentlist.css" rel="stylesheet">
+    <link href="/StudentList/css/PCstudentlist.css" rel="stylesheet">
 
 </head>
 
@@ -25,7 +25,7 @@
     <header class="bg-white shadow navbar fixed-top">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="../Home/css/logo.png" width="80">
+                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -83,7 +83,7 @@
             <div class="col-12">
                 <div class="d-flex flex-nowrap flex-md-nowrap gap-2 align-items-center justify-content-center">
                     <div class="input-group flex-grow-1">
-                        <input class="form-control" placeholder="Tìm kiếm mssv ..." type="text" />
+                        <input class="form-control" id="filter-mssv" placeholder="Tìm kiếm mssv ..." type="text" />
                         <button class="btn btn-outline-secondary" type="button">
                             <i class="fas fa-times"></i>
                         </button>
@@ -97,22 +97,22 @@
 
                     <!-- Select filters: hiện trên desktop -->
                     <div class="d-none d-md-flex gap-2">
-                        <select class="form-select custom-select-width">
+                        <select class="form-select custom-select-width" id="filter-class">
                             <option selected="">Lớp học</option>
                         </select>
-                        <select class="form-select custom-select-width">
+                        <select class="form-select custom-select-width" id="filter-major">
                             <option selected="">Ngành học</option>
                         </select>
-                        <select class="form-select custom-select-width">
+                        <select class="form-select custom-select-width" id="filter-faculty">
                             <option selected="">Khoa</option>
                         </select>
-                        <select class="form-select custom-select-width">
+                        <select class="form-select custom-select-width" id="filter-status">
                             <option selected="">Trạng thái</option>
                         </select>
                     </div>
 
                     <!-- Nút search -->
-                    <button class="btn button text-white" type="button">
+                    <button class="btn button text-white" type="button" id="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -121,16 +121,16 @@
             <!-- Mobile filter -->
             <div class="collapse d-md-none mt-2" id="mobileFilter">
                 <div class="d-flex flex-column gap-2">
-                    <select class="form-select">
+                    <select class="form-select" id="filter-class">
                         <option selected="">Lớp học</option>
                     </select>
-                    <select class="form-select">
+                    <select class="form-select" id="filter-major">
                         <option selected="">Ngành học</option>
                     </select>
-                    <select class="form-select">
+                    <select class="form-select" id="filter-faculty">
                         <option selected="">Khoa</option>
                     </select>
-                    <select class="form-select">
+                    <select class="form-select" id="filter-status">
                         <option selected="">Trạng thái</option>
                     </select>
                 </div>
@@ -139,7 +139,7 @@
 
 
         <div class="background text-white p-3 rounded-top fw-bold">
-            <span class="fs-3 fw-bold">70</span> sinh viên
+            <span class="fs-3 fw-bold">-</span> sinh viên
         </div>
         <div class="p-3">
             <div class="table-responsive">
@@ -163,41 +163,15 @@
                                 <div class="d-flex align-items-center">
                                     <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
                                         src="https://placehold.co/50x50" width="50" />
-                                    Nguyễn Văn A
+                                    -
                                 </div>
                             </td>
-                            <td>20520001</td>
-                            <td>20520001@gm.uit.edu.vn</td>
-                            <td>Đang học</td>
-                            <td>ATTT2023.1</td>
-                            <td>An toàn thông tin</td>
-                            <td>Mạng máy tính và Truyền thông</td>
-                            <td class="text-center">
-                                <a class="text" href="#">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </td>
-                            <td class="text-center border-end">
-                                <a class="text">
-                                    <i class="fas fa-chart-line"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="custom-row mb-2 align-middle">
-                            <td class="border-start middle-align    ">
-                                <div class="d-flex align-items-center">
-                                  <img alt="Profile picture of Nguyễn Văn A" class="rounded-circle me-2" height="50"
-                                    src="https://placehold.co/50x50" width="50" />
-                                  Nguyễn Văn A
-                                </div>
-                              </td>
-                              
-                            <td>20520001</td>
-                            <td>20520001@gm.uit.edu.vn</td>
-                            <td>Đang học</td>
-                            <td>ATTT2023.1</td>
-                            <td>An toàn thông tin</td>
-                            <td>Mạng máy tính và Truyền thông</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
                             <td class="text-center">
                                 <a class="text" href="#">
                                     <i class="fas fa-external-link-alt"></i>
@@ -220,7 +194,7 @@
         title="Gửi phản hồi" id="feedbackBtn">
         <i class="fas fa-comment-dots fs-4 text-white"></i>
     </a>
-    <script src="studentlist.js"></script>
+    <script src="/StudentList/studentlist.js"></script>
 </body>
 
 </html>

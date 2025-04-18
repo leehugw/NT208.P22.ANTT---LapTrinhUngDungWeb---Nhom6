@@ -27,6 +27,7 @@ passport.use(new GoogleStrategy({
     username: user.username,
     role: user.role,
     student_id: user.student_id,
-    lecturer_id: user.lecturer_id
+    lecturer_id: user.lecturer_id,
+    admin_id: user.admin_id,
   });
 }));

@@ -2,7 +2,7 @@ document.getElementById('menu-toggle').addEventListener('click', function () {
   var menu = document.getElementById('mobile-menu');
   menu.style.display = 'block';
   setTimeout(function () {
-      menu.classList.add('open');
+    menu.classList.add('open');
   }, 10);
 });
 
@@ -10,7 +10,7 @@ document.getElementById('menu-close').addEventListener('click', function () {
   var menu = document.getElementById('mobile-menu');
   menu.classList.remove('open');
   setTimeout(function () {
-      menu.style.display = 'none';
+    menu.style.display = 'none';
   }, 300);
 });
 
@@ -18,17 +18,31 @@ document.getElementById('menu-close').addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const urlParams = new URLSearchParams(window.location.search);
   const urlToken = urlParams.get('token');
+  const logoutButton = document.querySelector('.logout-button');
 
   if (urlToken) {
-      localStorage.setItem('token', urlToken);
-      window.history.replaceState({}, document.title, window.location.pathname);
+    localStorage.setItem('token', urlToken);
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
   const token = localStorage.getItem('token');
   if (!token) {
-      alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
-      window.location.href = "http://localhost:3000/";
-      return;
+    alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+    window.location.href = "http://localhost:3000/";
+    return;
+  }
+
+  if (logoutButton) {
+    logoutButton.addEventListener('click', () => {
+      // Xóa token khỏi localStorage vì lưu token trong localStorage
+      localStorage.removeItem('token');
+
+      // Thông báo đăng xuất(xóa nếu ko cần)
+      //alert("Đăng xuất thành công!");
+
+      // Chuyển về trang chủ
+      window.location.href = '/';
+    });
   }
 });
 
@@ -36,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function checkTokenAndRedirect() {
   const token = localStorage.getItem("token");
   if (!token) {
-      alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-      window.location.href = "http://localhost:3000/";
-      return false;
+    alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+    window.location.href = "http://localhost:3000/";
+    return false;
   }
   return token;
 }
@@ -88,21 +102,3 @@ function toggleSidebar() {
 function openChatHistory() {
   alert("Tính năng xem lịch sử trò chuyện sẽ được cập nhật sau!");
 }
-
-//api đăng xuất
-document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.querySelector('.logout-button');
-
-  if (logoutButton) {
-      logoutButton.addEventListener('click', () => {
-          // Xóa token khỏi localStorage vì lưu token trong localStorage
-          localStorage.removeItem('token');
-
-          // Thông báo đăng xuất(xóa nếu ko cần)
-          //alert("Đăng xuất thành công!");
-
-          // Chuyển về trang chủ
-          window.location.href = '/';
-      });
-  }
-});

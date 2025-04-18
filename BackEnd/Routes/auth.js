@@ -19,12 +19,12 @@ router.get('/google/callback',
         id: req.user._id,
         role: req.user.role,
         student_id: req.user.student_id,
-        lecturer_id: req.user.lecturer_id
+        lecturer_id: req.user.lecturer_id,
+        admin_id: req.user.admin_id,
       },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
-    
     // Redirect theo role từ DB
     let redirectPath = '/';
     switch (req.user.role) {

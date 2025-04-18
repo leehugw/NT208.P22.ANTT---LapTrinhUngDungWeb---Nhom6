@@ -17,6 +17,17 @@ document.getElementById('menu-close').addEventListener('click', function () {
 //api đăng xuất
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.querySelector('.logout-button');
+    const studentTrackBtn = document.querySelector('.btn-admin-student');
+    const studentDropDownBtn = document.getElementById('btn-admin-student');
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    if (token) {
+        localStorage.setItem("token", token);
+        console.log("Token đã được lưu vào localStorage:", token);
+        // xóa token khỏi URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
@@ -30,15 +41,41 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/';
         });
     }
+
+    if (studentTrackBtn) {
+        studentTrackBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Chưa đăng nhập");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/students?token=${token}`;
+            }
+        });
+    }
+    if (studentDropDownBtn) {
+        studentDropDownBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!token) {
+                alert("Chưa đăng nhập");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/students?token=${token}`;
+            }
+        });
+    };
 });
 
-document.getElementById('btn-admin-student').addEventListener('click', function (e) {
+document.querySelector('.btn-admin-student').addEventListener('click', function (e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
+    console.log("📦 Token:", token);
     if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
+        alert("Bạn chưa đăng nhập!");
+        window.location.href = '/';
     } else {
-        window.location.href = "/api/admin/class?token=" + token;
+        window.location.href = 'FrontEnd/StudentList/students?token=' + token;
     }
 });
