@@ -66,6 +66,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+    if (lecturerDropDownBtn) {
+        lecturerDropDownBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!token) {
+                alert("Chưa đăng nhập");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/lecturers?token=${token}`;
+            }
+        });
+    };
+    // Điều hướng tới danh sách giảng viên
+    if (lecturerTrackBtn) {
+        lecturerTrackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const savedToken = localStorage.getItem("token");
+            if (!savedToken) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/lecturers?token=${savedToken}`;
+            }
+        });
+    }
 });
 
 document.querySelector('.btn-admin-student').addEventListener('click', function (e) {
@@ -77,5 +101,16 @@ document.querySelector('.btn-admin-student').addEventListener('click', function 
         window.location.href = '/';
     } else {
         window.location.href = 'FrontEnd/StudentList/students?token=' + token;
+    }
+});
+document.querySelector('.btn-admin-lecturer').addEventListener('click', function (e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("📦 Token:", token);
+    if (!token) {
+        alert("Bạn chưa đăng nhập!");
+        window.location.href = '/';
+    } else {
+        window.location.href = '/api/admin/lecturers?token=' + token;
     }
 });
