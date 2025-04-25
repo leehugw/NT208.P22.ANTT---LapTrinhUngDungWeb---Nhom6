@@ -5,7 +5,7 @@ const router = express.Router();
 const adminFeedbackService = require('../Services/admin/adminFeedbackService');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const adminChatController = require('../Controllers/admin/adminChatController');
-const adminlecturerlistService = require('../Services/admin/adminLecturerListService');
+const { getAllLecturersForAdmin } = require('../Controllers/admin/adminLecturerList');
 const { getAllStudentsForAdmin } = require('../Controllers/admin/adminStudentController');
 const { createLecturer } = require('../Controllers/admin/adminCreateAccountsController');
 
@@ -44,22 +44,15 @@ router.get('/students', authenticateToken, authorizeRoles('admin'), (req, res) =
 });
 router.get('/students-data', authenticateToken, authorizeRoles('admin'), getAllStudentsForAdmin); //trả về file json để hiển thị
 
-// Route API hiển thị danh sách giảng viên cho admin
-router.get('/lecturers-data', async (req, res) => {
-  try {
-    const lecturers = await adminlecturerlistService.getAllLecturers();
-    res.status(200).json(lecturers);
-  } catch (err) {
-    console.error('Lỗi khi truy vấn giảng viên:', err);
-    res.status(500).json({ error: 'Lỗi server khi lấy danh sách giảng viên' });
-  }
-});
 
-// API trả về giao diện quản lý giảng viên cho admin
+// Route API hiển thị danh sách giảng viên cho admin
 router.get('/lecturers', authenticateToken, authorizeRoles('admin'), (req, res) => {
-  const pagePath = path.join(__dirname, '../../FrontEnd/LecturerList/lecturerlist.html');
+  const pagePath = path.join(__dirname, '../../FrontEnd/LecturerList/lecturerlist.html'); //trả về file html
   res.sendFile(pagePath);
 });
+router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAllLecturersForAdmin); //trả về file json để hiển thị
+
+
 
 // Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
 router.get('/create-lecturer-account', (req, res) => {

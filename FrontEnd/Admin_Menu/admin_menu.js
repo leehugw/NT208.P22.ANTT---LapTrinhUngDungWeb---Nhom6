@@ -14,83 +14,62 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-//api đăng xuất
 document.addEventListener('DOMContentLoaded', () => {
-    const logoutButton = document.querySelector('.logout-button');
-    const studentTrackBtn = document.querySelector('.btn-admin-student');
-    const studentDropDownBtn = document.getElementById('btn-admin-student');
+    // Lưu token từ URL vào localStorage nếu có
     const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    if (token) {
-        localStorage.setItem("token", token);
-        console.log("Token đã được lưu vào localStorage:", token);
-        // xóa token khỏi URL
+    const urlToken = params.get("token");
+    if (urlToken) {
+        localStorage.setItem("token", urlToken);
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
-            // Xóa token khỏi localStorage vì lưu token trong localStorage
+    // Đăng xuất
+    document.querySelectorAll('.logout-button').forEach(btn => {
+        btn.addEventListener('click', () => {
             localStorage.removeItem('token');
-
-            // Thông báo đăng xuất(xóa nếu ko cần)
-            //alert("Đăng xuất thành công!");
-
-            // Chuyển về trang chủ
             window.location.href = '/';
         });
-    }
+    });
 
-    if (studentTrackBtn) {
-        studentTrackBtn.addEventListener('click', function (e) {
+    // Theo dõi sinh viên
+    document.querySelectorAll('#btn-admin-student').forEach(btn => {
+        btn.addEventListener('click', function (e) {
             e.preventDefault();
-
             const token = localStorage.getItem("token");
             if (!token) {
-                alert("Chưa đăng nhập");
+                alert("Bạn chưa đăng nhập!");
                 window.location.href = '/';
             } else {
                 window.location.href = `/api/admin/students?token=${token}`;
             }
         });
-    }
-    if (studentDropDownBtn) {
-        studentDropDownBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (!token) {
-                alert("Chưa đăng nhập");
-                window.location.href = '/';
-            } else {
-                window.location.href = `/api/admin/students?token=${token}`;
-            }
-        });
-    };
-    const createLecturerBtns = document.querySelectorAll('.btn-create-lecturer-account');
-    if (createLecturerBtns) {
-        createLecturerBtns.forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    alert("Bạn chưa đăng nhập!");
-                    window.location.href = '/';
-                } else {
-                    window.location.href = `/api/admin/create-lecturer-account?token=${token}`;
-                }
-            });
-        });
-    }
-});
+    });
 
-document.querySelector('.btn-admin-student').addEventListener('click', function (e) {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    console.log("📦 Token:", token);
-    if (!token) {
-        alert("Bạn chưa đăng nhập!");
-        window.location.href = '/';
-    } else {
-        window.location.href = 'FrontEnd/StudentList/students?token=' + token;
-    }
+    // Theo dõi giảng viên
+    document.querySelectorAll('#btn-admin-lecturer').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/lecturers?token=${token}`;
+            }
+        });
+    });
+
+    // Tạo tài khoản giảng viên
+    document.querySelectorAll('.btn-create-lecturer-account').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/create-lecturer-account?token=${token}`;
+            }
+        });
+    });
 });
