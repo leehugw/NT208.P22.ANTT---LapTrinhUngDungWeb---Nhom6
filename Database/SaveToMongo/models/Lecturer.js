@@ -3,19 +3,17 @@ const mongoose = require('mongoose');
 // Định nghĩa Schema cho Lecturer
 const LecturerSchema = new mongoose.Schema({
     lecturer_id: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
+    username: { type: String, required: true, unique: true }, // email đăng nhập
+    fullname: { type: String, required: true },
     gender: { type: String, enum: ['Nam', 'Nữ', 'Khác'], required: true },
-    birth_date: { type: String, required: true },
-    faculty_id: { type: String, required: true },
-    birth_place: { type: String, required: true },
-    school_email: { type: String, required: true, unique: true },
-    alias_email: { type: String, default: '' },
-    personal_email: { type: String, required: true },
-    phone: { type: String, required: true }
+    birthdate: { type: String, required: true },
+    birthplace: { type: String, required: true },
+    faculty: { type: String, required: true },
+    className: { type: String }, // nếu có
+    phonenumber: { type: String, required: true },
+    email: { type: String, required: true } // có thể trùng username
 });
 
-// Tạo model từ Schema
 const Lecturer = mongoose.model('Lecturer', LecturerSchema);
 
-// Xuất module
 module.exports = Lecturer;

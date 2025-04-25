@@ -1,0 +1,103 @@
+[
+    {
+    "academic_year": "2024-2025",
+    "applicable_cohorts": ["2020"],
+    "regular_semester": {
+      "new_course_fee": "505,000 VND/tín chỉ",
+      "retake_or_improve_fee": "505,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "760,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2024-2025",
+    "applicable_cohorts": ["2021", "2022", "2023", "2024"],
+    "regular_semester": {
+      "new_course_fee": "32,800,000 VND/năm",
+      "retake_or_improve_fee": "980,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "1,470,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2023-2024",
+    "applicable_cohorts": ["2020"],
+    "regular_semester": {
+      "new_course_fee": "16,000,000 VND/năm",
+      "retake_or_improve_fee": "470,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "705,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2023-2024",
+    "applicable_cohorts": ["2021", "2022", "2023"],
+    "regular_semester": {
+      "new_course_fee": "32,000,000 VND/năm",
+      "retake_or_improve_fee": "950,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "1,425,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2022-2023",
+    "applicable_cohorts": ["2020"],
+    "regular_semester": {
+      "new_course_fee": "14,500,000 VND/năm",
+      "retake_or_improve_fee": "435,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "650,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2022-2023",
+    "applicable_cohorts": ["2021", "2022"],
+    "regular_semester": {
+      "new_course_fee": "29,000,000 VND/năm",
+      "retake_or_improve_fee": "870,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "1,300,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2021-2022",
+    "applicable_cohorts": ["2021"],
+    "regular_semester": {
+      "new_course_fee": "24,000,000 VND/năm",
+      "retake_or_improve_fee": "720,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "1,080,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2021-2022",
+    "applicable_cohorts": ["2020"],
+    "regular_semester": {
+      "new_course_fee": "12,000,000 VND/năm",
+      "retake_or_improve_fee": "370,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "all_courses_fee": "555,000 VND/tín chỉ"
+    }
+  },
+  {
+    "academic_year": "2020-2021",
+    "applicable_cohorts": ["2020"],
+    "regular_semester": {
+      "new_course_fee": "11,700,000 VND/năm",
+      "retake_fee": "390,000 VND/tín chỉ",
+      "improve_fee": "420,000 VND/tín chỉ"
+    },
+    "summer_or_off_hours": {
+      "retake_fee": "585,000 VND/tín chỉ",
+      "improve_fee": "630,000 VND/tín chỉ"
+    }
+  }
+]  

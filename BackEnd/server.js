@@ -38,6 +38,7 @@ app.use(express.static(frontendPath));
 const adminRoutes = require('./Routes/admin');
 const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
+const chatbotRoutes = require('./Routes/chatbot');
 
 // Direct route to home.html file
 app.get('/', (req, res) => {
@@ -62,6 +63,7 @@ app.get("/auth/google",
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 app.use('/api', require('./Routes/feedback'));
 

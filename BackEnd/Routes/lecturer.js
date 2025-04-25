@@ -54,6 +54,4 @@ router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async 
     }
 });
 
-
-
 module.exports = router;

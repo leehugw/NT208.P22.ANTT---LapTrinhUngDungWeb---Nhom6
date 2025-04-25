@@ -66,6 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+    const createLecturerBtns = document.querySelectorAll('.btn-create-lecturer-account');
+    if (createLecturerBtns) {
+        createLecturerBtns.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("Bạn chưa đăng nhập!");
+                    window.location.href = '/';
+                } else {
+                    window.location.href = `/api/admin/create-lecturer-account?token=${token}`;
+                }
+            });
+        });
+    }
 });
 
 document.querySelector('.btn-admin-student').addEventListener('click', function (e) {
