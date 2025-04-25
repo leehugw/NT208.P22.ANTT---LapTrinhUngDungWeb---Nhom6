@@ -7,6 +7,7 @@ const StudentAcademicController = require('../Controllers/student/StudentAcademi
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const HandleChatRequestController = require('../Controllers/student/ChatBotController');
 const chatController = require('../Controllers/student/studentChatController');
+const RecommendCourseController = require('../Controllers/student/RecommendCourseController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -78,5 +79,8 @@ router.get('/conversation/:session_id', chatController.getChatHistory); // Lấy
 router.get('/chatbot', authenticateToken, authorizeRoles('student'), (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/UI_ChatBot/UI_ChatBot.html'));
 });
+
+// Route gợi ý môn học cho sinh viên
+router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses );
 
 module.exports = router;

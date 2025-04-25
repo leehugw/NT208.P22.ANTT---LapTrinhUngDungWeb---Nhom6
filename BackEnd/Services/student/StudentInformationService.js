@@ -35,7 +35,8 @@ class StudentInformationService {
         contact: student.contact || null,
         address: student.address || null,
         identity: student.identity || null,
-        family: student.family || null
+        family: student.family || null,
+        major_id: student.major_id || null,
       };
     } catch (error) {
       console.error('Lỗi khi lấy thông tin sinh viên:', error);
