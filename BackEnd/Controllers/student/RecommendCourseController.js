@@ -133,7 +133,7 @@ exports.getRecommendedCourses = async (req, res) => {
 
         // Lấy thông tin môn học
         const subjectInfos = await Subject.find({ subject_id: { $in: rawSubjects } });
-        console.log("Subject Infos:", subjectInfos.map(s => s.subject_id)); // Debug
+        //console.log("Subject Infos:", subjectInfos.map(s => s.subject_id)); // Debug
 
         const subjectInfoMap = new Map(subjectInfos.map(s => [s.subject_id, s]));
         const recommendedCourses = [];
