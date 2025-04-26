@@ -62,34 +62,26 @@ function openFeedbackPopup() {
 
 async function fetchStudentProfile(token) {
     try {
-        console.log('🔄 Đang gửi token:', token);
 
-        const response = await fetch('http://localhost:3000/api/student/profile/api', {
+        const urlParams = new URLSearchParams(window.location.search);
+        let StudentProfileDataUrl;
+
+        // Kiểm tra nếu URL có query 
+        if (urlParams.toString()) {
+            const studentId = urlParams.get('student_id');
+            StudentProfileDataUrl = `http://localhost:3000/api/student/profile-data?student_id=${studentId}`;
+        } else {
+            StudentProfileDataUrl = `/api/student/profile-data`;
+        }
+
+        const response = await fetch(StudentProfileDataUrl, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         });
 
-        console.log('Response status:', response.status);
-
-        if (!response.ok) {
-            // Nếu token hết hạn hoặc không hợp lệ
-            if (response.status === 401 || response.status === 403) {
-                localStorage.removeItem('token');
-                sessionStorage.removeItem('token');
-                alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
-                window.location.href = 'http://localhost:3000/';
-                return;
-            }
-
-            const errorData = await response.json();
-            console.error('Error response:', errorData);
-            throw new Error(errorData.message || 'Failed to fetch student data');
-        }
-
         const data = await response.json();
-        console.log('Received data:', data);
 
         if (data.success && data.type === "student") {
             displayStudentData(data.data);

@@ -91,7 +91,7 @@ document.querySelectorAll(".btn-lecturer-classlist").forEach(el => {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";
         } else {
-            window.location.href = "/api/lecturer/classlist?token=" + token;
+            window.location.href = "/api/lecturer/classlist";
         }
     });
 });

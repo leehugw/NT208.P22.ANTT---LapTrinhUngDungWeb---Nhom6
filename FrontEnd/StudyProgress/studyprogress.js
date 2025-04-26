@@ -58,18 +58,27 @@ function StudentAcademicData(token) {
     const searchInput = document.getElementById('search-input');  // Lấy input tìm kiếm
     const semesterScores = document.getElementById("semester-scores"); // Lấy phần tử chứa bảng điểm
 
+    const urlParams = new URLSearchParams(window.location.search);
+    let StudentAcademicDataUrl;
+    let GroupSemesterDataUrl;
 
-    // Lấy student_id từ URL
-    const path = window.location.pathname;
-    const studentId = path.split('/')[3];  // Lấy student_id từ params
+    // Kiểm tra nếu URL có query 
+    if (urlParams.toString()) {
+        const studentId = urlParams.get('student_id');
+        StudentAcademicDataUrl = `http://localhost:3000/api/student/student-academic-data?student_id=${studentId}`;
+        GroupSemesterDataUrl = `http://localhost:3000/api/student/group-by-semester-data?student_id=${studentId}`
 
-    if (studentId) {
+    } else {
+        StudentAcademicDataUrl = `/api/student/student-academic-data`;
+        GroupSemesterDataUrl = `/api/student/group-by-semester-data`;
+    }
+
         // Gọi API để lấy thông tin sinh viên, tiến độ tốt nghiệp và GPA
         Promise.all([
-            fetch(`/api/student/student-academic-data`, {
+            fetch(StudentAcademicDataUrl, {
                 headers: { Authorization: `Bearer ${token}` }
             }),
-            fetch(`/api/student/group-by-semester-data`, {
+            fetch(GroupSemesterDataUrl, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         ])
@@ -231,10 +240,6 @@ function StudentAcademicData(token) {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    } else {
-        alert('Student ID không hợp lệ');
-    }
-
     // Lắng nghe sự kiện input để tìm kiếm theo mã môn học hoặc tên môn học
     searchInput.addEventListener('input', function () {
         const searchTerm = searchInput.value.toLowerCase();  // Chuyển giá trị tìm kiếm thành chữ thường
