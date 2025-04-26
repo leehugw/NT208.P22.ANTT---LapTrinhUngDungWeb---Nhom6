@@ -32,8 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // Gọi API lấy dữ liệu
-    fetchStudentProfile(token);
+    // Lấy studentId từ localStorage
+    const studentId = localStorage.getItem('selectedStudentId');
+
+    if (studentId) {
+        fetchStudentProfileAsAdmin(token, studentId)
+            .then(() => {
+                localStorage.removeItem('selectedStudentId');
+            });
+    } else {
+        fetchStudentProfile(token);
+    }
+
 });
 
 function openFeedbackPopup() {
@@ -102,6 +112,43 @@ async function fetchStudentProfile(token) {
         alert('Lỗi khi tải thông tin sinh viên: ' + error.message);
     }
 }
+//Hiển thị thông tin sinh viên cho admin
+async function fetchStudentProfileAsAdmin(token, studentId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/admin/student/${studentId}/profile/api`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('🔵 Fetch admin student profile: Status', response.status);
+
+        if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem('token');
+                alert('Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.');
+                window.location.href = '/';
+                return;
+            }
+            throw new Error('Không lấy được thông tin sinh viên');
+        }
+
+        const data = await response.json();
+        console.log('✅ Admin profile data:', data);
+
+        if (data.success) {
+            displayStudentData(data.data);
+        } else {
+            throw new Error(data.message || 'Lỗi dữ liệu');
+        }
+    } catch (error) {
+        console.error('🔥 Lỗi fetch hồ sơ sinh viên:', error);
+        alert('Không thể tải thông tin sinh viên: ' + error.message);
+    }
+}
+
+
 
 // Hàm hiển thị dữ liệu
 function displayStudentData(data) {
