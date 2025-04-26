@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(res => res.json())
         .then(data => {
             console.log("Thông tin giảng viên:", data);
-            document.getElementById("lecturerName").textContent = data.data.name;
-            document.getElementById("lecturerEmail").textContent = data.data.school_email;
+            document.getElementById("lecturerName").textContent = data.data.fullname;
+            document.getElementById("lecturerEmail").textContent = data.data.email;
         });
 
     // API đăng xuất
