@@ -7,6 +7,7 @@ const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const adminChatController = require('../Controllers/admin/adminChatController');
 const { getAllLecturersForAdmin } = require('../Controllers/admin/adminLecturerList');
 const { getAllStudentsForAdmin } = require('../Controllers/admin/adminStudentController');
+const { createLecturer } = require('../Controllers/admin/adminCreateAccountsController');
 
 
 
@@ -53,5 +54,18 @@ router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAll
 
 
 
+// Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
+router.get('/create-lecturer-account', (req, res) => {
+  const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Create_Lecturer_Accounts/admin_create_accounts.html');
+  res.sendFile(pagePath);
+});
+
+// Route tạo tài khoản giảng viên (API)
+router.post(
+  '/lecturers',
+  authenticateToken,
+  authorizeRoles('admin'),
+  createLecturer
+);
 
 module.exports = router;

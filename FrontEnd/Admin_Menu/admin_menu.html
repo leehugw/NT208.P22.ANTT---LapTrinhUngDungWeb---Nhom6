@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <link href="PC_admin_menu.css" rel="stylesheet">
-    <link href="mobile_admin_menu.css" rel="stylesheet">
-    <link href="admin_menu.css" rel="stylesheet">
+    <link href="/Admin_Menu/PC_admin_menu.css" rel="stylesheet">
+    <link href="/Admin_Menu/mobile_admin_menu.css" rel="stylesheet">
+    <link href="/Admin_Menu/admin_menu.css" rel="stylesheet">
 
 </head>
 
@@ -23,7 +23,7 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="logo.png" width="80">
+                <img alt="Logo" height="80" src="/Admin_Menu/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -38,10 +38,11 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Thống kê</a></li>
-                        <li><a id="btn-admin-student" class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
-                        <li><a id="btn-admin-lecturer" class="dropdown-item" href="#">Theo dõi giảng viên</a></li>
+                        <li><a id="btn-admin-student" class="dropdown-item">Theo dõi sinh viên</a></li>
+                        <li><a id="btn-admin-lecturer" class="dropdown-item">Theo dõi giảng viên</a></li>
                         <li><a class="dropdown-item" href="#">Quản lí Chatbot</a></li>
                         <li><a class="dropdown-item" href="#">Hồ sơ Admin</a></li>
+                        <li><a class="dropdown-item btn-create-lecturer-account">Tạo tài khoản giảng viên</a></li>
                         <li><a class="dropdown-item logout-button" href="#">Đăng xuất</a></li>
                     </ul>
                 </div>
@@ -92,6 +93,9 @@
             <div class="collapse" id="lecturerDropdown">
                 <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Hồ sơ Admin</a>
             </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-create-lecturer-account">Tạo tài khoản giảng viên</a>
+            </div>
             <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button" href="#">
                 <i class="fa-solid fa-sign-out"></i> Đăng xuất
             </a>
@@ -109,7 +113,7 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card btn-admin-student" href="#">
+            <button class="card" id="btn-admin-student" href="#">
                 <i class="fas fa-user-graduate"></i>
                 <h3>Theo dõi sinh viên</h3>
                 <p>Theo dõi sinh viên</p>
@@ -117,7 +121,7 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card btn-admin-lecturer" href="#">
+            <button class="card" id="btn-admin-lecturer" href="#">
                 <i class="fas fa-user-graduate"></i>
                 <h3>Theo dõi giảng viên</h3>
                 <p>Theo dõi giảng viên</p>
@@ -141,6 +145,14 @@
                     <a href="#">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
+            <button class="card btn-create-lecturer-account" href="#">
+                <i class="fas fa-user-plus"></i>
+                <h3>Tạo tài khoản giảng viên</h3>
+                <p>Tạo mới tài khoản cho giảng viên</p>
+                <div style="margin-top: auto; text-align: center; width: 100%;">
+                    <a href="#">Tìm hiểu thêm &gt;&gt;</a>
+                </div>
+            </button>
         </div>
     </section>
     <br><br><br><br><br><br><br>
@@ -151,7 +163,7 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
-    <script src="admin_menu.js"></script>
+    <script src="/Admin_Menu/admin_menu.js"></script>
 </body>
 
 </html>
