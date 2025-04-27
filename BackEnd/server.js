@@ -40,8 +40,10 @@ const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
 const chatbotRoutes = require('./Routes/chatbot');
 
+app.use('/api/statistics', require('./Routes/statistics'));
+const { increaseHomeVisit } = require('./Controllers/statistics/HomeStatisticsController');
 // Direct route to home.html file
-app.get('/', (req, res) => {
+app.get('/', increaseHomeVisit, (req, res) => {
   res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
 });
 
