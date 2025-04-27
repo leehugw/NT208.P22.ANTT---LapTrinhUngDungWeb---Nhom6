@@ -16,7 +16,7 @@ router.get('/profile', authenticateToken, authorizeRoles('lecturer'), (req, res)
     res.sendFile(path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html'));
 });
 
-router.get('/classlist', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
+router.get('/classlist', (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/Class_List/classlist.html'));
 });
 
@@ -24,7 +24,7 @@ router.get('/classlist', authenticateToken, authorizeRoles('lecturer'), (req, re
 router.get("/semesters", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getSemestersByLecturer);
 
 // Lấy danh sách lớp học giảng viên dạy trong 1 học kỳ
-router.get("/classes", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getClassesBySemester);
+router.get("/classes", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getClasses);
 
 // Lấy danh sách sinh viên trong lớp + điểm
 router.get("/classes/:classId/students", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.getStudentsByClass);

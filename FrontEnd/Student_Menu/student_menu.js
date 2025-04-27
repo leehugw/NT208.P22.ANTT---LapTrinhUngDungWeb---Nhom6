@@ -38,8 +38,7 @@ document.querySelectorAll(".btn-student-info").forEach(el => {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
         } else {
-            // Nếu có token, điều hướng đến chatbot
-            window.location.href = "/api/student/profile?token=" + token;  // Điều hướng đến route chatbot
+            window.location.href = "/api/student/profile";  
         }
     });
 });
@@ -100,7 +99,7 @@ document.querySelectorAll(".btn-student-progress").forEach(el => {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";
         } else {
-            window.location.href = "/api/student/academicstatistic?token=" + token;
+            window.location.href = "/api/student/academicstatistic";
         }
     });
 });

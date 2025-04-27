@@ -8,7 +8,6 @@ const ClassSchema = new mongoose.Schema({
     },
     semester_id: {
         type: String,
-        required: true
     },
     lecturer_id: {
         type: String,
@@ -16,12 +15,10 @@ const ClassSchema = new mongoose.Schema({
     },
     subject_id: {
         type: String,
-        required: true,
         ref: 'Subject'
     },
     students: {
         type: [String], // Mảng các MSSV dạng chuỗi
-        required: true
     }
 }, { collection: 'classes' }, {timestamps: true });
 

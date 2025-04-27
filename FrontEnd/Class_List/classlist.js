@@ -13,76 +13,125 @@ document.getElementById('menu-close').addEventListener('click', function () {
     }, 300);
 });
 
-document.getElementById('dropdownMenuLink').addEventListener('click', function () {
-    let menu = document.querySelector('.dropdown-menu');
-    menu.classList.toggle('show');
-});
+function openFeedbackPopup() {
+    if (document.getElementById('feedbackPopup')) {
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
+    }
+
+    fetch('/FeedbackForm/feedbackForm.html')
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
+    window.closeFeedbackForm = function () {
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
+    };
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const semesterSelect = document.getElementById("semesterSelect");
     const classSelect = document.getElementById("classSelect");
     const studentTableBody = document.getElementById("studentTableBody");
+    const studentTableThread = document.getElementById("studentTableThread");
     const classInfo = document.getElementById("classInfo");
     const classList = document.getElementById("classList");
     const classSize = document.getElementById("size");
     const logoutButton = document.querySelector('.logout-button');
     const token = localStorage.getItem("token"); // hoặc từ cookie
 
-    // Goi API lấy thông tin giảng viên
+    // Enable class dropdown by default
+    classSelect.disabled = false;
+
+    // Gọi API lấy thông tin giảng viên
     fetch("/api/lecturer/profile/api", {
         headers: { Authorization: `Bearer ${token}` }
     })
         .then(res => res.json())
         .then(data => {
             console.log("Thông tin giảng viên:", data);
-            document.getElementById("lecturerName").textContent = data.data.name;
-            document.getElementById("lecturerEmail").textContent = data.data.school_email;
-    });
-        
-    //api đăng xuất
+            document.getElementById("lecturerName").textContent = data.data.fullname;
+            document.getElementById("lecturerEmail").textContent = data.data.email;
+        });
+
+    // API đăng xuất
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             // Xóa token khỏi localStorage vì lưu token trong localStorage
             localStorage.removeItem('token');
-
-            // Thông báo đăng xuất(xóa nếu ko cần)
-            //alert("Đăng xuất thành công!");
 
             // Chuyển về trang chủ
             window.location.href = '/';
         });
     }
 
-    // Gọi API lấy học kỳ
-    fetch("/api/lecturer/semesters", {
-        headers: { Authorization: `Bearer ${token}` }
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log("Học kỳ:", data);
-            data.forEach(sem => {
-                semesterSelect.innerHTML += `<option value="${sem.semester_id}">${sem.semester_name}</option>`;
-            });
-        });
+    // Gọi API lấy học kỳ và lớp khi trang tải
+    fetchSemestersAndClasses();
 
-    // Khi chọn học kỳ -> gọi API lấy lớp
-    semesterSelect.addEventListener("change", () => {
-        classSelect.innerHTML = `<option value="">Chọn lớp</option>`;
-        fetch(`/api/lecturer/classes?semester_id=${semesterSelect.value}`, {
+    // Hàm lấy học kỳ và lớp khi trang tải
+    function fetchSemestersAndClasses() {
+        fetch("/api/lecturer/semesters", {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
             .then(data => {
-                data.forEach(cls => {
-                    classSelect.innerHTML += `<option value="${cls.class_id}">${cls.class_id}</option>`;
+                console.log(data);
+                data.forEach(sem => {
+                    semesterSelect.innerHTML += `<option value="${sem.semester_id}">${sem.semester_name}</option>`;
                 });
             });
+
+        // Gọi API lấy tất cả lớp ngay khi trang được tải
+        fetchClasses();
+    }
+
+    // Hàm lấy tất cả lớp (không lọc theo học kỳ)
+    async function fetchClasses(semesterId = '') {
+        classSelect.innerHTML = `<option value="">Chọn lớp</option>`; // Xóa tất cả lớp cũ
+
+        let url = '/api/lecturer/classes';  // API lấy tất cả lớp
+        if (semesterId) {
+            url += `?semester_id=${semesterId}`;  // Nếu có học kỳ, thêm tham số vào URL
+        }
+
+        try {
+            const response = await fetch(url, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                data.forEach(cls => {
+                    const option = document.createElement("option");
+                    option.value = cls.class_id;
+                    option.textContent = cls.class_id;
+                    classSelect.appendChild(option);
+                });
+            } else {
+                console.error("Error fetching classes:", response.status);
+            }
+        } catch (error) {
+            console.error("Error fetching classes:", error);
+        }
+    }
+
+    // Khi chọn học kỳ -> gọi API lấy lớp theo học kỳ
+    semesterSelect.addEventListener("change", () => {
+        fetchClasses(semesterSelect.value);  // Lọc lớp theo học kỳ đã chọn
     });
 
     // Khi chọn lớp -> gọi API lấy sinh viên và render bảng
     classSelect.addEventListener("change", () => {
-        const semesterText = semesterSelect.options[semesterSelect.selectedIndex].text;
-        const classText = classSelect.options[classSelect.selectedIndex].text;
+        const semesterText = semesterSelect.options[semesterSelect.selectedIndex]?.text || "Không chọn học kỳ";
+        const classText = classSelect.options[classSelect.selectedIndex]?.text || "Không chọn lớp";
 
         classInfo.innerText = `Lớp đang chọn: ${classText} - ${semesterText}`;
         classList.innerText = `Danh sách sinh viên lớp ${classText}`;
@@ -91,53 +140,103 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
-            .then(students => {
-
-                const studentCount = students.length;
+            .then(data => {
+                console.log(data);
+                const studentCount = data.students.length;
                 classSize.innerText = `${studentCount}`;
 
                 studentTableBody.innerHTML = "";
-                students.forEach(student => {
-                    studentTableBody.innerHTML += `
-        <tr>
-            <td class="border-start">
-                <div class="d-flex align-items-center">
-                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
-                    ${student.name}
-                </div>
-            </td>
-            <td class="text-center">${student.student_id}</td>
-            <td class="text-center">${student.email}</td>
-            <td class="text-center">${student.status}</td>
-            <td class="text-center">
-                <span class="score-text">${student.score_QT || "-"}</span>
-                <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
-            </td>
-            <td class="text-center">
-                <span class="score-text">${student.score_GK || "-"}</span>
-                <input class="score-input form-control form-control-sm m-auto" value="${student.score_GK || ""}" style="display:none;" />
-            </td>
-            <td class="text-center">
-                <span class="score-text">${student.score_TH || "-"}</span>
-                <input class="score-input form-control form-control-sm m-auto" value="${student.score_TH || ""}" style="display:none;" />
-            </td>
-            <td class="text-center">
-                <span class="score-text">${student.score_CK || "-"}</span>
-                <input class="score-input form-control form-control-sm m-auto" value="${student.score_CK || ""}" style="display:none;" />
-            </td>
-            <td class="text-center">
-                <span class="score-text">${student.score_HP || "-"}</span>
-                <input class="score-input form-control form-control-sm m-auto" value="${student.score_HP || ""}" style="display:none;" />
-            </td>
-            <td class="text-center">
-                <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
-            </td>
-        </tr>  
-    `;
+                data.students.forEach(student => {
+                    if (data.isAdvisorClass) {
+                        studentTableThread.innerHTML = `
+
+                        <tr>
+                            <th scope="col" class="thread border-0">Sinh viên</th>
+                            <th scope="col" class="thread border-0 text-center">MSSV</th>
+                            <th scope="col" class="thread border-0 text-center">Email</th>
+                            <th scope="col" class="thread border-0 text-center">Trạng thái</th>
+                            <th scope="col" class="thread border-0 text-center">Lớp</th>
+                            <th scope="col" class="thread border-0 text-center">Ngành</th>
+                            <th scope="col" class="thread border-0 text-center">Khoa</th>
+                            <th scope="col" class="thread border-0 text-center">Thông tin</th>
+                            <th scope="col" class="thread border-0 text-center">Tiến độ</th>
+                        </tr>
+                    `;
+                        studentTableBody.innerHTML += `
+                            <tr class="custom-row align-middle">
+                                <td class="border-start">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                                        ${student.name}
+                                    </div>
+                                </td>
+                                <td class="text-center">${student.student_id}</td>
+                                <td class="text-center">${student.school_email}</td>
+                                <td class="text-center">Đang học</td>
+                                <td class="text-center">${student.class_name || '-'}</td>
+                                <td class="text-center">${student.major_name || '-'}</td>
+                                <td class="text-center">${student.faculty_name || '-'}</td>
+                                <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${student.student_id}"><i class="fas fa-external-link-alt"></i></a></td>
+                                <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${student.student_id}"><i class="fas fa-chart-line"></i></a></td>
+                            </tr>
+                        `;
+                    } else {
+                        studentTableThread.innerHTML = `
+                        <tr>
+                            <th scope="col" class="thread border-0">Sinh viên</th>
+                            <th scope="col" class="thread border-0 text-center">MSSV</th>
+                            <th scope="col" class="thread border-0 text-center">Email</th>
+                            <th scope="col" class="thread border-0 text-center">Trạng thái</th>
+                            <th scope="col" class="thread border-0 text-center">Điểm QT</th>
+                            <th scope="col" class="thread border-0 text-center">Điểm GK</th>
+                            <th scope="col" class="thread border-0 text-center">Điểm TH</th>
+                            <th scope="col" class="thread border-0 text-center">Điểm CK</th>
+                            <th scope="col" class="thread border-0 text-center">Điểm HP</th>
+                            <th scope="col" class="thread border-0 text-center">Hành động</th> <!-- Cột Hành vi -->
+                        </tr>
+                    `;
+                        studentTableBody.innerHTML += `
+                            <tr class="custom-row align-middle">
+                                <td class="border-start">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                                        ${student.name}
+                                    </div>
+                                </td>
+                                <td class="text-center">${student.student_id}</td>
+                                <td class="text-center">${student.school_email}</td>
+                                <td class="text-center">${student.status}</td>
+                                <td class="text-center">
+                                    <span class="score-text">${student.score_QT || "-"}</span>
+                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
+                                </td>
+                                <td class="text-center">
+                                    <span class="score-text">${student.score_GK || "-"}</span>
+                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_GK || ""}" style="display:none;" />
+                                </td>
+                                <td class="text-center">
+                                    <span class="score-text">${student.score_TH || "-"}</span>
+                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_TH || ""}" style="display:none;" />
+                                </td>
+                                <td class="text-center">
+                                    <span class="score-text">${student.score_CK || "-"}</span>
+                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_CK || ""}" style="display:none;" />
+                                </td>
+                                <td class="text-center">
+                                    <span class="score-text">${student.score_HP || "-"}</span>
+                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_HP || ""}" style="display:none;" />
+                                </td>
+                                <td class="text-center border-end">
+                                    <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
+                                </td>
+                            </tr>  
+                        `;
+                    }
                 });
             });
     });
 });
+
 
 // Gọi API để cập nhật điểm khi người dùng sửa
 function editScore(iconElement) {
@@ -171,12 +270,27 @@ function editScore(iconElement) {
         const semesterId = document.getElementById("semesterSelect").value;
         const token = localStorage.getItem("token");
 
+        if (!semesterId) {
+            alert("Vui lòng chọn học kỳ trước khi lưu điểm.");
+
+             // Khôi phục giao diện ban đầu
+             scoreTexts.forEach((span, i) => {
+                span.style.display = "inline";
+                scoreInputs[i].style.display = "none";
+            });
+
+            iconElement.style.display = "inline"; // Hiện lại icon bút chì
+            saveAllBtn.remove(); // Xóa nút lưu
+
+            return;
+        }
+
         fetch(`/api/lecturer/classes/${classId}/students`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => res.json())
             .then(data => {
-                const subjectId = data[0].subject_id;
+                const subjectId = data.students[0].subject_id;
 
                 const payload = {
                     student_id: studentId,
@@ -215,4 +329,5 @@ function editScore(iconElement) {
             });
     };
 }
+
 

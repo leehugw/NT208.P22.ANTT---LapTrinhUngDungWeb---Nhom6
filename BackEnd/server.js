@@ -1,5 +1,6 @@
 // server.js
 require('dotenv').config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
@@ -51,6 +52,8 @@ app.get('/', increaseHomeVisit, (req, res) => {
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
 app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lecturer_Menu')));
 app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
+
+
 
 
 // Route to trigger Google login

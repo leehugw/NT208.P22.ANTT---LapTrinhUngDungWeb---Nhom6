@@ -12,6 +12,15 @@
     color: #3D67BA;
 }
 
+.logout-button {
+    background-color: #3D67BA;
+}
+
+
+.logout-button:hover {
+    background-color: #003366;
+}
+
 /* Đổi màu chữ khi hover vào dropdown */
 .navbar-container .dropdown-menu .dropdown-item:hover {
     color: #3D67BA !important;
@@ -84,26 +93,6 @@ table {
 /* Bảng và cột */
 .table th, .table td {
     padding: 1rem;
-    text-align: center;
-}
-
-/* --- CẬP NHẬT MỚI --- */
-
-/* Rút ngắn khoảng cách giữa tiêu đề và bảng */
-#classList {
-    margin-bottom: 10px;
-    margin-top: 30px;
-}
-
-/* Khoảng cách mềm giữa tiêu đề và bảng */
-.table-responsive {
-    margin-top: 10px;
-}
-
-/* Tăng độ nổi bật của tiêu đề nếu muốn */
-#classList {
-    color: #3D67BA;
-    font-weight: 600;
     text-align: center;
 }
 

@@ -9,10 +9,10 @@ const insertData = async () => {
         console.log("✅ Đã kết nối MongoDB");
 
         const db = mongoose.connection.db; // Truy cập database
-        const collection = db.collection("scores"); // Truy cập collection
+        const collection = db.collection("training_schedule"); // Truy cập collection
 
         // Đọc file JSON
-        const filePath = "Json\\score.json";
+        const filePath = "Json\\trainingschedule.json";
         const jsonData = fs.readFileSync(filePath, 'utf-8');
         const data = JSON.parse(jsonData); // Chuyển JSON thành object
 
