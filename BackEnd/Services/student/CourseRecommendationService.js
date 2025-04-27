@@ -333,7 +333,6 @@ function calculateCreditTargets(academicInfo) {
     const remainingGeneralCredits = academicInfo.major.progress_details.required_general_education - completedGeneralCredits;
 
     const maxCreditsPerSemester = 28;
-    const minCreditsPerSemester = 14;
     const remainingSemesters = academicInfo.remainingSemesters;
 
     let targetMajorFoundation = Math.min(Math.ceil(remainingMajorFoundation / remainingSemesters), maxCreditsPerSemester);
