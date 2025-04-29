@@ -1,5 +1,6 @@
 // server.js
 require('dotenv').config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
@@ -38,9 +39,12 @@ app.use(express.static(frontendPath));
 const adminRoutes = require('./Routes/admin');
 const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
+const chatbotRoutes = require('./Routes/chatbot');
 
+app.use('/api/statistics', require('./Routes/statistics'));
+const { increaseHomeVisit } = require('./Controllers/statistics/HomeStatisticsController');
 // Direct route to home.html file
-app.get('/', (req, res) => {
+app.get('/', increaseHomeVisit, (req, res) => {
   res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
 });
 
@@ -48,6 +52,8 @@ app.get('/', (req, res) => {
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
 app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lecturer_Menu')));
 app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
+
+
 
 
 // Route to trigger Google login
@@ -62,6 +68,7 @@ app.get("/auth/google",
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/lecturer', lecturerRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 app.use('/api', require('./Routes/feedback'));
 

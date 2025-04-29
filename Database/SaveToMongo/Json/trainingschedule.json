@@ -1,0 +1,1939 @@
+[{
+  "academicYear": "2024-2025",
+  "systems": [
+    {
+      "systemName": "Chính quy",
+      "educational_format": [
+        {
+          "format_name": "",
+          "courses": [
+            {
+              "program_id": [
+                "K2024"
+              ],
+              "activities": [
+                {
+                  "title": "N+S",
+                  "description": "Nhập học, kiểm tra AV và Sinh hoạt công dân đầu khóa",
+                  "date": [
+                    {
+                      "startDate": "2024-08-26",
+                      "endDate": "2024-09-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-09-09",
+                      "endDate": "2025-01-05"
+                    }
+                  ]
+                },
+                {
+                  "title": "GDQP&AN",
+                  "description": "Học GDQP&AN",
+                  "date": [
+                    {
+                      "startDate": "2024-09-30",
+                      "endDate": "2024-10-27"
+                    }
+                  ]
+                },
+                {
+                  "title": "K",
+                  "description": "Kiểm tra giữa kì tập trung theo lịch",
+                  "date": [
+                    {
+                      "startDate": "2024-11-25",
+                      "endDate": "2024-12-01"
+                    },
+                    {
+                      "startDate": "2025-04-21",
+                      "endDate": "2025-04-27"
+                    }
+                  ]
+                },
+                {
+                  "title": "K*",
+                  "description": "Khoảng thời gian kiểm tra giữa kì những môn không tổ chức thi tập trung, các lớp vẫn học bình thường",
+                  "date": [
+                    {
+                      "startDate": "2024-12-02",
+                      "endDate": "2024-12-08"
+                    },
+                    {
+                      "startDate": "2025-04-14",
+                      "endDate": "2025-04-20"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2025-02-17",
+                      "endDate": "2025-06-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2025-01-06",
+                      "endDate": "2025-01-12"
+                    },
+                    {
+                      "startDate": "2025-06-09",
+                      "endDate": "2025-06-15"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2025-01-13",
+                      "endDate": "2025-01-26"
+                    },
+                    {
+                      "startDate": "2025-06-16",
+                      "endDate": "2025-06-30"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "program_id": [
+                "K2023",
+                "K2022",
+                "K2021",
+                "K2020",
+                "K2019"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-09-02",
+                      "endDate": "2024-12-29"
+                    }
+                  ]
+                },
+                {
+                  "title": "K",
+                  "description": "Kiểm tra giữa kì tập trung theo lịch",
+                  "date": [
+                    {
+                      "startDate": "2024-10-21",
+                      "endDate": "2024-10-27"
+                    },
+                    {
+                      "startDate": "2025-04-21",
+                      "endDate": "2025-04-27"
+                    }
+                  ]
+                },
+                {
+                  "title": "K*",
+                  "description": "Khoảng thời gian kiểm tra giữa kì những môn không tổ chức thi tập trung, các lớp vẫn học bình thường",
+                  "date": [
+                    {
+                      "startDate": "2024-10-28",
+                      "endDate": "2024-11-03"
+                    },
+                    {
+                      "startDate": "2025-04-14",
+                      "endDate": "2025-04-20"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2025-02-17",
+                      "endDate": "2025-06-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2025-12-30",
+                      "endDate": "2025-01-05"
+                    },
+                    {
+                      "startDate": "2025-06-09",
+                      "endDate": "2025-06-15"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2025-01-06",
+                      "endDate": "2025-01-26"
+                    },
+                    {
+                      "startDate": "2025-06-16",
+                      "endDate": "2025-06-30"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ng",
+                  "description": "Nghỉ học",
+                  "date": [
+                    {
+                      "startDate": "2025-11-25",
+                      "endDate": "2025-12-01"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "format_name": "Văn bằng 2",
+          "courses": [
+            {
+              "program_id": [
+                "K2024"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-09-09",
+                      "endDate": "2024-12-29"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2025-02-17",
+                      "endDate": "2025-06-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2025-12-30",
+                      "endDate": "2025-01-05"
+                    },
+                    {
+                      "startDate": "2025-06-09",
+                      "endDate": "2025-06-15"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2025-01-06",
+                      "endDate": "2025-01-26"
+                    },
+                    {
+                      "startDate": "2025-06-16",
+                      "endDate": "2025-06-30"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "program_id": [
+                "K2023, K2022, K2021, K2020, K2019"
+              ],
+              "activities": [
+                {
+                  "title": "Ng",
+                  "description": "Nghỉ học",
+                  "date": [
+                    {
+                      "startDate": "2024-08-26",
+                      "endDate": "2024-09-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-09-09",
+                      "endDate": "2024-12-29"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2025-02-17",
+                      "endDate": "2025-06-08"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2025-08-12",
+                      "endDate": "2025-08-18"
+                    },
+                    {
+                      "startDate": "2025-12-30",
+                      "endDate": "2025-01-05"
+                    },
+                    {
+                      "startDate": "2025-06-09",
+                      "endDate": "2025-06-15"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2025-08-19",
+                      "endDate": "2025-08-25"
+                    },
+                    {
+                      "startDate": "2025-01-06",
+                      "endDate": "2025-01-26"
+                    },
+                    {
+                      "startDate": "2025-06-16",
+                      "endDate": "2025-06-30"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "format_name": "Liên thông",
+          "courses": [
+            {
+              "program_id": [
+                "K2024, K2023, K2022, K2021, K2020, K2019"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-08-12",
+                      "endDate": "2024-12-29"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2025-02-17",
+                      "endDate": "2025-07-20"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2025-12-30",
+                      "endDate": "2025-01-05"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2025-01-06",
+                      "endDate": "2025-01-26"
+                    },
+                    {
+                      "startDate": "2025-07-21",
+                      "endDate": "2025-08-03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "common_activities": [
+        {
+          "activities_title": "Học kì hè",
+          "activities": [
+            {
+              "title": "HK hè",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-07-07",
+                  "endDate": "2025-08-10"
+                }
+              ]
+            },
+            {
+              "title": "D",
+              "description": "Dự trữ, SV ôn tập",
+              "date": [
+                {
+                  "startDate": "2025-08-11",
+                  "endDate": "2025-08-17"
+                }
+              ]
+            },
+            {
+              "title": "T",
+              "description": "Thi học kỳ",
+              "date": [
+                {
+                  "startDate": "2025-08-18",
+                  "endDate": "2025-08-24"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Khóa luận tốt nghiệp",
+          "activities": [
+            {
+              "title": "Giao đề tài",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-02-17",
+                  "endDate": "2025-03-02"
+                },
+                {
+                  "startDate": "2024-09-02",
+                  "endDate": "2024-09-15"
+                }
+              ]
+            },
+            {
+              "title": "Thưc hiện đề tài",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-03-03",
+                  "endDate": "2025-05-08"
+                },
+                {
+                  "startDate": "2024-09-16",
+                  "endDate": "2024-12-29"
+                }
+              ]
+            },
+            {
+              "title": "50%",
+              "description": "Báo cáo tiến độ giữa kỳ khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2024-11-04",
+                  "endDate": "2024-11-10"
+                },
+                {
+                  "startDate": "2025-04-14",
+                  "endDate": "2025-04-20"
+                }
+              ]
+            },
+            {
+              "title": "Pb",
+              "description": "Phản biện khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2024-12-30",
+                  "endDate": "2025-01-05"
+                },
+                {
+                  "startDate": "2025-06-09",
+                  "endDate": "2025-06-22"
+                }
+              ]
+            },
+            {
+              "title": "Bv",
+              "description": "Bảo vệ khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2025-01-13",
+                  "endDate": "2025-01-19"
+                },
+                {
+                  "startDate": "2025-06-23",
+                  "endDate": "2025-06-29"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Đăng ký học phần",
+          "activities": [
+            {
+              "title": "Lập TKB",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-05",
+                  "endDate": "2024-08-25"
+                },
+                {
+                  "startDate": "2024-12-30",
+                  "endDate": "2025-01-19"
+                },
+                {
+                  "startDate": "2025-06-09",
+                  "endDate": "2025-06-18"
+                }
+              ]
+            },
+            {
+              "title": "SV ĐKHP",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-26",
+                  "endDate": "2024-09-15"
+                },
+                {
+                  "startDate": "2025-01-20",
+                  "endDate": "2025-02-02"
+                },
+                {
+                  "startDate": "2025-02-10",
+                  "endDate": "2025-02-23"
+                },
+                {
+                  "startDate": "2025-06-19",
+                  "endDate": "2025-06-29"
+                }
+              ]
+            },
+            {
+              "title": "Khảo sát các môn sẽ mở",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-05-12",
+                  "endDate": "2025-06-08"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xét tốt nghiệp",
+          "activities": [
+            {
+              "title": "Đợt 3/2024 Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-05",
+                  "endDate": "2024-08-27"
+                }
+              ]
+            },
+            {
+              "title": "Xét & ra QĐ",
+              "description": "Dự trữ, SV ôn tập",
+              "date": [
+                {
+                  "startDate": "2024-08-26",
+                  "endDate": "2024-09-08"
+                },
+                {
+                  "startDate": "2024-10-28",
+                  "endDate": "2024-11-10"
+                },
+                {
+                  "startDate": "2025-03-24",
+                  "endDate": "2025-04-06"
+                },
+                {
+                  "startDate": "2025-05-05",
+                  "endDate": "2025-05-18"
+                },
+                {
+                  "startDate": "2025-08-18",
+                  "endDate": "2025-08-31"
+                }
+              ]
+            },
+            {
+              "title": "Lễ TN",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-11-25",
+                  "endDate": "2024-12-01"
+                },
+                {
+                  "startDate": "2025-06-02",
+                  "endDate": "2025-06-08"
+                }
+              ]
+            },
+            {
+              "title": "Đợt 4/2024 Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-09-30",
+                  "endDate": "2024-10-27"
+                }
+              ]
+            },
+            {
+              "title": "Đợt 1/2025 Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-03-03",
+                  "endDate": "2025-03-23"
+                }
+              ]
+            },
+            {
+              "title": "Đợt 2/2025 Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-04-14",
+                  "endDate": "2025-05-04"
+                }
+              ]
+            },
+            {
+              "title": "Đợt 3/2025 Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-07-28",
+                  "endDate": "2025-08-17"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh",
+          "activities": [
+            {
+              "title": "N",
+              "description": "Nhập học, kiểm tra AV",
+              "date": [
+                {
+                  "startDate": "2024-08-26",
+                  "endDate": "2024-09-15"
+                }
+              ]
+            },
+            {
+              "title": "Thi THPT",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-06-30",
+                  "endDate": "2025-07-06"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh VB2" ,
+          "activities": [
+            {
+              "title": "Nhận HS đợt 3/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-26",
+                  "endDate": "2024-09-15"
+                }
+              ]
+            },
+            {
+              "title": "Xét tuyển & ra QĐ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-09-09",
+                  "endDate": "2024-10-06"
+                },
+                {
+                  "startDate": "2024-12-09",
+                  "endDate": "2024-12-29"
+                },
+                {
+                  "startDate": "2025-02-17",
+                  "endDate": "2025-03-09"
+                },
+                {
+                  "startDate": "2025-07-07",
+                  "endDate": "2025-07-20"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 4/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-11-11",
+                  "endDate": "2024-12-08"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 1/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-12-30",
+                  "endDate": "2025-01-19"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 2/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-06-02",
+                  "endDate": "2025-06-29"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xử lý học vụ",
+          "activities": [
+            {
+              "title": "Lập DS đợt 1",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-09-02",
+                  "endDate": "2024-09-22"
+                }
+              ]
+            },
+            {
+              "title": "QĐ đợt 1",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-09-23",
+                  "endDate": "2024-10-13"
+                }
+              ]
+            },
+            {
+              "title": "Lập DS đợt 2",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-02-17",
+                  "endDate": "2025-03-16"
+                }
+              ]
+            },
+            {
+              "title": "QĐ đợt 2",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-03-17",
+                  "endDate": "2025-06-04"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Nghỉ Tết ÂL",
+          "activities": [
+            {
+              "title": "Tết Âm Lịch",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-01-27",
+                  "endDate": "2025-02-16"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "systemName": "Từ xa",
+      "common_activities": [
+        {
+          "activities_title": "Xét tốt nghiệp",
+          "activities": [
+            {
+              "title": "Thu hồ sơ đợt 3/2024" ,
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-19",
+                  "endDate": "2024-10-06"
+                }
+              ]
+            },
+            {
+              "title": "Xét & ra QĐ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-10-07",
+                  "endDate": "2024-11-03"
+                },
+                {
+                  "startDate": "2025-04-07",
+                  "endDate": "2025-05-04"
+                },
+                {
+                  "startDate": "2025-08-04",
+                  "endDate": "2025-08-31"
+                }
+              ]
+            },
+            {
+              "title": "Lễ TN",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-11-25",
+                  "endDate": "2024-12-01"
+                },
+                {
+                  "startDate": "2025-06-02",
+                  "endDate": "2025-06-08"
+                }
+              ]
+            },
+            {
+              "title": "Thu hồ sơ đợt 1/2025 ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-02-17",
+                  "endDate": "2025-04-06"
+                }
+              ]
+            },
+            {
+              "title": "Thu hồ sơ đợt 2/2025 ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-07-07",
+                  "endDate": "2025-08-03"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh" ,
+          "activities": [
+            {
+              "title": "Thu HS đợt 3/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-19",
+                  "endDate": "2024-11-03"
+                }
+              ]
+            },
+            {
+              "title": "Xét & QĐTT & QĐ thực học đợt 3/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-11-04",
+                  "endDate": "2025-01-05"
+                }
+              ]
+            },
+            {
+              "title": "Thu HS đợt 1/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-02-17",
+                  "endDate": "2025-05-04"
+                }
+              ]
+            },
+            {
+              "title": "Thu HS đợt 2/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-06-16",
+                  "endDate": "2025-08-03"
+                }
+              ]
+            },
+            {
+              "title": "Xét & QĐTT & QĐ thực học đợt 1/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-05-05",
+                  "endDate": "2025-06-15"
+                }
+              ]
+            },
+            {
+              "title": "Xét & QĐTT & QĐ thực học đợt 2/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-08-04",
+                  "endDate": "2025-08-31"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xử lý học vụ",
+          "activities": [
+            {
+              "title": "Lập DS XLHV đợt 2/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-09-16",
+                  "endDate": "2024-10-20"
+                }
+              ]
+            },
+            {
+              "title": "QĐ XLHV",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-10-21",
+                  "endDate": "2024-11-03"
+                },
+                {
+                  "startDate": "2025-01-06",
+                  "endDate": "2025-01-19"
+                },
+                {
+                  "startDate": "2025-07-21",
+                  "endDate": "2025-08-03"
+                }
+              ]
+            },
+            {
+              "title": "Lập DS XLHV đợt 3/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-12-02",
+                  "endDate": "2025-01-05"
+                }
+              ]
+            },
+            {
+              "title": "Lập DS XLHV đợt 1/2025",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-06-16",
+                  "endDate": "2025-07-20"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Nghỉ Tết ÂL",
+          "activities": [
+            {
+              "title": "Tết Âm Lịch",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2025-01-27",
+                  "endDate": "2025-02-16"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "academicYear": "2023-2024",
+  "systems": [
+    {
+      "systemName": "Chính quy",
+      "educational_format": [
+        {
+          "format_name": "",
+          "courses": [
+            {
+              "program_id": [
+                "K2023"
+              ],
+              "activities": [
+                {
+                  "title": "N+S",
+                  "description": "Nhập học, kiểm tra AV và Sinh hoạt công dân đầu khóa",
+                  "date": [
+                    {
+                      "startDate": "2023-08-28",
+                      "endDate": "2023-09-10"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2023-2024",
+                  "date": [
+                    {
+                      "startDate": "2023-09-11",
+                      "endDate": "2024-01-07"
+                    }
+                  ]
+                },
+                {
+                  "title": "GDQP&AN",
+                  "description": "Học GDQP&AN",
+                  "date": [
+                    {
+                      "startDate": "2023-11-27",
+                      "endDate": "2023-12-24"
+                    }
+                  ]
+                },
+                {
+                  "title": "K",
+                  "description": "Kiểm tra giữa kì tập trung theo lịch",
+                  "date": [
+                    {
+                      "startDate": "2023-10-30",
+                      "endDate": "2023-11-05"
+                    },
+                    {
+                      "startDate": "2024-04-15",
+                      "endDate": "2024-04-21"
+                    }
+                  ]
+                },
+                {
+                  "title": "K*",
+                  "description": "Khoảng thời gian kiểm tra giữa kì những môn không tổ chức thi tập trung, các lớp vẫn học bình thường",
+                  "date": [
+                    {
+                      "startDate": "2023-11-06",
+                      "endDate": "2023-11-12"
+                    },
+                    {
+                      "startDate": "2024-04-22",
+                      "endDate": "2024-04-28"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-06-09"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2024-01-08",
+                      "endDate": "2024-01-14"
+                    },
+                    {
+                      "startDate": "2024-06-10",
+                      "endDate": "2024-06-16"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2024-01-15",
+                      "endDate": "2024-01-28"
+                    },
+                    {
+                      "startDate": "2024-06-17",
+                      "endDate": "2024-07-07"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ng",
+                  "description": "Nghỉ học",
+                  "date": [
+                    {
+                      "startDate": "2024-01-29",
+                      "endDate": "2024-02-05"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "program_id": [
+                "K2022",
+                "K2021",
+                "K2020",
+                "K2019"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2023-2024",
+                  "date": [
+                    {
+                      "startDate": "2023-09-11",
+                      "endDate": "2023-12-31"
+                    }
+                  ]
+                },
+                {
+                  "title": "K",
+                  "description": "Kiểm tra giữa kì tập trung theo lịch",
+                  "date": [
+                    {
+                      "startDate": "2023-10-30",
+                      "endDate": "2023-11-05"
+                    },
+                    {
+                      "startDate": "2024-04-15",
+                      "endDate": "2024-04-21"
+                    }
+                  ]
+                },
+                {
+                  "title": "K*",
+                  "description": "Khoảng thời gian kiểm tra giữa kì những môn không tổ chức thi tập trung, các lớp vẫn học bình thường",
+                  "date": [
+                    {
+                      "startDate": "2023-11-06",
+                      "endDate": "2023-11-12"
+                    },
+                    {
+                      "startDate": "2024-04-22",
+                      "endDate": "2024-04-28"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-06-09"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2024-01-01",
+                      "endDate": "2024-01-07"
+                    },
+                    {
+                      "startDate": "2024-06-10",
+                      "endDate": "2024-06-16"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2024-01-08",
+                      "endDate": "2024-01-28"
+                    },
+                    {
+                      "startDate": "2024-06-17",
+                      "endDate": "2024-07-07"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ng",
+                  "description": "Nghỉ học",
+                  "date": [
+                    {
+                      "startDate": "2024-01-29",
+                      "endDate": "2024-02-05"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "format_name": "Văn bằng 2",
+          "courses": [
+            {
+              "program_id": [
+                "K3"
+              ],
+             "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2023-2024",
+                  "date": [
+                    {
+                      "startDate": "2023-09-11",
+                      "endDate": "2024-02-04"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-06-09"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2024-01-01",
+                      "endDate": "2024-01-07"
+                    },
+                    {
+                      "startDate": "2024-06-10",
+                      "endDate": "2024-06-16"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2024-06-17",
+                      "endDate": "2024-06-30"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "program_id": [
+                "K1, K2"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2023-2024",
+                  "date": [
+                    {
+                      "startDate": "2023-09-11",
+                      "endDate": "2024-02-04"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-06-09"
+                    }
+                  ]
+                },
+                {
+                  "title": "D",
+                  "description": "Dự trữ, SV ôn tập",
+                  "date": [
+                    {
+                      "startDate": "2023-08-14",
+                      "endDate": "2023-08-20"
+                    },
+                    {
+                      "startDate": "2024-01-01",
+                      "endDate": "2024-01-07"
+                    },
+                    {
+                      "startDate": "2024-06-10",
+                      "endDate": "2024-06-16"
+                    }
+                  ]
+                },
+                {
+                  "title": "T",
+                  "description": "Thi học kỳ",
+                  "date": [
+                    {
+                      "startDate": "2024-08-21",
+                      "endDate": "2024-08-27"
+                    },
+                    {
+                      "startDate": "2024-06-17",
+                      "endDate": "2024-06-30"
+                    }
+                  ]
+                },
+                {
+                  "title": "Ng",
+                  "description": "Nghỉ học",
+                  "date": [
+                    {
+                      "startDate": "2023-08-28",
+                      "endDate": "2023-09-10"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "format_name": "Liên thông",
+          "courses": [
+            {
+              "program_id": [
+                "K3"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2023-08-07",
+                      "endDate": "2024-01-31"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-08-25"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "program_id": [
+                "K1", "K2"
+              ],
+              "activities": [
+                {
+                  "title": "HK1",
+                  "description": "Học kì 1 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2023-09-11",
+                      "endDate": "2024-01-31"
+                    }
+                  ]
+                },
+                {
+                  "title": "HK2",
+                  "description": "Học kì 2 - Năm học 2024-2025",
+                  "date": [
+                    {
+                      "startDate": "2024-02-19",
+                      "endDate": "2024-08-25"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "common_activities": [
+        {
+          "activities_title": "Học kì hè",
+          "activities": [
+            {
+              "title": "HK hè",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-07-08",
+                  "endDate": "2024-08-11"
+                }
+              ]
+            },
+            {
+              "title": "D",
+              "description": "Dự trữ, SV ôn tập",
+              "date": [
+                {
+                  "startDate": "2024-08-12",
+                  "endDate": "2024-08-18"
+                }
+              ]
+            },
+            {
+              "title": "T",
+              "description": "Thi học kỳ",
+              "date": [
+                {
+                  "startDate": "2024-08-19",
+                  "endDate": "2024-08-25"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Khóa luận tốt nghiệp",
+          "activities": [
+            {
+              "title": "Giao đề tài",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-02-19",
+                  "endDate": "2024-03-10"
+                },
+                {
+                  "startDate": "2023-08-21",
+                  "endDate": "2023-09-10"
+                }
+              ]
+            },
+            {
+              "title": "Thưc hiện đề tài",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-09-11",
+                  "endDate": "2023-12-31"
+                },
+                {
+                  "startDate": "2024-03-01",
+                  "endDate": "2024-07-20"
+                }
+              ]
+            },
+            {
+              "title": "50%",
+              "description": "Báo cáo tiến độ giữa kỳ khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2023-11-06",
+                  "endDate": "2023-11-11"
+                },
+                {
+                  "startDate": "2024-05-06",
+                  "endDate": "2024-05-12"
+                }
+              ]
+            },
+            {
+              "title": "Pb",
+              "description": "Phản biện khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2024-01-01",
+                  "endDate": "2024-01-14"
+                },
+                {
+                  "startDate": "2024-07-01",
+                  "endDate": "2024-07-14"
+                }
+              ]
+            },
+            {
+              "title": "Bv",
+              "description": "Bảo vệ khóa luận tốt nghiệp",
+              "date": [
+                {
+                  "startDate": "2024-01-15",
+                  "endDate": "2024-01-28"
+                },
+                {
+                  "startDate": "2024-07-15",
+                  "endDate": "2024-07-28"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xét tốt nghiệp",
+          "activities": [
+            {
+              "title": "Thu hồ sơ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-08-07",
+                  "endDate": "2023-08-20"
+                },
+                {
+                  "startDate": "2023-10-09",
+                  "endDate": "2023-10-29"
+                },
+                {
+                  "startDate": "2024-02-26",
+                  "endDate": "2024-03-24"
+                },
+                {
+                  "startDate": "2024-04-15",
+                  "endDate": "2024-05-05"
+                },
+                {
+                  "startDate": "2024-08-05",
+                  "endDate": "2024-08-18"
+                }
+              ]
+            },
+            {
+              "title": "Xét & ra QĐ",
+              "description": "Dự trữ, SV ôn tập",
+              "date": [
+                {
+                  "startDate": "2023-08-21",
+                  "endDate": "2023-09-03"
+                },
+                {
+                  "startDate": "2023-10-30",
+                  "endDate": "2023-11-12"
+                },
+                {
+                  "startDate": "2024-03-25",
+                  "endDate": "2024-04-17"
+                },
+                {
+                  "startDate": "2024-05-06",
+                  "endDate": "2024-05-19"
+                },
+                {
+                  "startDate": "2024-08-19",
+                  "endDate": "2024-09-01"
+                }
+              ]
+            },
+            {
+              "title": "Lễ TN",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-11-27",
+                  "endDate": "2023-12-03"
+                },
+                {
+                  "startDate": "2024-06-03",
+                  "endDate": "2024-06-09"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh",
+          "activities": [
+            {
+              "title": "N",
+              "description": "Nhập học, kiểm tra AV",
+              "date": [
+                {
+                  "startDate": "2023-08-28",
+                  "endDate": "2023-09-10"
+                }
+              ]
+            },
+            {
+              "title": "Thi THPT",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-06-24",
+                  "endDate": "2024-07-30"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh VB2" ,
+          "activities": [
+            {
+              "title": "Nhận HS đợt 3/2023",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-08-28",
+                  "endDate": "2023-09-10"
+                }
+              ]
+            },
+            {
+              "title": "Xét tuyển & ra QĐ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-09-11",
+                  "endDate": "2023-10-08"
+                },
+                {
+                  "startDate": "2023-12-11",
+                  "endDate": "2023-12-31"
+                },
+                {
+                  "startDate": "2024-02-26",
+                  "endDate": "2024-03-17"
+                },
+                {
+                  "startDate": "2024-07-01",
+                  "endDate": "2024-07-21"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 4/2023",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-11-13",
+                  "endDate": "2023-12-10"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 1/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-01-08",
+                  "endDate": "2024-02-04"
+                }
+              ]
+            },
+            {
+              "title": "Nhận HS đợt 2/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-06-03",
+                  "endDate": "2024-06-30"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xử lý học vụ",
+          "activities": [
+            {
+              "title": "Lập DS đợt 1",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-09-04",
+                  "endDate": "2023-09-17"
+                }
+              ]
+            },
+            {
+              "title": "QĐ đợt 1",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-09-25",
+                  "endDate": "2023-10-08"
+                }
+              ]
+            },
+            {
+              "title": "Lập DS đợt 2",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-03-04",
+                  "endDate": "2024-03-31"
+                }
+              ]
+            },
+            {
+              "title": "QĐ đợt 2",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-04-01",
+                  "endDate": "2024-04-14"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Nghỉ Tết ÂL",
+          "activities": [
+            {
+              "title": "Tết Âm Lịch",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-02-05",
+                  "endDate": "2024-02-18"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "systemName": "Từ xa",
+      "common_activities": [
+        {
+          "activities_title": "Xét tốt nghiệp",
+          "activities": [
+            {
+              "title": "Thu hồ sơ" ,
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-10-09",
+                  "endDate": "2023-10-29"
+                },
+                {
+                  "startDate": "2024-02-26",
+                  "endDate": "2024-03-17"
+                },
+                {
+                  "startDate": "2023-07-01",
+                  "endDate": "2023-10-04"
+                }
+              ]
+            },
+            {
+              "title": "Xét & ra QĐ",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-10-30",
+                  "endDate": "2023-11-12"
+                },
+                {
+                  "startDate": "2024-03-18",
+                  "endDate": "2024-03-30"
+                },
+                {
+                  "startDate": "2024-08-05",
+                  "endDate": "2024-08-25"
+                }
+              ]
+            },
+            {
+              "title": "Lễ TN",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-11-27",
+                  "endDate": "2023-12-03"
+                },
+                {
+                  "startDate": "2024-06-03",
+                  "endDate": "2024-06-09"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Tuyển sinh" ,
+          "activities": [
+            {
+              "title": "Thu HS đợt 3/2023",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-08-28",
+                  "endDate": "2023-11-05"
+                }
+              ]
+            },
+            {
+              "title": "QĐTT đợt 3/2023",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-11-06",
+                  "endDate": "2023-12-03"
+                }
+              ]
+            },
+            {
+              "title": "Thu HS đợt 1/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-03-04",
+                  "endDate": "2024-05-05"
+                }
+              ]
+            },
+            {
+              "title": "Thu HS đợt 2/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-06-03",
+                  "endDate": "2024-08-04"
+                }
+              ]
+            },
+            {
+              "title": "QĐTT đợt 1/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-05-06",
+                  "endDate": "2024-05-26"
+                }
+              ]
+            },
+            {
+              "title": "QĐTT đợt 2/2024",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-08-05",
+                  "endDate": "2024-08-25"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Xử lý học vụ",
+          "activities": [
+            {
+              "title": "Lập DS XLHV",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2023-12-04",
+                  "endDate": "2023-12-30"
+                },
+                {
+                  "startDate": "2024-06-03",
+                  "endDate": "2024-06-31"
+                }
+              ]
+            },
+            {
+              "title": "QĐ XLHV",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-01-01",
+                  "endDate": "2024-01-14"
+                },
+                {
+                  "startDate": "2024-07-01",
+                  "endDate": "2024-07-14"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "activities_title": "Nghỉ Tết ÂL",
+          "activities": [
+            {
+              "title": "Tết Âm Lịch",
+              "description": "",
+              "date": [
+                {
+                  "startDate": "2024-02-05",
+                  "endDate": "2024-02-18"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}]

@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!token) {
         alert("Vui lòng đăng nhập để xem thông tin");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = `${window.location.origin}/`;
         return;
     }
 
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchLecturerProfile(token) {
     try {
-        const response = await fetch('http://localhost:3000/api/lecturer/profile/api', {
+        const response = await fetch('/api/lecturer/profile/api', {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ async function fetchLecturerProfile(token) {
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem('token');
                 alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
-                window.location.href = 'http://localhost:3000/';
+                window.location.href = `${window.location.origin}/`;
                 return;
             }
             throw new Error('Lỗi khi tải thông tin');
@@ -128,16 +128,17 @@ function displayLecturerData(lecturer) {
     }
 
     // Hiển thị thông tin chính
-    setValue('lecturer-name', lecturer.name);
-    setValue('lecturer-email', lecturer.school_email || lecturer.personal_email);
+    setValue('lecturer-name', lecturer.fullname);
+    setValue('lecturer-email', lecturer.email);
     setValue('lecturer-id', lecturer.lecturer_id);
 
     // Thông tin cá nhân
-    setValue('fullname', lecturer.name);
-    setValue('birth-place', lecturer.birth_place);
-    setValue('birth-date', lecturer.birth_date);
-    setValue('faculty', lecturer.faculty_name);
-    
+    setValue('fullname', lecturer.fullname);
+    setValue('birth-place', lecturer.birthplace);
+    setValue('birth-date', lecturer.birthdate); 
+    setValue('faculty', lecturer.faculty);
+    setValue('class-management', lecturer.className);
+
     // Xử lý giới tính
     const genderElement = document.getElementById('gender-display');
     const maleRadio = document.getElementById('nam-display');
@@ -156,9 +157,7 @@ function displayLecturerData(lecturer) {
             if (genderElement) genderElement.textContent = 'Nam';
         }
     }
-    
     // Thông tin liên lạc
-    setValue('school-email', lecturer.school_email);
-    setValue('personal-email', lecturer.personal_email);
-    setValue('phone', lecturer.phone);
+    setValue('personal-email', lecturer.email);
+    setValue('phone', lecturer.phonenumber);
 }

@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.querySelector('.logout-button');
     const studentCountElement = document.querySelector('.fs-3.fw-bold');
     const studentTableBody = document.querySelector('tbody');
+    const clearMssvButton = document.getElementById('clear-mssv');
+    const mssvInput = document.getElementById('filter-mssv');
 
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateDropdown(id, items) {
         const select = document.getElementById(id);
         if (!select) return;
-        select.innerHTML = `<option value="">-- Tất cả --</option>` + items.map(item =>
+        select.innerHTML = `<option value="">Tất cả</option>` + items.map(item =>
             `<option value="${item}">${item}</option>`).join('');
     }
 
@@ -63,10 +65,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="text-center">${s.class_name || '-'}</td>
                     <td class="text-center">${s.major_id}</td>
                     <td class="text-center">${s.faculty_name}</td>
-                    <td class="text-center"><a class="text" href="#"><i class="fas fa-external-link-alt"></i></a></td>
-                    <td class="text-center border-end"><a class="text"><i class="fas fa-chart-line"></i></a></td>
+                    <td class="text-center">
+                        <a class="text view-profile" href="#" data-student-id="${s.student_id}">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                    <td class="text-center border-end">
+                        <a class="text"><i class="fas fa-chart-line"></i></a>
+                    </td>
                 </tr>
             `).join('');
+
+            document.querySelectorAll('.view-profile').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // Chặn reload
+                    const studentId = this.getAttribute('data-student-id');
+                    if (studentId) {
+                        localStorage.setItem('selectedStudentId', studentId);
+                        window.location.href = `/api/admin/student/${studentId}/profile`; // <-- Trang hồ sơ sinh viên
+                    }
+                });
+            });
 
             // Render dropdown filter
             if (filters) {
@@ -98,5 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (facultyName) params.append('faculty_name', facultyName);
 
         loadStudents(params.toString());
+    });
+
+    clearMssvButton.addEventListener('click', () => {
+        mssvInput.value = ''; // Xóa input
+        loadStudents(); // Load lại tất cả sinh viên
     });
 });

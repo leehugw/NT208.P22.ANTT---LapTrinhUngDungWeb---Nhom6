@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Menu Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link href="/Admin_Create_Lecturer_Accounts/PC_admin_create_accounts.css" rel="stylesheet">
+    <link href="/Admin_Create_Lecturer_Accounts/mobile_admin_create_accounts.css" rel="stylesheet">
+    <link href="/Admin_Create_Lecturer_Accounts/admin_create_accounts.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="bg-white shadow navbar fixed-top font-roboto">
+        <div class="container d-flex justify-content-between align-items-center py-2 px-6">
+            <div class="d-none d-md-flex align-items-center logo-container">
+                <img alt="Logo" height="80" src="/Admin_Create_Lecturer_Accounts/logo.png" width="80">
+            </div>
+            <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
+                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none" href="#about">Về chúng tôi</a>
+                <a class="nav-link mx-2 text-decoration-none" href="#services">Dịch vụ</a>
+                <a class="nav-link mx-2 text-decoration-none" href="#howitworks">Cách hoạt động</a>
+                <a class="nav-link mx-2 text-decoration-none" href="#contact">Liên hệ</a>
+                <div class="dropdown mx-2">
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Thống kê</a></li>
+                        <li><a id="btn-admin-student" class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
+                        <li><a class="dropdown-item" href="#">Quản lí Chatbot</a></li>
+                        <li><a class="dropdown-item" href="#">Hồ sơ Admin</a></li>
+                        <li><a class="dropdown-item" href="/admin/create-lecturer-account">Tạo tài khoản giảng viên</a></li>
+                        <li><a class="dropdown-item logout-button" href="#">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
+            style="width: 75%; height: 100%; display: none;">
+            <div class="d-flex justify-content-start align-items-center p-4">
+                <span class="h4 fw-bold">Chatbot UIT</span>
+                <button class="btn btn-link text-dark ms-auto" id="menu-close">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+                <i class="fa-solid fa-house-chimney"></i> Trang chủ
+            </a>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+                <i class="fa-solid fa-users"></i> Về chúng tôi
+            </a>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+                <i class="fa-solid fa-cog"></i> Cách hoạt động
+            </a>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+                <i class="fa-solid fa-server"></i> Dịch vụ
+            </a>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+                <i class="fa-solid fa-phone"></i> Liên hệ
+            </a>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#lecturerDropdown">
+                <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Thống kê</a>
+            </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a id="btn-admin-student" class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Theo dõi sinh viên</a>
+            </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Quản lí Chatbot</a>
+            </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Hồ sơ Admin</a>
+            </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="/admin/create-lecturer-account">Tạo tài khoản giảng viên</a>
+            </div>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button" href="#">
+                <i class="fa-solid fa-sign-out"></i> Đăng xuất
+            </a>
+        </nav>
+    </header>
+    <main class="container mt-5 pt-5">
+        <div class="card shadow p-4 rounded-4 border-0" style="max-width: 900px; margin: auto;">
+            <div class="d-flex align-items-center mb-4">
+                <i class="fa-solid fa-user-plus fa-2xl me-3 text-primary"></i>
+                <h2 class="mb-0">Tạo tài khoản Cố vấn học tập</h2>
+            </div>
+    
+            <form id="createLecturerForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label">Email (Username)</label>
+                        <input type="email" class="form-control" id="username" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fullname" class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" id="fullname" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phonenumber" class="form-label">Số điện thoại</label>
+                        <input type="phone" class="form-control" id="phonenumber" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="gender" class="form-label">Giới tính</label>
+                        <select class="form-select" id="gender" required>
+                            <option selected disabled>-- Chọn giới tính --</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="birthdate" class="form-label">Ngày sinh</label>
+                        <input type="date" class="form-control" id="birthdate" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="birthplace" class="form-label">Nơi sinh</label>
+                        <input type="text" class="form-control" id="birthplace" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="faculty" class="form-label">Khoa</label>
+                        <select class="form-select" id="faculty" required>
+                            <option selected disabled>-- Chọn khoa --</option>
+                            <option value="Khoa học máy tính">Khoa học máy tính</option>
+                            <option value="Công nghệ phần mềm">Công nghệ phần mềm</option>
+                            <option value="Kỹ thuật máy tính">Kỹ thuật máy tính</option>
+                            <option value="Hệ thống thông tin">Hệ thống thông tin</option>
+                            <option value="Khoa học & Kỹ thuật thông tin">Khoa học & Kỹ thuật thông tin</option>
+                            <option value="Mạng máy tính & Truyền thông">Mạng máy tính & Truyền thông</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="className" class="form-label">Tên lớp quản lý</label>
+                        <input type="text" class="form-control" id="className" placeholder="VD: ATTT20**.*" required>
+                    </div>
+                </div>
+    
+                <input type="hidden" id="role" value="Cố vấn học tập">
+    
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill">
+                        <i class="fa-solid fa-circle-plus me-2"></i> Tạo tài khoản
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    
+    <footer class="footer-nav d-flex justify-content-between align-items-center px-3 mt-auto py-1">
+        <a href="#" class="me-auto">Privacy Policy</a>
+        <a href="#" class="d-flex align-items-center">
+            <span class="me-1">Help</span>
+            <i class="fas fa-question-circle"></i>
+        </a>
+    </footer>
+    <script src="/Admin_Create_Lecturer_Accounts/admin_create_accounts.js"></script>
+</body>
+
+</html>

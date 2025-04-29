@@ -11,13 +11,19 @@ exports.getSemestersByLecturer = async (req, res) => {
   }
 };
 
-exports.getClassesBySemester = async (req, res) => {
+exports.getClasses = async (req, res) => {
   const { semester_id } = req.query;
-  const lecturerId = req.user.lecturer_id;
+  const lecturerId = req.user.lecturer_id; // Lấy lecturer_id từ thông tin người dùng đã xác thực
+
   try {
-    const classes = await scoreService.getClassesBySemester(lecturerId, semester_id);
+    // Gọi service để lấy danh sách lớp mà giảng viên dạy hoặc cố vấn
+    const classes = await scoreService.getClasses(lecturerId, semester_id);
+
+    // Trả kết quả về cho người dùng
     res.json(classes);
   } catch (err) {
+    // Xử lý lỗi và trả về thông báo lỗi
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };

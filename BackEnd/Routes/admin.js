@@ -7,6 +7,9 @@ const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const adminChatController = require('../Controllers/admin/adminChatController');
 const { getAllLecturersForAdmin } = require('../Controllers/admin/adminLecturerList');
 const { getAllStudentsForAdmin } = require('../Controllers/admin/adminStudentController');
+const { createLecturer } = require('../Controllers/admin/adminCreateAccountsController');
+const StudentInformationService = require('../Services/student/StudentInformationService');
+
 
 
 
@@ -42,6 +45,26 @@ router.get('/students', authenticateToken, authorizeRoles('admin'), (req, res) =
   res.sendFile(pagePath);
 });
 router.get('/students-data', authenticateToken, authorizeRoles('admin'), getAllStudentsForAdmin); //trả về file json để hiển thị
+// hiển thị thông tin sinh viên cho admin
+router.get('/student/:student_id/profile', (req, res) => {
+  const pagePath = path.join(__dirname, '../../FrontEnd/Student_Information/student_info.html');
+  res.sendFile(pagePath);
+});
+
+router.get('/student/:student_id/profile/api', authenticateToken, authorizeRoles('admin'), async (req, res) => {
+  const student_id = req.params.student_id;
+  try {
+    const profile = await StudentInformationService.getStudentProfile(student_id);
+    res.json({
+      success: true,
+      type: "admin",
+      data: profile
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Lỗi server" });
+  }
+});
 
 
 // Route API hiển thị danh sách giảng viên cho admin
@@ -53,5 +76,18 @@ router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAll
 
 
 
+// Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
+router.get('/create-lecturer-account', (req, res) => {
+  const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Create_Lecturer_Accounts/admin_create_accounts.html');
+  res.sendFile(pagePath);
+});
+
+// Route tạo tài khoản giảng viên (API)
+router.post(
+  '/lecturers',
+  authenticateToken,
+  authorizeRoles('admin'),
+  createLecturer
+);
 
 module.exports = router;

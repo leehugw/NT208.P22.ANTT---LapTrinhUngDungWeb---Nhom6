@@ -7,7 +7,6 @@ class StudentInformationService {
   static async getStudentProfile(student_id) {
     try {
       const student = await Student.findOne({ student_id }).lean();
-      console.log("studentId từ token:", student_id);
       if (!student) throw new NotFoundError('Không tìm thấy sinh viên');
   
       let faculty_name = null;
@@ -35,7 +34,8 @@ class StudentInformationService {
         contact: student.contact || null,
         address: student.address || null,
         identity: student.identity || null,
-        family: student.family || null
+        family: student.family || null,
+        major_id: student.major_id || null,
       };
     } catch (error) {
       console.error('Lỗi khi lấy thông tin sinh viên:', error);
