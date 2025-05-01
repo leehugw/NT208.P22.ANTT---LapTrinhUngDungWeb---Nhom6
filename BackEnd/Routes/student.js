@@ -8,6 +8,7 @@ const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const HandleChatRequestController = require('../Controllers/student/ChatBotController');
 const chatController = require('../Controllers/student/studentChatController');
 const RecommendCourseController = require('../Controllers/student/RecommendCourseController');
+const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController')
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -29,7 +30,6 @@ router.get('/academicstatistic', (req, res) => {
     res.sendFile(pagePath);
 });
 
-    
 
 //Route hien thi cau hoi va tra loi chatbot
 // router.post('/:student_id/chatbot-data', HandleChatRequestController.handleChatRequest);
@@ -61,16 +61,10 @@ router.get('/academicstatistic', (req, res) => {
 // });
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
-router.post('/:studentId/schedule-optimize-data',
-    CourseRecommendationController.generateOptimizedSchedule
+router.post('/schedule-optimize-data', authenticateToken, authorizeRoles('student'), CourseRecommendationController.generateOptimizedSchedule
 );
 
-router.get('/:student_id/schedule-optimize', (req, res) => {
-    const { student_id } = req.params;
-
-    if (!student_id) {
-        return res.status(400).send("student_id là bắt buộc");
-    }
+router.get('/schedule-optimize', (req, res) => {
     const pagePath = path.join(__dirname, '../../FrontEnd/Timetable/Timetable.html');
 
     res.sendFile(pagePath);

@@ -638,9 +638,7 @@ document.getElementById('optimizeScheduleBtn').addEventListener('click', () => {
         return;
     }
 
-    const path = window.location.pathname;
-    const studentId = path.split('/')[3];
-    sendToOptimizeSchedule(studentId, classList);
+    sendToOptimizeSchedule(classList);
 });
 
 // Gọi modal khi nhấn nút "Xóa tất cả"
@@ -678,50 +676,58 @@ function removeAllSubjects() {
 }
 
 
-
+const token = localStorage.getItem('token'); 
 // Sau khi đã parse xong dữ liệu Excel
-async function sendToOptimizeSchedule(studentId, classList) {
+async function sendToOptimizeSchedule(classList) {
     try {
-        const response = await fetch(`/api/student/${studentId}/schedule-optimize-data`, {
+        
+        const response = await fetch('/api/student/schedule-optimize-data', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // Gửi token xác thực
             },
-            body: JSON.stringify({ availableCourses: classList })
+            body: JSON.stringify({
+                availableCourses: classList
+            })
         });
 
         const result = await response.json();
 
+        // Kiểm tra nếu có lỗi trong phản hồi từ backend
         if (!response.ok) {
-            console.error('❌ Backend Error:', result.error);
-        } else {
-            const scheduleData = result.schedule;
+            console.error('❌ Backend Error:', result.error || result.message);
+            return;
+        }
 
-            const nextSemester = Object.keys(scheduleData)[0];
+        const scheduleData = result.schedule;
+        const nextSemester = Object.keys(scheduleData)[0];
 
-            scheduleData[nextSemester].courses.forEach(course => {
-                course.classes.forEach(courseClass => {
-                    const index = classList.findIndex(existingSubject =>
-                        existingSubject.subject_id === courseClass.subject_id
-                        && existingSubject.class_id === courseClass.class_id
-                        && existingSubject.lecturer === courseClass.lecturer
-                        && existingSubject.day === courseClass.day
-                        && existingSubject.slots.every((slot, idx) => slot === courseClass.slots[idx])
+        scheduleData[nextSemester].courses.forEach(course => {
+            course.classes.forEach(courseClass => {
+                const index = classList.findIndex(existingSubject =>
+                    existingSubject.subject_id === courseClass.subject_id &&
+                    existingSubject.class_id === courseClass.class_id &&
+                    existingSubject.lecturer === courseClass.lecturer &&
+                    existingSubject.day === courseClass.day &&
+                    JSON.stringify(existingSubject.slots) === JSON.stringify(courseClass.slots)
+                );
 
-                    ); // Tìm lớp học trong classList
-
-
+                if (index !== -1) {
                     const checkbox = document.getElementById(`chk${index}`);
                     if (checkbox) {
                         checkbox.checked = true;
                         checkbox.dispatchEvent(new Event('change'));
                     }
-                });
+                }
             });
-        }
+        });
+
     } catch (error) {
         console.error('❌ Fetch Error:', error.message);
     }
 }
+
+
 
 

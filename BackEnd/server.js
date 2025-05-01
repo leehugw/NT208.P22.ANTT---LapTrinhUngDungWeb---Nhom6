@@ -14,7 +14,7 @@ require('./passport');
 const authRoutes = require('./Routes/auth');
 app.use('/auth', authRoutes);
 
-app.use(express.json());
+app.use(express.json({limit: '100mb'}));
 app.use(passport.initialize());
 
 // Kết nối database
@@ -27,10 +27,9 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(bodyParser.json({ limit: '50mb' }));
 
-app.use(express.json()); // For parsing application/json
-app.use(express.urlencoded({ extended: true })); // For form data
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
@@ -54,13 +53,11 @@ app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lectu
 app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
 
 
-
-
 // Route to trigger Google login
 
 //const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=278181169185-sqeskqdu8rnck8l5cakqhplhbjskn2ni.apps.googleusercontent.com&redirect_uri=http://localhost:3000/callback&response_type=code&scope=email`;
 
-app.get("/auth/google", 
+app.get("/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 

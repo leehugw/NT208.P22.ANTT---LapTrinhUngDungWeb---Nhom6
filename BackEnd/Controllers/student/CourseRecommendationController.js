@@ -3,7 +3,7 @@ const CourseRecommendationService = require('../../Services/student/CourseRecomm
 exports.generateOptimizedSchedule = async (req, res) => {
     try {
         const { availableCourses } = req.body;
-        const studentId = req.params.studentId;
+        const studentId = req.user.student_id;
 
         if (!Array.isArray(availableCourses) || availableCourses.length === 0) {
             return res.status(400).json({ error: 'availableCourses is missing or empty' });
