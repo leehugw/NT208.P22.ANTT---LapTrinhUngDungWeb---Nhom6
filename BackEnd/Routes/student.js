@@ -32,20 +32,50 @@ router.get('/academicstatistic', (req, res) => {
     
 
 //Route hien thi cau hoi va tra loi chatbot
-router.post('/:student_id/chatbot-data', HandleChatRequestController.handleChatRequest);
+// router.post('/:student_id/chatbot-data', HandleChatRequestController.handleChatRequest);
 
-router.get('/:student_id/chatbot', (req, res) => {
+// router.get('/:student_id/chatbot', (req, res) => {
+//     const { student_id } = req.params;
+
+//     if (!student_id) {
+//         return res.status(400).send("student_id là bắt buộc");
+//     }
+
+//     // Gọi controller để xử lý
+//     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
+
+//     res.sendFile(pagePath);
+// });
+
+// router.get('/:student_id/chatbot', (req, res) => {
+//     const { student_id } = req.params;
+
+//     if (!student_id) {
+//         return res.status(400).send("student_id là bắt buộc");
+//     }
+
+//     // Gọi controller để xử lý
+//     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
+
+//     res.sendFile(pagePath);
+// });
+
+// API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
+router.post('/:studentId/schedule-optimize-data',
+    CourseRecommendationController.generateOptimizedSchedule
+);
+
+router.get('/:student_id/schedule-optimize', (req, res) => {
     const { student_id } = req.params;
 
     if (!student_id) {
         return res.status(400).send("student_id là bắt buộc");
     }
-
-    // Gọi controller để xử lý
-    const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
+    const pagePath = path.join(__dirname, '../../FrontEnd/Timetable/Timetable.html');
 
     res.sendFile(pagePath);
 });
+
 
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {

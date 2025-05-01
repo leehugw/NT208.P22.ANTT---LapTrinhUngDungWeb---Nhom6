@@ -1,0 +1,364 @@
+{
+    "schedule": {
+        "3": {
+            "courses": [
+                {
+                    "courseId": "IE101",
+                    "subjectName": "Cơ sở hạ tầng công nghệ thông tin",
+                    "credits": 3,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IE101",
+                            "subject_name": "Cơ sở hạ tầng công nghệ thông tin",
+                            "class_id": "IE101.P22",
+                            "lecturer": "Nguyễn Thị Anh Thư",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-04-12",
+                            "day": "Mon",
+                            "slots": [
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "08:15 - 11:30",
+                            "room": "B1.04"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE102",
+                    "subjectName": "Các công nghệ nền",
+                    "credits": 3,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IE102",
+                            "subject_name": "Các công nghệ nền",
+                            "class_id": "IE102.P22",
+                            "lecturer": "Nguyễn Tấn Hoàng Phước",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-03",
+                            "day": "Mon",
+                            "slots": [
+                                6,
+                                7,
+                                8
+                            ],
+                            "time": "13:00 - 15:15",
+                            "room": "B1.02"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE103",
+                    "subjectName": "Quản lý thông tin",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IE103",
+                            "subject_name": "Quản lý thông tin",
+                            "class_id": "IE103.P21",
+                            "lecturer": "Tạ Thu Thủy",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Wed",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
+                            "time": "13:00 - 16:15",
+                            "room": "B1.02"
+                        },
+                        {
+                            "subject_id": "IE103",
+                            "subject_name": "Quản lý thông tin",
+                            "class_id": "IE103.P21.1",
+                            "lecturer": "Tạ Thu Thủy",
+                            "capacity": 30,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-17",
+                            "day": "Thu",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9,
+                                0
+                            ],
+                            "time": "13:00 - 17:00",
+                            "room": "B2.06"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IE105",
+                    "subjectName": "Nhập môn bảo đảm và an ninh thông tin",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IE105",
+                            "subject_name": "Nhập môn bảo đảm và an ninh thông tin",
+                            "class_id": "IE105.P22",
+                            "lecturer": "Nguyễn Tấn Cầm",
+                            "capacity": 60,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Tue",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "time": "07:30 - 10:45",
+                            "room": "B1.04"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IS208",
+                    "subjectName": "Quản lý dự án công nghệ thông tin",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IS208",
+                            "subject_name": "Quản lý dự án công nghệ thông tin",
+                            "class_id": "IS208.P21",
+                            "lecturer": "Tạ Việt Phương",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Sat",
+                            "slots": [
+                                6,
+                                7,
+                                8,
+                                9
+                            ],
+                            "time": "13:00 - 16:15",
+                            "room": "B7.04"
+                        },
+                        {
+                            "subject_id": "IS208",
+                            "subject_name": "Quản lý dự án công nghệ thông tin",
+                            "class_id": "IS208.P21.1",
+                            "lecturer": "Tạ Việt Phương",
+                            "capacity": 40,
+                            "startDate": "2025-03-03",
+                            "endDate": "2025-05-17",
+                            "day": "Sat",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ],
+                            "time": "07:30 - 11:30",
+                            "room": "B3.08"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IS336",
+                    "subjectName": "Hoạch định nguồn lực doanh nghiệp",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IS336",
+                            "subject_name": "Hoạch định nguồn lực doanh nghiệp",
+                            "class_id": "IS336.P21",
+                            "lecturer": "Văn Đức Sơn Hà",
+                            "capacity": 50,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-05-10",
+                            "day": "Wed",
+                            "slots": [
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "time": "07:30 - 10:45",
+                            "room": "C301"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IT002",
+                    "subjectName": "Lập trình hướng đối tượng",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IT002",
+                            "subject_name": "Lập trình hướng đối tượng",
+                            "class_id": "IT002.P213",
+                            "lecturer": "Trần Thị Hồng Yến",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-06-07",
+                            "day": "Thu",
+                            "slots": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "time": "07:30 - 09:45",
+                            "room": "B1.20"
+                        }
+                    ]
+                },
+                {
+                    "courseId": "IT005",
+                    "subjectName": "Nhập môn mạng máy tính",
+                    "credits": 4,
+                    "isElective": false,
+                    "classes": [
+                        {
+                            "subject_id": "IT005",
+                            "subject_name": "Nhập môn mạng máy tính",
+                            "class_id": "IT005.P22",
+                            "lecturer": "Nguyễn Khánh Thuật",
+                            "capacity": 80,
+                            "startDate": "2025-02-17",
+                            "endDate": "2025-06-07",
+                            "day": "Tue",
+                            "slots": [
+                                6,
+                                7,
+                                8
+                            ],
+                            "time": "13:00 - 15:15",
+                            "room": "B6.10"
+                        }
+                    ]
+                }
+            ],
+            "totalCredits": 30,
+            "majorfoundationCredits": 30,
+            "majorCredits": 0,
+            "electiveCredits": 0,
+            "generalEducationCredits": 0,
+            "targetMajorFoundation": 8,
+            "targetMajorCore": 3,
+            "targetGeneralCredits": 5,
+            "targetElectiveCredits": 1
+        }
+    },
+    "weeklyTimetable": {
+        "Mon": [
+            {
+                "time": "08:15 - 11:30",
+                "subject": "Cơ sở hạ tầng công nghệ thông tin",
+                "classId": "IE101.P22",
+                "room": "B1.04",
+                "lecturer": "Nguyễn Thị Anh Thư",
+                "credits": 3
+            },
+            {
+                "time": "13:00 - 15:15",
+                "subject": "Các công nghệ nền",
+                "classId": "IE102.P22",
+                "room": "B1.02",
+                "lecturer": "Nguyễn Tấn Hoàng Phước",
+                "credits": 3
+            }
+        ],
+        "Tue": [
+            {
+                "time": "07:30 - 10:45",
+                "subject": "Nhập môn bảo đảm và an ninh thông tin",
+                "classId": "IE105.P22",
+                "room": "B1.04",
+                "lecturer": "Nguyễn Tấn Cầm",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 15:15",
+                "subject": "Nhập môn mạng máy tính",
+                "classId": "IT005.P22",
+                "room": "B6.10",
+                "lecturer": "Nguyễn Khánh Thuật",
+                "credits": 4
+            }
+        ],
+        "Wed": [
+            {
+                "time": "07:30 - 10:45",
+                "subject": "Hoạch định nguồn lực doanh nghiệp",
+                "classId": "IS336.P21",
+                "room": "C301",
+                "lecturer": "Văn Đức Sơn Hà",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 16:15",
+                "subject": "Quản lý thông tin",
+                "classId": "IE103.P21",
+                "room": "B1.02",
+                "lecturer": "Tạ Thu Thủy",
+                "credits": 4
+            }
+        ],
+        "Thu": [
+            {
+                "time": "07:30 - 09:45",
+                "subject": "Lập trình hướng đối tượng",
+                "classId": "IT002.P213",
+                "room": "B1.20",
+                "lecturer": "Trần Thị Hồng Yến",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 17:00",
+                "subject": "Quản lý thông tin",
+                "classId": "IE103.P21.1",
+                "room": "B2.06",
+                "lecturer": "Tạ Thu Thủy",
+                "credits": 4
+            }
+        ],
+        "Fri": [],
+        "Sat": [
+            {
+                "time": "07:30 - 11:30",
+                "subject": "Quản lý dự án công nghệ thông tin",
+                "classId": "IS208.P21.1",
+                "room": "B3.08",
+                "lecturer": "Tạ Việt Phương",
+                "credits": 4
+            },
+            {
+                "time": "13:00 - 16:15",
+                "subject": "Quản lý dự án công nghệ thông tin",
+                "classId": "IS208.P21",
+                "room": "B7.04",
+                "lecturer": "Tạ Việt Phương",
+                "credits": 4
+            }
+        ],
+        "summary": {
+            "totalCourses": 8,
+            "daysWithClasses": 5,
+            "creditsPerDay": {
+                "Mon": 6,
+                "Wed": 8,
+                "Thu": 8,
+                "Tue": 8,
+                "Sat": 8
+            }
+        }
+    }
+}

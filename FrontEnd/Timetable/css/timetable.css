@@ -1,0 +1,151 @@
+.body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f3f6f1;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.2;
+}
+
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important;
+    /* Đảm bảo màu được áp dụng */
+    background-color: transparent !important;
+    /* Loại bỏ màu nền mặc định */
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.table-wrapper {
+    overflow-x: auto; /* Chỉ 1 thanh cuộn ngang */
+}
+
+.scrollable-table {
+    border-collapse: collapse;
+    width: max-content; /* Để bảng rộng theo nội dung */
+    min-width: 100%;
+    table-layout: fixed;
+}
+
+.scrollable-table thead th {
+    position: sticky;
+}
+
+.scrollable-table thead tr:nth-child(1) th {
+    top: 0; /* Đặt vị trí của hàng đầu tiên */
+    z-index: 3; /* Đảm bảo hàng đầu tiên luôn ở trên cùng */
+}
+
+.scrollable-table thead tr:nth-child(2) th {
+    top: 40px; /* Đặt vị trí của hàng thứ hai, cách hàng đầu tiên một khoảng */
+    z-index: 2;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: center;
+    word-break: break-word;
+}
+
+.scroll-body {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.scroll-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Thêm shadow */
+    border-radius: 8px;
+    /* Làm tròn góc nếu muốn */
+}
+
+.table th,
+.table td {
+    vertical-align: top;
+    border: 1px solid #d9d9d9;
+}
+
+.table thead th {
+    background-color: #3D67BA;
+    /* Màu nền tiêu đề */
+    color: white;
+    /* Màu chữ trắng */
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    border-top: none;
+    /* Không có viền trên cho hàng đầu tiên */
+    border-left: none;
+    /* Không có viền trái cho cột đầu tiên */
+}
+
+
+
+/* Loại bỏ viền cho cột đầu tiên */
+.table td:first-child,
+.table th:first-child {
+    border-left: none;
+    /* Không có viền trái cho cột đầu tiên */
+}
+
+.time-cell {
+    background-color: #c0c0c0;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    padding: 0.25rem 0.3rem;
+    white-space: nowrap;
+}
+
+.import-btn {
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}
+
+.import-btn:hover {
+    background-color: #1e40af;
+    color: white;
+}
+
+.position-relative .btn-delete {
+    display: none;
+}
+
+.position-relative:hover .btn-delete {
+    display: block !important;
+}
