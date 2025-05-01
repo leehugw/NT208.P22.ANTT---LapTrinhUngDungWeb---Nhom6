@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const multer = require('multer');
-const fs = require('fs');
 
 
 const { generateOptimizedScheduleFromExcel } = require('../Services/student/ScheduleService');
@@ -12,19 +10,6 @@ const StudentAcademicController = require('../Controllers/student/StudentAcademi
 //const HandleChatRequestController  = require('../Controllers/student/ChatBotController');
 
 const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController');
-
-// Cấu hình multer với validation
-const upload = multer({
-    dest: 'uploads/',
-    limits: { fileSize: 5 * 1024 * 1024 }, // Giới hạn 5MB
-    fileFilter: (req, file, cb) => {
-        const ext = path.extname(file.originalname).toLowerCase();
-        if (ext !== '.xlsx' && ext !== '.xls') {
-            return cb(new Error('Only Excel files (.xlsx, .xls) are allowed'));
-        }
-        cb(null, true);
-    }
-});
 
 // Route lấy bản điểm
 router.get("/:studentId/group-by-semester-data", ScoreController.getScoresByStudentGrouped);
@@ -75,10 +60,23 @@ router.get('/:student_id/academicstatistic', (req, res) => {
 // });
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
-router.post('/:studentId/schedule-optimize',
-    upload.single('file'),
+router.post('/:studentId/schedule-optimize-data',
     CourseRecommendationController.generateOptimizedSchedule
 );
+
+router.get('/:student_id/schedule-optimize', (req, res) => {
+    const { student_id } = req.params;
+
+    if (!student_id) {
+        return res.status(400).send("student_id là bắt buộc");
+    }
+
+    // Gọi controller để xử lý
+    const pagePath = path.join(__dirname, '../../FrontEnd/Timetable/Timetable.html');
+
+    res.sendFile(pagePath);
+});
+
 
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {

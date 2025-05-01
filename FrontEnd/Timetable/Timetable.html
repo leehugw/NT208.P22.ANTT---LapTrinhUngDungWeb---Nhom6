@@ -1,0 +1,399 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Thời khóa biểu</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <link href="/Timetable/css/timetablePC.css" rel="stylesheet">
+    <link href="/Timetable/css/timetablemobile.css" rel="stylesheet">
+    <link href="/Timetable/css/timetable.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="bg-white shadow navbar fixed-top">
+        <div class="container d-flex justify-content-between align-items-center py-2 px-6">
+            <div class="d-none d-md-flex align-items-center logo-container">
+                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
+            </div>
+            <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
+                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <div class="dropdown mx-2">
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sinh viên
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Hồ sơ Sinh viên</a></li>
+                        <li><a class="dropdown-item" href="#">Tiến độ học tập</a></li>
+                        <li><a class="dropdown-item" href="#">ChatbotUIT</a></li>
+                    </ul>
+
+            </nav>
+            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+
+        </div>
+        <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
+            style="width: 75%; height: 100%; display: none;">
+            <div class="d-flex justify-content-start align-items-center p-4">
+                <span class="h4 fw-bold">Chatbot UIT</span>
+                <button class="btn btn-link text-dark ms-auto" id="menu-close">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home"><i
+                    class="fa-solid fa-house-chimney"></i>
+                Trang chủ</a>
+
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+                <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="studentDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Hồ sơ Sinh viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#progress">Tiến độ học tập</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">ChatBot UIT</a>
+            </div>
+        </nav>
+    </header>
+    <main class="container pt-5 mt-5">
+        <h1 class="text-center fw-bold mb-4" style="color: #333;">Lịch học</h1>
+        <div class="p-2 border-bottom bg-white d-flex align-items-center gap-2">
+            <label for="importExcel" class="import-btn mb-0">
+                <i class="fas fa-file-excel"></i> Import file Excel
+            </label>
+            <input type="file" id="importExcel" accept=".xls,.xlsx" class="d-none" />
+            <div class="d-flex ms-auto gap-2">
+                <button id="clearTimetableBtn" class="import-btn">Xóa tất cả</button>
+                <button id="optimizeScheduleBtn" class="import-btn">
+                    <i class="fas fa-magic"></i> Tạo lịch học tối ưu
+                </button>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column rounded" style="height: 1400px; background: white;">
+            <!-- Cuộn ngang toàn bảng -->
+            <div class="table-wrapper">
+                <div class="scroll-body">
+                    <table class="table scrollable-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2"></th>
+                                <th>MÔN HỌC</th>
+                                <th>MÃ LỚP</th>
+                                <th>TÊN GIẢNG VIÊN</th>
+                                <th>THỨ</th>
+                                <th>TIẾT</th>
+                                <th>HTGD</th>
+                                <th>SỐ TC</th>
+                                <th>SĨ SỐ</th>
+                                <th>PHÒNG HỌC</th>
+                                <th>CÁCH TUẦN</th>
+                                <th>KHÓA HỌC</th>
+                                <th>HỌC KỲ</th>
+                                <th>KHOA QL</th>
+                                <th>NĂM HỌC</th>
+                                <th>HỆ ĐT</th>
+                                <th>NBD</th>
+                                <th>NKT</th>
+                                <th>GHI CHÚ</th>
+                                <th>NGÔN NGỮ</th>
+                            </tr>
+                            <tr>
+                                <th><input id="search_subject" type="text" class="form-control form-control-sm"
+                                        placeholder="(7) NT106 - Lập trình mạng căn bản"></th>
+                                <th><input id="search_classid" type="text" class="form-control form-control-sm"
+                                        placeholder="MA005.P21"></th>
+                                <th><input id="search_lecturer" type="text" class="form-control form-control-sm"
+                                        placeholder="Trần Văn B"></th>
+                                <th><input id="search_day" type="text" class="form-control form-control-sm"
+                                        placeholder="Thứ Tư"></th>
+                                <th><input id="search_slot" type="text" class="form-control form-control-sm"
+                                        placeholder="1,2,3,4"></th>
+                                <th><input id="search_htgd" type="text" class="form-control form-control-sm"
+                                        placeholder="LT"></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="TableContainer">
+                            <!-- Dữ liệu mẫu -->
+                            <tr>
+                                <td><input type="checkbox" checked></td>
+                                <td>MA005 - Xác suất thống kê</td>
+                                <td><span class="code">MA005.P214</span></td>
+                                <td>ThS. Nguyễn Văn A</td>
+                                <td>Thứ Hai</td>
+                                <td>1,2,3</td>
+                                <td>LT</td>
+                                <td>3</td>
+                                <td>45</td>
+                                <td>I3.02</td>
+                                <td>1</td>
+                                <td>K2021</td>
+                                <td>HK2</td>
+                                <td>CNPM</td>
+                                <td>2024-2025</td>
+                                <td>ĐH</td>
+                                <td>20/01/2025</td>
+                                <td>10/05/2025</td>
+                                <td></td>
+                                <td>Tiếng Việt</td>
+                            </tr>
+                            <!-- Thêm nhiều dòng nữa nếu muốn -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <!-- Right panel -->
+            <div class="flex-grow-1 bg-white">
+                <h2 class="text-center">Thời khóa biểu</h2>
+                <div id="creditDisplay" class="fw-bold" style="font-size: 20px !important; margin-bottom: 10px;">Tổng
+                    tín chỉ: 0</div>
+                <table class="table table-bordered mb-0 custom-table" style="min-width: 680px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;" class="time-cell">Thứ / Tiết</th>
+                            <th style="width: 120px;">Thứ 2</th>
+                            <th style="width: 120px;">Thứ 3</th>
+                            <th style="width: 120px;">Thứ 4</th>
+                            <th style="width: 120px;">Thứ 5</th>
+                            <th style="width: 120px;">Thứ 6</th>
+                            <th style="width: 120px;">Thứ 7</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetableBody">
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 1<br />
+                                (7:30 - 8:15)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 2<br />
+                                (8:15 - 9:00)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 3<br />
+                                (9:00 - 9:45)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 4<br />
+                                (10:00 - 10:45)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 5<br />
+                                (10:45 - 11:30)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 6<br />
+                                (13:00 - 13:45)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 7<br />
+                                (13:45 - 14:30)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+
+                                Tiết 8<br />
+                                (14:30 - 15:15)
+
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 9 <br>
+                                (15:30 - 16h15)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 10 <br>
+                                (16:15 - 17h00)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 11 <br>
+                                -
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 12 <br>
+                                -
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">
+                                Tiết 13 <br>
+                                -
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Xóa tất cả môn học</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa tất cả môn học? Hành động này sẽ không thể hoàn tác.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa tất cả</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;">
+        <!-- Toast sẽ được chèn vào đây -->
+    </div>
+
+    <!-- Thêm một toast cơ bản -->
+    <div id="toast-template" class="toast align-items-center text-bg-info border-0" role="alert" aria-live="assertive"
+        aria-atomic="true" style="display:none;">
+        <div class="d-flex">
+            <div class="toast-body">
+                Thông báo của bạn
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="/Timetable/Timetable.js"></script>
+</body>

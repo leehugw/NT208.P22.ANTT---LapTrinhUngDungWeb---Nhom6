@@ -2,12 +2,20 @@ const CourseRecommendationService = require('../../Services/student/CourseRecomm
 
 exports.generateOptimizedSchedule = async (req, res) => {
     try {
+        const { availableCourses } = req.body;
+        const studentId = req.params.studentId;
+
+        if (!Array.isArray(availableCourses) || availableCourses.length === 0) {
+            return res.status(400).json({ error: 'availableCourses is missing or empty' });
+        }
+
         const result = await CourseRecommendationService.generateOptimizedSchedule(
-            req.params.studentId, 
-            req.file.path
+            studentId,
+            availableCourses
         );
         res.json(result);
     } catch (error) {
+        console.error('Generate Schedule Error:', error);
         res.status(500).json({ error: error.message });
     }
 };

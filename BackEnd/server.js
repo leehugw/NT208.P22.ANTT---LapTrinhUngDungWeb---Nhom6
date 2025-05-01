@@ -12,7 +12,7 @@ connectDB();
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
@@ -29,6 +29,6 @@ app.use('/api/lecturer', lecturerRoutes);
 
 
 // Khởi động server
-app.listen(3001, () => {
-  console.log('Server is running on port 3001');
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
