@@ -40,18 +40,16 @@ const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
 const chatbotRoutes = require('./Routes/chatbot');
 
-app.use('/api/statistics', require('./Routes/statistics'));
-const { increaseHomeVisit } = require('./Controllers/statistics/HomeStatisticsController');
-// Direct route to home.html file
-app.get('/', increaseHomeVisit, (req, res) => {
-  res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
-});
-
 // Route to student_menu.html file
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
 app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lecturer_Menu')));
 app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
 
+const { increaseHomeVisit } = require('./Controllers/admin/HomeStatisticsController');
+// Direct route to home.html file
+app.get('/', increaseHomeVisit, (req, res) => {
+  res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
+});
 
 // Route to trigger Google login
 

@@ -9,7 +9,7 @@ const { getAllLecturersForAdmin } = require('../Controllers/admin/adminLecturerL
 const { getAllStudentsForAdmin } = require('../Controllers/admin/adminStudentController');
 const { createLecturer } = require('../Controllers/admin/adminCreateAccountsController');
 const StudentInformationService = require('../Services/student/StudentInformationService');
-
+const { getHomeVisitCount } = require('../Controllers/admin/HomeStatisticsController');
 
 
 
@@ -89,5 +89,7 @@ router.post(
   authorizeRoles('admin'),
   createLecturer
 );
+
+router.get('/home-visit-count', getHomeVisitCount);
 
 module.exports = router;
