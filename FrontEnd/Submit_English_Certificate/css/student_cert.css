@@ -1,0 +1,104 @@
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important; /* Đảm bảo màu được áp dụng */
+    background-color: transparent !important; /* Loại bỏ màu nền mặc định */
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.avatar {
+    transition: transform 0.3s ease-in-out;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+}
+.container {
+    padding: auto;
+    margin: auto;
+}
+
+.font-lexend {
+    font-family: 'Lexend', sans-serif;
+}
+.login-button {
+    background-color: #3D67BA;
+}
+
+.container h2 {
+    color: #3D67BA;
+}
+
+.login-button:hover {
+    background-color: #003366;
+}
+
+.footer-nav {
+    background-color: #3D67BA; /* Đổi màu nền */
+    color: white; /* Màu chữ */
+    padding: 10px 15px; /* Khoảng cách nội dung */
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-nav a {
+    color: white; /* Màu chữ của link */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+.footer-nav a:hover {
+    text-decoration: underline; /* Hiệu ứng hover */
+}
+
+.mt-custom {
+    margin-top: 30px; /* Hoặc bất kỳ số lẻ nào bạn muốn */
+}
+
+/* Màu chủ đạo UIT */
+.bg-uit, .bg-primary, .bg-gradient.bg-primary {
+    background-color: #3D67BA !important;
+    background-image: none !important;
+    border-color: #3D67BA !important;
+}
+.text-uit, .text-primary {
+    color: #3D67BA !important;
+}
+.btn-uit, .btn-success, .btn-primary {
+    background-color: #3D67BA !important;
+    border-color: #3D67BA !important;
+    color: #fff !important;
+}
+.btn-uit:hover, .btn-success:hover, .btn-primary:hover {
+    background-color: #2d4e8c !important;
+    border-color: #2d4e8c !important;
+    color: #fff !important;
+}
+.badge.bg-success, .badge.bg-uit {
+    background-color: #3D67BA !important;
+}
+.table-info, .table-uit thead {
+    background-color: #3D67BA !important;
+    color: #fff !important;
+}
+.form-select:focus, .form-control:focus {
+    border-color: #3D67BA !important;
+    box-shadow: 0 0 0 0.2rem rgba(61,103,186,.15) !important;
+}
