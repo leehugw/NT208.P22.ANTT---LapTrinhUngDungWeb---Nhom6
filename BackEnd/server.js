@@ -14,7 +14,7 @@ require('./passport');
 const authRoutes = require('./Routes/auth');
 app.use('/auth', authRoutes);
 
-app.use(express.json());
+app.use(express.json({limit: '100mb'}));
 app.use(passport.initialize());
 
 // Kết nối database
@@ -27,10 +27,9 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(bodyParser.json());
 
-app.use(express.json()); // For parsing application/json
-app.use(express.urlencoded({ extended: true })); // For form data
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
@@ -41,26 +40,22 @@ const studentRoutes = require('./Routes/student');
 const lecturerRoutes = require('./Routes/lecturer');
 const chatbotRoutes = require('./Routes/chatbot');
 
-app.use('/api/statistics', require('./Routes/statistics'));
-const { increaseHomeVisit } = require('./Controllers/statistics/HomeStatisticsController');
-// Direct route to home.html file
-app.get('/', increaseHomeVisit, (req, res) => {
-  res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
-});
-
 // Route to student_menu.html file
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
 app.use('/lecturer/menu', express.static(path.join(__dirname, '../FrontEnd/Lecturer_Menu')));
 app.use('/admin/menu', express.static(path.join(__dirname, '../FrontEnd/Admin_Menu')));
 
-
-
+const { increaseHomeVisit } = require('./Controllers/admin/HomeStatisticsController');
+// Direct route to home.html file
+app.get('/', increaseHomeVisit, (req, res) => {
+  res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
+});
 
 // Route to trigger Google login
 
 //const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=278181169185-sqeskqdu8rnck8l5cakqhplhbjskn2ni.apps.googleusercontent.com&redirect_uri=http://localhost:3000/callback&response_type=code&scope=email`;
 
-app.get("/auth/google", 
+app.get("/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 

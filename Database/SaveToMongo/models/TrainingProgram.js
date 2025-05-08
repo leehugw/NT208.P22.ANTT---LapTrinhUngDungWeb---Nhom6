@@ -16,7 +16,8 @@ const TrainingProgramSchema = new mongoose.Schema({
           required_major_core: { type: Number, required: true },
           required_major_foundation: { type: Number, required: true },
           required_graduation_project: { type: Number, required: true },
-          required_elective_credits: { type: Number, required: true }
+          required_elective_credits: { type: Number, required: true },
+          required_semesters: { type: Number }
         }
       }
     ]

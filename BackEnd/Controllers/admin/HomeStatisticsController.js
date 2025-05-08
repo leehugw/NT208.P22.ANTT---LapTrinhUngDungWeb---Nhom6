@@ -1,4 +1,4 @@
-const HomeStatisticsService = require('../../Services/statistics/HomeStatisticsService');
+const HomeStatisticsService = require('../../Services/admin/HomeStatisticsService');
 
 const increaseHomeVisit = async (req, res, next) => {
     await HomeStatisticsService.increaseHomeVisit();
