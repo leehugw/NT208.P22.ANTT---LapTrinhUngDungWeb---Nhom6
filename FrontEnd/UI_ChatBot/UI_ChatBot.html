@@ -16,36 +16,65 @@
 </head>
 
 <body>
-    <div class="header-container">
-        <!-- Navbar -->
-        <header class="navbar fixed-top" id="mainNavbar">
-            <div class="container d-flex justify-content-between align-items-center py-2 px-6">
-                <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
-                    <a class="nav-link mx-2 text-decoration-none" href="#home">Home</a>
-                    <a class="nav-link mx-2 text-decoration-none" href="#home">About us</a>
-                    <a class="nav-link mx-2 text-decoration-none" href="#home">Service</a>
-                    <a class="nav-link mx-2 text-decoration-none" href="#home">How it works?</a>
-                    <a class="nav-link mx-2 text-decoration-none" href="#home">Contact</a>
-                    <div class="dropdown mx-2">
-                      <a class="btn dropdown-toggle bg-white text-uit-blue border-0" href="#" role="button"
-                             id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sinh viên
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
-                            <li><a class="dropdown-item" href="#">Tiến độ học tập</a></li>
-                            <li><a class="dropdown-item" href="#">ChatBot</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
-                        class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-            </div>
-        </header>
+      
+      <header class="bg-white shadow navbar fixed-top">
+        <div class="container d-flex justify-content-between align-items-center py-2 px-6">
+        <!-- Logo (ẩn trên mobile) -->
+          <div class="d-none d-md-flex align-items-center logo-container">
+            <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
+          </div>
 
+        <!-- Navigation desktop -->
+        <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
+            <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+            <div class="dropdown mx-2">
+                <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sinh viên
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+                    <li><a class="dropdown-item" href="#">Tiến độ học tập</a></li>
+                    <li><a class="dropdown-item" href="#">ChatBot</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Mobile menu toggle button -->
+        <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Logout button -->
+        <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
+        style="width: 75%; height: 100%; display: none;">
+        <div class="d-flex justify-content-start align-items-center p-4">
+            <span class="h4 fw-bold">ChatBot UIT</span>
+            <button class="btn btn-link text-dark ms-auto" id="menu-close">
+                <i class="fa-solid fa-x"></i>
+            </button>
+        </div>
+        <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home">
+            <i class="fa-solid fa-house-chimney"></i> Trang chủ
+        </a>
+        <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+            <i class="fa-solid fa-user"></i> Sinh viên 
+            <i class="fa-solid fa-chevron-down float-end"></i>
+        </button>
+        <div class="collapse" id="studentDropdown">
+            <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Hồ sơ</a>
+            <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Tiến độ học tập</a>
+            <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">ChatBot</a>
+        </div>
+    </nav>
+</header>
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <ul>
@@ -73,9 +102,9 @@
                     <div class="divider"></div>
                     <p class="faq-title">Các câu hỏi thường gặp</p>
                     <div class="faq-buttons">
-                        <button ondblclick="fillMessage(this)">Đăng ký môn thế nào?</button>
-                        <button ondblclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
-                        <button ondblclick="fillMessage(this)">Chính sách học bổng năm nay</button>
+                        <button onclick="fillMessage(this)">Đăng ký môn thế nào?</button>
+                        <button onclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
+                        <button onclick="fillMessage(this)">Chính sách học bổng năm nay</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +119,7 @@
                 </button>
             </div>    
         </div>
-    </div>
+    
 
     <footer class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
         <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>

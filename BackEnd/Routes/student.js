@@ -32,7 +32,7 @@ router.get('/academicstatistic', (req, res) => {
 
 
 //Route hien thi cau hoi va tra loi chatbot
-// router.post('/:student_id/chatbot-data', HandleChatRequestController.handleChatRequest);
+ router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
 
 // router.get('/:student_id/chatbot', (req, res) => {
 //     const { student_id } = req.params;

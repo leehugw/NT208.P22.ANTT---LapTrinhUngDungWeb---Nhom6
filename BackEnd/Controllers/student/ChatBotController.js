@@ -1,14 +1,14 @@
-const { callHuggingFace } = require('../../Services/student/ChatBotService');
+const callHuggingFace = require('../../Services/student/ChatBotService').callHuggingFace;
 
 const handleChatRequest = async (req, res) => {
-    const { question } = req.body;
+    const { message } = req.body;
 
-    if (!question) {
+    if (!message) {
         return res.status(400).json({ error: 'Thiếu câu hỏi!' });
     }
 
     try {
-        const answer = await callHuggingFace(question);
+        const answer = await callHuggingFace(message);
         res.json({ answer });
     } catch (error) {
         res.status(500).json({ error: error.message });

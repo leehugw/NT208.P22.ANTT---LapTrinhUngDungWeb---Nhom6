@@ -1,17 +1,25 @@
-document.getElementById('menu-toggle').addEventListener('click', function () {
-  var menu = document.getElementById('mobile-menu');
-  menu.style.display = 'block';
-  setTimeout(function () {
-    menu.classList.add('open');
-  }, 10);
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuClose = document.getElementById('menu-close');
 
-document.getElementById('menu-close').addEventListener('click', function () {
-  var menu = document.getElementById('mobile-menu');
-  menu.classList.remove('open');
-  setTimeout(function () {
-    menu.style.display = 'none';
-  }, 300);
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.style.display = 'block';
+            setTimeout(() => {
+                mobileMenu.style.left = '0';
+            }, 10);
+        });
+    }
+
+    if (menuClose) {
+        menuClose.addEventListener('click', function() {
+            mobileMenu.style.left = '-75%';
+            setTimeout(() => {
+                mobileMenu.style.display = 'none';
+            }, 300);
+        });
+    }
 });
 
 // Kiểm tra token khi tải trang
@@ -74,7 +82,25 @@ function sendMessage() {
 
   // Không trả lời lại nữa sau khi người dùng gửi tin nhắn
   // (Không thêm bất kỳ logic trả lời nào sau khi người dùng gửi tin nhắn)
+
+  fetch(`http://localhost:3000/api/student/chatbot-data`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const botResponse = data.answer || "Xin lỗi, tôi không hiểu câu hỏi của bạn.";
+      addMessage(botResponse, 'bot'); // Thêm tin nhắn của bot vào khung chat
+    })
+    .catch((error) => {
+      console.error("Lỗi khi gọi API:", error);
+      addMessage("Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.", 'bot');
+    });
 }
+
 
 // Thêm tin nhắn vào khung chat
 function addMessage(text, sender) {
@@ -83,13 +109,19 @@ function addMessage(text, sender) {
   messageElem.className = `message ${sender}`;
   messageElem.innerText = text;
   chatBox.appendChild(messageElem);
-  chatBox.scrollTop = chatBox.scrollHeight;  // Cuộn xuống cuối khung chat
+  setTimeout(() => {
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 0); // Cuộn xuống cuối khung chat
 }
 
 // Điền vào ô chat khi nhấn vào FAQ
 function fillMessage(button) {
-  const message = button.innerText;
-  document.getElementById("user-input").value = message;
+    const message = button.textContent;
+    const inputField = document.getElementById("user-input");
+    if (inputField) {
+        inputField.value = message;
+        inputField.focus();
+    }
 }
 
 // Toggle sidebar
@@ -102,3 +134,4 @@ function toggleSidebar() {
 function openChatHistory() {
   alert("Tính năng xem lịch sử trò chuyện sẽ được cập nhật sau!");
 }
+
