@@ -149,7 +149,7 @@ function displayLecturerData(lecturer) {
     setValue('birth-place', lecturer.birthplace);
     setValue('birth-date', lecturer.birthdate); 
     setValue('faculty', lecturer.faculty);
-    setValue('class-management', lecturer.className);
+    setValue('class-management', lecturer.class_id);
 
     // Xử lý giới tính
     const genderElement = document.getElementById('gender-display');
