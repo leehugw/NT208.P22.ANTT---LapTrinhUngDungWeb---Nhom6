@@ -45,33 +45,43 @@ async function generateEnrollments() {
         console.warn(`⚠️ Không tìm thấy Faculty chứa major_id ${student.major_id} của sinh viên ${student.student_id}`);
         continue;
       }
-
+    
       // Lọc môn học theo faculty_id
       const subjectsOfFaculty = subjects.filter(sub => sub.faculty_id === facultyOfStudent.faculty_id);
-
+    
       // Chọn ngẫu nhiên 2 đến 3 học kỳ gần nhất
       const selectedSemesters = semesters.slice(-Math.floor(Math.random() * 2 + 2));
-
+    
+      // Set để lưu môn đã chọn của sinh viên
+      const selectedSubjectsSoFar = new Set();
+    
       for (const semester of selectedSemesters) {
         const shuffledSubjects = [...subjectsOfFaculty].sort(() => 0.5 - Math.random());
-
+    
         const selectedSubjects = [];
         const classIds = [];
         let totalCredits = 0;
-
+    
         const creditLimit = Math.floor(Math.random() * 29); // 0 đến 28 tín chỉ
-
+    
         for (const subject of shuffledSubjects) {
+          if (selectedSubjectsSoFar.has(subject.subject_id)) {
+            // Nếu môn đã chọn rồi thì bỏ qua
+            continue;
+          }
+    
           const subjectCredits = subject.theory_credits + subject.practice_credits;
-
+    
           if (totalCredits + subjectCredits > creditLimit) continue;
-
+    
           selectedSubjects.push(subject.subject_id);
+          selectedSubjectsSoFar.add(subject.subject_id); // Đánh dấu môn đã chọn
+    
           totalCredits += subjectCredits;
-
+    
           // Tạo key để quản lý lớp theo môn học
           const subjectKey = subject.subject_id;
-
+    
           // Lấy hoặc tạo suffix cho môn học
           let suffix = "";
           if (classMap.has(subjectKey)) {
@@ -80,19 +90,19 @@ async function generateEnrollments() {
             suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
             classMap.set(subjectKey, suffix);
           }
-
+    
           // Class ID lý thuyết (lớp chung)
           classIds.push(`${subject.subject_id}_${suffix}`);
-
+    
           // Class ID thực hành (có thể là 1 hoặc 2)
           const practiceCount = subject.practice_credits > 0 ? 1 : 0;
           for (let i = 1; i <= practiceCount; i++) {
             classIds.push(`${subject.subject_id}_${suffix}.${i}`);
           }
-
+    
           if (totalCredits >= creditLimit) break;
         }
-
+    
         enrollments.push({
           student_id: student.student_id,
           semester_id: semester.semester_id,
@@ -102,6 +112,7 @@ async function generateEnrollments() {
         });
       }
     }
+    
 
     await Enrollment.deleteMany();
     await Enrollment.insertMany(enrollments);

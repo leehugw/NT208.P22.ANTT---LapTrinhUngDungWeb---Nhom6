@@ -10,8 +10,9 @@ const { getAllStudentsForAdmin } = require('../Controllers/admin/adminStudentCon
 const { createLecturer } = require('../Controllers/admin/adminCreateAccountsController');
 const StudentInformationService = require('../Services/student/StudentInformationService');
 const { getHomeVisitCount } = require('../Controllers/admin/HomeStatisticsController');
+const { getTopPopularSubjects } = require('../Controllers/admin/SubjectStatistic');
 
-
+router.get('/top-popular-subjects', getTopPopularSubjects);
 
 // Middleware để xác thực và phân quyền
 router.get('/admin_menu', authenticateToken, authorizeRoles('admin'), (req, res) => {
@@ -38,6 +39,8 @@ router.get('/feedbacks', (req, res) => {
 router.get('/chat/conversations', adminChatController.getAllSessions); // Lấy danh sách tất cả các cuộc trò chuyện
 router.get('/chat/conversations/:session_id', adminChatController.getSessionDetails); // Lấy chi tiết cuộc trò chuyện theo session_id
 router.get('/chat/students/:student_id/conversations', adminChatController.getStudentConversations); // Lấy danh sách cuộc trò chuyện của một sinh viên theo student_id
+
+
 
 // Route API hiển thị danh sách sinh viên cho admin
 router.get('/students', authenticateToken, authorizeRoles('admin'), (req, res) => {
