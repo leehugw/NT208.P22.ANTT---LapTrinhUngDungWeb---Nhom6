@@ -95,4 +95,9 @@ router.post(
 
 router.get('/home-visit-count', getHomeVisitCount);
 
+router.get('/statistics', authenticateToken, authorizeRoles('admin'), (req, res) => {
+  const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Statistics/admin_statistics.html');
+  res.sendFile(pagePath);
+});
+
 module.exports = router;
