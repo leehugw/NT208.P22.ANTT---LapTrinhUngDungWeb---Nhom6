@@ -33,3 +33,48 @@
     display: block;
     /* Khi mở menu, nó sẽ hiện ra ngay */
 }
+@media (max-width: 576px) {
+    /* Filter xuống dòng, full width */
+    .d-flex.justify-content-center.mt-3,
+    .d-flex.justify-content-center {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+    .form-select {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 8px;
+    }
+    /* Bảng: ẩn các cột phụ nếu cần, thu nhỏ avatar */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    .table thead th,
+    .table tbody td {
+        font-size: 0.95rem;
+        padding: 0.4rem !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+    /* Ví dụ: ẩn cột Email và Ngành trên mobile (nếu có) */
+    .table th:nth-child(3),
+    .table td:nth-child(3),
+    .table th:nth-child(5),
+    .table td:nth-child(5) {
+        display: none !important;
+    }
+    .table img.rounded-circle {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    /* Avatar trên đầu trang nhỏ lại */
+    .mb-4 img.rounded-circle {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    /* Tiêu đề và thông tin căn giữa */
+    .text-center, .fw-bold, .fw-semibold {
+        text-align: center !important;
+    }
+}
