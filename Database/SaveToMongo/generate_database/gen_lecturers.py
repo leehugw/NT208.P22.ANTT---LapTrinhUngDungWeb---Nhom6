@@ -105,13 +105,15 @@ data = generate_lecturer_data(20)
 
 current_file_path = Path(__file__).absolute()
 
-data_path = (
-    current_file_path.parent.parent.parent.parent
-    / "Database" 
-    / "SaveToMongo" 
-    / "Json" 
-    / "lecturers.json"
-)
+# data_path = (
+#    current_file_path.parent.parent.parent.parent
+#    / "Database" 
+#    / "SaveToMongo" 
+#    / "Json" 
+#    / "lecturers.json"
+#)
+
+data_path = Path("lecturers.json")
 
 # Save to JSON file
 with data_path.open('w', encoding='utf-8') as f:
