@@ -13,7 +13,7 @@ const getScoresByStudentGrouped = async (req, res) => {
             student_id = req.user.student_id; // Sinh viên lấy student_id từ req.user
         }
         // Nếu là giảng viên
-        else if (userRole === 'lecturer') {
+        else if (userRole === 'lecturer' || userRole === 'admin') {
             // Nếu là giảng viên, lấy student_id từ URL
             student_id = req.query.student_id;
 

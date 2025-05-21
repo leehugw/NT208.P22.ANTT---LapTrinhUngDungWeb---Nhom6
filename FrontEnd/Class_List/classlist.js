@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     classSelect.disabled = false;
 
     // Gọi API lấy thông tin giảng viên
-    fetch("/api/lecturer/profile/api", {
+    fetch("/api/lecturer/profile-data", {
         headers: { Authorization: `Bearer ${token}` }
     })
         .then(res => res.json())

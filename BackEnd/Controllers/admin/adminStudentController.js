@@ -17,22 +17,24 @@ const getAllStudentsForAdmin = async (req, res) => {
 
     const query = {};
     if (req.query.student_id) query.student_id = { $regex: req.query.student_id, $options: 'i' };
-    if (req.query.class_name) query.class_name = req.query.class_name;
+    if (req.query.class_id) query.class_id = req.query.class_id;
     if (req.query.major_id) query.major_id = req.query.major_id;
     if (req.query.faculty_name) {
       const faculty = faculties.find(f => f.faculty_name === req.query.faculty_name);
       if (faculty) query.major_id = { $in: faculty.majors };
     }
 
-    const students = await student.find(query).select('name student_id contact.school_email class_name major_id');
+    const students = await student.find(query).select('name student_id contact.school_email class_id major_id');
     const enrichedStudents = students.map(s => ({
       ...s.toObject(),
       faculty_name: majorToFacultyMap.get(s.major_id) || 'Không rõ'
     }));
 
-    const classNames = [...new Set(enrichedStudents.map(s => s.class_name).filter(Boolean))];
+    const classNames = [...new Set(enrichedStudents.map(s => s.class_id).filter(Boolean))];
     const majorIds = [...new Set(enrichedStudents.map(s => s.major_id).filter(Boolean))];
     const facultyNames = [...new Set(enrichedStudents.map(s => s.faculty_name).filter(Boolean))];
+    const statuses = ["Đang học", "Cảnh báo"];
+
 
     res.json({
       success: true,
@@ -40,7 +42,8 @@ const getAllStudentsForAdmin = async (req, res) => {
       filters: {
         classes: classNames,
         majors: majorIds,
-        faculties: facultyNames
+        faculties: facultyNames,
+        statuses: statuses
       }
     });
 

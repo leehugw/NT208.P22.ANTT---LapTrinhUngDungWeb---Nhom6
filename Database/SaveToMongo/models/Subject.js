@@ -15,7 +15,7 @@ const SubjectSchema = new mongoose.Schema({
   subject_type: { 
     type: String, 
     required: true,
-    enum: ['CN', 'CNTC', 'ĐC', 'TN'] // CN = Chuyên ngành, CNTC = Chuyên ngành tự chọn
+    enum: ['CN', 'CNTC', 'ĐC', 'TN', 'CSN', 'TTTN', 'CSNN'] // CN = Chuyên ngành, CNTC = Chuyên ngành tự chọn
   },
   practice_credits: { type: Number, required: true, min: 0 }
 }, {collection:"subjects",

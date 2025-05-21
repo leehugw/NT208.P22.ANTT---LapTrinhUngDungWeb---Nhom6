@@ -30,23 +30,24 @@ const generateClassesDirectly = async () => {
 
     const classesCollection = mongoose.connection.db.collection('classes');
 
+    // Tạo mảng các lớp mới
+    const newClasses = [];
     for (const [class_id, studentSet] of classMap.entries()) {
-      const existed = await classesCollection.findOne({ class_id });
-      if (existed) {
-        console.log(`⚠️ Lớp ${class_id} đã tồn tại, bỏ qua.`);
-        continue;
-      }
-
       const lecturer_id = await getRandomLecturerId();
 
-      const newClass = {
+      newClasses.push({
         class_id,
         lecturer_id,
         students: Array.from(studentSet)
-      };
+      });
+    }
 
-      await classesCollection.insertOne(newClass);
-      console.log(`✅ Đã thêm lớp ${class_id} với ${studentSet.size} sinh viên`);
+    // Thêm đồng loạt
+    if (newClasses.length > 0) {
+      await classesCollection.insertMany(newClasses);
+      console.log(`✅ Đã thêm ${newClasses.length} lớp mới`);
+    } else {
+      console.log("⚠️ Không có lớp nào để thêm");
     }
 
   } catch (err) {
@@ -55,5 +56,6 @@ const generateClassesDirectly = async () => {
     mongoose.connection.close();
   }
 };
+
 
 generateClassesDirectly();

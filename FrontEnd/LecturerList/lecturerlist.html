@@ -79,50 +79,48 @@
                 <h1>Danh sách giảng viên</h1>
             </div>
         </div>
-        <div class="row justify-content-center align-items-center mb-3 g-2">
+        <div class="row justify-content-center mb-3 g-2">
             <div class="col-12">
-                <div class="d-flex flex-nowrap flex-md-nowrap gap-2 align-items-center justify-content-center">
-                    <div class="input-group flex-grow-1">
-                        <input class="form-control" id="filter-lecturer-id" placeholder="Tìm kiếm mã giảng viên ..." type="text" />
+                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-center">
+        
+                    <!-- Input: Mã giảng viên -->
+                    <div class="input-group" style="max-width: 250px;">
+                        <input class="form-control" id="filter-lecturer-id" placeholder="Tìm mã giảng viên..." type="text" />
                         <button class="btn btn-outline-secondary" type="button" id="clear-lecturer-id">
                             <i class="fas fa-times"></i>
                         </button>
-                        <input class="form-control" id="filter-lecturer-name" placeholder="Tìm kiếm tên giảng viên ..." type="text" />
+                    </div>
+        
+                    <!-- Input: Tên giảng viên -->
+                    <div class="input-group" style="max-width: 250px;">
+                        <input class="form-control" id="filter-lecturer-name" placeholder="Tìm tên giảng viên..." type="text" />
                         <button class="btn btn-outline-secondary" type="button" id="clear-lecturer-name">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
- 
-                    <!-- Nút filter (ẩn trên desktop) -->
+        
+                    <!-- Select: Khoa -->
+                    <div style="max-width: 200px;">
+                        <select class="form-select" id="filter-faculty">
+                            <option selected>Khoa</option>
+                            <!-- <option value="cntt">Công nghệ thông tin</option> -->
+                        </select>
+                    </div>
+        
+                    <!-- Nút lọc trên mobile -->
                     <button class="btn btn-outline-secondary d-md-none" type="button" data-bs-toggle="collapse"
                         data-bs-target="#mobileFilter">
                         <i class="fas fa-filter"></i>
                     </button>
-
-                    <!-- Select filters: hiện trên desktop -->
-                    <div class="input-group flex-grow-1">
-                        <select class="form-select custom-select-width" id="filter-faculty">
-                            <option selected="">Khoa</option>
-                        </select>
-                    </div>
-
-                    <!-- Nút search -->
+        
+                    <!-- Nút tìm kiếm -->
                     <button class="btn button text-white" type="button" id="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
-
-            <!-- Mobile filter -->
-            <div class="collapse d-md-none mt-2" id="mobileFilter">
-                <div class="d-flex flex-column gap-2">
-                    <select class="form-select" id="filter-faculty">
-                        <option selected="">Khoa</option>
-                    </select>
-                </div>
-            </div>
         </div>
-
+        
 
         <div class="background text-white p-3 rounded-top fw-bold">
             <span class="fs-3 fw-bold">-</span> giảng viên

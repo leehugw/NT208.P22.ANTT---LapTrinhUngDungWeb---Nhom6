@@ -8,8 +8,8 @@ const LecturerSchema = new mongoose.Schema({
     gender: { type: String, enum: ['Nam', 'Nữ', 'Khác'], required: true },
     birthdate: { type: String, required: true },
     birthplace: { type: String, required: true },
-    faculty: { type: String, required: true },
-    className: { type: String }, // nếu có
+    faculty_id: { type: String, required: true },
+    class_id: { type: String }, // nếu có
     phonenumber: { type: String, required: true },
     email: { type: String, required: true } // có thể trùng username
 });
