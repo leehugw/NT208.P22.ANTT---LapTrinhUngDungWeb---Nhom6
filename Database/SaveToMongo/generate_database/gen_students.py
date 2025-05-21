@@ -319,10 +319,11 @@ def generate_students(num_students=50):
     return students
 
 # Generate 50 students
-students = generate_students(50)
+students = generate_students(300)
 
 # Save to JSON file
-data_path = Path(__file__).parent.parent / "data" / "students.json"
+# data_path = Path(__file__).parent.parent / "data" / "students.json"
+data_path = Path("students.json")
 with data_path.open('w', encoding='utf-8') as f:
     json.dump(students, f, ensure_ascii=False, indent=2)
 

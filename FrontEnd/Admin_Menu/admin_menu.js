@@ -72,4 +72,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Thống kê
+    document.querySelectorAll('.btn-admin-statistics').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/statistics?token=${token}`;
+            }
+        });
+    });
 });
