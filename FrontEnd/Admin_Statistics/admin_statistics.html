@@ -17,6 +17,7 @@
     <link href="/Admin_Statistics/mobile_admin_statistics.css" rel="stylesheet">
     <link href="/Admin_Statistics/admin_statistics.css" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -136,18 +137,25 @@
                     </div>
                 </div>
 
-                <!-- Thống kê chung -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="card-title">Thống kê chung</h3>
                         
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-md-6">
-                                <h5>Môn học phổ biến nhất</h5>
-                                <p>Số lượng sinh viên đăng ký các môn học phổ biến.</p>
+                                <div class="px-3">
+                                    <h5 class="mb-3">Môn học phổ biến nhất</h5>
+                                    <p class="mb-4">Tỷ lệ đăng ký các môn học phổ biến.</p>
+                                    <div class="chart-container">
+                                        <canvas id="popularSubjectsChart"></canvas>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <h5>Số lượng tốt/phản hồi về chatbot và hệ thống</h5>
+                                <div class="px-3">
+                                    <h5 class="mb-3">Số lượng tốt/phản hồi về chatbot và hệ thống</h5>
+                                    <!-- Feedback stats can go here -->
+                                </div>
                             </div>
                         </div>
                     </div>

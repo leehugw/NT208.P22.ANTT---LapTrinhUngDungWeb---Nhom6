@@ -60,3 +60,36 @@
     align-self: normal;
     /* Khi mở menu, nó sẽ hiện ra ngay */
 }
+
+@media (max-width: 576px) {
+    .card-body .px-3 {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    .card-body h5,
+    .card-body p {
+        text-align: center !important;
+        margin-bottom: 0.3rem !important;
+        margin-top: 0.3rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.4;
+        font-size: 1.1rem !important;
+    }
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+        width: 100%;
+    }
+    #popularSubjectsChart {
+        display: block;
+        margin: 0 auto;
+        max-width: 320px;
+        width: 150%;
+        height: 220px !important;
+        max-height: 220px !important;
+    }
+}
