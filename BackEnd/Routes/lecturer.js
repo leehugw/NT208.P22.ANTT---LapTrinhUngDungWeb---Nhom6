@@ -4,6 +4,7 @@ const path = require('path');
 
 const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
 const LecturerScoreController = require('../Controllers/lecturer/LecturerScoreController');
+const LecturerAbnormalDetectionController = require('../Controllers/lecturer/detectAbnormalStudent');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 
 // Middleware để xác thực và phân quyền
@@ -53,5 +54,8 @@ router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async 
         res.status(500).json({ success: false, message: "Lỗi server" });
     }
 });
+
+router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('lecturer'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
+
 
 module.exports = router;

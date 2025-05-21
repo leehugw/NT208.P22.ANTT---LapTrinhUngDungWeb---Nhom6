@@ -40,6 +40,7 @@ function openFeedbackPopup() {
 document.addEventListener("DOMContentLoaded", function () {
     const semesterSelect = document.getElementById("semesterSelect");
     const classSelect = document.getElementById("classSelect");
+    const statusSelect = document.getElementById("statusSelect");
     const studentTableBody = document.getElementById("studentTableBody");
     const studentTableThread = document.getElementById("studentTableThread");
     const classInfo = document.getElementById("classInfo");
@@ -128,65 +129,100 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchClasses(semesterSelect.value);  // Lọc lớp theo học kỳ đã chọn
     });
 
+    statusSelect.addEventListener("change", () => {
+        classSelect.dispatchEvent(new Event("change")); // Gọi lại hàm fetch khi đổi trạng thái
+    });
+    
+
     // Khi chọn lớp -> gọi API lấy sinh viên và render bảng
-    classSelect.addEventListener("change", () => {
+    classSelect.addEventListener("change", async () => {
         const semesterText = semesterSelect.options[semesterSelect.selectedIndex]?.text || "Không chọn học kỳ";
         const classText = classSelect.options[classSelect.selectedIndex]?.text || "Không chọn lớp";
-
+        
         classInfo.innerText = `Lớp đang chọn: ${classText} - ${semesterText}`;
         classList.innerText = `Danh sách sinh viên lớp ${classText}`;
 
-        fetch(`/api/lecturer/classes/${classSelect.value}/students`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                const studentCount = data.students.length;
-                classSize.innerText = `${studentCount}`;
+        const classId = classSelect.value;
 
-                studentTableBody.innerHTML = "";
-                data.students.forEach(student => {
-                    if (data.isAdvisorClass) {
-                        studentTableThread.innerHTML = `
+        try {
+            const [studentRes, abnormalRes] = await Promise.all([
+                fetch(`/api/lecturer/classes/${classId}/students`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                }),
+                fetch(`/api/lecturer/abnormal/${classId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            ]);
 
-                        <tr>
-                            <th scope="col" class="thread border-0">Sinh viên</th>
-                            <th scope="col" class="thread border-0 text-center">MSSV</th>
-                            <th scope="col" class="thread border-0 text-center">Email</th>
-                            <th scope="col" class="thread border-0 text-center">Trạng thái</th>
-                            <th scope="col" class="thread border-0 text-center">Lớp</th>
-                            <th scope="col" class="thread border-0 text-center">Ngành</th>
-                            <th scope="col" class="thread border-0 text-center">Khoa</th>
-                            <th scope="col" class="thread border-0 text-center">Thông tin</th>
-                            <th scope="col" class="thread border-0 text-center">Tiến độ</th>
+            const studentData = await studentRes.json();
+            const abnormalData = await abnormalRes.json();
+
+
+            const studentCount = studentData.students.length;
+            classSize.innerText = `${studentCount}`;
+
+            // Map sinh viên bất thường theo student_id
+            const abnormalMap = {};
+            abnormalData.data.forEach(s => {
+                abnormalMap[s.student_id] = s;
+            });
+
+            studentTableBody.innerHTML = "";
+
+            if (studentData.isAdvisorClass) {
+                studentTableThread.innerHTML = `
+                    <tr>
+                        <th scope="col" class="thread border-0">Sinh viên</th>
+                        <th scope="col" class="thread border-0 text-center">MSSV</th>
+                        <th scope="col" class="thread border-0 text-center">Email</th>
+                        <th scope="col" class="thread border-0 text-center">Trạng thái</th>
+                        <th scope="col" class="thread border-0 text-center">Ghi chú</th>
+                        <th scope="col" class="thread border-0 text-center">Lớp</th>
+                        <th scope="col" class="thread border-0 text-center">Ngành</th>
+                        <th scope="col" class="thread border-0 text-center">Khoa</th>
+                        <th scope="col" class="thread border-0 text-center">Thông tin</th>
+                        <th scope="col" class="thread border-0 text-center">Tiến độ</th>
+                    </tr>
+                `;
+
+                studentData.students.forEach(student => {
+                    const abnormal = abnormalMap[student.student_id];
+                    const statusText = abnormal ? abnormal.status : "Đang học";
+                    const noteText = (abnormal?.note || "").replace(/\n/g, "<br>");
+                    
+                    const selectedStatus = statusSelect.value; 
+                    if(selectedStatus && selectedStatus !== statusText) {
+                        return; // Nếu trạng thái không khớp, bỏ qua sinh viên này
+                    }
+
+                    studentTableBody.innerHTML += `
+                        <tr class="custom-row align-middle">
+                            <td class="border-start">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                                    ${student.name}
+                                </div>
+                            </td>
+                            <td class="text-center">${student.student_id}</td>
+                            <td class="text-center">${student.school_email}</td>
+                            <td class="text-center">${statusText}</td>
+                            <td class="text-center">${noteText}</td>
+                            <td class="text-center">${student.class_name || '-'}</td>
+                            <td class="text-center">${student.major_name || '-'}</td>
+                            <td class="text-center">${student.faculty_name || '-'}</td>
+                            <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${student.student_id}"><i class="fas fa-external-link-alt"></i></a></td>
+                            <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${student.student_id}"><i class="fas fa-chart-line"></i></a></td>
                         </tr>
                     `;
-                        studentTableBody.innerHTML += `
-                            <tr class="custom-row align-middle">
-                                <td class="border-start">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
-                                        ${student.name}
-                                    </div>
-                                </td>
-                                <td class="text-center">${student.student_id}</td>
-                                <td class="text-center">${student.school_email}</td>
-                                <td class="text-center">Đang học</td>
-                                <td class="text-center">${student.class_name || '-'}</td>
-                                <td class="text-center">${student.major_name || '-'}</td>
-                                <td class="text-center">${student.faculty_name || '-'}</td>
-                                <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${student.student_id}"><i class="fas fa-external-link-alt"></i></a></td>
-                                <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${student.student_id}"><i class="fas fa-chart-line"></i></a></td>
-                            </tr>
-                        `;
-                    } else {
-                        studentTableThread.innerHTML = `
+                }
+                );
+            }
+            else {
+                studentTableThread.innerHTML = `
                         <tr>
                             <th scope="col" class="thread border-0">Sinh viên</th>
                             <th scope="col" class="thread border-0 text-center">MSSV</th>
                             <th scope="col" class="thread border-0 text-center">Email</th>
-                            <th scope="col" class="thread border-0 text-center">Trạng thái</th>
                             <th scope="col" class="thread border-0 text-center">Điểm QT</th>
                             <th scope="col" class="thread border-0 text-center">Điểm GK</th>
                             <th scope="col" class="thread border-0 text-center">Điểm TH</th>
@@ -195,7 +231,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             <th scope="col" class="thread border-0 text-center">Hành động</th> <!-- Cột Hành vi -->
                         </tr>
                     `;
-                        studentTableBody.innerHTML += `
+
+                studentData.students.forEach(student => {
+                studentTableBody.innerHTML += `
                             <tr class="custom-row align-middle">
                                 <td class="border-start">
                                     <div class="d-flex align-items-center">
@@ -205,7 +243,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </td>
                                 <td class="text-center">${student.student_id}</td>
                                 <td class="text-center">${student.school_email}</td>
-                                <td class="text-center">${student.status}</td>
                                 <td class="text-center">
                                     <span class="score-text">${student.score_QT || "-"}</span>
                                     <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
@@ -231,11 +268,14 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </td>
                             </tr>  
                         `;
-                    }
                 });
-            });
+            }
+        } catch (error) {
+            console.error("Error fetching students:", error);
+        }
     });
 });
+
 
 
 // Gọi API để cập nhật điểm khi người dùng sửa
@@ -273,8 +313,8 @@ function editScore(iconElement) {
         if (!semesterId) {
             alert("Vui lòng chọn học kỳ trước khi lưu điểm.");
 
-             // Khôi phục giao diện ban đầu
-             scoreTexts.forEach((span, i) => {
+            // Khôi phục giao diện ban đầu
+            scoreTexts.forEach((span, i) => {
                 span.style.display = "inline";
                 scoreInputs[i].style.display = "none";
             });
