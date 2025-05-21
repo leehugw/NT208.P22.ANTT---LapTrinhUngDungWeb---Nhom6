@@ -6,7 +6,6 @@ const StudentSchema = new mongoose.Schema({
   gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
   birth_date: { type: String, required: true },
   birthplace: { type: String, trim: true },
-  class_name: { type: String, trim: true },
   class_id: { type: String, trim: true },
   major_id: { type: String, required: true },
   program_id: { type: String, required: true },

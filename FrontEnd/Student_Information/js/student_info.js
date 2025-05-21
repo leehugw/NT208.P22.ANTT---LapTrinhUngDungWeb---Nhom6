@@ -171,7 +171,7 @@ function displayStudentData(data) {
     setValue('student-name', student.name);
     setValue('fullname', student.name);
     setValue('student-id', student.student_id);
-    setValue('class', student.class_name);
+    setValue('class', student.class_id);
     setValue('faculty-name', student.faculty_name);
     setValue('training-system', student.program_type);
 
