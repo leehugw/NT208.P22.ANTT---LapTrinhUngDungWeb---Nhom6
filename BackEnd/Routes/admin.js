@@ -33,6 +33,7 @@ router.get('/feedbacks-data', async (req, res) => {
   }
 });
 
+
 router.get('/feedbacks', (req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Feedback_Manager/ad_feedback.html');
   res.sendFile(pagePath);
