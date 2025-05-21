@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-const LecturerInformationService = require('../Services/lecturer/LecturerInformationService');
+const LecturerInformationController = require('../Controllers/lecturer/LecturerInformationController');
 const LecturerScoreController = require('../Controllers/lecturer/LecturerScoreController');
 const LecturerAbnormalDetectionController = require('../Controllers/lecturer/detectAbnormalStudent');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
@@ -13,7 +13,7 @@ router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res
 });
 
 // Route để phục vụ trang HTML
-router.get('/profile', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
+router.get('/profile', (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/Lecturer_Information/lecturer_info.html'));
 });
 
@@ -34,26 +34,7 @@ router.get("/classes/:classId/students", authenticateToken, authorizeRoles('lect
 router.put("/update/scores", authenticateToken, authorizeRoles('lecturer'), LecturerScoreController.updateScore);
 
 // Route API để lấy dữ liệu profile
-router.get('/profile/api', authenticateToken, authorizeRoles('lecturer'), async (req, res) => {
-    try {
-        if (!req.user?.lecturer_id) {
-            return res.status(403).json({
-                success: false,
-                message: "Không có quyền truy cập"
-            });
-        }
-        
-        const profile = await LecturerInformationService.getLecturerProfile(req.user.lecturer_id);
-        res.json({ 
-            success: true, 
-            type: "lecturer",
-            data: profile 
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Lỗi server" });
-    }
-});
+router.get('/profile-data', authenticateToken, authorizeRoles('lecturer', 'admin'), LecturerInformationController.getProfile);
 
 router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('lecturer'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
 

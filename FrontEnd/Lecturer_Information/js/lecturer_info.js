@@ -79,7 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchLecturerProfile(token) {
     try {
-        const response = await fetch('/api/lecturer/profile/api', {
+        const urlParams = new URLSearchParams(window.location.search);
+        let LecturerProfileData;
+
+        if(urlParams.toString()){
+            const lecturerId = urlParams.get('lecturer_id');
+            LecturerProfileData = `http://localhost:3000/api/lecturer/profile-data?lecturer_id=${lecturerId}`;
+        }
+        else {
+            LecturerProfileData = `http://localhost:3000/api/lecturer/profile-data`;
+        }
+
+        const token = localStorage.getItem("token");
+        const response = await fetch(LecturerProfileData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'

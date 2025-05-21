@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Bạn chưa đăng nhập!");
                 window.location.href = '/';
             } else {
-                window.location.href = `/api/admin/lecturers?token=${token}`;
+                window.location.href = `/api/admin/lecturers`;
             }
         });
     });

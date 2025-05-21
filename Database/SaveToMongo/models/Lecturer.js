@@ -10,7 +10,7 @@ const LecturerSchema = new mongoose.Schema({
     birthplace: { type: String, required: true },
     faculty: { type: String, required: true },
     faculty_id: { type: String, required: true },
-    className: { type: String }, // nếu có
+    class_id: { type: String }, // nếu có
     phonenumber: { type: String, required: true },
     email: { type: String, required: true } // trùng username
 });
