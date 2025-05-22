@@ -79,7 +79,7 @@
         <div class="sidebar" id="sidebar">
             <ul>
                 <li><a href="#" class="sidebar-icon" onclick="openChatHistory()"><i class="fas fa-history"></i></a></li>
-                <li><a href="#" class="sidebar-icon"><i class="fas fa-plus-circle"></i></a></li> <!-- Add icon -->
+                <li><a href="#" class="sidebar-icon" onclick="startNewChatSession()"><i class="fas fa-plus-circle"></i></a></li> <!-- Add icon -->
                 <li><a href="#" class="sidebar-icon"><i class="fas fa-question-circle"></i></a></li> <!-- Question icon -->
             </ul>
         </div>
@@ -95,29 +95,7 @@
             <div class="chat-box">
                 <div class="chat-response">
                     <p><strong>Tôi có thể giúp gì cho bạn?</strong></p>
-                </div>
-
-                <!-- FAQ -->
-                <div class="faq">
-                    <div class="divider"></div>
-                    <p class="faq-title">Các câu hỏi thường gặp</p>
-                    <div class="faq-buttons">
-                        <button onclick="fillMessage(this)">Đăng ký môn thế nào?</button>
-                        <button onclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
-                        <button onclick="fillMessage(this)">Chính sách học bổng năm nay</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Khung nhập tin nhắn -->
-            <div class="chat-input">
-                <input type="text" placeholder="Nhập gì đó..." id="user-input" />
-                <button class="send-btn" onclick="sendMessage()">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
-                        <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-                    </svg>
-                </button>
-            </div>    
+                </div>  
         </div>
     
 
@@ -128,6 +106,14 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
+
+    <div id="chat-history-panel" style="display:none; position:fixed; right:0; top:0; width:350px; height:100%; background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2); z-index:9999; overflow-y:auto;">
+    <div style="padding:16px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+        <strong>Lịch sử chat (7 ngày)</strong>
+        <button onclick="closeChatHistory()" style="border:none; background:none; font-size:20px;">&times;</button>
+    </div>
+    <div id="chat-history-content" style="padding:16px;"></div>
+</div>
 <!-- Script ẩn/hiện navbar khi cuộn -->
 <script>
     let lastScrollTop = 0;
