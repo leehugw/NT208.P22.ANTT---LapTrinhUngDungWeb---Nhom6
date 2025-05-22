@@ -1,0 +1,172 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tiến độ học tập</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="../FeedbackForm/feed.css" rel="stylesheet">
+    <link href="/LecturerClassStatistic/lecturerClassStatistic.css" rel="stylesheet">
+    <link href="/LecturerClassStatistic/mobileLecturerClassStatistic.css" rel="stylesheet">
+    <link href="/LecturerClassStatistic/PCLecturerClassStatistic.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="bg-white shadow navbar fixed-top">
+        <div class="container d-flex justify-content-between align-items-center py-2 px-6">
+            <div class="d-none d-md-flex align-items-center logo-container">
+                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
+            </div>
+            <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
+                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <div class="dropdown mx-2">
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Thống kê</a></li>
+                        <li><a class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
+                        <li><a class="dropdown-item" href="#">Quản lý chatbot</a></li>
+                        <li><a class="dropdown-item" href="#">Xem thông tin giảng viên</a></li>
+                    </ul>
+
+            </nav>
+            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button id="logout-button" class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+
+        </div>
+        <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
+            style="width: 75%; height: 100%; display: none;">
+            <div class="d-flex justify-content-start align-items-center p-4">
+                <span class="h4 fw-bold">Chatbot UIT</span>
+                <button class="btn btn-link text-dark ms-auto" id="menu-close">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home"><i
+                    class="fa-solid fa-house-chimney"></i>
+                Trang chủ</a>
+
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+                <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="studentDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Thống kê</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Theo dõi sinh viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Quản lý chatbot</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Xem thông tin giảng viên</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto py-6">
+        <h1 class="text-3xl font-bold text-center mt-12 mb-4">Thống kê lớp học</h1>
+
+        <!-- Thống kê tổng quan -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div class="card p-4 text-center">
+                <h3 class="text-gray-600">Tổng số sinh viên</h3>
+                <p class="text-3xl font-bold text-blue-600">-</p>
+            </div>
+            <div class="card p-4 text-center">
+                <h3 class="text-gray-600">Tín chỉ trung bình</h3>
+                <p class="text-3xl font-bold text-blue-600">-</p>
+            </div>
+            <div class="card p-4 text-center">
+                <h3 class="text-gray-600">GPA trung bình</h3>
+                <p class="text-3xl font-bold text-blue-600">-
+                <p>
+            </div>
+            <div class="card p-4 text-center">
+                <h3 class="text-gray-600">Tỷ lệ đạt ngoại ngữ</h3>
+                <p class="text-3xl font-bold text-blue-600">-</p>
+            </div>
+        </section>
+
+        <!-- Bộ lọc -->
+        <div class="flex justify-center mb-6">
+            <select id="timeFilter" class="p-2 border rounded mr-4">
+                <option value="semester">Theo học kỳ</option>
+                <option value="year">Theo năm</option>
+                <option value="all">Toàn bộ</option>
+            </select>
+            <button onclick="updateCharts()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cập
+                nhật</button>
+        </div>
+
+        <!-- Biểu đồ -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Biểu đồ GPA -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold mb-4">Biểu đồ GPA</h2>
+                <canvas id="gpaChart" class="chart-container"></canvas>
+            </div>
+
+            <!-- Biểu đồ Tín chỉ -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold mb-4">Biểu đồ Tín chỉ đã học</h2>
+                <canvas id="creditsChart" class="chart-container"></canvas>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Biểu đồ Đầu vào Ngoại ngữ -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold mb-4">Thống kê đầu vào ngoại ngữ</h2>
+                <select id="inputLangFilter" onchange="updateLangCharts()" class="p-2 border rounded mb-4">
+                    <option value="toeic">TOEIC</option>
+                    <option value="toefl">TOEFL iBT</option>
+                    <option value="ielts">IELTS</option>
+                    <option value="vnu">VNU-EPT</option>
+                    <option value="cambridge">Cambridge</option>
+                </select>
+                <canvas id="inputLangChart" class="chart-container"></canvas>
+            </div>
+
+            <!-- Biểu đồ Đầu ra Ngoại ngữ -->
+            <div class="card p-6">
+                <h2 class="text-xl font-semibold mb-4">Thống kê đầu ra ngoại ngữ</h2>
+                <select id="outputLangFilter" onchange="updateLangCharts()" class="p-2 border rounded mb-4">
+                    <option value="toeic">TOEIC</option>
+                    <option value="toefl">TOEFL iBT</option>
+                    <option value="ielts">IELTS</option>
+                    <option value="vnu">VNU-EPT</option>
+                    <option value="cambridge">Cambridge</option>
+                </select>
+                <canvas id="outputLangChart" class="chart-container"></canvas>
+            </div>
+        </section>
+
+        <!-- Xu hướng GPA -->
+        <section class="card p-6">
+            <h2 class="text-xl font-semibold mb-4">Xu hướng GPA trung bình theo thời gian</h2>
+            <canvas id="gpaTrendChart" class="chart-container"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white p-4 flex justify-between">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Help</a>
+    </footer>
+    
+    <script src="/LecturerClassStatistic/lecturerClassStatistic.js"></script>
+</body>
+
+</html>

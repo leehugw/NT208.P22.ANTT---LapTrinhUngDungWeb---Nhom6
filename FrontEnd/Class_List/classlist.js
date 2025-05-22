@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const classSize = document.getElementById("size");
     const logoutButton = document.querySelector('.logout-button');
     const token = localStorage.getItem("token"); // hoặc từ cookie
+    const classStatisticsWrapper = document.getElementById("classStatisticsBtnWrapper");
+    const classStatisticsBtn = document.getElementById("classStatisticsBtn");
 
     // Enable class dropdown by default
     classSelect.disabled = false;
@@ -170,6 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
             studentTableBody.innerHTML = "";
 
             if (studentData.isAdvisorClass) {
+                classStatisticsWrapper.style.display = "inline-block";
+                classStatisticsBtn.href = `/api/lecturer/classstatistic?class_id=${classSelect.value}`;
                 studentTableThread.innerHTML = `
                     <tr>
                         <th scope="col" class="thread border-0">Sinh viên</th>
