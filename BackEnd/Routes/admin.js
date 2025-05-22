@@ -24,9 +24,8 @@ router.get('/admin_menu', authenticateToken, authorizeRoles('admin'), (req, res)
   res.json({ message: 'Chào admin' });
 });
 
-
 // API hiển thị danh sách phản hồi cho admin
-router.get('/feedbacks-data', async (req, res) => {
+router.get('/feedbacks-data', authenticateToken, authorizeRoles('admin'), async (req, res) => {
   try {
     const feedbacks = await adminFeedbackService.getAllFeedbacks();
     res.status(200).json(feedbacks);

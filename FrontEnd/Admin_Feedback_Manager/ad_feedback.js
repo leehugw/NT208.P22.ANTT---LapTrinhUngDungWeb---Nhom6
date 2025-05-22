@@ -1,5 +1,25 @@
+document.getElementById('menu-toggle').addEventListener('click', function () {
+    var menu = document.getElementById('mobile-menu');
+    menu.style.display = 'block';
+    setTimeout(function () {
+        menu.classList.add('open');
+    }, 10);
+});
+document.getElementById('menu-close').addEventListener('click', function () {
+    var menu = document.getElementById('mobile-menu');
+    menu.classList.remove('open');
+    setTimeout(function () {
+        menu.style.display = 'none';
+    }, 300);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/api/admin/feedbacks-data', )
+  const token = localStorage.getItem('token');
+  fetch('/api/admin/feedbacks-data', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then(res => res.json())
     .then(data => {
       const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

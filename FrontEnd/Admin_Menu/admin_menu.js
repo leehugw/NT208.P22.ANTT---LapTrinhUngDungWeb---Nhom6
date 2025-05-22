@@ -86,4 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Danh sách phản hồi
+    document.querySelectorAll('.btn-feedback').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập!");
+                window.location.href = '/';
+            } else {
+                window.location.href = `/api/admin/feedbacks?token=${token}`;
+            }
+        });
+    });
 });
