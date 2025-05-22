@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Lấy danh sách môn học phổ biến
   fetchPopularSubjects();
+
+    // Lấy thống kê GPA theo học kỳ
+  fetchSemesterGPAStats();
 });
 
 // Hàm lấy số lượt truy cập từ backend
@@ -122,4 +125,75 @@ function renderPieChart(subjects) {
             }
         }
     });
+}
+
+async function fetchSemesterGPAStats() {
+  try {
+    const res = await fetch('/api/admin/semester-gpa-statistics', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    const json = await res.json();
+    if (json.success) {
+      renderGPAChart(json.data);
+    }
+  } catch (err) {
+    console.error("Lỗi khi tải GPA:", err);
+  }
+}
+
+function renderGPAChart(data) {
+  // Format lại semester_id: "HK120222023" -> "HK1 2022-2023"
+  const formatSemester = (id) => {
+    const hk = id.slice(0, 3);              // HK1, HK2
+    const yearStart = id.slice(3, 7);       // 2022
+    const yearEnd = id.slice(7, 11);        // 2023
+    return `${hk} ${yearStart}-${yearEnd}`;
+  };
+
+  // Sắp xếp đúng thứ tự thời gian: ưu tiên theo năm bắt đầu, sau đó HK1 trước HK2
+  data.sort((a, b) => {
+    const aYear = parseInt(a.semester_id.slice(3, 7));
+    const bYear = parseInt(b.semester_id.slice(3, 7));
+    if (aYear !== bYear) return aYear - bYear;
+
+    const aTerm = a.semester_id.slice(2, 3); // "1" hoặc "2"
+    const bTerm = b.semester_id.slice(2, 3);
+    return parseInt(aTerm) - parseInt(bTerm);
+  });
+
+  const ctx = document.getElementById('gpaTrendChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map(d => formatSemester(d.semester_id)),
+      datasets: [{
+        label: 'GPA Trung bình (thang 10)',
+        data: data.map(d => d.averageGPA),
+        backgroundColor: 'rgba(75, 192, 192, 0.7)'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.dataset.label}: ${context.raw}`
+          }
+        },
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 10,
+          title: {
+            display: true,
+            text: 'GPA (thang 10)'
+          }
+        }
+      }
+    }
+  });
 }

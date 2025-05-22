@@ -13,6 +13,9 @@ const { getHomeVisitCount } = require('../Controllers/admin/HomeStatisticsContro
 const { getTopPopularSubjects } = require('../Controllers/admin/SubjectStatistic');
 const LecturerAbnormalDetectionController = require('../Controllers/lecturer/detectAbnormalStudent');
 const { authorize } = require('passport');
+const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
+
+router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
 router.get('/top-popular-subjects', authenticateToken, authorizeRoles('admin'), getTopPopularSubjects);
 
