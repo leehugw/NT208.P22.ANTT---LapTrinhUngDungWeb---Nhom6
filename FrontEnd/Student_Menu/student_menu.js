@@ -116,6 +116,19 @@ document.querySelectorAll(".btn-student-schedule").forEach(el => {
     });
 });
 
+document.querySelectorAll(".btn-student-english").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/student/english-certificate";
+        }
+    });
+});
+
 //api đăng xuất
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.querySelector('.logout-button');
