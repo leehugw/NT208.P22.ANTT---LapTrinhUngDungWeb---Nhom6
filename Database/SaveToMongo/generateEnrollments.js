@@ -33,76 +33,89 @@ async function generateEnrollments() {
       }
     }
 
-    // Map để lưu lớp đã tạo theo subject_id + suffix, phục vụ phân lớp chung cho sinh viên
     const classMap = new Map();
 
     const enrollments = [];
 
+    const facultyPDTDH = "KHOA_PĐTĐH";
+    const facultyBMTL = "KHOA_BMTL";
+
     for (const student of students) {
-      // Tìm faculty chứa ngành của sinh viên
       const facultyOfStudent = faculties.find(faculty => faculty.majors.includes(student.major_id));
       if (!facultyOfStudent) {
         console.warn(`⚠️ Không tìm thấy Faculty chứa major_id ${student.major_id} của sinh viên ${student.student_id}`);
         continue;
       }
-    
-      // Lọc môn học theo faculty_id
-      const subjectsOfFaculty = subjects.filter(sub => sub.faculty_id === facultyOfStudent.faculty_id);
-    
-      // Chọn ngẫu nhiên 2 đến 3 học kỳ gần nhất
-      const selectedSemesters = semesters.slice(-Math.floor(Math.random() * 2 + 2));
-    
-      // Set để lưu môn đã chọn của sinh viên
-      const selectedSubjectsSoFar = new Set();
-    
+
+      const preferredFacultyIds = [facultyPDTDH, facultyBMTL, facultyOfStudent.faculty_id];
+
+
+      const subjectsOfFaculty = subjects
+        .filter(sub => preferredFacultyIds.includes(sub.faculty_id))
+        .sort((a, b) => {
+          const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN'];
+
+          const typeCompare = typeOrder.indexOf(a.subject_type) - typeOrder.indexOf(b.subject_type);
+
+          if (typeCompare !== 0) return typeCompare;
+
+          if (a.subject_type === 'ĐC' && b.subject_type === 'ĐC') {
+            const isAPriority = [facultyPDTDH, facultyBMTL].includes(a.faculty_id) ? 0 : 1;
+            const isBPriority = [facultyPDTDH, facultyBMTL].includes(b.faculty_id) ? 0 : 1;
+            return isAPriority - isBPriority;
+          }
+
+          return 0;
+        });
+
+      // Chọn hết tất cả học kỳ
+      const selectedSemesters = semesters;
+
+      const subjectRepetitionCount = {};
+
       for (const semester of selectedSemesters) {
         const shuffledSubjects = [...subjectsOfFaculty].sort(() => 0.5 - Math.random());
-    
+
         const selectedSubjects = [];
         const classIds = [];
         let totalCredits = 0;
-    
-        const creditLimit = Math.floor(Math.random() * 29); // 0 đến 28 tín chỉ
-    
+
+        const creditLimit = Math.floor(Math.random() * 29);
+
         for (const subject of shuffledSubjects) {
-          if (selectedSubjectsSoFar.has(subject.subject_id)) {
-            // Nếu môn đã chọn rồi thì bỏ qua
-            continue;
-          }
-    
           const subjectCredits = subject.theory_credits + subject.practice_credits;
-    
+
+          const timesLearned = subjectRepetitionCount[subject.subject_id] || 0;
+          if (timesLearned >= 3) continue;
+
           if (totalCredits + subjectCredits > creditLimit) continue;
-    
+
           selectedSubjects.push(subject.subject_id);
-          selectedSubjectsSoFar.add(subject.subject_id); // Đánh dấu môn đã chọn
-    
           totalCredits += subjectCredits;
-    
-          // Tạo key để quản lý lớp theo môn học
-          const subjectKey = subject.subject_id;
-    
-          // Lấy hoặc tạo suffix cho môn học
+
+          subjectRepetitionCount[subject.subject_id] = timesLearned + 1;
+
           let suffix = "";
-          if (classMap.has(subjectKey)) {
-            suffix = classMap.get(subjectKey);
+          if (classMap.has(subject.subject_id)) {
+            suffix = classMap.get(subject.subject_id);
           } else {
             suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-            classMap.set(subjectKey, suffix);
+            classMap.set(subject.subject_id, suffix);
           }
-    
-          // Class ID lý thuyết (lớp chung)
+
           classIds.push(`${subject.subject_id}_${suffix}`);
-    
-          // Class ID thực hành (có thể là 1 hoặc 2)
-          const practiceCount = subject.practice_credits > 0 ? 1 : 0;
-          for (let i = 1; i <= practiceCount; i++) {
-            classIds.push(`${subject.subject_id}_${suffix}.${i}`);
+
+          const practiceCount = Math.min(subject.practice_credits > 0 ? 2 : 0, 2);
+          if (practiceCount === 2) {
+            const chosenClass = Math.floor(Math.random() * 2) + 1;
+            classIds.push(`${subject.subject_id}_${suffix}.${chosenClass}`);
+          } else if (practiceCount === 1) {
+            classIds.push(`${subject.subject_id}_${suffix}.1`);
           }
-    
+
           if (totalCredits >= creditLimit) break;
         }
-    
+
         enrollments.push({
           student_id: student.student_id,
           semester_id: semester.semester_id,
@@ -112,7 +125,6 @@ async function generateEnrollments() {
         });
       }
     }
-    
 
     await Enrollment.deleteMany();
     await Enrollment.insertMany(enrollments);
@@ -125,6 +137,8 @@ async function generateEnrollments() {
   }
 }
 
+
 generateEnrollments();
+
 
 

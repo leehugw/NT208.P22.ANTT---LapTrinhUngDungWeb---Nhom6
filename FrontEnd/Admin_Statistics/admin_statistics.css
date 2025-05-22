@@ -111,3 +111,66 @@ main.container {
         margin-bottom: 15px;
     }
 }
+
+#popularSubjectsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#popularSubjectsChart {
+    display: block;
+    margin: 0 auto;
+    max-width: 350px;
+    max-height: 350px;
+    width: 100%;
+    height: 350px;
+}
+@media (max-width: 576px) {
+    #popularSubjectsChart {
+        max-width: 100vw;
+        height: 250px;
+        max-height: 250px;
+    }
+}
+
+/* Giảm khoảng cách và đảm bảo chữ xuống dòng, căn giữa */
+#popularSubjectsContainer {
+    margin-top: 0.3rem !important;
+    margin-bottom: 0 !important;
+}
+
+#popularSubjectsContainer ~ p,
+#popularSubjectsContainer ~ h5,
+.card-body h5,
+.card-body p {
+    margin-bottom: 0.3rem !important;
+    margin-top: 0.3rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    text-align: center !important;
+    line-height: 1.4;
+    width: 100%;
+    display: block;
+}
+
+/* Căn chỉnh container biểu đồ */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Căn chỉnh tiêu đề và nội dung */
+.card-body h5 {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.card-body p {
+    margin-bottom: 20px;
+    color: #666;
+}

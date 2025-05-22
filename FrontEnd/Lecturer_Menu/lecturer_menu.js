@@ -55,19 +55,16 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = "http://localhost:3000/";
         return;
     }
-
-    // Nếu có token → gọi API lấy dữ liệu:
-    fetchLecturerProfile(token);
 });
 
 document.getElementById("btn-lecturer-card").addEventListener("click", function(e) {
-    e.preventDefault();
     const token = localStorage.getItem("token");
+    e.preventDefault();
     if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
         window.location.href = "http://localhost:3000/";
     } else {
-        window.location.href = "/api/lecturer/profile?token=" + token;
+        window.location.href = "/api/lecturer/profile";
     }
 });
 
@@ -79,14 +76,14 @@ document.getElementById("btn-lecturer-info").addEventListener("click", function(
         window.location.href = "http://localhost:3000/";
     } else {
         // Sửa thành redirect đến trang HTML thay vì API endpoint
-        window.location.href = "/api/lecturer/profile?token=" + token;
+        window.location.href = "/api/lecturer/profile";
     }
 });
 
 document.querySelectorAll(".btn-lecturer-classlist").forEach(el => {
+    const token = localStorage.getItem("token");
     el.addEventListener("click", function(e) {
         e.preventDefault();
-        const token = localStorage.getItem("token");
         if (!token) {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";

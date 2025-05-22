@@ -263,8 +263,7 @@ def generate_students(num_students=50):
             "gender": gender,
             "birth_date": birth_date.strftime("%d-%m-%Y"),
             "birthplace": birthplace,
-            "class_name": class_name,
-            "class_id": class_id,
+            "class_id": class_name,
             "major_id": major_id,
             "program_id": program_id,
             "program_type": program_type,
@@ -318,12 +317,12 @@ def generate_students(num_students=50):
     
     return students
 
-# Generate 50 students
+# Generate 300 students
 students = generate_students(300)
 
 # Save to JSON file
-# data_path = Path(__file__).parent.parent / "data" / "students.json"
-data_path = Path("students.json")
+data_path = Path(__file__).parent.parent / "Json" / "students.json"
+
 with data_path.open('w', encoding='utf-8') as f:
     json.dump(students, f, ensure_ascii=False, indent=2)
 

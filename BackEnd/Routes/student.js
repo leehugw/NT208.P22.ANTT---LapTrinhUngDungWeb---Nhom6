@@ -17,11 +17,11 @@ router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res)
 
 // Route lấy bản điểm của sinh viên theo học kỳ 
 router.get("/group-by-semester-data", authenticateToken,
-    authorizeRoles('student', 'lecturer'), ScoreController.getScoresByStudentGrouped);
+    authorizeRoles('student', 'lecturer', 'admin'), ScoreController.getScoresByStudentGrouped);
 
 // Route cập nhật thông tin học tập của sinh viên 
 router.get("/student-academic-data", authenticateToken,
-    authorizeRoles('student', 'lecturer'), StudentAcademicController.updateStudentAcademicController);
+    authorizeRoles('student', 'lecturer', 'admin'), StudentAcademicController.updateStudentAcademicController);
 
 // Route xem thống kê học tập 
 router.get('/academicstatistic', (req, res) => {
@@ -34,31 +34,6 @@ router.get('/academicstatistic', (req, res) => {
 //Route hien thi cau hoi va tra loi chatbot
  router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
 
-// router.get('/:student_id/chatbot', (req, res) => {
-//     const { student_id } = req.params;
-
-//     if (!student_id) {
-//         return res.status(400).send("student_id là bắt buộc");
-//     }
-
-//     // Gọi controller để xử lý
-//     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
-
-//     res.sendFile(pagePath);
-// });
-
-// router.get('/:student_id/chatbot', (req, res) => {
-//     const { student_id } = req.params;
-
-//     if (!student_id) {
-//         return res.status(400).send("student_id là bắt buộc");
-//     }
-
-//     // Gọi controller để xử lý
-//     const pagePath = path.join(__dirname, '../../FrontEnd/ChatBot/chatbot.html');
-
-//     res.sendFile(pagePath);
-// });
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
 router.post('/schedule-optimize-data', authenticateToken, authorizeRoles('student'), CourseRecommendationController.generateOptimizedSchedule
@@ -77,7 +52,7 @@ router.get('/profile', (req, res) => {
 });
 
 // Route API để lấy dữ liệu sinh viên
-router.get('/profile-data', authenticateToken, authorizeRoles('student', 'lecturer'), StudentInformationController.ViewStudentInformation);
+router.get('/profile-data', authenticateToken, authorizeRoles('student', 'lecturer', 'admin'), StudentInformationController.ViewStudentInformation);
 
 
 // Routes chatbot conversation

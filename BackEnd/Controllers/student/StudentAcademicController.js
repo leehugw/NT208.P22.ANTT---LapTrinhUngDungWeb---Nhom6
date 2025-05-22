@@ -14,8 +14,8 @@ const updateStudentAcademicController = async (req, res) => {
         if (userRole === 'student') {
             // Nếu là sinh viên, lấy student_id từ req.user (vì sinh viên chỉ có thể xem thông tin của chính mình)
             student_id = req.user.student_id; 
-        } else if (userRole === 'lecturer') {
-            // Nếu là giảng viên, lấy student_id từ URL (có thể là sinh viên khác)
+        } else if (userRole === 'lecturer' || userRole === 'admin') {
+            // Nếu là giảng viên or admin, lấy student_id từ URL (có thể là sinh viên khác)
             student_id = req.query.student_id;
             
         } else {

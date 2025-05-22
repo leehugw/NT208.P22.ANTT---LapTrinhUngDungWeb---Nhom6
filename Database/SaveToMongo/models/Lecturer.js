@@ -9,9 +9,10 @@ const LecturerSchema = new mongoose.Schema({
     birthdate: { type: String, required: true },
     birthplace: { type: String, required: true },
     faculty: { type: String, required: true },
-    className: { type: String }, // nếu có
+    faculty_id: { type: String, required: true },
+    class_id: { type: String }, // nếu có
     phonenumber: { type: String, required: true },
-    email: { type: String, required: true } // có thể trùng username
+    email: { type: String, required: true } // trùng username
 });
 
 const Lecturer = mongoose.model('Lecturer', LecturerSchema);

@@ -4,116 +4,91 @@ import unicodedata
 import json
 from pathlib import Path
 
+faculties = [
+    {"faculty": "Kỹ thuật máy tính", "classes": ["KTMT", "TKVM"], "faculty_id": "KHOA_KTMT"},
+    {"faculty": "Khoa học & Kỹ thuật thông tin", "classes": ["CNTT", "KHDL"], "faculty_id": "KHOA_KTTT"},
+    {"faculty": "Khoa học máy tính", "classes": ["KHMT", "TTNT"], "faculty_id": "KHOA_KHMT"},
+    {"faculty": "Công nghệ phần mềm", "classes": ["KTPM"], "faculty_id": "KHOA_CNPM"},
+    {"faculty": "Hệ thống thông tin", "classes": ["HTTT", "TMDT"], "faculty_id": "KHOA_HTTT"},
+    {"faculty": "Mạng máy tính & Truyền thông", "classes": ["ATTT", "MMTT"], "faculty_id": "KHOA_MTT"},
+]
+
+first_names_male = ["Nguyễn Văn", "Lê Văn", "Hoàng Văn", "Bùi Văn", "Vũ Văn", "Trần Văn", "Phạm Văn", "Đặng Văn", 
+                   "Đỗ Văn", "Ngô Văn", "Lý Văn", "Mai Văn", "Đinh Văn", "Trịnh Văn", "Hồ Văn"]
+first_names_female = ["Trần Thị", "Phạm Thị", "Nguyễn Thị", "Lê Thị", "Đặng Thị", "Vũ Thị", "Hoàng Thị", "Bùi Thị",
+                     "Đỗ Thị", "Ngô Thị", "Lý Thị", "Mai Thị", "Đinh Thị", "Trịnh Thị", "Hồ Thị"]
+last_names = ["An", "Bình", "Cường", "Dũng", "Giang", "Hải", "Khánh", "Long", "Minh", "Nga", "Phương", "Quân", 
+             "Sơn", "Tú", "Uyên", "Việt", "Xuân", "Yến", "Tùng", "Thảo"]
+
+provinces = ["Hà Nội", "TP.HCM", "Đà Nẵng", "Cần Thơ", "Bình Dương", "Đồng Nai", "Nghệ An", "Huế", "Quảng Ninh"]
+
 def remove_accents(input_str):
     nfkd_form = unicodedata.normalize('NFKD', input_str)
     no_accent = ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
-    return no_accent.replace('đ', 'd').replace('Đ', 'D')  # Xử lý riêng chữ "đ" và "Đ"
+    return no_accent.replace('đ', 'd').replace('Đ', 'D')
 
 def generate_school_email(first_name, last_name):
     first_name = first_name.strip()
     last_name = last_name.strip().lower()
-
-    first_initials = ''.join(word[0].lower() for word in first_name.split())  # Lấy chữ cái đầu của từng từ trong first_name
-    first_initials = remove_accents(first_initials)  # Bỏ dấu
-    last_name = remove_accents(last_name)  # Bỏ dấu
-    
+    first_initials = ''.join(word[0].lower() for word in first_name.split())
+    first_initials = remove_accents(first_initials)
+    last_name = remove_accents(last_name)
     school_email = f"{last_name}{first_initials}@uit.edu.vn"
     return school_email
 
+def random_class(faculty_classes, used_classes):
+    while True:
+        year = random.randint(2021, 2024)
+        semester = random.choice(["1", "2"])
+        class_code = random.choice(faculty_classes)
+        class_name = f"{class_code}{year}.{semester}"
+        if class_name not in used_classes:
+            used_classes.add(class_name)
+            return class_name
+
 def generate_lecturer_data(num_lecturers=30):
     data = []
-    first_names_male = ["Nguyễn Văn", "Lê Văn", "Hoàng Văn", "Bùi Văn", "Vũ Văn", "Trần Văn", "Phạm Văn", "Đặng Văn", 
-                       "Đỗ Văn", "Ngô Văn", "Lý Văn", "Mai Văn", "Đinh Văn", "Trịnh Văn", "Hồ Văn"]
-    first_names_female = ["Trần Thị", "Phạm Thị", "Nguyễn Thị", "Lê Thị", "Đặng Thị", "Vũ Thị", "Hoàng Thị", "Bùi Thị",
-                         "Đỗ Thị", "Ngô Thị", "Lý Thị", "Mai Thị", "Đinh Thị", "Trịnh Thị", "Hồ Thị"]
-    last_names = ["An", "Bình", "Cường", "Dũng", "Giang", "Hải", "Khánh", "Long", "Minh", "Nga", "Phương", "Quân", 
-                 "Sơn", "Tú", "Uyên", "Việt", "Xuân", "Yến", "Tùng", "Thảo"]
-    faculties = {
-        "KHOA_KHMT": "Khoa Khoa học Máy tính",
-        "KHOA_CNPM": "Khoa Công nghệ Phần mềm",
-        "KHOA_KTMT": "Khoa Kỹ thuật máy tính",
-        "KHOA_HTTT": "Khoa Hệ thống Thông tin",
-        "KHOA_MMT": "Khoa Mạng Máy tính & Truyền thông",
-        "KHOA_KTTT": "Khoa Khoa học & Kỹ thuật thông tin"
-    }
-    provinces = [
-        "Hà Nội", "Hồ Chí Minh", "Hải Phòng", "Đà Nẵng", "Cần Thơ", 
-        "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", 
-        "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước", 
-        "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", 
-        "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", 
-        "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình", 
-        "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", 
-        "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định", 
-        "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", 
-        "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", 
-        "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", 
-        "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", 
-        "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
-    ]
-
+    used_classes = set()
     for i in range(1, num_lecturers + 1):
         gender = random.choice(["Nam", "Nữ"])
-        
         if gender == "Nam":
             first_name = random.choice(first_names_male)
         else:
             first_name = random.choice(first_names_female)
-            
         last_name = random.choice(last_names)
-        name = f"{first_name} {last_name}"
-        name_no_accents = remove_accents(name)
-        
-        # Generate birth date between 1970-01-01 and 1985-12-31
-        start_date = datetime(1970, 1, 1)
-        end_date = datetime(1985, 12, 31)
-        delta = end_date - start_date
-        random_days = random.randint(0, delta.days)
-        birth_date = start_date + timedelta(days=random_days)
-        
+        fullname = f"{first_name} {last_name}"
+        name_no_accents = remove_accents(fullname)
         lecturer_id = f"GV{str(i).zfill(3)}"
-        faculty_id = random.choice(list(faculties.keys()))
-        birth_place = random.choice(provinces)
-        
-        # Generate emails without accents
-        name_parts = name_no_accents.lower().split()
-        school_email = generate_school_email(first_name, last_name)
-        personal_email = f"{''.join([part.lower() for part in name_parts])}@gmail.com"
-        
-        # Generate phone number
-        phone = f"09{random.randint(10000000, 99999999)}"
-        
+        birthdate = (datetime(1990, 1, 1) + timedelta(days=random.randint(0, 365*10))).strftime("%Y-%m-%d")
+        birthplace = random.choice(provinces)
+        faculty_info = random.choice(faculties)
+        faculty = faculty_info["faculty"]
+        className = random_class(faculty_info["classes"], used_classes)
+        phonenumber = f"09{random.randint(10000000, 99999999)}"
+        personal_email = f"{''.join(name_no_accents.lower().split())}@gmail.com"
+        email = personal_email
+        faculty_id = faculty_info["faculty_id"]
         lecturer = {
             "lecturer_id": lecturer_id,
-            "name": name,
+            "username": personal_email,
+            "fullname": fullname,
             "gender": gender,
-            "birth_date": birth_date.strftime("%d-%m-%Y"),
+            "birthdate": birthdate,
+            "birthplace": birthplace,
+            "faculty": faculty,
             "faculty_id": faculty_id,
-            "birth_place": birth_place,
-            "school_email": school_email,
-            "alias_email": "",  # Empty as in example
-            "personal_email": personal_email,
-            "phone": phone
+            "class_id": className,
+            "phonenumber": phonenumber,
+            "email": email
         }
-        
         data.append(lecturer)
-    
     return data
 
-# Generate 20 lecturers with proper Vietnamese names but emails without accents
-data = generate_lecturer_data(20)
+# Generate 30 lecturers
+data = generate_lecturer_data(30)
 
-current_file_path = Path(__file__).absolute()
-
-# data_path = (
-#    current_file_path.parent.parent.parent.parent
-#    / "Database" 
-#    / "SaveToMongo" 
-#    / "Json" 
-#    / "lecturers.json"
-#)
-
-data_path = Path("lecturers.json")
+# Đường dẫn tương đối từ thư mục gốc project
+data_path = Path(__file__).parent.parent / "Json" / "lecturers.json"
 
 # Save to JSON file
 with data_path.open('w', encoding='utf-8') as f:

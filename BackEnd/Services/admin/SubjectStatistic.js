@@ -67,5 +67,3 @@ const getTopPopularSubjects = async () => {
   
 
 module.exports = { getTopPopularSubjects };
-
-

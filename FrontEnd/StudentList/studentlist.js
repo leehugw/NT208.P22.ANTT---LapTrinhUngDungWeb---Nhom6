@@ -35,22 +35,46 @@ document.addEventListener('DOMContentLoaded', () => {
             `<option value="${item}">${item}</option>`).join('');
     }
 
-    function loadStudents(query = '') {
-        fetch(`/api/admin/students-data?${query}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => {
-            if (!res.ok) throw new Error("Token hết hạn hoặc API lỗi");
-            return res.json();
-        })
-        .then(data => {
-            const { data: students, filters } = data;
-
-            // Render sinh viên
-            studentCountElement.textContent = students.length;
-            studentTableBody.innerHTML = students.map(s => `
+    async function loadStudents(query = '') {
+        try {
+            const token = localStorage.getItem('token');
+    
+            // 1. Lấy danh sách sinh viên
+            const res1 = await fetch(`/api/admin/students-data?${query}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (!res1.ok) throw new Error("Token hết hạn hoặc API lỗi");
+            const { data: students, filters } = await res1.json();
+    
+            // 2. Lấy danh sách class_id duy nhất
+            const classIds = [...new Set(students.map(s => s.class_id).filter(Boolean))];
+    
+            // 3. Gọi API abnormal cho từng class_id song song
+            const abnormalResults = await Promise.all(classIds.map(async classId => {
+                const res = await fetch(`/api/admin/abnormal/${classId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (!res.ok) return [];
+                const json = await res.json();
+                return json.data || [];
+            }));
+    
+            // 4. Gộp kết quả cảnh báo thành map student_id => {status, note}
+            const abnormalMap = new Map();
+            abnormalResults.flat().forEach(s => {
+                abnormalMap.set(s.student_id, { status: s.status, note: s.note });
+            });
+    
+            // 5. Ghép cảnh báo vào sinh viên
+            const mergedStudents = students.map(s => ({
+                ...s,
+                status: abnormalMap.get(s.student_id)?.status || 'Đang học',
+                note: abnormalMap.get(s.student_id)?.note || '-'
+            }));
+    
+            // 6. Render
+            studentCountElement.textContent = mergedStudents.length;
+            studentTableBody.innerHTML = mergedStudents.map(s => `
                 <tr class="custom-row align-middle">
                     <td class="border-start">
                         <div class="d-flex align-items-center">
@@ -61,44 +85,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td class="text-center">${s.student_id}</td>
                     <td class="text-center">${s.contact?.school_email || '-'}</td>
-                    <td class="text-center">Đang học</td>
-                    <td class="text-center">${s.class_name || '-'}</td>
+                    <td class="text-center">${s.status}</td>
+                    <td class="text-center">${s.class_id || '-'}</td>
                     <td class="text-center">${s.major_id}</td>
                     <td class="text-center">${s.faculty_name}</td>
                     <td class="text-center">
-                        <a class="text view-profile" href="#" data-student-id="${s.student_id}">
+                        <a class="text view-profile" href="/api/student/profile?student_id=${s.student_id}">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
                     </td>
                     <td class="text-center border-end">
-                        <a class="text"><i class="fas fa-chart-line"></i></a>
+                        <a class="text" href="/api/student/academicstatistic?student_id=${s.student_id}">
+                            <i class="fas fa-chart-line"></i>
+                        </a>
                     </td>
                 </tr>
             `).join('');
-
-            document.querySelectorAll('.view-profile').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault(); // Chặn reload
-                    const studentId = this.getAttribute('data-student-id');
-                    if (studentId) {
-                        localStorage.setItem('selectedStudentId', studentId);
-                        window.location.href = `/api/admin/student/${studentId}/profile`; // <-- Trang hồ sơ sinh viên
-                    }
-                });
-            });
-
-            // Render dropdown filter
+    
             if (filters) {
                 populateDropdown('filter-class', filters.classes);
                 populateDropdown('filter-major', filters.majors);
                 populateDropdown('filter-faculty', filters.faculties);
+                populateDropdown('filter-status', filters.statuses);
             }
-        })
-        .catch(err => {
+    
+        } catch (err) {
             console.error('❌ Lỗi tải danh sách sinh viên:', err);
             studentTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Lỗi tải dữ liệu</td></tr>';
-        });
+        }
     }
+    
 
     // Ban đầu load tất cả
     loadStudents();

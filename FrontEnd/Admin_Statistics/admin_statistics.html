@@ -17,6 +17,7 @@
     <link href="/Admin_Statistics/mobile_admin_statistics.css" rel="stylesheet">
     <link href="/Admin_Statistics/admin_statistics.css" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -136,53 +137,37 @@
                     </div>
                 </div>
 
-                <!-- Thống kê chung -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="card-title">Thống kê chung</h3>
                         
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-md-6">
-                                <h5>Môn học phổ biến nhất</h5>
-                                <p>Số lượng sinh viên đăng ký các môn học phổ biến.</p>
+                                <div class="px-3">
+                                    <h5 class="mb-3">Môn học phổ biến nhất</h5>
+                                    <p class="mb-4">Tỷ lệ đăng ký các môn học phổ biến.</p>
+                                    <div class="chart-container">
+                                        <canvas id="popularSubjectsChart"></canvas>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <h5>Số lượng tốt/phản hồi về chatbot và hệ thống</h5>
+                                <div class="px-3">
+                                    <h5 class="mb-3">Số lượng tốt/phản hồi về chatbot và hệ thống</h5>
+                                    <!-- Feedback stats can go here -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Xu hướng GPA trung bình theo năm học -->
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Xu hướng GPA trung bình theo năm học</h5>
-                        <div class="d-flex align-items-end" style="height: 200px;">
-                            <div class="flex-fill d-flex flex-column align-items-center">
-                                <div class="bg-success w-75 mb-2 rounded" style="height: 100%;"></div>
-                                <span>3.6</span>
-                            </div>
-                            <div class="flex-fill d-flex flex-column align-items-center">
-                                <div class="bg-success w-75 mb-2 rounded" style="height: 75%;"></div>
-                                <span>2.7</span>
-                            </div>
-                            <div class="flex-fill d-flex flex-column align-items-center">
-                                <div class="bg-success w-75 mb-2 rounded" style="height: 50%;"></div>
-                                <span>1.8</span>
-                            </div>
-                            <div class="flex-fill d-flex flex-column align-items-center">
-                                <div class="bg-success w-75 mb-2 rounded" style="height: 25%;"></div>
-                                <span>0.9</span>
-                            </div>
-                        </div>
-                        <div class="d-flex mt-2">
-                            <div class="flex-fill text-center">2020</div>
-                            <div class="flex-fill text-center">2021</div>
-                            <div class="flex-fill text-center">2022</div>
-                            <div class="flex-fill text-center">2023</div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Xu hướng GPA trung bình theo học kỳ</h5>
+                            <canvas id="gpaTrendChart" height="200"></canvas>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </main>

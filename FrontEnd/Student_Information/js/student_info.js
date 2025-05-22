@@ -91,6 +91,12 @@ async function fetchStudentProfile(token) {
             }
         });
 
+        if (!response.ok) {
+            // Nếu không phải JSON, dùng text() để log lỗi chi tiết
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+
         const data = await response.json();
 
         if (data.success && data.type === "student") {
@@ -104,43 +110,6 @@ async function fetchStudentProfile(token) {
         alert('Lỗi khi tải thông tin sinh viên: ' + error.message);
     }
 }
-//Hiển thị thông tin sinh viên cho admin
-async function fetchStudentProfileAsAdmin(token, studentId) {
-    try {
-        const response = await fetch(`http://localhost:3000/api/admin/student/${studentId}/profile/api`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        console.log('🔵 Fetch admin student profile: Status', response.status);
-
-        if (!response.ok) {
-            if (response.status === 401 || response.status === 403) {
-                localStorage.removeItem('token');
-                alert('Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.');
-                window.location.href = '/';
-                return;
-            }
-            throw new Error('Không lấy được thông tin sinh viên');
-        }
-
-        const data = await response.json();
-        console.log('✅ Admin profile data:', data);
-
-        if (data.success) {
-            displayStudentData(data.data);
-        } else {
-            throw new Error(data.message || 'Lỗi dữ liệu');
-        }
-    } catch (error) {
-        console.error('🔥 Lỗi fetch hồ sơ sinh viên:', error);
-        alert('Không thể tải thông tin sinh viên: ' + error.message);
-    }
-}
-
-
 
 // Hàm hiển thị dữ liệu
 function displayStudentData(data) {
@@ -171,7 +140,7 @@ function displayStudentData(data) {
     setValue('student-name', student.name);
     setValue('fullname', student.name);
     setValue('student-id', student.student_id);
-    setValue('class', student.class_name);
+    setValue('class', student.class_id);
     setValue('faculty-name', student.faculty_name);
     setValue('training-system', student.program_type);
 

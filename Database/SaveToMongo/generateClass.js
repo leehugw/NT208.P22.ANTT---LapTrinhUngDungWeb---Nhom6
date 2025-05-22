@@ -20,13 +20,17 @@ const generateClassData = async () => {
         await mongoose.connect(process.env.DB_URI);
         console.log("✅ MongoDB connected");
 
+        // Xóa dữ liệu cũ trong collection 'classes'
+        await Class.deleteMany({});
+        console.log("✅ Đã xóa toàn bộ dữ liệu cũ trong collection 'classes'");
+
         const enrollments = await Enrollment.find({});
         if (!enrollments.length) {
             console.log("❌ Không có dữ liệu enrollment.");
             return;
         }
 
-        // Map để gom sinh viên theo class_id
+        // Map để gom sinh viên theo class_id, giữ semester_id của lớp đó
         const classMap = new Map();
 
         for (const enroll of enrollments) {
@@ -43,36 +47,38 @@ const generateClassData = async () => {
             }
         }
 
-        // Lặp qua từng class_id để tạo class mới
+        // Tạo mảng để lưu các lớp mới
+        const newClasses = [];
+
+        // Lặp qua từng class_id để chuẩn bị dữ liệu lớp mới
         for (const [class_id, data] of classMap.entries()) {
             const { students, semester_id } = data;
-
-            // Kiểm tra class đã tồn tại chưa
-            const existed = await Class.findOne({ class_id });
-            if (existed) {
-                continue;
-            }
 
             const lecturer_id = await getRandomLecturerId();
             const subject_id = class_id.split('.')[0]; // ví dụ SS004.P21 -> SS004
 
-            const newClass = new Class({
+            newClasses.push({
                 class_id,
                 semester_id,
                 lecturer_id,
                 subject_id,
                 students: Array.from(students)
             });
-
-            await newClass.save();
         }
-        console.log("✅ Đã tạo lớp học thành công.");
+
+        if (newClasses.length > 0) {
+            await Class.insertMany(newClasses);
+            console.log(`✅ Đã tạo thành công ${newClasses.length} lớp học.`);
+        } else {
+            console.log("⚠️ Không có lớp học nào để tạo.");
+        }
 
     } catch (err) {
         console.error("❌ Lỗi:", err);
     } finally {
-        mongoose.connection.close();
+        await mongoose.connection.close();
     }
 };
 
 generateClassData();
+
