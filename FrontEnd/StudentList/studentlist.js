@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nút tìm kiếm
     document.getElementById('search-button').addEventListener('click', () => {
-        console.log('Tìm kiếm được click!');
         const mssv = document.getElementById('filter-mssv')?.value.trim();
         const classId = document.getElementById('filter-class')?.value;
         const majorId = document.getElementById('filter-major')?.value;
@@ -135,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (facultyName) params.append('faculty_name', facultyName);
         if (status) params.append('status', status);
 
-        console.log('Query gửi đi:', params.toString());
         loadStudents(params.toString());
     });
 
