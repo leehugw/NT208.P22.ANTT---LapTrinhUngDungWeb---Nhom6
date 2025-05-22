@@ -95,22 +95,6 @@
                         <i class="fas fa-filter"></i>
                     </button>
 
-                    <!-- Select filters: hiện trên desktop -->
-                    <div class="d-none d-md-flex gap-2">
-                        <select class="form-select custom-select-width" id="filter-class">
-                            <option selected="">Lớp học</option>
-                        </select>
-                        <select class="form-select custom-select-width" id="filter-major">
-                            <option selected="">Ngành học</option>
-                        </select>
-                        <select class="form-select custom-select-width" id="filter-faculty">
-                            <option selected="">Khoa</option>
-                        </select>
-                        <select class="form-select custom-select-width" id="filter-status">
-                            <option selected="">Trạng thái</option>
-                        </select>
-                    </div>
-
                     <!-- Nút search -->
                     <button class="btn button text-white" type="button" id="search-button">
                         <i class="fas fa-search"></i>
@@ -118,22 +102,20 @@
                 </div>
             </div>
 
-            <!-- Mobile filter -->
-            <div class="collapse d-md-none mt-2" id="mobileFilter">
-                <div class="d-flex flex-column gap-2">
-                    <select class="form-select" id="filter-class">
-                        <option selected="">Lớp học</option>
-                    </select>
-                    <select class="form-select" id="filter-major">
-                        <option selected="">Ngành học</option>
-                    </select>
-                    <select class="form-select" id="filter-faculty">
-                        <option selected="">Khoa</option>
-                    </select>
-                    <select class="form-select" id="filter-status">
-                        <option selected="">Trạng thái</option>
-                    </select>
-                </div>
+            <!-- Shared Filters (dùng chung cho cả PC và mobile, dùng class để giữ style như cũ) -->
+            <div class="collapse d-md-flex mt-2 gap-2 justify-content-center" id="mobileFilter">
+                <select class="form-select custom-select-width" id="filter-class">
+                    <option selected="">Lớp học</option>
+                </select>
+                <select class="form-select custom-select-width" id="filter-major">
+                    <option selected="">Ngành học</option>
+                </select>
+                <select class="form-select custom-select-width" id="filter-faculty">
+                    <option selected="">Khoa</option>
+                </select>
+                <select class="form-select custom-select-width" id="filter-status">
+                    <option selected="">Trạng thái</option>
+                </select>
             </div>
         </div>
 

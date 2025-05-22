@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function populateDropdown(id, items) {
-        const select = document.getElementById(id);
-        if (!select) return;
-        select.innerHTML = `<option value="">Tất cả</option>` + items.map(item =>
-            `<option value="${item}">${item}</option>`).join('');
+    function populateDropdown(id, items, label) {
+    const select = document.getElementById(id);
+    if (!select) return;
+    select.innerHTML = `<option value="">${label}</option>` + items.map(item =>
+        `<option value="${item}">${item}</option>`).join('');
     }
 
     async function loadStudents(query = '') {
@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
     
             if (filters) {
-                populateDropdown('filter-class', filters.classes);
-                populateDropdown('filter-major', filters.majors);
-                populateDropdown('filter-faculty', filters.faculties);
-                populateDropdown('filter-status', filters.statuses);
+                populateDropdown('filter-class', filters.classes, 'Lớp học');
+                populateDropdown('filter-major', filters.majors, 'Ngành học');
+                populateDropdown('filter-faculty', filters.faculties, 'Khoa');
+                populateDropdown('filter-status', filters.statuses, 'Trạng thái');
             }
     
         } catch (err) {
@@ -121,17 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nút tìm kiếm
     document.getElementById('search-button').addEventListener('click', () => {
+        console.log('Tìm kiếm được click!');
         const mssv = document.getElementById('filter-mssv')?.value.trim();
-        const className = document.getElementById('filter-class')?.value;
+        const classId = document.getElementById('filter-class')?.value;
         const majorId = document.getElementById('filter-major')?.value;
         const facultyName = document.getElementById('filter-faculty')?.value;
+        const status = document.getElementById('filter-status')?.value;
 
         const params = new URLSearchParams();
         if (mssv) params.append('student_id', mssv);
-        if (className) params.append('class_name', className);
+        if (classId) params.append('class_id', className);
         if (majorId) params.append('major_id', majorId);
         if (facultyName) params.append('faculty_name', facultyName);
+        if (status) params.append('status', status);
 
+        console.log('Query gửi đi:', params.toString());
         loadStudents(params.toString());
     });
 

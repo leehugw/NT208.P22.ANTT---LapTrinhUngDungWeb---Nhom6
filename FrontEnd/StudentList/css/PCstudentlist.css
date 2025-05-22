@@ -1,7 +1,6 @@
 @media (min-width: 768px) {
     .navbar-container {
         margin-top: -50px;
-        /* Adjust this value as needed */
     }
 
     .logout-button {
@@ -10,6 +9,20 @@
 
     .navbar {
         height: 60px;
-        /* Adjust this value as needed */
+    }
+
+    /* Thêm: Ẩn menu di động, hiển thị menu chính */
+    #mobile-menu {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        display: flex !important;
+    }
+
+    /* Thêm: Tối ưu table trên desktop */
+    .table th, .table td {
+        font-size: 1rem;
+        padding: 10px;
     }
 }

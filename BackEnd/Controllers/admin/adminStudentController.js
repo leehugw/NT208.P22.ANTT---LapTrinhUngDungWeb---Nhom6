@@ -23,6 +23,7 @@ const getAllStudentsForAdmin = async (req, res) => {
       const faculty = faculties.find(f => f.faculty_name === req.query.faculty_name);
       if (faculty) query.major_id = { $in: faculty.majors };
     }
+    if (req.query.status) query.status = req.query.status;
 
     const students = await student.find(query).select('name student_id contact.school_email class_id major_id');
     const enrichedStudents = students.map(s => ({
@@ -34,7 +35,6 @@ const getAllStudentsForAdmin = async (req, res) => {
     const majorIds = [...new Set(enrichedStudents.map(s => s.major_id).filter(Boolean))];
     const facultyNames = [...new Set(enrichedStudents.map(s => s.faculty_name).filter(Boolean))];
     const statuses = ["Đang học", "Cảnh báo"];
-
 
     res.json({
       success: true,
