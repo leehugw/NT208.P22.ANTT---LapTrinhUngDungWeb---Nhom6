@@ -14,6 +14,8 @@ const { getTopPopularSubjects } = require('../Controllers/admin/SubjectStatistic
 const LecturerAbnormalDetectionController = require('../Controllers/lecturer/detectAbnormalStudent');
 const { authorize } = require('passport');
 const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
+const Feedback = require('../../Database/SaveToMongo/models/Feedback');
+
 
 router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
@@ -83,6 +85,17 @@ router.get('/home-visit-count', getHomeVisitCount);
 router.get('/statistics', authenticateToken, authorizeRoles('admin'), (req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Statistics/admin_statistics.html');
   res.sendFile(pagePath);
+});
+
+// Route đếm số lượt phản hồi về lỗi (bug)
+router.get('/bug-statistic', authenticateToken, authorizeRoles('admin'), async (req, res) => {
+  try {
+    const bugCount = await Feedback.countDocuments({ type: 'bug' });
+    res.status(200).json({ bugCount });
+  } catch (err) {
+    console.error('Lỗi thống kê bug:', err);
+    res.status(500).json({ error: 'Lỗi server khi thống kê lỗi' });
+  }
 });
 
 module.exports = router;
