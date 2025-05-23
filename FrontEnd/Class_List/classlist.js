@@ -150,12 +150,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         
             const studentData = await studentRes.json();
-            console.log(studentData);
             const studentCount = studentData.students.length;
             classSize.innerText = `${studentCount}`;
             studentTableBody.innerHTML = "";
         
             if (studentData.isAdvisorClass) {
+                statusSelect.disabled = false;
                 const abnormalRes = await fetch(`/api/lecturer/abnormal/${classId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td class="text-center">${student.school_email}</td>
                             <td class="text-center">${statusText}</td>
                             <td class="text-center">${noteText}</td>
-                            <td class="text-center">${student.class_name || '-'}</td>
+                            <td class="text-center">${student.class_id || '-'}</td>
                             <td class="text-center">${student.major_name || '-'}</td>
                             <td class="text-center">${student.faculty_name || '-'}</td>
                             <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${student.student_id}"><i class="fas fa-external-link-alt"></i></a></td>
@@ -215,6 +215,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                 });
             } else {
+                statusSelect.disabled = true;
+                classStatisticsWrapper.style.display = "none";
+
                 studentTableThread.innerHTML = `
                     <tr>
                         <th scope="col" class="thread border-0">Sinh viên</th>
