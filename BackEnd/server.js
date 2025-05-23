@@ -54,6 +54,10 @@ app.get('/', increaseHomeVisit, (req, res) => {
   res.sendFile(path.join(__dirname, '../FrontEnd/Home/home.html'));
 });
 
+// Usser statistics
+//const statisticsRoutes = require('./Routes/statistics');
+//app.use('/api/statistics', statisticsRoutes);
+
 // Route to trigger Google login
 
 //const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=278181169185-sqeskqdu8rnck8l5cakqhplhbjskn2ni.apps.googleusercontent.com&redirect_uri=http://localhost:3000/callback&response_type=code&scope=email`;
