@@ -20,6 +20,7 @@
 </head>
 
 <body class="font-roboto">
+ 
     <header class="bg-white shadow navbar fixed-top">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
@@ -35,9 +36,10 @@
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn text-white rounded-0 ml-2 login-button">
-                <a href="/auth/google" class="text-decoration-none text-white">Đăng nhập</a></button>
-            </button>
+           <a href="/auth/google" class="btn bg-white text-dark fw-bold rounded-0 ml-2" id="login-button">
+              <i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+        <button class="btn bg-white text-dark fw-bold rounded-0 ml-2" id="logout-button" style="display: none;"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
 
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"

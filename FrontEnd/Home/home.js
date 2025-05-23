@@ -64,3 +64,33 @@ window.addEventListener('scroll', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');
+    const loginBtn = document.getElementById('login-button');
+    const logoutBtn = document.getElementById('logout-button');
+    if (token) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'block';
+    } else {
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+    }
+});
+
+//api đăng xuất
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutButton = document.getElementById('logout-button');
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            // Xóa token khỏi localStorage vì lưu token trong localStorage
+            localStorage.removeItem('token');
+
+            // Thông báo đăng xuất(xóa nếu ko cần)
+            //alert("Đăng xuất thành công!");
+
+            // Chuyển về trang chủ
+            window.location.href = '/';
+        });
+    }
+});

@@ -28,23 +28,26 @@
                 <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none" id="btn-home" href="#">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
                         Sinh viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item btn-student-progress" >Tiến độ học tập</a></li>
-                        <li><a class="dropdown-item" id="btn-student-chatbot" >Chatbot</a></li>
-                        <li><a class="dropdown-item btn-student-info">Hồ sơ Sinh viên</a></li>
-                        <li><a class="dropdown-item logout-button" href="#">Đăng xuất</a></li>
+                        <li><a class="dropdown-item btn-student-info" href="#">Hồ sơ Sinh viên</a></li>
+                        <li><a class="dropdown-item btn-student-progress" href="#">Tiến độ học tập</a></li>
+                        <li><a class="dropdown-item btn-student-english" href="#">Xác nhận chứng chỉ Anh Văn</a></li>
+                        <li><a class="dropdown-item btn-student-schedule" href="#">Thời khóa biểu</a></li>
+                        <li><a class="dropdown-item" id="btn-student-chatbot1" href="#">Chatbot</a></li>
                     </ul>
                 </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
+            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -87,12 +90,12 @@
                     <a style="color:#3d67da" class="btn-student-progress">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
-            <button class="card" id="btn-student-chatbotcard">
+            <button class="card" id="btn-student-chatbot2">
                 <i style="color:#3d67da" class="fas fa-robot"></i>
                 <h3>ChatBot</h3>
                 <p>Tư vấn 24/7 giúp tiếp cận thông tin nhanh chóng</p>
                 <div style="margin-top: auto; text-align: center; width: 100%;">
-                    <a style="color:#3d67da" class="btn-student-chatbot">Tìm hiểu thêm &gt;&gt;</a>
+                    <a style="color:#3d67da">Tìm hiểu thêm &gt;&gt;</a>
                 </div>
             </button>
             <button class="card btn-student-info">
