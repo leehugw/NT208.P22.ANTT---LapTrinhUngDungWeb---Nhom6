@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
         .then(res => res.json())
         .then(data => {
-            console.log("Thông tin giảng viên:", data);
             document.getElementById("lecturerName").textContent = data.data.fullname;
             document.getElementById("lecturerEmail").textContent = data.data.email;
         });
@@ -86,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 data.forEach(sem => {
                     semesterSelect.innerHTML += `<option value="${sem.semester_id}">${sem.semester_name}</option>`;
                 });
@@ -147,31 +145,28 @@ document.addEventListener("DOMContentLoaded", function () {
         const classId = classSelect.value;
 
         try {
-            const [studentRes, abnormalRes] = await Promise.all([
-                fetch(`/api/lecturer/classes/${classId}/students`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                }),
-                fetch(`/api/lecturer/abnormal/${classId}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                })
-            ]);
-
+            const studentRes = await fetch(`/api/lecturer/classes/${classId}/students`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+        
             const studentData = await studentRes.json();
-            const abnormalData = await abnormalRes.json();
-
-
+            console.log(studentData);
             const studentCount = studentData.students.length;
             classSize.innerText = `${studentCount}`;
-
-            // Map sinh viên bất thường theo student_id
-            const abnormalMap = {};
-            abnormalData.data.forEach(s => {
-                abnormalMap[s.student_id] = s;
-            });
-
             studentTableBody.innerHTML = "";
-
+        
             if (studentData.isAdvisorClass) {
+                const abnormalRes = await fetch(`/api/lecturer/abnormal/${classId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const abnormalData = await abnormalRes.json();
+        
+                // Map sinh viên bất thường theo student_id
+                const abnormalMap = {};
+                abnormalData.data.forEach(s => {
+                    abnormalMap[s.student_id] = s;
+                });
+        
                 classStatisticsWrapper.style.display = "inline-block";
                 classStatisticsBtn.href = `/api/lecturer/classstatistic?class_id=${classSelect.value}`;
                 studentTableThread.innerHTML = `
@@ -188,17 +183,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         <th scope="col" class="thread border-0 text-center">Tiến độ</th>
                     </tr>
                 `;
-
+        
                 studentData.students.forEach(student => {
                     const abnormal = abnormalMap[student.student_id];
                     const statusText = abnormal ? abnormal.status : "Đang học";
                     const noteText = (abnormal?.note || "").replace(/\n/g, "<br>");
-                    
-                    const selectedStatus = statusSelect.value; 
-                    if(selectedStatus && selectedStatus !== statusText) {
-                        return; // Nếu trạng thái không khớp, bỏ qua sinh viên này
+        
+                    const selectedStatus = statusSelect.value;
+                    if (selectedStatus && selectedStatus !== statusText) {
+                        return;
                     }
-
+        
                     studentTableBody.innerHTML += `
                         <tr class="custom-row align-middle">
                             <td class="border-start">
@@ -218,65 +213,63 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${student.student_id}"><i class="fas fa-chart-line"></i></a></td>
                         </tr>
                     `;
-                }
-                );
-            }
-            else {
+                });
+            } else {
                 studentTableThread.innerHTML = `
-                        <tr>
-                            <th scope="col" class="thread border-0">Sinh viên</th>
-                            <th scope="col" class="thread border-0 text-center">MSSV</th>
-                            <th scope="col" class="thread border-0 text-center">Email</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm QT</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm GK</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm TH</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm CK</th>
-                            <th scope="col" class="thread border-0 text-center">Điểm HP</th>
-                            <th scope="col" class="thread border-0 text-center">Hành động</th> <!-- Cột Hành vi -->
+                    <tr>
+                        <th scope="col" class="thread border-0">Sinh viên</th>
+                        <th scope="col" class="thread border-0 text-center">MSSV</th>
+                        <th scope="col" class="thread border-0 text-center">Email</th>
+                        <th scope="col" class="thread border-0 text-center">Điểm QT</th>
+                        <th scope="col" class="thread border-0 text-center">Điểm GK</th>
+                        <th scope="col" class="thread border-0 text-center">Điểm TH</th>
+                        <th scope="col" class="thread border-0 text-center">Điểm CK</th>
+                        <th scope="col" class="thread border-0 text-center">Điểm HP</th>
+                        <th scope="col" class="thread border-0 text-center">Hành động</th>
+                    </tr>
+                `;
+        
+                studentData.students.forEach(student => {
+                    studentTableBody.innerHTML += `
+                        <tr class="custom-row align-middle">
+                            <td class="border-start">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                                    ${student.name}
+                                </div>
+                            </td>
+                            <td class="text-center">${student.student_id}</td>
+                            <td class="text-center">${student.school_email}</td>
+                            <td class="text-center">
+                                <span class="score-text">${student.score_QT || "-"}</span>
+                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
+                            </td>
+                            <td class="text-center">
+                                <span class="score-text">${student.score_GK || "-"}</span>
+                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_GK || ""}" style="display:none;" />
+                            </td>
+                            <td class="text-center">
+                                <span class="score-text">${student.score_TH || "-"}</span>
+                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_TH || ""}" style="display:none;" />
+                            </td>
+                            <td class="text-center">
+                                <span class="score-text">${student.score_CK || "-"}</span>
+                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_CK || ""}" style="display:none;" />
+                            </td>
+                            <td class="text-center">
+                                <span class="score-text">${student.score_HP || "-"}</span>
+                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_HP || ""}" style="display:none;" />
+                            </td>
+                            <td class="text-center border-end">
+                                <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
+                            </td>
                         </tr>
                     `;
-
-                studentData.students.forEach(student => {
-                studentTableBody.innerHTML += `
-                            <tr class="custom-row align-middle">
-                                <td class="border-start">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
-                                        ${student.name}
-                                    </div>
-                                </td>
-                                <td class="text-center">${student.student_id}</td>
-                                <td class="text-center">${student.school_email}</td>
-                                <td class="text-center">
-                                    <span class="score-text">${student.score_QT || "-"}</span>
-                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
-                                </td>
-                                <td class="text-center">
-                                    <span class="score-text">${student.score_GK || "-"}</span>
-                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_GK || ""}" style="display:none;" />
-                                </td>
-                                <td class="text-center">
-                                    <span class="score-text">${student.score_TH || "-"}</span>
-                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_TH || ""}" style="display:none;" />
-                                </td>
-                                <td class="text-center">
-                                    <span class="score-text">${student.score_CK || "-"}</span>
-                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_CK || ""}" style="display:none;" />
-                                </td>
-                                <td class="text-center">
-                                    <span class="score-text">${student.score_HP || "-"}</span>
-                                    <input class="score-input form-control form-control-sm m-auto" value="${student.score_HP || ""}" style="display:none;" />
-                                </td>
-                                <td class="text-center border-end">
-                                    <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
-                                </td>
-                            </tr>  
-                        `;
                 });
             }
         } catch (error) {
             console.error("Error fetching students:", error);
-        }
+        }        
     });
 });
 
@@ -359,7 +352,6 @@ function editScore(iconElement) {
             })
             .then(res => res.json())
             .then(updated => {
-                console.log("Đã cập nhật:", updated);
 
                 // Cập nhật lại giao diện: hiện text, ẩn input và nút
                 scoreTexts.forEach((span, i) => {
