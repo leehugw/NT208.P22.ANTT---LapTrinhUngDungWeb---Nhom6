@@ -15,7 +15,9 @@ const LecturerAbnormalDetectionController = require('../Controllers/lecturer/det
 const { authorize } = require('passport');
 const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
 const Feedback = require('../../Database/SaveToMongo/models/Feedback');
+const { getAverageGPABySemester } = require('../Controllers/admin/AvgGpaBySemester');
 
+router.get('/average-gpa-by-semester', authenticateToken, authorizeRoles('admin'), getAverageGPABySemester);
 
 router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
