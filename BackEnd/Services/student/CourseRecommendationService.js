@@ -425,6 +425,12 @@ async function scheduleElectiveCourses(semesterSchedule, categorized, availableC
 
 //Kiểm tra lớp có thực hành không => Thêm vào lịch
 async function addCourseStrictly(semesterSchedule, course, availableCourses) {
+    // Kiểm tra nếu môn học đã tồn tại trong lịch
+    const isCourseAlreadyScheduled = semesterSchedule.courses.some(c => c.courseId === course.courseId);
+    if (isCourseAlreadyScheduled) {
+        return false; // Bỏ qua nếu môn học đã được thêm
+    }
+
     const classes = availableCourses.filter(c => c.subject_id === course.courseId);
     if (classes.length === 0) return false;
 
@@ -454,6 +460,7 @@ async function addCourseStrictly(semesterSchedule, course, availableCourses) {
         const classesToAdd = selectedPractice ? [theoryClass, selectedPractice] : [theoryClass];
 
         semesterSchedule.courses.push({
+            courseId: course.courseId, // Thêm courseId để kiểm tra trùng lặp
             classes: classesToAdd
         });
 
