@@ -1,4 +1,4 @@
-const callHuggingFace = require('../../Services/student/ChatBotService').callHuggingFace;
+const callModel = require('../../Services/student/ChatBotService').callQwen;
 
 const handleChatRequest = async (req, res) => {
     const { message } = req.body;
@@ -8,7 +8,7 @@ const handleChatRequest = async (req, res) => {
     }
 
     try {
-        const answer = await callHuggingFace(message);
+        const answer = await callModel(message);
         res.json({ answer });
     } catch (error) {
         res.status(500).json({ error: error.message });

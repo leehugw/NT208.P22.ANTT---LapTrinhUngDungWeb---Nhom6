@@ -1,43 +1,29 @@
-require('dotenv').config();
-const axios = require('axios');
+const url = 'http://localhost:11434/api/generate';
 
-const token = process.env.HF_API_KEY;; 
-const url = 'https://api-inference.huggingface.co/models/Qwen/Qwen2.5-72B-Instruct';
+const callQwen = async (question) => {
+    const data = {
+        model: "qwen3:8b",
+        prompt: question,
+        stream: false
+    };
 
-if (!token) {
-    console.error('Lỗi: Không tìm thấy HF_API_TOKEN trong file .env.');
-    process.exit(1);
-  }
-
-const callHuggingFace = async (question) => {
     try {
-        const response = await axios.post(
-          url,
-          {inputs: question,
-            parameters: {
-              max_new_tokens: 20, 
-            },
-          },
-          {
+        const response = await fetch(url, {
+            method: 'POST',
             headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-          }
-        );
-
-        const data = response.data;
-        const answer = data.generated_text || data[0]?.generated_text || 'Không có câu trả lời.';
-        console.log(answer);
-        return answer;
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        console.log("Toàn bộ kết quả trả về:", result);
+        const rawResponse = result.response || 'Không có câu trả lời.';
+        const cleanedResponse = rawResponse.replace(/<think>[\s\S]*?<\/think>/, '').trim();
+        return cleanedResponse;
     } catch (error) {
-        console.error('Lỗi gọi Hugging Face:', error.response?.data || error.message);
+        console.error('Lỗi gọi Qwen API:', error);
         throw new Error('Lỗi khi gọi AI model');
     }
 };
 
-
-module.exports = { callHuggingFace };
-
-
-
+module.exports = { callQwen };
