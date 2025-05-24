@@ -14,9 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <link href="../../FeedbackForm/feed.css" rel="stylesheet">
-    <link href="/Student_English_Certificate/css/student_cert.css" rel="stylesheet">
-    <link href="/Student_English_Certificate/css/PC_student_cert.css" rel="stylesheet">
-    <link href="/Student_English_Certificate/css/mobile_student_cert.css" rel="stylesheet">
+    <link href="/Submit_English_Certificate/css/student_cert.css" rel="stylesheet">
+    <link href="/Submit_English_Certificate/css/PC_student_cert.css" rel="stylesheet">
+    <link href="/Submit_English_Certificate/css/mobile_student_cert.css" rel="stylesheet">
 
 </head>
 
@@ -24,26 +24,29 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/Student_English_Certificate/images/logo.png" width="80">
+                <img alt="Logo" height="80" src="/Submit_English_Certificate/images/logo.png" width="80">
             </div>
             <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none" id="btn-home" href="#">Trang chủ</a>
                 <div class="dropdown mx-2">
-                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Sinh viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Tiến độ học tập</a></li>
-                        <li><a class="dropdown-item" href="#">Chatbot</a></li>
-                        <li><a class="dropdown-item" href="#">Hồ sơ Sinh viên</a></li>
-                        <li><a class="dropdown-item" href="#">Xác nhận chứng chỉ Anh Văn</a></li>
+                       <li><a class="dropdown-item btn-student-info" href="#">Hồ sơ Sinh viên</a></li>
+                        <li><a class="dropdown-item btn-student-progress" href="#">Tiến độ học tập</a></li>
+                        <li><a class="dropdown-item btn-student-english" href="#">Xác nhận chứng chỉ Anh Văn</a></li>
+                        <li><a class="dropdown-item btn-student-schedule" href="#">Thời khóa biểu</a></li>
+                        <li><a class="dropdown-item" id="btn-student-chatbot1" href="#">Chatbot</a></li>
                     </ul>
                 </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn text-white rounded-0 ml-2 login-button">Đăng xuất</button>
+            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
 
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
@@ -57,9 +60,9 @@
             <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home">
                 <i class="fa-solid fa-house-chimney"></i>Trang chủ
             </a>
-            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100" 
-            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-            <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+                <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="studentDropdown">
                 <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Tiến độ học tập</a>
@@ -100,7 +103,8 @@
                             <td>1</td>
                             <td>TOEIC_LR</td>
                             <td>
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3 border-0" style="color:#3D67BA;">
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3 border-0"
+                                    style="color:#3D67BA;">
                                     <i class="fa-solid fa-image"></i> Xem hình
                                 </a>
                             </td>
@@ -111,7 +115,8 @@
                             <td>2</td>
                             <td>TOEIC_SW</td>
                             <td>
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3 border-0" style="color:#3D67BA;">
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3 border-0"
+                                    style="color:#3D67BA;">
                                     <i class="fa-solid fa-image"></i> Xem hình
                                 </a>
                             </td>
@@ -158,7 +163,23 @@
             </div>
         </div>
     </div>
-    <footer class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
+    <!-- Modal xem hình ảnh chứng chỉ -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ảnh chứng chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Ảnh chứng chỉ" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer
+        class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
         <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>
         <a href="#" class="text-light text-decoration-none d-flex align-items-center">
             <span class="me-1">Help</span>
@@ -171,6 +192,6 @@
         title="Gửi phản hồi" id="feedbackBtn">
         <i class="fas fa-comment-dots fs-4 text-white"></i>
     </a>
-    <script src="/Student_English_Certificate/js/student_cert.js"></script>
+    <script src="/Submit_English_Certificate/js/student_cert.js"></script>
 
 </html>

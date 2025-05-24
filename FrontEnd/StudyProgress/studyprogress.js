@@ -184,6 +184,10 @@ function StudentAcademicData(token) {
                 });
 
                 scoresemesterData.forEach(semester => {
+                    scoresemesterData.sort((a, b) => {
+                        return b.semester.semester_id.localeCompare(a.semester.semester_id);
+                      });
+
                     const semesterWrapper = document.createElement("div");
                     semesterWrapper.className = "mb-4";
                     const gpa = semesterGpaMap[semester.semester.semester_id] ?? '-';
@@ -370,4 +374,75 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/';
         });
     }
+});
+
+document.querySelectorAll(".btn-student-progress").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/student/academicstatistic";
+        }
+    });
+});
+
+document.querySelectorAll(".btn-student-schedule").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/student/schedule-optimize";
+        }
+    });
+});
+
+document.querySelectorAll(".btn-student-english").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/student/english-certificate";
+        }
+    });
+});
+
+document.querySelectorAll(".btn-student-info").forEach(el => {
+    el.addEventListener("click", function(e) {
+        e.preventDefault(); 
+        const token = localStorage.getItem("token"); 
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+        } else {
+            window.location.href = "/api/student/profile";  
+        }
+    });
+});
+
+// Xử lý sự kiện khi click vào "Chatbot"
+document.getElementById("btn-student-chatbot1").addEventListener("click", function(e) {
+    e.preventDefault(); 
+    const token = localStorage.getItem("token"); 
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+    } else {
+        // Nếu có token, điều hướng đến chatbot
+        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
+    }
+});
+
+document.getElementById('btn-home').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Giả sử token đã lưu ở localStorage
+    window.location.href = "/Home/Home.html";
 });

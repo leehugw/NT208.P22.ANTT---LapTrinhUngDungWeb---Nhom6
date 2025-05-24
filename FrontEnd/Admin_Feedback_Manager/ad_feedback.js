@@ -1,16 +1,16 @@
 document.getElementById('menu-toggle').addEventListener('click', function () {
-    var menu = document.getElementById('mobile-menu');
-    menu.style.display = 'block';
-    setTimeout(function () {
-        menu.classList.add('open');
-    }, 10);
+  var menu = document.getElementById('mobile-menu');
+  menu.style.display = 'block';
+  setTimeout(function () {
+    menu.classList.add('open');
+  }, 10);
 });
 document.getElementById('menu-close').addEventListener('click', function () {
-    var menu = document.getElementById('mobile-menu');
-    menu.classList.remove('open');
-    setTimeout(function () {
-        menu.style.display = 'none';
-    }, 300);
+  var menu = document.getElementById('mobile-menu');
+  menu.classList.remove('open');
+  setTimeout(function () {
+    menu.style.display = 'none';
+  }, 300);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
       renderFeedbackTable(sorted);
     })
     .catch(err => console.error('Lỗi khi tải phản hồi:', err));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const bugElement = document.getElementById('bugCount');
+
+  if (bugElement) {
+    fetch('/api/admin/bug-statistic', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('API response:', data);
+        bugElement.textContent = `Số lượt báo lỗi: ${data.bugCount}`;
+      })
+      .catch(err => {
+        console.error('Lỗi khi tải thống kê bug:', err);
+      });
+  }
 });
 
 function renderFeedbackTable(feedbacks) {

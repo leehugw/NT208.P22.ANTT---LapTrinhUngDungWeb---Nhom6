@@ -6,6 +6,7 @@ const LecturerInformationController = require('../Controllers/lecturer/LecturerI
 const LecturerScoreController = require('../Controllers/lecturer/LecturerScoreController');
 const LecturerAbnormalDetectionController = require('../Controllers/lecturer/detectAbnormalStudent');
 const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
+const LecturerClassStatisticController = require('../Controllers/lecturer/LecturerClassStatisticController');
 
 // Middleware để xác thực và phân quyền
 router.get('/lec_menu', authenticateToken, authorizeRoles('lecturer'), (req, res) => {
@@ -38,5 +39,10 @@ router.get('/profile-data', authenticateToken, authorizeRoles('lecturer', 'admin
 
 router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('lecturer'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
 
+// Route API để lấy dữ liệu thống kê lớp
+router.get('/classstatistic', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../FrontEnd/LecturerClassStatistic/lecturerClassStatistic.html'));
+});
+router.get('/classes/:classId/statistics', authenticateToken, authorizeRoles('lecturer'), LecturerClassStatisticController.getClassStatisticByClassId);
 
 module.exports = router;

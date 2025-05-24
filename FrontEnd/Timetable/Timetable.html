@@ -17,6 +17,7 @@
     <link href="/Timetable/css/timetablePC.css" rel="stylesheet">
     <link href="/Timetable/css/timetablemobile.css" rel="stylesheet">
     <link href="/Timetable/css/timetable.css" rel="stylesheet">
+    <link href="/Timetable/css/Course_Rcmdation.css" rel="stylesheet">
 
 </head>
 
@@ -27,18 +28,20 @@
                 <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none" id="btn-home" href="#">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Sinh viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Hồ sơ Sinh viên</a></li>
-                        <li><a class="dropdown-item" href="#">Tiến độ học tập</a></li>
-                        <li><a class="dropdown-item" href="#">ChatbotUIT</a></li>
+                        <li><a class="dropdown-item btn-student-info" href="#">Hồ sơ Sinh viên</a></li>
+                        <li><a class="dropdown-item btn-student-progress" href="#">Tiến độ học tập</a></li>
+                        <li><a class="dropdown-item btn-student-english" href="#">Xác nhận chứng chỉ Anh Văn</a></li>
+                        <li><a class="dropdown-item btn-student-schedule" href="#">Thời khóa biểu</a></li>
+                        <li><a class="dropdown-item" id="btn-student-chatbot1" href="#">Chatbot</a></li>
                     </ul>
-
+                </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -393,7 +396,15 @@
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
+
+
+    <div class="container py-5" id="recommendation-container">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">📚 Gợi ý môn học cho học kỳ tới</h2>
+    <p class="text-muted">Hệ thống tự động dựa vào GPA, lịch sử học tập và chuyên ngành</p>
+  </div>
+  <div id="recommendation-result"></div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="/Timetable/Timetable.js"></script>
 </body>

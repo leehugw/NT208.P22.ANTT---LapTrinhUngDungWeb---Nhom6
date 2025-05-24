@@ -32,15 +32,6 @@
     color: white;
 }
 
-.login-button {
-    background-color: #3D67BA;
-}
-
-
-.login-button:hover {
-    background-color: #003366;
-}
-
 .chat-container {
     padding: 20px;
     margin-bottom: 0;

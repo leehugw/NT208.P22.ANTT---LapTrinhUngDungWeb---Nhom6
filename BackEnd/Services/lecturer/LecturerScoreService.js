@@ -86,7 +86,7 @@ exports.getStudentsByClass = async (classId) => {
         student_id: student.student_id,
         name: student.name,
         school_email: student.contact?.school_email || "",
-        class_name: student.class_name,
+        class_id: student.class_id,
         major_name: major?.major_name || "N/A",
         faculty_name: faculty?.faculty_name || "N/A"
       }))

@@ -15,7 +15,10 @@
         margin: 0 100px;
     }
 
-    .login-button {
+    #login-button {
+        margin-top: -50px;
+    }
+    #logout-button {
         margin-top: -50px;
     }
 

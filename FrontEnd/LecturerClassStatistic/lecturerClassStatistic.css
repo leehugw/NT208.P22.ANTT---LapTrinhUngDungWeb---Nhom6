@@ -1,0 +1,60 @@
+.body {
+    font-family: 'Roboto', sans-serif;
+    background: #F5F7FA;
+}
+
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+.logout-button {
+    background-color: #3D67BA;
+}
+
+
+.logout-button:hover {
+    background-color: #003366;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.background {
+    background-color: #3D67BA;
+}
+
+.button {
+    background-color: #3D67BA;
+}
+
+.button:hover {
+    background-color: #2b4a8c;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+    max-height: 300px;
+}
+

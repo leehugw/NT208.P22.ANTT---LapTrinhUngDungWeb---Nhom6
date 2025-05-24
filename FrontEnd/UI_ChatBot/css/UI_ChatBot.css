@@ -47,12 +47,6 @@ body {
   color: #3D67BA; /* Màu xanh UIT chẳng hạn */
 }
 
-@media (max-width: 768px) {
-    .sidebar {
-        display: none; 
-    }
-}
-
 /* Logo và tiêu đề */
 .logo-title {
   display: flex;
@@ -159,7 +153,7 @@ body {
   bottom: 10px;
   left: 1;
   right: 1;
-  width: 90%;
+  width: 96%;
   display: flex;
   align-items: center;
   background-color: #e0e0e0;
@@ -252,7 +246,7 @@ body {
 .navbar-container .nav-link {
     color: black;
     transition: color 0.3s ease-in-out;
-    font-size: 104%;
+
 }
 
 .navbar-container .nav-link:hover,
@@ -260,76 +254,16 @@ body {
     color: #3D67BA;
 }
 
-/* Dropdown menu styles */
 .navbar-container .dropdown-menu .dropdown-item:hover {
     color: #3D67BA !important;
     background-color: transparent !important;
 }
 
-/* Dropdown toggle button styles */
 .navbar-container .dropdown .btn-secondary:hover,
 .navbar-container .dropdown .btn-secondary:focus {
     color: #3D67BA !important;
     background-color: transparent !important;
     border-color: transparent !important;
-}
-
-/* Mobile menu styles */
-@media (max-width: 768px) {
-    #mobile-menu {
-        position: fixed;
-        top: 0;
-        left: -75%;
-        width: 75%;
-        height: 100%;
-        background: white;
-        transition: left 0.3s ease;
-        z-index: 1001;
-        overflow-y: auto;
-    }
-
-    #mobile-menu.active {
-        left: 0;
-    }
-
-    /* Mobile menu links */
-    #mobile-menu .nav-link {
-        color: black;
-        transition: color 0.3s ease-in-out;
-        padding: 0.75rem 1rem;
-    }
-
-    #mobile-menu .nav-link:hover,
-    #mobile-menu .nav-link.active {
-        color: #3D67BA;
-    }
-
-    /* Mobile dropdown */
-    #mobile-menu .collapse {
-        background-color: #f8f9fc;
-    }
-
-    #mobile-menu .btn-student-info {
-        color: #3D67BA;
-    }
-}
-
-.navbar.fixed-top {
-    height: 60px; /* Đặt chiều cao cố định cho header */
-    padding: 0; /* Xóa padding mặc định của navbar */
-}
-
-/* Container trong navbar */
-.navbar .container {
-    height: 100%; /* Container chiếm toàn bộ chiều cao của navbar */
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-}
-/* Header general styles */
-.navbar {
-    background-color: white;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,.15);
 }
 
 /* Logout button */

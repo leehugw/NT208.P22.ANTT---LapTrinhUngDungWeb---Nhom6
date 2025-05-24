@@ -14,7 +14,7 @@ const getScoresByStudentGrouped = async (req, res) => {
         }
         // Nếu là giảng viên
         else if (userRole === 'lecturer' || userRole === 'admin') {
-            // Nếu là giảng viên, lấy student_id từ URL
+            // Nếu là giảng viên or admin, lấy student_id từ URL
             student_id = req.query.student_id;
 
             // Kiểm tra xem sinh viên có tồn tại không

@@ -8,7 +8,8 @@ const { authenticateToken, authorizeRoles } = require('../Middleware/auth');
 const HandleChatRequestController = require('../Controllers/student/ChatBotController');
 const chatController = require('../Controllers/student/studentChatController');
 const RecommendCourseController = require('../Controllers/student/RecommendCourseController');
-const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController')
+const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController');
+const EnglishCertificateController = require('../Controllers/student/EnglishCertificateController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -30,6 +31,12 @@ router.get('/academicstatistic', (req, res) => {
     res.sendFile(pagePath);
 });
 
+// Route nộp chứng chỉ
+router.get('/english-certificate', (req, res) => {
+    const { student_id } = req.query;
+    const pagePath = path.join(__dirname, '../../FrontEnd/Submit_English_Certificate/student_english_certificate.html');
+    res.sendFile(pagePath);
+});
 
 //Route hien thi cau hoi va tra loi chatbot
  router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
@@ -67,5 +74,11 @@ router.get('/chatbot', authenticateToken, authorizeRoles('student'), (req, res) 
 
 // Route gợi ý môn học cho sinh viên
 router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses );
+
+// POST chứng chỉ Anh văn
+router.post('/certificate', EnglishCertificateController.submitCertificate);
+
+// GET danh sách chứng chỉ đã nộp
+router.get('/certificate', EnglishCertificateController.getStudentCertificates);
 
 module.exports = router;
