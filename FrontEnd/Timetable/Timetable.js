@@ -816,3 +816,71 @@ document.getElementById('btn-home').addEventListener('click', function(e) {
     // Giả sử token đã lưu ở localStorage
     window.location.href = "/Home/Home.html";
 });
+
+
+function renderRecommendation(response) {
+    if (!response) return;
+
+    const headerInfo = `
+      <div class="mb-4">
+        <p><span class="info-label">Ngành:</span> <span class="info-value">${response.major_id}</span></p>
+        <p><span class="info-label">Học kỳ hiện tại:</span> <span class="info-value">${response.currentSemester}</span></p>
+        ${response.nextSemester ? `<p><span class="info-label">Học kỳ tiếp theo:</span> <span class="info-value">${response.nextSemester}</span></p>` : ""}
+        <p><span class="info-label">Tổng tín chỉ gợi ý:</span> <span class="info-value">${response.totalCredits}</span></p>
+      </div>
+    `;
+
+    const gridHtml = `
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">${response.message}</h5>
+          ${headerInfo}
+          <div class="row">
+            ${response.recommendedCourses.map(course => `
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="subject-card">
+                  <div class="subject-name">${course.name}</div>
+                  <div class="mt-2">
+                    <span class="credits">${course.credits} tín chỉ</span>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("recommendation-result").innerHTML = gridHtml;
+  }
+
+
+  async function fetchAndRenderRecommendation() {
+    const token = localStorage.getItem('token');
+    if (!token) return; // Nếu chưa đăng nhập thì không gọi
+
+    try {
+        const res = await fetch('/api/student/recommend-courses', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+            document.getElementById("recommendation-result").innerHTML = `
+                <div class="alert alert-warning">Không thể lấy dữ liệu gợi ý môn học: ${data.message || 'Lỗi hệ thống'}</div>
+            `;
+            return;
+        }
+
+        renderRecommendation(data);
+    } catch (err) {
+        document.getElementById("recommendation-result").innerHTML = `
+            <div class="alert alert-danger">Lỗi kết nối đến máy chủ!</div>
+        `;
+    }
+}
+
+// Gọi hàm này khi trang timetable load xong
+document.addEventListener('DOMContentLoaded', fetchAndRenderRecommendation);
