@@ -65,9 +65,16 @@ async function fetchPopularSubjects() {
 
 
 function renderPieChart(subjects) {
-    const topSubjects = subjects.slice(0, 6);
+    const topSubjects = subjects.slice(0, 13);
 
-    const labels = topSubjects.map(subject => subject.subjectName);
+    // Rút gọn tên môn học nếu quá dài
+    const labels = topSubjects.map(subject => {
+        const maxLength = 25;
+        return subject.subjectName.length > maxLength 
+            ? subject.subjectName.substring(0, maxLength) + '...' 
+            : subject.subjectName;
+    });
+
     const data = topSubjects.map(subject => subject.totalRegistrations);
     const backgroundColors = [
         'rgba(255, 99, 132, 0.7)',
@@ -75,7 +82,14 @@ function renderPieChart(subjects) {
         'rgba(255, 206, 86, 0.7)',
         'rgba(75, 192, 192, 0.7)',
         'rgba(153, 102, 255, 0.7)',
-        'rgba(255, 159, 64, 0.7)'
+        'rgba(255, 159, 64, 0.7)',
+        'rgba(201, 203, 207, 0.7)',
+        'rgba(124, 11, 36, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(210, 169, 67, 0.7)',
+        'rgba(0, 34, 255, 0.7)',
+        'rgba(63, 3, 182, 0.7)',
+        'rgba(0, 229, 255, 0.7)',
     ];
 
     const ctx = document.getElementById('popularSubjectsChart').getContext('2d');
@@ -95,20 +109,34 @@ function renderPieChart(subjects) {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    top: 20,
-                    bottom: 20,
-                    left: 20,
-                    right: 20
+                    left: 50, // Tăng padding trái để chứa legend
+                    right: 50
                 }
             },
             plugins: {
                 legend: {
                     position: 'right',
+                    align: 'start', // Căn lề trái cho legend
                     labels: {
-                        padding: 20,
+                        padding: 10,
                         boxWidth: 15,
                         font: {
-                            size: 12
+                            size: 10, // Giảm kích thước font
+                            family: "'Roboto', sans-serif"
+                        },
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    return {
+                                        text: label,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
                         }
                     }
                 },
