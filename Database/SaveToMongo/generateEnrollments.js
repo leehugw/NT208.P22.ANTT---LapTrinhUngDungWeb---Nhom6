@@ -34,11 +34,19 @@ async function generateEnrollments() {
     }
 
     const classMap = new Map();
-
     const enrollments = [];
 
     const facultyPDTDH = "KHOA_PĐTĐH";
     const facultyBMTL = "KHOA_BMTL";
+    const facultyAV = "KHOA_TTNN";
+
+    const startSemesterMap = {
+      "20": "HK120202021",
+      "21": "HK120212022",
+      "22": "HK120222023",
+      "23": "HK120232024",
+      "24": "HK120242025"
+    };
 
     for (const student of students) {
       const facultyOfStudent = faculties.find(faculty => faculty.majors.includes(student.major_id));
@@ -47,31 +55,44 @@ async function generateEnrollments() {
         continue;
       }
 
-      const preferredFacultyIds = [facultyPDTDH, facultyBMTL, facultyOfStudent.faculty_id];
-
+      const preferredFacultyIds = [facultyPDTDH, facultyBMTL, facultyAV, facultyOfStudent.faculty_id];
 
       const subjectsOfFaculty = subjects
         .filter(sub => preferredFacultyIds.includes(sub.faculty_id))
         .sort((a, b) => {
           const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN'];
-
           const typeCompare = typeOrder.indexOf(a.subject_type) - typeOrder.indexOf(b.subject_type);
-
           if (typeCompare !== 0) return typeCompare;
 
           if (a.subject_type === 'ĐC' && b.subject_type === 'ĐC') {
-            const isAPriority = [facultyPDTDH, facultyBMTL].includes(a.faculty_id) ? 0 : 1;
-            const isBPriority = [facultyPDTDH, facultyBMTL].includes(b.faculty_id) ? 0 : 1;
+            const priorityFaculties = [facultyPDTDH, facultyBMTL, facultyAV];
+            const isAPriority = priorityFaculties.includes(a.faculty_id) ? 0 : 1;
+            const isBPriority = priorityFaculties.includes(b.faculty_id) ? 0 : 1;
             return isAPriority - isBPriority;
           }
 
           return 0;
         });
 
-      // Chọn hết tất cả học kỳ
-      const selectedSemesters = semesters;
 
+      // Lấy năm vào học từ student_id
+      const studentYearPrefix = student.student_id.toString().substring(0, 2);
+      const startSemesterId = startSemesterMap[studentYearPrefix];
+
+      if (!startSemesterId) {
+        console.warn(`⚠️ Không xác định được học kỳ bắt đầu cho sinh viên ${student.student_id}`);
+        continue;
+      }
+
+      const startIndex = semesters.findIndex(s => s.semester_id === startSemesterId);
+      if (startIndex === -1) {
+        console.warn(`⚠️ Không tìm thấy học kỳ bắt đầu ${startSemesterId} cho sinh viên ${student.student_id}`);
+        continue;
+      }
+
+      const selectedSemesters = semesters.slice(startIndex);
       const subjectRepetitionCount = {};
+      const allLearnedSubjects = new Set();
 
       for (const semester of selectedSemesters) {
         const shuffledSubjects = [...subjectsOfFaculty].sort(() => 0.5 - Math.random());
@@ -79,12 +100,18 @@ async function generateEnrollments() {
         const selectedSubjects = [];
         const classIds = [];
         let totalCredits = 0;
-
         const creditLimit = Math.floor(Math.random() * 29);
 
         for (const subject of shuffledSubjects) {
-          const subjectCredits = subject.theory_credits + subject.practice_credits;
+          if ((subject.theory_credits + subject.practice_credits) === 0) continue;
 
+          const prerequisitesRaw = subject.prerequisite_id || [];
+          const prerequisites = prerequisitesRaw.filter(id => id.trim() !== '');
+          const hasAllPrerequisites = prerequisites.length === 0 || prerequisites.every(prereqId => allLearnedSubjects.has(prereqId));
+
+          if (!hasAllPrerequisites) continue;
+
+          const subjectCredits = subject.theory_credits + subject.practice_credits;
           const timesLearned = subjectRepetitionCount[subject.subject_id] || 0;
           if (timesLearned >= 3) continue;
 
@@ -92,7 +119,6 @@ async function generateEnrollments() {
 
           selectedSubjects.push(subject.subject_id);
           totalCredits += subjectCredits;
-
           subjectRepetitionCount[subject.subject_id] = timesLearned + 1;
 
           let suffix = "";
@@ -123,6 +149,8 @@ async function generateEnrollments() {
           class_ids: classIds,
           credits: totalCredits
         });
+
+        selectedSubjects.forEach(subId => allLearnedSubjects.add(subId));
       }
     }
 
@@ -137,8 +165,9 @@ async function generateEnrollments() {
   }
 }
 
-
 generateEnrollments();
+
+
 
 
 

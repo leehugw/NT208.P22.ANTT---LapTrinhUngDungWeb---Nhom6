@@ -184,6 +184,10 @@ function StudentAcademicData(token) {
                 });
 
                 scoresemesterData.forEach(semester => {
+                    scoresemesterData.sort((a, b) => {
+                        return b.semester.semester_id.localeCompare(a.semester.semester_id);
+                      });
+
                     const semesterWrapper = document.createElement("div");
                     semesterWrapper.className = "mb-4";
                     const gpa = semesterGpaMap[semester.semester.semester_id] ?? '-';

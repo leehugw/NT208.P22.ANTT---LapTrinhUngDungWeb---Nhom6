@@ -6,9 +6,18 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const Student = require('./models/Student');
 const Lecturer = require('./models/Lecturer');
 
-const getRandomLecturerId = async () => {
-  const lecturers = await Lecturer.find({});
-  if (!lecturers.length) throw new Error("❌ Không có giảng viên.");
+const getLecturerIdByClassId = async (class_id) => {
+  // Tìm giảng viên có class_id trùng lớp
+  const lecturers = await Lecturer.find({ class_id: class_id });
+  
+  if (lecturers.length === 0) {
+    // Nếu không có giảng viên nào theo lớp, lấy ngẫu nhiên 1 giảng viên bất kỳ
+    const allLecturers = await Lecturer.find({});
+    if (allLecturers.length === 0) throw new Error("❌ Không có giảng viên.");
+    return allLecturers[Math.floor(Math.random() * allLecturers.length)].lecturer_id;
+  }
+
+  // Lấy ngẫu nhiên 1 giảng viên trong số giảng viên có class_id này
   return lecturers[Math.floor(Math.random() * lecturers.length)].lecturer_id;
 };
 
@@ -33,7 +42,7 @@ const generateClassesDirectly = async () => {
     // Tạo mảng các lớp mới
     const newClasses = [];
     for (const [class_id, studentSet] of classMap.entries()) {
-      const lecturer_id = await getRandomLecturerId();
+      const lecturer_id = await getLecturerIdByClassId(class_id);
 
       newClasses.push({
         class_id,
@@ -42,7 +51,7 @@ const generateClassesDirectly = async () => {
       });
     }
 
-    // Thêm đồng loạt
+    // Thêm đồng loạt vào collection 'classes'
     if (newClasses.length > 0) {
       await classesCollection.insertMany(newClasses);
       console.log(`✅ Đã thêm ${newClasses.length} lớp mới`);
@@ -53,9 +62,9 @@ const generateClassesDirectly = async () => {
   } catch (err) {
     console.error("❌ Lỗi:", err);
   } finally {
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
 };
 
-
 generateClassesDirectly();
+

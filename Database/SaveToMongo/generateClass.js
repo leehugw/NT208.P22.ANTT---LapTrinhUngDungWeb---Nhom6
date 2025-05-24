@@ -55,7 +55,7 @@ const generateClassData = async () => {
             const { students, semester_id } = data;
 
             const lecturer_id = await getRandomLecturerId();
-            const subject_id = class_id.split('.')[0]; // ví dụ SS004.P21 -> SS004
+            const subject_id = class_id.split('_')[0]; // ví dụ SS004.P21 -> SS004
 
             newClasses.push({
                 class_id,
