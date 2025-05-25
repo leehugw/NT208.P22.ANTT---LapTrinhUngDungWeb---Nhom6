@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const Student = require('./models/Student.js');
+const Student = require('../models/Student.js');
 const Identity = require('./models/Identity.js');
 const Contact = require('./models/Contact.js');
 const Family = require('./models/Family.js');
 const Address = require('./models/Address.js');
 
-const Score = require('./models/Score.js');
-const Semester = require('./models/Semester.js');
+const Score = require('../models/Score.js');
+const Semester = require('../models/Semester.js');
 const Semester_gpa = require('./models/Semester_gpa.js');
 const Student_gpa = require('./models/Student_gpa.js');
 
@@ -17,9 +17,9 @@ const familyData = require('./Json/family.json');
 const addressData = require('./Json/address.json');
 
 const scoreData = require('./Json/score.json');
-const semesterData = require('./Json/semester.json');
-const semesterGPAData = require('./Json/semester_gpa.json');
-const studentGPAData = require('./Json/student_gpa.json'); 
+const semesterData = require('../Json/semester.json');
+const semesterGPAData = require('../Json/semester_gpa.json');
+const studentGPAData = require('../Json/student_gpa.json'); 
 
 mongoose.connect('X', {
 }).then(() => console.log('MongoDB connected'));

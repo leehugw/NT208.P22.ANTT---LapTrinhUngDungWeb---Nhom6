@@ -4,9 +4,9 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 // Models
-const Enrollment = require('./models/Enrollment'); 
-const Class = require('./models/Classes');           
-const Lecturer = require('./models/Lecturer');     
+const Enrollment = require('../models/Enrollment'); 
+const Class = require('../models/Classes');           
+const Lecturer = require('../models/Lecturer');     
 
 const getRandomLecturerId = async () => {
     const lecturers = await Lecturer.find({});

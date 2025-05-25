@@ -3,8 +3,8 @@ const path = require('path');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-const Student = require('./models/Student');
-const Lecturer = require('./models/Lecturer');
+const Student = require('../models/Student');
+const Lecturer = require('../models/Lecturer');
 
 const getLecturerIdByClassId = async (class_id) => {
   // Tìm giảng viên có class_id trùng lớp
