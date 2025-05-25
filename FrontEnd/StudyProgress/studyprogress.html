@@ -28,18 +28,18 @@
                 <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" id="btn-home" href="#">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none btn-home">Trang chủ</a>
                 <div class="dropdown mx-2">
-                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" role="button"
                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Sinh viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item btn-student-info" href="#">Hồ sơ Sinh viên</a></li>
-                        <li><a class="dropdown-item btn-student-progress" href="#">Tiến độ học tập</a></li>
-                        <li><a class="dropdown-item btn-student-english" href="#">Xác nhận chứng chỉ Anh Văn</a></li>
-                        <li><a class="dropdown-item btn-student-schedule" href="#">Thời khóa biểu</a></li>
-                        <li><a class="dropdown-item" id="btn-student-chatbot1" href="#">Chatbot</a></li>
+                        <li><a class="dropdown-item btn-student-info" role="button">Hồ sơ Sinh viên</a></li>
+                        <li><a class="dropdown-item btn-student-progress" role="button">Tiến độ học tập</a></li>
+                        <li><a class="dropdown-item btn-student-english" role="button">Xác nhận chứng chỉ Anh Văn</a></li>
+                        <li><a class="dropdown-item btn-student-schedule" role="button">Thời khóa biểu</a></li>
+                        <li><a class="dropdown-item btn-student-chatbot" role="button">Chatbot</a></li>
                     </ul>
 
             </nav>
@@ -58,18 +58,20 @@
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home"><i
-                    class="fa-solid fa-house-chimney"></i>
-                Trang chủ</a>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 btn-home" role="button"><i
+                class="fa-solid fa-house-chimney"></i>
+            Trang chủ</a>
 
             <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
                 data-bs-toggle="collapse" data-bs-target="#studentDropdown">
                 <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" href="#">Hồ sơ Sinh viên</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#progress">Tiến độ học tập</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">ChatBot UIT</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ học tập</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận chứng chỉ Anh Văn</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa biểu</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot UIT</a>
             </div>
         </nav>
     </header>
