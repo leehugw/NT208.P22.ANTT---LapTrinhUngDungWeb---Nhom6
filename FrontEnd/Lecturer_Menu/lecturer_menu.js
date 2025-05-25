@@ -15,27 +15,27 @@ document.getElementById('menu-close').addEventListener('click', function () {
 
 function openFeedbackPopup() {
     if (document.getElementById('feedbackPopup')) {
-      document.getElementById('feedbackPopup').style.display = 'flex';
-      return;
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
     }
-  
+
     fetch('/FeedbackForm/feedbackForm.html')
-      .then(res => res.text())
-      .then(html => {
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        document.body.appendChild(wrapper);
-  
-        const script = document.createElement('script');
-        script.src = '/FeedbackForm/Feedback.js';
-        document.body.appendChild(script);
-      });
-  
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
     window.closeFeedbackForm = function () {
-      const popup = document.getElementById('feedbackPopup');
-      if (popup) popup.remove();
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
     };
-  }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -57,32 +57,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.getElementById("btn-lecturer-card").addEventListener("click", function(e) {
-    const token = localStorage.getItem("token");
-    e.preventDefault();
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
-    } else {
-        window.location.href = "/api/lecturer/profile";
-    }
-});
-
-document.getElementById("btn-lecturer-info").addEventListener("click", function(e) {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
-    } else {
-        // Sửa thành redirect đến trang HTML thay vì API endpoint
-        window.location.href = "/api/lecturer/profile";
-    }
+document.querySelectorAll(".btn-lecturer-info").forEach(el => {
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";
+        } else {
+            window.location.href = "/api/lecturer/profile";
+        }
+    });
 });
 
 document.querySelectorAll(".btn-lecturer-classlist").forEach(el => {
     const token = localStorage.getItem("token");
-    el.addEventListener("click", function(e) {
+    el.addEventListener("click", function (e) {
         e.preventDefault();
         if (!token) {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
@@ -109,4 +99,33 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/';
         });
     }
+});
+
+
+document.querySelectorAll('.btn-home').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Chưa đăng nhập");
+            return window.location.href = "/";
+        }
+
+        // Gửi token kèm theo khi truy cập route được bảo vệ
+        fetch('http://localhost:3000/api/lecturer/lec_menu', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if (res.ok) {
+                // Nếu token hợp lệ, điều hướng
+                window.location.href = '/Lecturer_Menu/lec_menu.html';
+            } else {
+                alert('Phiên đăng nhập không hợp lệ!');
+                window.location.href = '/';
+            }
+        });
+    });
 });
