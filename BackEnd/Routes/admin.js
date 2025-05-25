@@ -49,7 +49,7 @@ router.get('/chat/students/:student_id/conversations', adminChatController.getSt
 
 
 // Route API hiển thị danh sách sinh viên cho admin
-router.get('/students', authenticateToken, authorizeRoles('admin'), (req, res) => {
+router.get('/students', (req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/StudentList/studentlist.html'); //trả về file html
   res.sendFile(pagePath);
 });
@@ -81,7 +81,7 @@ router.post(
 
 router.get('/home-visit-count', getHomeVisitCount);
 
-router.get('/statistics', authenticateToken, authorizeRoles('admin'), (req, res) => {
+router.get('/statistics', (req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Statistics/admin_statistics.html');
   res.sendFile(pagePath);
 });

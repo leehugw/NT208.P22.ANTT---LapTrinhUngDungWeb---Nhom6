@@ -24,32 +24,30 @@
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/Admin_Statistics/logo.png" width="80">
+                <img alt="Logo" height="80" src="/Admin_Menu/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
-                <a class="nav-link mx-2 text-decoration-none" href="#about">Về chúng tôi</a>
-                <a class="nav-link mx-2 text-decoration-none" href="#services">Dịch vụ</a>
-                <a class="nav-link mx-2 text-decoration-none" href="#howitworks">Cách hoạt động</a>
-                <a class="nav-link mx-2 text-decoration-none" href="#contact">Liên hệ</a>
+                <a class="nav-link mx-2 text-decoration-none btn-home" role="button">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
                         Admin
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Thống kê</a></li>
-                        <li><a id="btn-admin-student" class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
-                        <li><a class="dropdown-item" href="#">Quản lí Chatbot</a></li>
-                        <li><a class="dropdown-item" href="#">Hồ sơ Admin</a></li>
-                        <li><a class="dropdown-item" href="/admin/create-lecturer-account">Tạo tài khoản giảng viên</a></li>
-                        <li><a class="dropdown-item logout-button" href="#">Đăng xuất</a></li>
+                        <li><a class="dropdown-item btn-admin-statistics" role="button">Thống kê</a></li>
+                        <li><a class="dropdown-item btn-admin-student" role="button">Theo dõi sinh viên</a></li>
+                        <li><a class="dropdown-item btn-admin-lecturer" role="button">Theo dõi giảng viên</a></li>
+                        <li><a class="dropdown-item btn-create-lecturer-account" role="button">Tạo tài khoản giảng viên</a></li>
+                        <li><a class="dropdown-item btn-feedback" role="button">Danh sách phản hồi</a></li>
                     </ul>
                 </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
+            <button class="btn bg-white text-dar
+            k fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -59,51 +57,35 @@
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start btn-home" role="button">
                 <i class="fa-solid fa-house-chimney"></i> Trang chủ
             </a>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
-                <i class="fa-solid fa-users"></i> Về chúng tôi
-            </a>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
-                <i class="fa-solid fa-cog"></i> Cách hoạt động
-            </a>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
-                <i class="fa-solid fa-server"></i> Dịch vụ
-            </a>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start" href="#home">
-                <i class="fa-solid fa-phone"></i> Liên hệ
-            </a>
             <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
-                data-bs-toggle="collapse" data-bs-target="#lecturerDropdown">
+                data-bs-toggle="collapse" data-bs-target="#adminDropdown">
                 <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
-            <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Thống kê</a>
+            <div class="collapse" id="adminDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-admin-statistics" role="button">Thống kê</a>
             </div>
-            <div class="collapse" id="lecturerDropdown">
-                <a id="btn-admin-student" class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Theo dõi sinh viên</a>
+            <div class="collapse" id="adminDropdown">
+                <a class="btn-admin-student nav-link d-block text-decoration-none py-2 px-5 text-start" role="button">Theo dõi sinh viên</a>
             </div>
-            <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Quản lí Chatbot</a>
+            <div class="collapse" id="adminDropdown">
+                <a class="btn-admin-lecturer nav-link d-block text-decoration-none py-2 px-5 text-start" role="button">Theo dõi giảng viên</a>
             </div>
-            <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="#">Hồ sơ Admin</a>
+            <div class="collapse" id="adminDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-create-lecturer-account" role="button">Tạo tài khoản giảng viên</a>
             </div>
-            <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start" href="/admin/create-lecturer-account">Tạo tài khoản giảng viên</a>
+            <div class="collapse" id="adminDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-feedback" role="button">Danh sách phản hồi</a>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button" href="#">
-                <i class="fa-solid fa-sign-out"></i> Đăng xuất
-            </a>
         </nav>
     </header>
-    
     <main class="container mt-5 pt-5">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="mb-4">Thống kê</h1>
-                
+
                 <!-- Thống kê chatbot -->
                 <div class="card mb-4">
                     <div class="card-body">
@@ -140,7 +122,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="card-title">Thống kê chung</h3>
-                        
+
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="px-3">
@@ -162,16 +144,16 @@
                 </div>
 
                 <!-- Xu hướng GPA trung bình theo năm học -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Xu hướng GPA trung bình theo học kỳ</h5>
-                            <canvas id="gpaTrendChart" height="200"></canvas>
-                        </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Xu hướng GPA trung bình theo học kỳ</h5>
+                        <canvas id="gpaTrendChart" height="200"></canvas>
                     </div>
+                </div>
             </div>
         </div>
     </main>
-    
+
     <footer class="footer-nav d-flex justify-content-between align-items-center px-3 mt-auto py-1">
         <a href="#" class="me-auto">Privacy Policy</a>
         <a href="#" class="d-flex align-items-center">
