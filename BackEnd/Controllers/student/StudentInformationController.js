@@ -42,7 +42,7 @@ const ViewStudentInformation = async (req, res) => {
 
       return res.json({
         success: true,
-        type: "student",
+        type: userRole,
         data: profile
       });
     }

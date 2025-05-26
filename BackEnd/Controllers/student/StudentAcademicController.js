@@ -56,6 +56,7 @@ const updateStudentAcademicController = async (req, res) => {
             student_name: student.name,
             has_english_certificate: student.has_english_certificate,
             required_progress_details: major.progress_details,
+            type: userRole,
             data: result
         });
 
