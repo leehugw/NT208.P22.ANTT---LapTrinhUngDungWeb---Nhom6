@@ -28,7 +28,7 @@ class LecturerInformationController {
             
             return res.json({
                 success: true,
-                type: "lecturer",
+                type: userRole,
                 data: profile
             });
         } catch (error) {
@@ -36,7 +36,6 @@ class LecturerInformationController {
             res.status(500).json({ 
                 success: false,
                 message: error.message || "Lỗi server",
-                error: error.message 
             });
         }
     }    
