@@ -27,16 +27,27 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
     // Nếu có text mới parse JSON, nếu không thì tạo object rỗng
     const result = text ? JSON.parse(text) : {};
 
-    if (res.ok) {
-      responseMessage.innerHTML = `<div class="alert alert-success">${result.message || 'Phản hồi đã gửi thành công!'}</div>`;
-      document.getElementById('feedbackForm').reset();
-    } else {
-      responseMessage.innerHTML = `<div class="alert alert-danger">${result.error || 'Có lỗi xảy ra. Vui lòng thử lại.'}</div>`;
-    }
+   if (res.ok) {
+  responseMessage.innerHTML = `<div class="alert alert-success">${escapeHTML(result.message || 'Phản hồi đã gửi thành công!')}</div>`;
+  document.getElementById('feedbackForm').reset();
+} else {
+  responseMessage.innerHTML = `<div class="alert alert-danger">${escapeHTML(result.error || 'Có lỗi xảy ra. Vui lòng thử lại.')}</div>`;
+}
   } catch (err) {
     responseMessage.innerHTML = `<div class="alert alert-danger">Lỗi gửi phản hồi. Vui lòng thử lại.</div>`;
     console.error('Lỗi khi gửi phản hồi:', err);
   }
 });
 
-  
+function escapeHTML(str) {
+  return String(str).replace(/[&<>"']/g, function (m) {
+    return ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[m];
+  });
+}
+

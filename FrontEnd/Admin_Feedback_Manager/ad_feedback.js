@@ -67,14 +67,14 @@ function renderFeedbackTable(feedbacks) {
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${role}</td>
-        <td>${name}</td>
-        <td>${email}</td>
-        <td>${type}</td>
-        <td class="text-start">${message}</td>
-        <td>${date}</td>
-      `;
+    <td>${index + 1}</td>
+    <td>${escapeHTML(role)}</td>
+    <td>${escapeHTML(name)}</td>
+    <td>${escapeHTML(email)}</td>
+    <td>${escapeHTML(type)}</td>
+    <td class="text-start">${escapeHTML(message)}</td>
+    <td>${escapeHTML(date)}</td>
+`;
 
     tbody.appendChild(tr);
   });
@@ -204,3 +204,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 });
+
+function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, function(m) {
+        return ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[m];
+    });
+}

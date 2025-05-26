@@ -594,24 +594,23 @@ function StudentAcademicData(token) {
                                 </tr>
                             </thead>
                             <tbody>
-                                ${semester.subjects.map(sub => `
-                                    <tr>
-                                        <td>${sub.subject_code}</td>
-                                        <td>${sub.subject_name}</td>
-                                        <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
-                                        <td>${sub.score_QT ?? '-'}</td>
-                                        <td>${sub.score_GK ?? '-'}</td>
-                                        <td>${sub.score_TH ?? '-'}</td>
-                                        <td>${sub.score_CK ?? '-'}</td>
-                                        <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP}</td>
-                                    </tr>
-                                `).join("")}
-                                <tr class="table-secondary">
-                                    <td colspan="7" class="text-start fw-bold">Trung bình học kỳ</td>
-                                    <td class="fw-bold text-primary">${gpa}</td>
-                                </tr>
-
-                            </tbody>
+                    ${semester.subjects.map(sub => `
+                        <tr>
+                            <td>${escapeHTML(sub.subject_code)}</td>
+                            <td>${escapeHTML(sub.subject_name)}</td>
+                            <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${escapeHTML(sub.status)}</span></td>
+                            <td>${sub.score_QT !== undefined && sub.score_QT !== null ? escapeHTML(sub.score_QT) : '-'}</td>
+                            <td>${sub.score_GK !== undefined && sub.score_GK !== null ? escapeHTML(sub.score_GK) : '-'}</td>
+                            <td>${sub.score_TH !== undefined && sub.score_TH !== null ? escapeHTML(sub.score_TH) : '-'}</td>
+                            <td>${sub.score_CK !== undefined && sub.score_CK !== null ? escapeHTML(sub.score_CK) : '-'}</td>
+                            <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">${sub.score_HP !== undefined && sub.score_HP !== null ? escapeHTML(sub.score_HP) : '-'}</td>
+                        </tr>
+                    `).join("")}
+                    <tr class="table-secondary">
+                        <td colspan="7" class="text-start fw-bold">Trung bình học kỳ</td>
+                        <td class="fw-bold text-primary">${escapeHTML(gpa)}</td>
+                    </tr>
+                </tbody>
                         </table>
                     </div>
                     `;
@@ -664,20 +663,22 @@ function StudentAcademicData(token) {
                                     <th scope="col">Điểm HP</th>
                                 </tr>
                             </thead>
-                            ${filteredSubjects.map(sub => `
-  <tr>
-    <td>${sub.subject_code}</td>
-    <td>${sub.subject_name}</td>
-    <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${sub.status}</span></td>
-    <td>${sub.score_QT ?? '-'}</td>
-    <td>${sub.score_GK ?? '-'}</td>
-    <td>${sub.score_TH ?? '-'}</td>
-    <td>${typeof sub.score_CK === 'number' ? sub.score_CK : '-'}</td>
-    <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">
-      ${sub.score_HP !== null && sub.score_HP !== undefined ? Number(sub.score_HP) : '-'}
-    </td>
-  </tr>
-`).join("")}
+                             <tbody>
+                    ${filteredSubjects.map(sub => `
+                        <tr>
+                            <td>${escapeHTML(sub.subject_code)}</td>
+                            <td>${escapeHTML(sub.subject_name)}</td>
+                            <td><span class="${sub.status === 'Đậu' ? 'status-badge-pass' : 'status-badge-fail'}">${escapeHTML(sub.status)}</span></td>
+                            <td>${sub.score_QT !== undefined && sub.score_QT !== null ? escapeHTML(sub.score_QT) : '-'}</td>
+                            <td>${sub.score_GK !== undefined && sub.score_GK !== null ? escapeHTML(sub.score_GK) : '-'}</td>
+                            <td>${sub.score_TH !== undefined && sub.score_TH !== null ? escapeHTML(sub.score_TH) : '-'}</td>
+                            <td>${typeof sub.score_CK === 'number' ? escapeHTML(sub.score_CK) : '-'}</td>
+                            <td class="${sub.status === 'Đậu' ? 'highlight-pass' : 'highlight-fail'}">
+                                ${sub.score_HP !== null && sub.score_HP !== undefined ? escapeHTML(sub.score_HP) : '-'}
+                            </td>
+                        </tr>
+                    `).join("")}
+                </tbody>
 
                             
                         </table>
@@ -725,22 +726,6 @@ document.getElementById('export-excel-btn').addEventListener('click', function (
     XLSX.writeFile(wb, "subject_scores.xlsx");
 });
 
-
-document.querySelectorAll(".btn-student-info").forEach(el => {
-    el.addEventListener("click", function (e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-        } else {
-            // Nếu có token, điều hướng đến chatbot
-            window.location.href = "/api/student/profile?token=" + token;  // Điều hướng đến route chatbot
-        }
-    });
-});
-
-//api đăng xuất
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.querySelector('.logout-button');
 
@@ -756,98 +741,110 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/';
         });
     }
-});
 
-document.querySelectorAll(".btn-student-progress").forEach(el => {
-    el.addEventListener("click", function (e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/academicstatistic";
-        }
+    document.querySelectorAll(".btn-student-progress").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/academicstatistic";
+            }
+        });
     });
-});
 
-document.querySelectorAll(".btn-student-schedule").forEach(el => {
-    el.addEventListener("click", function (e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/schedule-optimize";
-        }
+    document.querySelectorAll(".btn-student-schedule").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/schedule-optimize";
+            }
+        });
     });
-});
 
-document.querySelectorAll(".btn-student-english").forEach(el => {
-    el.addEventListener("click", function (e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/english-certificate";
-        }
+    document.querySelectorAll(".btn-student-english").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/english-certificate";
+            }
+        });
     });
-});
 
-document.querySelectorAll(".btn-student-info").forEach(el => {
-    el.addEventListener("click", function (e) {
+    document.querySelectorAll(".btn-student-info").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+            } else {
+                window.location.href = "/api/student/profile";
+            }
+        });
+    });
+
+    // Xử lý sự kiện khi click vào "Chatbot"
+    document.getElementById("btn-student-chatbot").addEventListener("click", function (e) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (!token) {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
         } else {
-            window.location.href = "/api/student/profile";
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
         }
     });
-});
-
-// Xử lý sự kiện khi click vào "Chatbot"
-document.getElementById("btn-student-chatbot").addEventListener("click", function (e) {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-    } else {
-        // Nếu có token, điều hướng đến chatbot
-        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
-    }
-});
 
 
-document.querySelectorAll('.btn-home').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
+    document.querySelectorAll('.btn-home').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert("Chưa đăng nhập");
-            return window.location.href = "/";
-        }
-
-        // Gửi token kèm theo khi truy cập route được bảo vệ
-        fetch('http://localhost:3000/api/student/stu_menu', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Chưa đăng nhập");
+                return window.location.href = "/";
             }
-        }).then(res => {
-            if (res.ok) {
-                // Nếu token hợp lệ, điều hướng
-                window.location.href = '/Student_Menu/stu_menu.html';
-            } else {
-                alert('Phiên đăng nhập không hợp lệ!');
-                window.location.href = '/';
-            }
+
+            // Gửi token kèm theo khi truy cập route được bảo vệ
+            fetch('http://localhost:3000/api/student/stu_menu', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(res => {
+                if (res.ok) {
+                    // Nếu token hợp lệ, điều hướng
+                    window.location.href = '/Student_Menu/stu_menu.html';
+                } else {
+                    alert('Phiên đăng nhập không hợp lệ!');
+                    window.location.href = '/';
+                }
+            });
         });
     });
 });
+
+function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, function (m) {
+        return ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[m];
+    });
+}

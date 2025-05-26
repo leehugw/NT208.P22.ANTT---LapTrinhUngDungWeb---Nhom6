@@ -132,13 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
     statusSelect.addEventListener("change", () => {
         classSelect.dispatchEvent(new Event("change")); // Gọi lại hàm fetch khi đổi trạng thái
     });
-    
+
 
     // Khi chọn lớp -> gọi API lấy sinh viên và render bảng
     classSelect.addEventListener("change", async () => {
         const semesterText = semesterSelect.options[semesterSelect.selectedIndex]?.text || "Không chọn học kỳ";
         const classText = classSelect.options[classSelect.selectedIndex]?.text || "Không chọn lớp";
-        
+
         classInfo.innerText = `Lớp đang chọn: ${classText} - ${semesterText}`;
         classList.innerText = `Danh sách sinh viên lớp ${classText}`;
 
@@ -148,25 +148,25 @@ document.addEventListener("DOMContentLoaded", function () {
             const studentRes = await fetch(`/api/lecturer/classes/${classId}/students`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-        
+
             const studentData = await studentRes.json();
             const studentCount = studentData.students.length;
             classSize.innerText = `${studentCount}`;
             studentTableBody.innerHTML = "";
-        
+
             if (studentData.isAdvisorClass) {
                 statusSelect.disabled = false;
                 const abnormalRes = await fetch(`/api/lecturer/abnormal/${classId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const abnormalData = await abnormalRes.json();
-        
+
                 // Map sinh viên bất thường theo student_id
                 const abnormalMap = {};
                 abnormalData.data.forEach(s => {
                     abnormalMap[s.student_id] = s;
                 });
-        
+
                 classStatisticsWrapper.style.display = "inline-block";
                 classStatisticsBtn.href = `/api/lecturer/classstatistic?class_id=${classSelect.value}`;
                 studentTableThread.innerHTML = `
@@ -183,36 +183,36 @@ document.addEventListener("DOMContentLoaded", function () {
                         <th scope="col" class="thread border-0 text-center">Tiến độ</th>
                     </tr>
                 `;
-        
+
                 studentData.students.forEach(student => {
                     const abnormal = abnormalMap[student.student_id];
                     const statusText = abnormal ? abnormal.status : "Đang học";
                     const noteText = (abnormal?.note || "").replace(/\n/g, "<br>");
-        
+
                     const selectedStatus = statusSelect.value;
                     if (selectedStatus && selectedStatus !== statusText) {
                         return;
                     }
-        
+
                     studentTableBody.innerHTML += `
-                        <tr class="custom-row align-middle">
-                            <td class="border-start">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
-                                    ${student.name}
-                                </div>
-                            </td>
-                            <td class="text-center">${student.student_id}</td>
-                            <td class="text-center">${student.school_email}</td>
-                            <td class="text-center">${statusText}</td>
-                            <td class="text-center">${noteText}</td>
-                            <td class="text-center">${student.class_id || '-'}</td>
-                            <td class="text-center">${student.major_name || '-'}</td>
-                            <td class="text-center">${student.faculty_name || '-'}</td>
-                            <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${student.student_id}"><i class="fas fa-external-link-alt"></i></a></td>
-                            <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${student.student_id}"><i class="fas fa-chart-line"></i></a></td>
-                        </tr>
-                    `;
+    <tr class="custom-row align-middle">
+        <td class="border-start">
+            <div class="d-flex align-items-center">
+                <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                ${escapeHTML(student.name)}
+            </div>
+        </td>
+        <td class="text-center">${escapeHTML(student.student_id)}</td>
+        <td class="text-center">${escapeHTML(student.school_email)}</td>
+        <td class="text-center">${escapeHTML(statusText)}</td>
+        <td class="text-center">${noteText}</td> <!-- Nếu noteText có thể chứa HTML, hãy escape hoặc chỉ cho phép một số thẻ -->
+        <td class="text-center">${escapeHTML(student.class_id || '-')}</td>
+        <td class="text-center">${escapeHTML(student.major_name || '-')}</td>
+        <td class="text-center">${escapeHTML(student.faculty_name || '-')}</td>
+        <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
+        <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-chart-line"></i></a></td>
+    </tr>
+`;
                 });
             } else {
                 statusSelect.disabled = true;
@@ -231,48 +231,48 @@ document.addEventListener("DOMContentLoaded", function () {
                         <th scope="col" class="thread border-0 text-center">Hành động</th>
                     </tr>
                 `;
-        
+
                 studentData.students.forEach(student => {
                     studentTableBody.innerHTML += `
-                        <tr class="custom-row align-middle">
-                            <td class="border-start">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
-                                    ${student.name}
-                                </div>
-                            </td>
-                            <td class="text-center">${student.student_id}</td>
-                            <td class="text-center">${student.school_email}</td>
-                            <td class="text-center">
-                                <span class="score-text">${student.score_QT || "-"}</span>
-                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_QT || ""}" style="display:none;" />
-                            </td>
-                            <td class="text-center">
-                                <span class="score-text">${student.score_GK || "-"}</span>
-                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_GK || ""}" style="display:none;" />
-                            </td>
-                            <td class="text-center">
-                                <span class="score-text">${student.score_TH || "-"}</span>
-                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_TH || ""}" style="display:none;" />
-                            </td>
-                            <td class="text-center">
-                                <span class="score-text">${student.score_CK || "-"}</span>
-                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_CK || ""}" style="display:none;" />
-                            </td>
-                            <td class="text-center">
-                                <span class="score-text">${student.score_HP || "-"}</span>
-                                <input class="score-input form-control form-control-sm m-auto" value="${student.score_HP || ""}" style="display:none;" />
-                            </td>
-                            <td class="text-center border-end">
-                                <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
-                            </td>
-                        </tr>
-                    `;
+        <tr class="custom-row align-middle">
+            <td class="border-start">
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                    ${escapeHTML(student.name)}
+                </div>
+            </td>
+            <td class="text-center">${escapeHTML(student.student_id)}</td>
+            <td class="text-center">${escapeHTML(student.school_email)}</td>
+            <td class="text-center">
+                <span class="score-text">${escapeHTML(student.score_QT || "-")}</span>
+                <input class="score-input form-control form-control-sm m-auto" value="${escapeHTML(student.score_QT || "")}" style="display:none;" />
+            </td>
+            <td class="text-center">
+                <span class="score-text">${escapeHTML(student.score_GK || "-")}</span>
+                <input class="score-input form-control form-control-sm m-auto" value="${escapeHTML(student.score_GK || "")}" style="display:none;" />
+            </td>
+            <td class="text-center">
+                <span class="score-text">${escapeHTML(student.score_TH || "-")}</span>
+                <input class="score-input form-control form-control-sm m-auto" value="${escapeHTML(student.score_TH || "")}" style="display:none;" />
+            </td>
+            <td class="text-center">
+                <span class="score-text">${escapeHTML(student.score_CK || "-")}</span>
+                <input class="score-input form-control form-control-sm m-auto" value="${escapeHTML(student.score_CK || "")}" style="display:none;" />
+            </td>
+            <td class="text-center">
+                <span class="score-text">${escapeHTML(student.score_HP || "-")}</span>
+                <input class="score-input form-control form-control-sm m-auto" value="${escapeHTML(student.score_HP || "")}" style="display:none;" />
+            </td>
+            <td class="text-center border-end">
+                <i class="bi bi-pencil-square" style="color:#3D67BA" onclick="editScore(this)"></i>
+            </td>
+        </tr>
+    `;
                 });
             }
         } catch (error) {
             console.error("Error fetching students:", error);
-        }        
+        }
     });
 });
 
@@ -422,5 +422,17 @@ document.querySelectorAll('.btn-home').forEach(function (btn) {
         });
     });
 });
+
+function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, function (m) {
+        return ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[m];
+    });
+}
 
 

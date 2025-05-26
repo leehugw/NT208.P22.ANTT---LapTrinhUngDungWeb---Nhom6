@@ -29,26 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateDropdown(id, items, label) {
-    const select = document.getElementById(id);
-    if (!select) return;
-    select.innerHTML = `<option value="">${label}</option>` + items.map(item =>
-        `<option value="${item}">${item}</option>`).join('');
+        const select = document.getElementById(id);
+        if (!select) return;
+        select.innerHTML = `<option value="">${label}</option>` + items.map(item =>
+            `<option value="${item}">${item}</option>`).join('');
     }
 
     async function loadStudents(query = '') {
         try {
             const token = localStorage.getItem('token');
-    
+
             // 1. Lấy danh sách sinh viên
             const res1 = await fetch(`/api/admin/students-data?${query}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (!res1.ok) throw new Error("Token hết hạn hoặc API lỗi");
             const { data: students, filters } = await res1.json();
-    
+
             // 2. Lấy danh sách class_id duy nhất
             const classIds = [...new Set(students.map(s => s.class_id).filter(Boolean))];
-    
+
             // 3. Gọi API abnormal cho từng class_id song song
             const abnormalResults = await Promise.all(classIds.map(async classId => {
                 const res = await fetch(`/api/admin/abnormal/${classId}`, {
@@ -58,63 +58,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 const json = await res.json();
                 return json.data || [];
             }));
-    
+
             // 4. Gộp kết quả cảnh báo thành map student_id => {status, note}
             const abnormalMap = new Map();
             abnormalResults.flat().forEach(s => {
                 abnormalMap.set(s.student_id, { status: s.status, note: s.note });
             });
-    
+
             // 5. Ghép cảnh báo vào sinh viên
             const mergedStudents = students.map(s => ({
                 ...s,
                 status: abnormalMap.get(s.student_id)?.status || 'Đang học',
                 note: abnormalMap.get(s.student_id)?.note || '-'
             }));
-    
+
             // 6. Render
             studentCountElement.textContent = mergedStudents.length;
             studentTableBody.innerHTML = mergedStudents.map(s => `
-                <tr class="custom-row align-middle">
-                    <td class="border-start">
-                        <div class="d-flex align-items-center">
-                            <img alt="Avatar ${s.name}" class="rounded-circle me-2" height="50"
-                                src="https://placehold.co/50x50" width="50" />
-                            ${s.name}
-                        </div>
-                    </td>
-                    <td class="text-center">${s.student_id}</td>
-                    <td class="text-center">${s.contact?.school_email || '-'}</td>
-                    <td class="text-center">${s.status}</td>
-                    <td class="text-center">${s.class_id || '-'}</td>
-                    <td class="text-center">${s.major_id}</td>
-                    <td class="text-center">${s.faculty_name}</td>
-                    <td class="text-center">
-                        <a class="text view-profile" href="/api/student/profile?student_id=${s.student_id}">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </td>
-                    <td class="text-center border-end">
-                        <a class="text" href="/api/student/academicstatistic?student_id=${s.student_id}">
-                            <i class="fas fa-chart-line"></i>
-                        </a>
-                    </td>
-                </tr>
-            `).join('');
-    
+    <tr class="custom-row align-middle">
+        <td class="border-start">
+            <div class="d-flex align-items-center">
+                <img alt="Avatar ${escapeHTML(s.name)}" class="rounded-circle me-2" height="50"
+                    src="https://placehold.co/50x50" width="50" />
+                ${escapeHTML(s.name)}
+            </div>
+        </td>
+        <td class="text-center">${escapeHTML(s.student_id)}</td>
+        <td class="text-center">${escapeHTML(s.contact?.school_email || '-')}</td>
+        <td class="text-center">${escapeHTML(s.status)}</td>
+        <td class="text-center">${escapeHTML(s.class_id || '-')}</td>
+        <td class="text-center">${escapeHTML(s.major_id)}</td>
+        <td class="text-center">${escapeHTML(s.faculty_name)}</td>
+        ...
+    </tr>
+`).join('');
+
             if (filters) {
                 populateDropdown('filter-class', filters.classes, 'Lớp học');
                 populateDropdown('filter-major', filters.majors, 'Ngành học');
                 populateDropdown('filter-faculty', filters.faculties, 'Khoa');
                 populateDropdown('filter-status', filters.statuses, 'Trạng thái');
             }
-    
+
         } catch (err) {
             console.error('❌ Lỗi tải danh sách sinh viên:', err);
             studentTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Lỗi tải dữ liệu</td></tr>';
         }
     }
-    
+
 
     // Ban đầu load tất cả
     loadStudents();
@@ -233,13 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-home').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
-    
+
             const token = localStorage.getItem('token');
             if (!token) {
                 alert("Chưa đăng nhập");
                 return window.location.href = "/";
             }
-    
+
             // Gửi token kèm theo khi truy cập route được bảo vệ
             fetch('http://localhost:3000/api/admin/admin_menu', {
                 method: 'GET',
@@ -258,3 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, function (m) {
+        return ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[m];
+    });
+}
