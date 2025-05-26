@@ -3,9 +3,10 @@ const Student = require("../models/Student");
 const Subject = require("../models/Subject");
 const Semester = require("../models/Semester");
 const Enrollment = require("../models/Enrollment");
-const Faculty = require('../models/Faculty');
-
+const Faculty = require("../models/Faculty");
+const TrainingProgram = require("../models/TrainingProgram");
 const path = require("path");
+
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 async function generateEnrollments() {
@@ -17,15 +18,16 @@ async function generateEnrollments() {
     const subjects = await Subject.find();
     const faculties = await Faculty.find();
     const semesters = await Semester.find().sort({ start_date: 1 });
+    const programs = await TrainingProgram.find();
 
-    if (!students.length || !subjects.length || !semesters.length || !faculties.length) {
-      console.error("❌ Thiếu dữ liệu Student / Subject / Semester / Faculty");
+    if (!students.length || !subjects.length || !semesters.length || !faculties.length || !programs.length) {
+      console.error("❌ Thiếu dữ liệu Student / Subject / Semester / Faculty / TrainingProgram");
       return;
     }
 
     const letters = ["A", "B", "C", "D"];
     const minNumber = 20;
-    const maxNumber = Math.floor(Math.random() * 3) + 20; // 20 đến 22
+    const maxNumber = Math.floor(Math.random() * 3) + 20; // 20 - 22
     const suffixes = [];
     for (const letter of letters) {
       for (let num = minNumber; num <= maxNumber; num++) {
@@ -48,45 +50,65 @@ async function generateEnrollments() {
       "24": "HK120242025"
     };
 
+    const sortSubjects = (subjectsToSort) => {
+      const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN'];
+      return subjectsToSort.sort((a, b) => {
+        const typeCompare = typeOrder.indexOf(a.subject_type) - typeOrder.indexOf(b.subject_type);
+        if (typeCompare !== 0) return typeCompare;
+
+        if (a.subject_type === 'ĐC' && b.subject_type === 'ĐC') {
+          const priorityFaculties = [facultyPDTDH, facultyBMTL, facultyAV];
+          const isAPriority = priorityFaculties.includes(a.faculty_id) ? 0 : 1;
+          const isBPriority = priorityFaculties.includes(b.faculty_id) ? 0 : 1;
+          return isAPriority - isBPriority;
+        }
+
+        return 0;
+      });
+    };
+
     for (const student of students) {
       const facultyOfStudent = faculties.find(faculty => faculty.majors.includes(student.major_id));
       if (!facultyOfStudent) {
-        console.warn(`⚠️ Không tìm thấy Faculty chứa major_id ${student.major_id} của sinh viên ${student.student_id}`);
+        console.warn(`Không tìm thấy Faculty chứa major_id ${student.major_id} của sinh viên ${student.student_id}`);
         continue;
       }
 
+      const trainingProgram = programs.find(p =>
+        p.program_id === student.program_id
+      );
+      if (!trainingProgram) {
+        console.warn(`Không tìm thấy chương trình đào tạo cho sinh viên ${student.student_id}`);
+        continue;
+      }
+
+      const majorData = trainingProgram.majors.find(m => m.major_id === student.major_id);
+      if (!majorData) {
+        console.warn(`Không tìm thấy ngành học ${student.major_id} trong CTĐT của sinh viên ${student.student_id}`);
+        continue;
+      }
+
+      const requiredCoursesSet = new Set(majorData.required_courses);
+
       const preferredFacultyIds = [facultyPDTDH, facultyBMTL, facultyAV, facultyOfStudent.faculty_id];
 
-      const subjectsOfFaculty = subjects
-        .filter(sub => preferredFacultyIds.includes(sub.faculty_id))
-        .sort((a, b) => {
-          const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN'];
-          const typeCompare = typeOrder.indexOf(a.subject_type) - typeOrder.indexOf(b.subject_type);
-          if (typeCompare !== 0) return typeCompare;
+      const requiredSubjects = sortSubjects(subjects.filter(sub => requiredCoursesSet.has(sub.subject_id)));
+      const otherSubjects = sortSubjects(subjects.filter(sub =>
+        preferredFacultyIds.includes(sub.faculty_id) && !requiredCoursesSet.has(sub.subject_id)
+      ));
 
-          if (a.subject_type === 'ĐC' && b.subject_type === 'ĐC') {
-            const priorityFaculties = [facultyPDTDH, facultyBMTL, facultyAV];
-            const isAPriority = priorityFaculties.includes(a.faculty_id) ? 0 : 1;
-            const isBPriority = priorityFaculties.includes(b.faculty_id) ? 0 : 1;
-            return isAPriority - isBPriority;
-          }
+      const subjectsOfStudent = [...requiredSubjects, ...otherSubjects];
 
-          return 0;
-        });
-
-
-      // Lấy năm vào học từ student_id
       const studentYearPrefix = student.student_id.toString().substring(0, 2);
       const startSemesterId = startSemesterMap[studentYearPrefix];
-
       if (!startSemesterId) {
-        console.warn(`⚠️ Không xác định được học kỳ bắt đầu cho sinh viên ${student.student_id}`);
+        console.warn(`Không xác định được học kỳ bắt đầu cho sinh viên ${student.student_id}`);
         continue;
       }
 
       const startIndex = semesters.findIndex(s => s.semester_id === startSemesterId);
       if (startIndex === -1) {
-        console.warn(`⚠️ Không tìm thấy học kỳ bắt đầu ${startSemesterId} cho sinh viên ${student.student_id}`);
+        console.warn(`Không tìm thấy học kỳ bắt đầu ${startSemesterId} cho sinh viên ${student.student_id}`);
         continue;
       }
 
@@ -95,7 +117,7 @@ async function generateEnrollments() {
       const allLearnedSubjects = new Set();
 
       for (const semester of selectedSemesters) {
-        const shuffledSubjects = [...subjectsOfFaculty].sort(() => 0.5 - Math.random());
+        const shuffledSubjects = [...subjectsOfStudent].sort(() => 0.5 - Math.random());
 
         const selectedSubjects = [];
         const classIds = [];
@@ -145,11 +167,11 @@ async function generateEnrollments() {
         enrollments.push({
           student_id: student.student_id,
           semester_id: semester.semester_id,
-          subject_ids: selectedSubjects,
-          class_ids: classIds,
-          credits: totalCredits
+          subject_ids: selectedSubjects, // có thể là []
+          class_ids: classIds,           // có thể là []
+          credits: totalCredits          // có thể là 0
         });
-
+        
         selectedSubjects.forEach(subId => allLearnedSubjects.add(subId));
       }
     }
@@ -166,6 +188,8 @@ async function generateEnrollments() {
 }
 
 generateEnrollments();
+
+
 
 
 

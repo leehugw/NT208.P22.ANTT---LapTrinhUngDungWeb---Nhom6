@@ -1,68 +1,45 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuClose = document.getElementById('menu-close');
-
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', function() {
-            mobileMenu.style.display = 'block';
-            setTimeout(() => {
-                mobileMenu.style.left = '0';
-            }, 10);
-        });
-    }
-
-    if (menuClose) {
-        menuClose.addEventListener('click', function() {
-            mobileMenu.style.left = '-75%';
-            setTimeout(() => {
-                mobileMenu.style.display = 'none';
-            }, 300);
-        });
-    }
-});
-
 // Kiểm tra token khi tải trang
 document.addEventListener('DOMContentLoaded', function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlToken = urlParams.get('token');
-  const logoutButton = document.querySelector('.logout-button');
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+    const logoutButton = document.querySelector('.logout-button');
 
-  if (urlToken) {
-    localStorage.setItem('token', urlToken);
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
+    if (urlToken) {
+        localStorage.setItem('token', urlToken);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
-    window.location.href = "http://localhost:3000/";
-    return;
-  }
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+        window.location.href = "http://localhost:3000/";
+        return;
+    }
 
-  if (logoutButton) {
-    logoutButton.addEventListener('click', () => {
-      // Xóa token khỏi localStorage vì lưu token trong localStorage
-      localStorage.removeItem('token');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            // Xóa token khỏi localStorage vì lưu token trong localStorage
+            localStorage.removeItem('token');
 
-      // Thông báo đăng xuất(xóa nếu ko cần)
-      //alert("Đăng xuất thành công!");
+            // Thông báo đăng xuất(xóa nếu ko cần)
+            //alert("Đăng xuất thành công!");
 
-      // Chuyển về trang chủ
-      window.location.href = '/';
-    });
-  }
+            // Chuyển về trang chủ
+            window.location.href = '/';
+        });
+    }
+    attachEvent(token);
 });
 
 // Hàm kiểm tra token chung
 function checkTokenAndRedirect() {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-    window.location.href = "http://localhost:3000/";
-    return false;
-  }
-  return token;
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+        window.location.href = "http://localhost:3000/";
+        return false;
+    }
+    return token;
 }
 
 function getChatSessions() {
@@ -140,47 +117,47 @@ function setInputEnabled(enabled) {
 
 // Gửi tin nhắn khi người dùng gửi tin nhắn
 function sendMessage() {
-  const inputField = document.getElementById("user-input");
-  const message = inputField.value.trim();
+    const inputField = document.getElementById("user-input");
+    const message = inputField.value.trim();
 
-  if (!message) return;
+    if (!message) return;
 
-  addMessage(message, 'user');  // Thêm tin nhắn của người dùng vào khung chat
-  saveMessage('user', message);
-  inputField.value = '';  // Xóa ô nhập sau khi gửi
- 
-  setInputEnabled(false);
-  // Ẩn phần FAQ sau khi gửi
-  const faqSection = document.querySelector(".faq");
-  if (faqSection) {
-    faqSection.style.display = "none";
-  }
-  
+    addMessage(message, 'user');  // Thêm tin nhắn của người dùng vào khung chat
+    saveMessage('user', message);
+    inputField.value = '';  // Xóa ô nhập sau khi gửi
 
-  // Không trả lời lại nữa sau khi người dùng gửi tin nhắn
-  // (Không thêm bất kỳ logic trả lời nào sau khi người dùng gửi tin nhắn)
+    setInputEnabled(false);
+    // Ẩn phần FAQ sau khi gửi
+    const faqSection = document.querySelector(".faq");
+    if (faqSection) {
+        faqSection.style.display = "none";
+    }
 
-  fetch(`http://localhost:3000/api/student/chatbot-data`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ message }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const botResponse = data.answer || "Xin lỗi, tôi không hiểu câu hỏi của bạn.";
-      addMessage(botResponse, 'bot'); // Thêm tin nhắn của bot vào khung chat
-      saveMessage('bot', botResponse);
-      setInputEnabled(true);
+
+    // Không trả lời lại nữa sau khi người dùng gửi tin nhắn
+    // (Không thêm bất kỳ logic trả lời nào sau khi người dùng gửi tin nhắn)
+
+    fetch(`http://localhost:3000/api/student/chatbot-data`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
     })
-    .catch((error) => {
-      console.error("Lỗi khi gọi API:", error);
-      const errorMsg = "Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.";
-      addMessage(errorMsg, 'bot');
-      saveMessage('bot', errorMsg);
-      setInputEnabled(true);
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            const botResponse = data.answer || "Xin lỗi, tôi không hiểu câu hỏi của bạn.";
+            addMessage(botResponse, 'bot'); // Thêm tin nhắn của bot vào khung chat
+            saveMessage('bot', botResponse);
+            setInputEnabled(true);
+        })
+        .catch((error) => {
+            console.error("Lỗi khi gọi API:", error);
+            const errorMsg = "Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.";
+            addMessage(errorMsg, 'bot');
+            saveMessage('bot', errorMsg);
+            setInputEnabled(true);
+        });
 }
 
 function handleBotReply(reply) {
@@ -190,14 +167,14 @@ function handleBotReply(reply) {
 
 // Thêm tin nhắn vào khung chat
 function addMessage(text, sender) {
-  const chatBox = document.querySelector(".chat-box");
-  const messageElem = document.createElement("div");
-  messageElem.className = `message ${sender}`;
-  messageElem.innerText = text;
-  chatBox.appendChild(messageElem);
-  setTimeout(() => {
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }, 0); // Cuộn xuống cuối khung chat
+    const chatBox = document.querySelector(".chat-box");
+    const messageElem = document.createElement("div");
+    messageElem.className = `message ${sender}`;
+    messageElem.innerText = text;
+    chatBox.appendChild(messageElem);
+    setTimeout(() => {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 0); // Cuộn xuống cuối khung chat
 }
 
 // Điền vào ô chat khi nhấn vào FAQ
@@ -212,9 +189,9 @@ function fillMessage(button) {
 
 // Toggle sidebar
 function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const isOpen = sidebar.style.transform === "translateX(0px)";
-  sidebar.style.transform = isOpen ? "translateX(-60px)" : "translateX(0px)";
+    const sidebar = document.getElementById("sidebar");
+    const isOpen = sidebar.style.transform === "translateX(0px)";
+    sidebar.style.transform = isOpen ? "translateX(-60px)" : "translateX(0px)";
 }
 
 function loadSessionToChatBox(sessionId) {
@@ -322,7 +299,7 @@ function startNewChatSession() {
     rederInputAndFAQ();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Luôn bắt đầu bằng một session mới khi vào trang
     localStorage.removeItem('currentSessionId');
     // Nếu muốn xóa luôn nội dung chatbox khi vào trang:
@@ -332,96 +309,114 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.querySelectorAll(".btn-student-progress").forEach(el => {
-    el.addEventListener("click", function(e) {
+function attachEvent(token) {
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        menu.style.display = 'block';
+        setTimeout(function () {
+            menu.classList.add('open');
+        }, 10);
+    });
+    document.getElementById('menu-close').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        menu.classList.remove('open');
+        setTimeout(function () {
+            menu.style.display = 'none';
+        }, 300);
+    });
+
+    document.querySelectorAll(".btn-student-progress").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/academicstatistic";
+            }
+        });
+    });
+
+    document.querySelectorAll(".btn-student-schedule").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/schedule-optimize";
+            }
+        });
+    });
+
+    document.querySelectorAll(".btn-student-english").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";
+            } else {
+                window.location.href = "/api/student/english-certificate";
+            }
+        });
+    });
+
+    document.querySelectorAll(".btn-student-info").forEach(el => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+                window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+            } else {
+                window.location.href = "/api/student/profile";
+            }
+        });
+    });
+
+    // Xử lý sự kiện khi click vào "Chatbot"
+    document.querySelectorAll("btn-student-chatbot").forEach(function (btn) {btn.addEventListener("click", function (e) {
         e.preventDefault();
         const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/academicstatistic";
-        }
-    });
-});
-
-document.querySelectorAll(".btn-student-schedule").forEach(el => {
-    el.addEventListener("click", function(e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/schedule-optimize";
-        }
-    });
-});
-
-document.querySelectorAll(".btn-student-english").forEach(el => {
-    el.addEventListener("click", function(e) {
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "http://localhost:3000/";
-        } else {
-            window.location.href = "/api/student/english-certificate";
-        }
-    });
-});
-
-document.querySelectorAll(".btn-student-info").forEach(el => {
-    el.addEventListener("click", function(e) {
-        e.preventDefault(); 
-        const token = localStorage.getItem("token"); 
         if (!token) {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
         } else {
-            window.location.href = "/api/student/profile";  
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
         }
     });
-});
+    });
 
-// Xử lý sự kiện khi click vào "Chatbot"
-document.getElementById("btn-student-chatbot1").addEventListener("click", function(e) {
-    e.preventDefault(); 
-    const token = localStorage.getItem("token"); 
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-    } else {
-        // Nếu có token, điều hướng đến chatbot
-        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
-    }
-});
+    document.querySelectorAll('.btn-home').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
 
-
-document.querySelectorAll('.btn-home').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert("Chưa đăng nhập");
-            return window.location.href = "/";
-        }
-
-        // Gửi token kèm theo khi truy cập route được bảo vệ
-        fetch('http://localhost:3000/api/student/stu_menu', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Chưa đăng nhập");
+                return window.location.href = "/";
             }
-        }).then(res => {
-            if (res.ok) {
-                // Nếu token hợp lệ, điều hướng
-                window.location.href = '/Student_Menu/stu_menu.html';
-            } else {
-                alert('Phiên đăng nhập không hợp lệ!');
-                window.location.href = '/';
-            }
+
+            // Gửi token kèm theo khi truy cập route được bảo vệ
+            fetch('http://localhost:3000/api/student/stu_menu', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(res => {
+                if (res.ok) {
+                    // Nếu token hợp lệ, điều hướng
+                    window.location.href = '/Student_Menu/stu_menu.html';
+                } else {
+                    alert('Phiên đăng nhập không hợp lệ!');
+                    window.location.href = '/';
+                }
+            });
         });
     });
-});
+}
+

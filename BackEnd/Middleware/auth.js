@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 function authenticateToken(req, res, next) {
   const token = req.headers['authorization']?.split(' ')[1] || req.query.token;
-  console.log("Token nhận được:", token);
 
   if (!token) {
     console.log("Không tìm thấy token trong request");
@@ -27,7 +26,6 @@ function authenticateToken(req, res, next) {
     }
 
     req.user = user;
-    console.log("Giải mã token:", user);
     next();
   });
 }

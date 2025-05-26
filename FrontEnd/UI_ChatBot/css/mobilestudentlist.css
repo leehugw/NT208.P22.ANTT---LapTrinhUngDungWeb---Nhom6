@@ -1,41 +1,36 @@
 @media (max-width: 767px) {
-    #mobile-menu {
-        position: fixed;
-        top: 0;
-        left: -75%;
-        width: 75%;
-        height: 100%;
-        background: white;
-        transition: left 0.3s ease;
-        z-index: 1001;
-        overflow-y: auto;
+    .chatbot-image {
+        order: -1;
+        margin-bottom: 20px;
     }
 
-    #mobile-menu.active {
-        left: 0;
+    .logo-container img {
+        width: 50px;
+        height: 50px;
     }
 
-    /* Mobile menu links */
-    #mobile-menu .nav-link {
-        color: black;
-        transition: color 0.3s ease-in-out;
-        padding: 0.75rem 1rem;
+    .navbar-container {
+        margin: 0;
+        padding: auto;
     }
 
-    #mobile-menu .nav-link:hover,
-    #mobile-menu .nav-link.active {
-        color: #3D67BA;
+    .stat-header {
+        margin-top: 1rem;
     }
 
-    /* Mobile dropdown */
-    #mobile-menu .collapse {
-        background-color: #f8f9fc;
-    }
+}
 
-    #mobile-menu .btn-student-info {
-        color: #3D67BA;
-    }
-    .sidebar {
-        display: none; 
-    }
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+#mobile-menu.open {
+    display: block;
+    /* Khi mở menu, nó sẽ hiện ra ngay */
 }

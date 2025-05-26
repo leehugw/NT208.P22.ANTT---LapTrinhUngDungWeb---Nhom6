@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,11 +18,11 @@
 </head>
 
 <body>
-      
-      <header class="bg-white shadow navbar fixed-top font-roboto">
+
+    <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
-        <!-- Logo (ẩn trên mobile) -->
-          <div class="d-none d-md-flex align-items-center logo-container">
+            <!-- Logo (ẩn trên mobile) -->
+            <div class="d-none d-md-flex align-items-center logo-container">
                 <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
             </div>
 
@@ -43,19 +44,19 @@
                 </div>
             </nav>
 
-        <!-- Mobile menu toggle button -->
-        <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
+            <!-- Mobile menu toggle button -->
+            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
 
-        <!-- Logout button -->
-        <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button">
-            <i class="fas fa-sign-out-alt"></i> Đăng xuất
-        </button>
-    </div>
+            <!-- Logout button -->
+            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
 
-    <!-- Mobile menu -->
-    <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
+        <!-- Mobile menu -->
+        <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
             <div class="d-flex justify-content-start align-items-center p-4">
                 <span class="h4 fw-bold">Chatbot UIT</span>
@@ -64,84 +65,90 @@
                 </button>
             </div>
             <a class="nav-link d-block text-decoration-none py-2 px-4 btn-home" role="button"><i
-                class="fa-solid fa-house-chimney"></i>
-            Trang chủ</a>
-        <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
-            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-            <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
-        </button>
-        <div class="collapse" id="studentDropdown">
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh
-                viên</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ
-                học tập</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận
-                chứng chỉ Anh Văn</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa
-                biểu</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot
-                UIT</a>
-        </div>
+                    class="fa-solid fa-house-chimney"></i>
+                Trang chủ</a>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+                <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="studentDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh
+                    viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ
+                    học tập</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận
+                    chứng chỉ Anh Văn</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa
+                    biểu</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot
+                    UIT</a>
+            </div>
         </nav>
-</header>
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <ul>
-                <li><a href="#" class="sidebar-icon" onclick="openChatHistory()"><i class="fas fa-history"></i></a></li>
-                <li><a href="#" class="sidebar-icon" onclick="startNewChatSession()"><i class="fas fa-plus-circle"></i></a></li> <!-- Add icon -->
-                <li><a href="#" class="sidebar-icon"><i class="fas fa-question-circle"></i></a></li> <!-- Question icon -->
-            </ul>
-        </div>
-
-        <!-- Logo và tiêu đề -->
-        <div class="logo-title">
-            <img src="/UI_ChatBot/logo.png" alt="ChatBot Logo" class="chatbot-logo" />
-            <h2 class="chatbot-title">ChatBot UIT</h2>
-        </div>
-
-        <!-- Khung chat chính -->
-        <div class="chatbox-container" id="chatbox-container">
-            <div class="chat-box">
-                <div class="chat-response">
-                    <p><strong>Tôi có thể giúp gì cho bạn?</strong></p>
-                </div>  
-        </div>
-    
-
-    <footer class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
-        <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>
-        <a href="#" class="text-light text-decoration-none d-flex align-items-center">
-            <span class="me-1">Help</span>
-            <i class="fas fa-question-circle"></i>
-        </a>
-    </footer>
-
-    <div id="chat-history-panel" style="display:none; position:fixed; right:0; top:0; width:350px; height:100%; background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2); z-index:9999; overflow-y:auto;">
-    <div style="padding:16px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
-        <strong>Lịch sử chat (7 ngày)</strong>
-        <button onclick="closeChatHistory()" style="border:none; background:none; font-size:20px;">&times;</button>
+    </header>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#" class="sidebar-icon" onclick="openChatHistory()"><i class="fas fa-history"></i></a></li>
+            <li><a href="#" class="sidebar-icon" onclick="startNewChatSession()"><i class="fas fa-plus-circle"></i></a>
+            </li> <!-- Add icon -->
+            <li><a href="#" class="sidebar-icon"><i class="fas fa-question-circle"></i></a></li> <!-- Question icon -->
+        </ul>
     </div>
-    <div id="chat-history-content" style="padding:16px;"></div>
-</div>
-<!-- Script ẩn/hiện navbar khi cuộn -->
-<script>
-    let lastScrollTop = 0;
-    const navbar = document.getElementById("mainNavbar");
 
-    window.addEventListener("scroll", function () {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    <!-- Logo và tiêu đề -->
+    <div class="logo-title">
+        <img src="/UI_ChatBot/logo.png" alt="ChatBot Logo" class="chatbot-logo" />
+        <h2 class="chatbot-title">ChatBot UIT</h2>
+    </div>
 
-      if (scrollTop > lastScrollTop) {
-        navbar.style.top = "-80px";
-      } else {
-        navbar.style.top = "0";
-      }
+    <!-- Khung chat chính -->
+    <div class="chatbox-container" id="chatbox-container">
+        <div class="chat-box">
+            <div class="chat-response">
+                <p><strong>Tôi có thể giúp gì cho bạn?</strong></p>
+            </div>
+        </div>
 
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-  </script>
-    <script src="/UI_ChatBot/UI_ChatBot.js"></script>
-  
-    
+
+        <footer
+            class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
+            <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>
+            <a href="#" class="text-light text-decoration-none d-flex align-items-center">
+                <span class="me-1">Help</span>
+                <i class="fas fa-question-circle"></i>
+            </a>
+        </footer>
+
+        <div id="chat-history-panel"
+            style="display:none; position:fixed; right:0; top:0; width:350px; height:100%; background:#fff; box-shadow:-2px 0 8px rgba(0,0,0,0.2); z-index:9999; overflow-y:auto;">
+            <div
+                style="padding:16px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                <strong>Lịch sử chat (7 ngày)</strong>
+                <button onclick="closeChatHistory()"
+                    style="border:none; background:none; font-size:20px;">&times;</button>
+            </div>
+            <div id="chat-history-content" style="padding:16px;"></div>
+        </div>
+        <!-- Script ẩn/hiện navbar khi cuộn -->
+        <script>
+            let lastScrollTop = 0;
+            const navbar = document.getElementById("mainNavbar");
+
+            window.addEventListener("scroll", function () {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (scrollTop > lastScrollTop) {
+                    navbar.style.top = "-80px";
+                } else {
+                    navbar.style.top = "0";
+                }
+
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+        </script>
+        <script src="/UI_ChatBot/UI_ChatBot.js"></script>
+
+
 </body>
+
 </html>
