@@ -198,7 +198,6 @@ function updateTimetable(event, subject) {
 
         // Thêm môn học vào thời khóa biểu
         addSubjectToTimetable(subject, hasDuplicateId);
-        timetableSubjects.push(subject); // nhớ thêm vào danh sách đã chọn
     } else {
         removeSubjectFromTimetable(subject);
     }
@@ -263,7 +262,7 @@ function addSubjectToTimetable(subject, hasDuplicateId){
     const subjectStr = JSON.stringify(subject).replace(/"/g, '&quot;');
     const deleteIcon = `<i class="fas fa-trash text-danger position-absolute top-0 end-0 d-none btn-delete" style="cursor: pointer;" onclick="removeSubjectFromTimetable(${subjectStr})"></i>`;
 
-    // Hiển thị cảnh báo ⚠ cho các môn bị trùng với môn đã có (chỉ để hiển thị, không thay đổi logic hasDuplicateId nữa)
+    // Hiển thị cảnh báo ⚠ cho các môn bị trùng với môn đã có (chỉ để hiển thị, không thay đổi logic hasDuplicateId)
     if (hasDuplicateId) {
         timetableSubjects.forEach(existingSubject => {
             if (
@@ -289,10 +288,8 @@ function addSubjectToTimetable(subject, hasDuplicateId){
         });
     }
 
-    if (!hasDuplicateId) {
-        totalCredits += subject.soTC || 0;
-        updateCreditDisplay();
-    }
+    totalCredits += subject.soTC || 0;
+    updateCreditDisplay();
 
     if (firstSlot !== "*") {
         let firstRowIndex = (firstSlot === 0) ? 9 : firstSlot - 1;
@@ -361,6 +358,7 @@ function addSubjectToTimetable(subject, hasDuplicateId){
     }
 
     timetableSubjects.push(subject);
+    console.log(timetableSubjects);
 }
 
 // Hàm xóa môn học khỏi thời khóa biểu
@@ -401,8 +399,7 @@ function removeSubjectFromTimetable(subject) {
                 }
             }
         });
-    }
-    else {
+    } else {
         const rows = timetableBody.rows;
         const subjectKey = `${subject.subject_id}-${subject.class_id}-${subject.lecturer}-${subject.khoahoc}`;
 
@@ -432,7 +429,6 @@ function removeSubjectFromTimetable(subject) {
     totalCredits -= subject.soTC || 0;
     updateCreditDisplay();
 
-
     // Xóa môn học khỏi danh sách
     const timetableIndex = timetableSubjects.findIndex(existingSubject =>
         existingSubject.subject_id === subject.subject_id
@@ -444,13 +440,28 @@ function removeSubjectFromTimetable(subject) {
 
     if (timetableIndex !== -1) {
         timetableSubjects.splice(timetableIndex, 1);
-        console.log('Đã xóa môn học:', subject);  // Kiểm tra xem môn học đã bị xóa chưa
-        console.log('Mảng timetableSubjects sau khi xóa:', timetableSubjects);  // In ra mảng sau khi xóa
-
-    } else {
-        console.log('Không tìm thấy môn học trong timetableSubjects');
     }
 
+    console.log(timetableSubjects);
+
+    // Kiểm tra và xóa cảnh báo màu vàng nếu không còn trùng lặp
+    timetableSubjects.forEach(existingSubject => {
+        const rowIndex = (existingSubject.slots[0] === 0) ? 9 : existingSubject.slots[0] - 1;
+        const cell = timetableBody.rows[rowIndex]?.cells[dayMapping[existingSubject.day] + 1];
+        if (cell) {
+            const warningIcon = cell.querySelector('.text-warning');
+            if (warningIcon) {
+                const hasConflict = timetableSubjects.some(otherSubject =>
+                    otherSubject.subject_id === existingSubject.subject_id &&
+                    isClassOverlap(otherSubject.class_id, existingSubject.class_id)
+                );
+
+                if (!hasConflict) {
+                    warningIcon.remove(); // Xóa biểu tượng cảnh báo nếu không còn trùng lặp
+                }
+            }
+        }
+    });
 }
 
 function formatDate(dateString) {
@@ -798,23 +809,47 @@ document.querySelectorAll(".btn-student-info").forEach(el => {
     });
 });
 
-// Xử lý sự kiện khi click vào "Chatbot"
-document.getElementById("btn-student-chatbot1").addEventListener("click", function(e) {
-    e.preventDefault(); 
-    const token = localStorage.getItem("token"); 
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-    } else {
-        // Nếu có token, điều hướng đến chatbot
-        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
-    }
+document.querySelectorAll(".btn-student-chatbot").forEach(el => {
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+        } else {
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
+        }
+    });
 });
 
-document.getElementById('btn-home').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Giả sử token đã lưu ở localStorage
-    window.location.href = "/Home/Home.html";
+
+document.querySelectorAll('.btn-home').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Chưa đăng nhập");
+            return window.location.href = "/";
+        }
+
+        // Gửi token kèm theo khi truy cập route được bảo vệ
+        fetch('http://localhost:3000/api/student/stu_menu', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if (res.ok) {
+                // Nếu token hợp lệ, điều hướng
+                window.location.href = '/Student_Menu/stu_menu.html';
+            } else {
+                alert('Phiên đăng nhập không hợp lệ!');
+                window.location.href = '/';
+            }
+        });
+    });
 });
 
 

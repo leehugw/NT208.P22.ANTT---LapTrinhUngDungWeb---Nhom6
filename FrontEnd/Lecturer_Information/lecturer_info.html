@@ -27,22 +27,25 @@
             <div class="d-none d-md-flex align-items-center logo-container">
                 <img alt="Logo" height="80" src="/Lecturer_Information/images/logo.png" width="80">
             </div>
-            <nav class="d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+            <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
+                <a class="nav-link mx-2 text-decoration-none btn-home" role="button">Trang chủ</a>
                 <div class="dropdown mx-2">
-                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
                         Giảng viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Hồ sơ Giảng viên</a></li>
-                        <li><a class="dropdown-item" href="#">Danh sách Lớp học</a></li>
+                        <li><a class="dropdown-item btn-lecturer-classlist" role="button">Theo dõi lớp học</a></li>
+                        <li><a class="dropdown-item btn-lecturer-info" role="button">Hồ sơ Giảng viên</a></li>
                     </ul>
                 </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn text-white rounded-0 ml-2 login-button">Đăng xuất</button>
+            <button class="btn bg-white text-dar
+            k fw-bold rounded-0 ml-2 logout-button"><i
+                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
 
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
@@ -53,18 +56,18 @@
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home">
-                <i class="fa-solid fa-house-chimney"></i>Trang chủ
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start btn-home" role="button">
+                <i class="fa-solid fa-house-chimney"></i> Trang chủ
             </a>
-            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100" 
-            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-            <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#lecturerDropdown">
+                <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
-            <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Hồ sơ Giảng viên</a>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-classlist" role="button">Theo dõi lớp học</a>
             </div>
-            <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Danh sách lớp học</a>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-info" role="button">Hồ sơ Giảng viên</a>
             </div>
         </nav>
     </header>

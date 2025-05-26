@@ -41,7 +41,7 @@ function openFeedbackPopup() {
 
 
 window.addEventListener('scroll', function () {
-    let sections = document.querySelectorAll('section'); // Chọn tất cả các phần có id (các phần bạn muốn theo dõi)
+    let sections = document.querySelectorAll('section'); // Chọn tất cả các phần có id 
     let navbarLinks = document.querySelectorAll('.navbar-container .nav-link'); // Các liên kết trong navbar
     let currentSection = "";
 
@@ -68,12 +68,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('token');
     const loginBtn = document.getElementById('login-button');
     const logoutBtn = document.getElementById('logout-button');
-    if (token) {
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (logoutBtn) logoutBtn.style.display = 'block';
-    } else {
+    if (!token) {
         if (loginBtn) loginBtn.style.display = 'block';
         if (logoutBtn) logoutBtn.style.display = 'none';
+    } else {
+        try {
+            const payloadBase64 = token.split('.')[1];
+            const decodedPayload = JSON.parse(atob(payloadBase64));
+            const role = decodedPayload.role; 
+
+            if (role === 'student') {
+                window.location.href = '/Student_Menu/stu_menu.html';
+            } else if (role === 'lecturer') {
+                window.location.href = '/Lecturer_Menu/lec_menu.html';
+            } else if (role === 'admin') {
+                window.location.href = '/Admin_Menu/admin_menu.html';
+            } else {
+                alert('Không xác định được vai trò người dùng!');
+                window.location.href = '/';
+            }
+        } catch (e) {
+            console.error('Token không hợp lệ hoặc không thể giải mã:', e);
+            localStorage.removeItem('token');
+            window.location.href = '/';
+        }
     }
 });
 

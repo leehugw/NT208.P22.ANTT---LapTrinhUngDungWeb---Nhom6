@@ -429,7 +429,7 @@ document.querySelectorAll(".btn-student-info").forEach(el => {
 });
 
 // Xử lý sự kiện khi click vào "Chatbot"
-document.getElementById("btn-student-chatbot1").addEventListener("click", function(e) {
+document.getElementById("btn-student-chatbot").addEventListener("click", function(e) {
     e.preventDefault(); 
     const token = localStorage.getItem("token"); 
     if (!token) {
@@ -441,8 +441,31 @@ document.getElementById("btn-student-chatbot1").addEventListener("click", functi
     }
 });
 
-document.getElementById('btn-home').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Giả sử token đã lưu ở localStorage
-    window.location.href = "/Home/Home.html";
+
+document.querySelectorAll('.btn-home').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Chưa đăng nhập");
+            return window.location.href = "/";
+        }
+
+        // Gửi token kèm theo khi truy cập route được bảo vệ
+        fetch('http://localhost:3000/api/student/stu_menu', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if (res.ok) {
+                // Nếu token hợp lệ, điều hướng
+                window.location.href = '/Student_Menu/stu_menu.html';
+            } else {
+                alert('Phiên đăng nhập không hợp lệ!');
+                window.location.href = '/';
+            }
+        });
+    });
 });

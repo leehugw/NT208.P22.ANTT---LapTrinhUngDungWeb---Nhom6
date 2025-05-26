@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Theo dõi sinh viên
-    document.querySelectorAll('#btn-admin-student').forEach(btn => {
+    document.querySelectorAll('.btn-admin-student').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
             const token = localStorage.getItem("token");
@@ -40,13 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Bạn chưa đăng nhập!");
                 window.location.href = '/';
             } else {
-                window.location.href = `/api/admin/students?token=${token}`;
+                window.location.href = `/api/admin/students`;
             }
         });
     });
 
     // Theo dõi giảng viên
-    document.querySelectorAll('#btn-admin-lecturer').forEach(btn => {
+    document.querySelectorAll('.btn-admin-lecturer').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
             const token = localStorage.getItem("token");
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Bạn chưa đăng nhập!");
                 window.location.href = '/';
             } else {
-                window.location.href = `/api/admin/statistics?token=${token}`;
+                window.location.href = `/api/admin/statistics`;
             }
         });
     });
@@ -96,8 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Bạn chưa đăng nhập!");
                 window.location.href = '/';
             } else {
-                window.location.href = `/api/admin/feedbacks?token=${token}`;
+                window.location.href = `/api/admin/feedbacks`;
             }
+        });
+    });
+
+    document.querySelectorAll('.btn-home').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+    
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Chưa đăng nhập");
+                return window.location.href = "/";
+            }
+    
+            // Gửi token kèm theo khi truy cập route được bảo vệ
+            fetch('http://localhost:3000/api/admin/admin_menu', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(res => {
+                if (res.ok) {
+                    // Nếu token hợp lệ, điều hướng
+                    window.location.href = '/Admin_Menu/admin_menu.html';
+                } else {
+                    alert('Phiên đăng nhập không hợp lệ!');
+                    window.location.href = '/';
+                }
+            });
         });
     });
 });

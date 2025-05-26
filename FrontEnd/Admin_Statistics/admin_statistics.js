@@ -54,7 +54,6 @@ async function fetchPopularSubjects() {
         if (!response.ok) throw new Error('Network response was not ok');
 
         const subjects = await response.json();
-        console.log("Subjects from API:", subjects);  // <--- thêm dòng này để debug
         renderPieChart(subjects);
     } catch (error) {
         console.error('Error fetching popular subjects:', error);
@@ -65,9 +64,16 @@ async function fetchPopularSubjects() {
 
 
 function renderPieChart(subjects) {
-    const topSubjects = subjects.slice(0, 6);
+    const topSubjects = subjects.slice(0, 13);
 
-    const labels = topSubjects.map(subject => subject.subjectName);
+    // Rút gọn tên môn học nếu quá dài
+    const labels = topSubjects.map(subject => {
+        const maxLength = 25;
+        return subject.subjectName.length > maxLength 
+            ? subject.subjectName.substring(0, maxLength) + '...' 
+            : subject.subjectName;
+    });
+
     const data = topSubjects.map(subject => subject.totalRegistrations);
     const backgroundColors = [
         'rgba(255, 99, 132, 0.7)',
@@ -75,7 +81,14 @@ function renderPieChart(subjects) {
         'rgba(255, 206, 86, 0.7)',
         'rgba(75, 192, 192, 0.7)',
         'rgba(153, 102, 255, 0.7)',
-        'rgba(255, 159, 64, 0.7)'
+        'rgba(255, 159, 64, 0.7)',
+        'rgba(201, 203, 207, 0.7)',
+        'rgba(124, 11, 36, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(210, 169, 67, 0.7)',
+        'rgba(0, 34, 255, 0.7)',
+        'rgba(63, 3, 182, 0.7)',
+        'rgba(0, 229, 255, 0.7)',
     ];
 
     const ctx = document.getElementById('popularSubjectsChart').getContext('2d');
@@ -95,20 +108,34 @@ function renderPieChart(subjects) {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    top: 20,
-                    bottom: 20,
-                    left: 20,
-                    right: 20
+                    left: 50, // Tăng padding trái để chứa legend
+                    right: 50
                 }
             },
             plugins: {
                 legend: {
                     position: 'right',
+                    align: 'start', // Căn lề trái cho legend
                     labels: {
-                        padding: 20,
+                        padding: 10,
                         boxWidth: 15,
                         font: {
-                            size: 12
+                            size: 10, // Giảm kích thước font
+                            family: "'Roboto', sans-serif"
+                        },
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    return {
+                                        text: label,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
                         }
                     }
                 },
@@ -197,3 +224,119 @@ function renderGPAChart(data) {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Lưu token từ URL vào localStorage nếu có
+  const params = new URLSearchParams(window.location.search);
+  const urlToken = params.get("token");
+  if (urlToken) {
+      localStorage.setItem("token", urlToken);
+      window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  // Đăng xuất
+  document.querySelectorAll('.logout-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+          localStorage.removeItem('token');
+          window.location.href = '/';
+      });
+  });
+
+  // Theo dõi sinh viên
+  document.querySelectorAll('.btn-admin-student').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          if (!token) {
+              alert("Bạn chưa đăng nhập!");
+              window.location.href = '/';
+          } else {
+              window.location.href = `/api/admin/students`;
+          }
+      });
+  });
+
+  // Theo dõi giảng viên
+  document.querySelectorAll('.btn-admin-lecturer').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          if (!token) {
+              alert("Bạn chưa đăng nhập!");
+              window.location.href = '/';
+          } else {
+              window.location.href = `/api/admin/lecturers`;
+          }
+      });
+  });
+
+  // Tạo tài khoản giảng viên
+  document.querySelectorAll('.btn-create-lecturer-account').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          if (!token) {
+              alert("Bạn chưa đăng nhập!");
+              window.location.href = '/';
+          } else {
+              window.location.href = `/api/admin/create-lecturer-account?token=${token}`;
+          }
+      });
+  });
+
+  // Thống kê
+  document.querySelectorAll('.btn-admin-statistics').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          if (!token) {
+              alert("Bạn chưa đăng nhập!");
+              window.location.href = '/';
+          } else {
+              window.location.href = `/api/admin/statistics`;
+          }
+      });
+  });
+
+  // Danh sách phản hồi
+  document.querySelectorAll('.btn-feedback').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const token = localStorage.getItem("token");
+          if (!token) {
+              alert("Bạn chưa đăng nhập!");
+              window.location.href = '/';
+          } else {
+              window.location.href = `/api/admin/feedbacks`;
+          }
+      });
+  });
+
+  document.querySelectorAll('.btn-home').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault();
+  
+          const token = localStorage.getItem('token');
+          if (!token) {
+              alert("Chưa đăng nhập");
+              return window.location.href = "/";
+          }
+  
+          // Gửi token kèm theo khi truy cập route được bảo vệ
+          fetch('http://localhost:3000/api/admin/admin_menu', {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          }).then(res => {
+              if (res.ok) {
+                  // Nếu token hợp lệ, điều hướng
+                  window.location.href = '/Admin_Menu/admin_menu.html';
+              } else {
+                  alert('Phiên đăng nhập không hợp lệ!');
+                  window.location.href = '/';
+              }
+          });
+      });
+  });
+});

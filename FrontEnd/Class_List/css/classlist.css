@@ -12,15 +12,6 @@
     color: #3D67BA;
 }
 
-.logout-button {
-    background-color: #3D67BA;
-}
-
-
-.logout-button:hover {
-    background-color: #003366;
-}
-
 /* Đổi màu chữ khi hover vào dropdown */
 .navbar-container .dropdown-menu .dropdown-item:hover {
     color: #3D67BA !important;

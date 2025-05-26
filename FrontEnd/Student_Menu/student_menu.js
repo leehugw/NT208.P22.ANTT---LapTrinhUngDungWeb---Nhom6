@@ -33,30 +33,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function openFeedbackPopup() {
     if (document.getElementById('feedbackPopup')) {
-      document.getElementById('feedbackPopup').style.display = 'flex';
-      return;
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
     }
-  
+
     fetch('/FeedbackForm/feedbackForm.html')
-      .then(res => res.text())
-      .then(html => {
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = html;
-        document.body.appendChild(wrapper);
-  
-        const script = document.createElement('script');
-        script.src = '/FeedbackForm/Feedback.js';
-        document.body.appendChild(script);
-      });
-  
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
     window.closeFeedbackForm = function () {
-      const popup = document.getElementById('feedbackPopup');
-      if (popup) popup.remove();
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
     };
-  }
+}
 
 document.querySelectorAll(".btn-student-progress").forEach(el => {
-    el.addEventListener("click", function(e) {
+    el.addEventListener("click", function (e) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (!token) {
@@ -69,7 +69,7 @@ document.querySelectorAll(".btn-student-progress").forEach(el => {
 });
 
 document.querySelectorAll(".btn-student-schedule").forEach(el => {
-    el.addEventListener("click", function(e) {
+    el.addEventListener("click", function (e) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (!token) {
@@ -82,7 +82,7 @@ document.querySelectorAll(".btn-student-schedule").forEach(el => {
 });
 
 document.querySelectorAll(".btn-student-english").forEach(el => {
-    el.addEventListener("click", function(e) {
+    el.addEventListener("click", function (e) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (!token) {
@@ -95,41 +95,30 @@ document.querySelectorAll(".btn-student-english").forEach(el => {
 });
 
 document.querySelectorAll(".btn-student-info").forEach(el => {
-    el.addEventListener("click", function(e) {
-        e.preventDefault(); 
-        const token = localStorage.getItem("token"); 
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
         if (!token) {
             alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
             window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
         } else {
-            window.location.href = "/api/student/profile";  
+            window.location.href = "/api/student/profile";
         }
     });
 });
 
-// Xử lý sự kiện khi click vào "Chatbot"
-document.getElementById("btn-student-chatbot1").addEventListener("click", function(e) {
-    e.preventDefault(); 
-    const token = localStorage.getItem("token"); 
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-    } else {
-        // Nếu có token, điều hướng đến chatbot
-        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
-    }
-});
-
-document.getElementById("btn-student-chatbot2").addEventListener("click", function(e) {
-    e.preventDefault(); 
-    const token = localStorage.getItem("token"); 
-    if (!token) {
-        alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
-    } else {
-        // Nếu có token, điều hướng đến chatbot
-        window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
-    }
+document.querySelectorAll(".btn-student-chatbot").forEach(el => {
+    el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+        } else {
+            // Nếu có token, điều hướng đến chatbot
+            window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
+        }
+    });
 });
 
 //api đăng xuất
@@ -150,8 +139,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.getElementById('btn-home').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Giả sử token đã lưu ở localStorage
-    window.location.href = "/Home/Home.html";
+document.querySelectorAll('.btn-home').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Chưa đăng nhập");
+            return window.location.href = "/";
+        }
+
+        // Gửi token kèm theo khi truy cập route được bảo vệ
+        fetch('http://localhost:3000/api/student/stu_menu', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if (res.ok) {
+                // Nếu token hợp lệ, điều hướng
+                window.location.href = '/Student_Menu/stu_menu.html';
+            } else {
+                alert('Phiên đăng nhập không hợp lệ!');
+                window.location.href = '/';
+            }
+        });
+    });
 });
+

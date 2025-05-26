@@ -13,7 +13,7 @@ const EnglishCertificateController = require('../Controllers/student/EnglishCert
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
-    res.json({ message: 'Chào sinh viên hoặc giảng viên' });
+    res.json({ message: 'Chào sinh viên' });
 });
 
 // Route lấy bản điểm của sinh viên theo học kỳ 
