@@ -94,9 +94,8 @@ def remove_accents(input_str):
     no_accent = ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
     return no_accent.replace('đ', 'd').replace('Đ', 'D')
 
-def generate_students(num_students=50):
-    students = []
-    
+def generate_student_data(major_id, cohort, program_type, class_name):
+    """Hàm phụ trợ để tạo dữ liệu sinh viên."""
     # Vietnamese name components
     first_names_male = ["Nguyễn Văn", "Lê Văn", "Hoàng Văn", "Bùi Văn", "Vũ Văn", "Trần Văn", "Phạm Văn", "Đặng Văn", 
                         "Đỗ Văn", "Ngô Văn", "Lý Văn", "Mai Văn", "Đinh Văn", "Trịnh Văn", "Hồ Văn"]
@@ -105,218 +104,223 @@ def generate_students(num_students=50):
     
     last_names_male = ["Anh", "Bình", "Dũng", "Hiếu", "Khánh", "Minh", "Phương", "Quang", "Thành", "Việt", "Tuấn", "Sơn", "Nam", "Khoa", "Lâm", "Bảo"]
     last_names_female = ["Anh", "Chi", "Giang", "Linh", "Nga", "Phương", "Uyên", "Xuân", "Yến","Thảo", "Hoa", "Như", "Huyền", "Ngọc", "Nhi", "My"]
-    
-    # Các khóa học từ 2021-2024
-    
-    for i in range(1, num_students + 1):
-        gender = random.choice(["Male", "Female"])
-        
-        if gender == "Male":
-            first_name = random.choice(first_names_male)
-            last_name = random.choice(last_names_male)
-        else:
-            first_name = random.choice(first_names_female)
-            last_name = random.choice(last_names_female)
-            
-        name = f"{first_name} {last_name}"
-        
-        # Chỉ cho phép sinh năm 2003–2005
-        birth_year = random.choice([2003, 2004, 2005])
-        birth_month = random.randint(1, 12)
-        birth_day = random.randint(1, 28)
-        birth_date = datetime(birth_year, birth_month, birth_day)
 
-        # Giả định vào đại học năm 18 tuổi
-        cohort = birth_year + 18
-        student_id = generate_student_id(cohort)
-        birthplace = generate_birthplace()  # 64 provinces in Vietnam
-        program_id = f"CTDT{cohort}"
+    gender = random.choice(["Male", "Female"])
+    if gender == "Male":
+        first_name = random.choice(first_names_male)
+        last_name = random.choice(last_names_male)
+    else:
+        first_name = random.choice(first_names_female)
+        last_name = random.choice(last_names_female)
+    name = f"{first_name} {last_name}"
         
-        # Chọn ngành học, khóa và loại chương trình
-        if cohort < 2024:
-            majors = ["ATTT", "MMTT", "CNTT", "HTTT", "KHMT", "TTNT", "KTPM", "KTMT", "TMDT", "KHDL"]
-        else:
-            majors = ["ATTT", "MMTT", "CNTT", "HTTT", "KHMT", "TTNT", "KTPM", "KTMT", "TMDT", "KHDL", "TKVM"]
-        major_id = random.choice(majors)
-        if major_id in ["ATTT", "KHMT"]:
-            program_types = ["CQUI", "CNTN"]
-            program_type = random.choice(program_types)
-        else:
-            program_type = "CQUI"
+    birth_year = cohort - 18  # Giả định sinh viên nhập học năm 18 tuổi
+    birth_month = random.randint(1, 12)
+    birth_day = random.randint(1, 28)
+    birth_date = datetime(birth_year, birth_month, birth_day)
         
-        # Tạo class_name theo định dạng {major_id}{cohort}.{lớp}
-        class_num = random.randint(1, 2)
-        if program_type == "CNTN":
-            if major_id == "ATTT":
-                class_id = f"ATTN{cohort}{class_num}"
-                class_name = f"ATTN{cohort}.{class_num}"
-            else:
-                class_id = f"KHTN{cohort}{class_num}"
-                class_name = f"KHTN{cohort}.{class_num}"
+    student_id = generate_student_id(cohort)
+    birthplace = generate_birthplace()
+    program_id = f"CTDT{cohort}"
+        
+    # Generate contact info
+    school_email = f"{student_id}@gm.uit.edu.vn"
+    name_no_accents = remove_accents(name).lower().replace(" ", "")
+    personal_email = f"{name_no_accents}@gmail.com"
+    phone = f"09{random.randint(10000000, 99999999)}"
+        
+    # Generate address info
+    permanent_address = generate_vietnamese_address()
+        
+    if random.random() > 0.5:
+        temp_address = "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
+    else:
+        temp_city = faker.city()
+        temp_district = faker.district(temp_city)
+        temp_address = f"Số {random.randint(1, 200)}, Đường {faker.street_name()}, {temp_district}, {temp_city}"
+        
+    # Generate identity info
+    identity_number = f"{random.randint(100000000, 999999999):012d}"
+    issue_date = datetime(2010, 1, 1) + timedelta(days=random.randint(0, 365*10))
+        
+    ethnicities = ["Kinh", "Tày", "Thái", "Hoa", "Khơ-me", "Mường", "Nùng", "H'Mông", "Dao", "Gia-rai"]
+    religions = ["Không", "Phật giáo", "Thiên chúa giáo", "Tin lành", "Cao đài", "Hòa hảo", "Hồi giáo"]
+    origins = ["Cán bộ - Công chức", "Nông dân", "Công nhân", "Tiểu thương", "Doanh nhân", "Trí thức", "Nghệ sĩ"]
+
+    # Generate family info
+    male_last_names = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng"]
+    female_last_names = ["Nguyễn Thị", "Trần Thị", "Lê Thị", "Phạm Thị", "Hoàng Thị", "Huỳnh Thị", "Phan Thị"]
+    middle_names = ["Văn", "Quang", "Đức", "Minh", "Hữu", "Công", "Thanh", "Duy", "Anh", "Bảo"]
+    first_names = ["A", "B", "C", "D", "E", "F", "G", "H", "K", "L", "M", "N", "P", "Q", "S", "T"]
+        
+    father_jobs = [
+        "Kỹ sư xây dựng", "Bác sĩ", "Giảng viên đại học", "Doanh nhân", 
+        "Cán bộ nhà nước", "Kỹ sư phần mềm", "Giám đốc công ty", 
+        "Trưởng phòng kinh doanh", "Chuyên viên tài chính", "Kiến trúc sư"
+    ]
+        
+    mother_jobs = [
+        "Giáo viên", "Bác sĩ", "Kế toán", "Nhân viên văn phòng", 
+        "Kinh doanh tự do", "Y tá", "Dược sĩ", "Kiểm toán viên", 
+        "Chuyên viên nhân sự", "Nội trợ"
+    ]
+        
+    gov_positions = [
+        "Ủy viên ban chấp hành Đảng Bộ",
+        "Phó chủ tịch UBND quận",
+        "Trưởng phòng Tài chính",
+        "Chánh văn phòng Sở",
+        "Phó giám đốc Sở"
+    ]
+        
+    # Father information
+    father_last = random.choice(male_last_names)
+    father_middle = random.choice(middle_names)
+    father_first = random.choice(first_names)
+    father_name = f"{father_last} {father_middle} {father_first}"
+        
+    if random.random() < 0.3:
+        father_job = f"{random.choice(gov_positions)}; {random.choice(father_jobs)}"
+    else:
+        father_job = random.choice(father_jobs)
             
-        else:
-            class_id = f"{major_id}{cohort}{class_num}"
-            class_name = f"{major_id}{cohort}.{class_num}"
+    father_phone = f"09{random.randint(10000000, 99999999)}"
+    father_address = generate_vietnamese_address()
         
-        # Generate contact info
-        school_email = f"{student_id}@gm.uit.edu.vn"
-        name_no_accents = remove_accents(name).lower().replace(" ", "")
-        personal_email = f"{name_no_accents}@gmail.com"
-        phone = f"09{random.randint(10000000, 99999999)}"
+    # Mother information
+    mother_last = random.choice(female_last_names)
+    mother_first = random.choice(first_names)
+    mother_name = f"{mother_last} {mother_first}"
+    mother_job = random.choice(mother_jobs)
+    mother_phone = f"09{random.randint(10000000, 99999999)}"
         
-        # Generate address info
-        permanent_address = generate_vietnamese_address()
+    if random.random() < 0.8:
+        mother_address = father_address
+    else:
+        mother_address = generate_vietnamese_address()
         
-        if random.random() > 0.5:
-            temp_address = "Ký túc xá đại học quốc gia thành phố Hồ Chí Minh, Số 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh"
-        else:
-            temp_city = faker.city()
-            temp_district = faker.district(temp_city)
-            temp_address = f"Số {random.randint(1, 200)}, Đường {faker.street_name()}, {temp_district}, {temp_city}"
+    # Guardian information (10% chance to have)
+    if random.random() < 0.1:
+        guardian_name = f"{random.choice(male_last_names + female_last_names)} {random.choice(first_names)}"
+        guardian_phone = f"09{random.randint(10000000, 99999999)}"
+        guardian_address = generate_vietnamese_address()
+    else:
+        guardian_name = ""
+        guardian_phone = ""
+        guardian_address = ""
         
-        # Generate identity info
-        identity_number = f"{random.randint(100000000, 999999999):012d}"
-        issue_date = datetime(2010, 1, 1) + timedelta(days=random.randint(0, 365*10))
+    # Union join date (100% chance to have)
+    union_join_date = (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y")
         
-        ethnicities = ["Kinh", "Tày", "Thái", "Hoa", "Khơ-me", "Mường", "Nùng", "H'Mông", "Dao", "Gia-rai"]
-        religions = ["Không", "Phật giáo", "Thiên chúa giáo", "Tin lành", "Cao đài", "Hòa hảo", "Hồi giáo"]
-        origins = ["Cán bộ - Công chức", "Nông dân", "Công nhân", "Tiểu thương", "Doanh nhân", "Trí thức", "Nghệ sĩ"]
+    # Party join date (30% chance to have)
+    if random.random() < 0.3:
+        party_join_date = (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y")
+    else:
+        party_join_date = ""
         
-        # Generate family info
-        male_last_names = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng"]
-        female_last_names = ["Nguyễn Thị", "Trần Thị", "Lê Thị", "Phạm Thị", "Hoàng Thị", "Huỳnh Thị", "Phan Thị"]
-        middle_names = ["Văn", "Quang", "Đức", "Minh", "Hữu", "Công", "Thanh", "Duy", "Anh", "Bảo"]
-        first_names = ["A", "B", "C", "D", "E", "F", "G", "H", "K", "L", "M", "N", "P", "Q", "S", "T"]
-        
-        father_jobs = [
-            "Kỹ sư xây dựng", "Bác sĩ", "Giảng viên đại học", "Doanh nhân", 
-            "Cán bộ nhà nước", "Kỹ sư phần mềm", "Giám đốc công ty", 
-            "Trưởng phòng kinh doanh", "Chuyên viên tài chính", "Kiến trúc sư"
-        ]
-        
-        mother_jobs = [
-            "Giáo viên", "Bác sĩ", "Kế toán", "Nhân viên văn phòng", 
-            "Kinh doanh tự do", "Y tá", "Dược sĩ", "Kiểm toán viên", 
-            "Chuyên viên nhân sự", "Nội trợ"
-        ]
-        
-        gov_positions = [
-            "Ủy viên ban chấp hành Đảng Bộ",
-            "Phó chủ tịch UBND quận",
-            "Trưởng phòng Tài chính",
-            "Chánh văn phòng Sở",
-            "Phó giám đốc Sở"
-        ]
-        
-        # Father information
-        father_last = random.choice(male_last_names)
-        father_middle = random.choice(middle_names)
-        father_first = random.choice(first_names)
-        father_name = f"{father_last} {father_middle} {father_first}"
-        
-        if random.random() < 0.3:
-            father_job = f"{random.choice(gov_positions)}; {random.choice(father_jobs)}"
-        else:
-            father_job = random.choice(father_jobs)
-            
-        father_phone = f"09{random.randint(10000000, 99999999)}"
-        father_address = generate_vietnamese_address()
-        
-        # Mother information
-        mother_last = random.choice(female_last_names)
-        mother_first = random.choice(first_names)
-        mother_name = f"{mother_last} {mother_first}"
-        mother_job = random.choice(mother_jobs)
-        mother_phone = f"09{random.randint(10000000, 99999999)}"
-        
-        if random.random() < 0.8:
-            mother_address = father_address
-        else:
-            mother_address = generate_vietnamese_address()
-        
-        # Guardian information (10% chance to have)
-        if random.random() < 0.1:
-            guardian_name = f"{random.choice(male_last_names + female_last_names)} {random.choice(first_names)}"
-            guardian_phone = f"09{random.randint(10000000, 99999999)}"
-            guardian_address = generate_vietnamese_address()
-        else:
-            guardian_name = ""
-            guardian_phone = ""
-            guardian_address = ""
-        
-        # Union join date (70% chance to have)
-        if random.random() < 0.7:
-            union_join_date = (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y")
-        else:
-            union_join_date = ""
-        
-        # Party join date (10% chance to have)
-        if random.random() < 0.1:
-            party_join_date = (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y")
-        else:
-            party_join_date = ""
-        
-        # Build the student document
-        student = {
-            "student_id": student_id,
-            "name": name,
-            "gender": gender,
-            "birth_date": birth_date.strftime("%d-%m-%Y"),
-            "birthplace": birthplace,
-            "class_id": class_name,
-            "major_id": major_id,
-            "program_id": program_id,
-            "program_type": program_type,
-            "has_english_certificate": random.random() < 0.3,
-            
-            "contact": {
-                "school_email": school_email,
-                "alias_email": "",
-                "personal_email": personal_email,
-                "phone": phone
+    # Build the student document
+    student = {
+        "student_id": student_id,
+        "name": name,
+        "gender": gender,
+        "birth_date": birth_date.strftime("%d-%m-%Y"),
+        "birthplace": birthplace,
+        "class_id": class_name,
+        "major_id": major_id,
+        "program_id": program_id,
+        "program_type": program_type,
+        "has_english_certificate": random.random() < 0.3,
+        "contact": {
+            "school_email": school_email,
+            "alias_email": "",
+            "personal_email": personal_email,
+            "phone": phone
+        },
+        "address": {
+            "permanent_address": permanent_address,
+            "temporary_address": temp_address
+        },
+        "identity": {
+            "identity_number": identity_number,
+            "identity_issue_date": issue_date.strftime("%d-%m-%Y"),
+            "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
+            "ethnicity": "Kinh" if random.random() < 0.8 else random.choice(ethnicities[1:]),
+            "religion": "Không" if random.random() < 0.7 else random.choice(religions[1:]),
+            "origin": random.choice(origins),
+            "union_join_date": (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y"),
+            "party_join_date": "" if random.random() < 0.9 else (datetime(2020, 1, 1) + timedelta(days=random.randint(0, 365*3))).strftime("%d-%m-%Y")
+        },
+        "family": {
+            "father": {
+                "name": father_name,
+                "job": father_job,
+                "phone": father_phone,
+                "address": father_address
             },
-            
-            "address": {
-                "permanent_address": permanent_address,
-                "temporary_address": temp_address
+            "mother": {
+                "name": mother_name,
+                "job": mother_job,
+                "phone": mother_phone,
+                "address": mother_address
             },
-            
-            "identity": {
-                "identity_number": identity_number,
-                "identity_issue_date": issue_date.strftime("%d-%m-%Y"),
-                "identity_issue_place": "Cục cảnh sát ĐKQL cư trú và DLQG về dân cư",
-                "ethnicity": "Kinh" if random.random() < 0.8 else random.choice(ethnicities[1:]),
-                "religion": "Không" if random.random() < 0.7 else random.choice(religions[1:]),
-                "origin": random.choice(origins),
-                "union_join_date": union_join_date,
-                "party_join_date": party_join_date
-            },
-            
-            "family": {
-                "father": {
-                    "name": father_name,
-                    "job": father_job,
-                    "phone": father_phone,
-                    "address": father_address
-                },
-                "mother": {
-                    "name": mother_name,
-                    "job": mother_job,
-                    "phone": mother_phone,
-                    "address": mother_address
-                },
-                "guardian": {
-                    "name": guardian_name,
-                    "phone": guardian_phone,
-                    "address": guardian_address
-                }
+            "guardian": {
+                "name": guardian_name,
+                "phone": guardian_phone,
+                "address": guardian_address
             }
         }
+    }
         
+    return student
+
+def generate_students(num_students=300):
+    students = []
+    
+    # Danh sách các lớp cần đảm bảo có ít nhất 1 sinh viên
+    required_classes = []
+    cohorts = [2021, 2022, 2023, 2024]
+    for cohort in cohorts:
+        if cohort < 2023:
+            majors = ["ATTT", "MMTT", "CNTT", "HTTT", "KHMT", "KTPM", "KTMT", "TMDT", "KHDL"]
+        elif cohort == 2023:
+            majors = ["ATTT", "MMTT", "CNTT", "HTTT", "KHMT", "TTNT", "KTPM", "KTMT", "TMDT", "KHDL"]
+        else:  # cohort > 2023
+            majors = ["ATTT", "MMTT", "CNTT", "HTTT", "KHMT", "TTNT", "KTPM", "KTMT", "TMDT", "KHDL", "TKVM"]
+        
+        for major_id in majors:
+            program_types = ["CQUI", "CNTN"] if major_id in ["ATTT", "KHMT"] else ["CQUI"]
+            for program_type in program_types:
+                # Tạo cả lớp .1 và .2 để đa dạng hơn
+                for class_num in [1, 2]:
+                    if program_type == "CNTN":
+                        if major_id == "ATTT":
+                            class_name = f"ATTN{cohort}.{class_num}"
+                        else:
+                            class_name = f"KHTN{cohort}.{class_num}"
+                    else:
+                        class_name = f"{major_id}{cohort}.{class_num}"
+                    required_classes.append((major_id, cohort, program_type, class_name))
+    
+    # Đảm bảo số lượng sinh viên đủ để phân bổ vào các lớp
+    if num_students < len(required_classes):
+        print(f"Warning: Số lượng sinh viên ({num_students}) ít hơn số lớp ({len(required_classes)}). Một số lớp sẽ không có sinh viên.")
+    
+    # Tạo sinh viên cho các lớp bắt buộc trước
+    for idx, (major_id, cohort, program_type, class_name) in enumerate(required_classes):
+        if idx >= num_students:
+            break  # Dừng nếu đã đủ số lượng sinh viên
+        student = generate_student_data(major_id, cohort, program_type, class_name)
         students.append(student)
     
+    # Tạo các sinh viên còn lại và phân phối ngẫu nhiên vào các lớp
+    remaining_students = num_students - len(students)
+    if remaining_students > 0:
+        for _ in range(remaining_students):
+            major_id, cohort, program_type, class_name = random.choice(required_classes)
+            student = generate_student_data(major_id, cohort, program_type, class_name)
+            students.append(student)
+    
     return students
-
 # Generate 300 students
 students = generate_students(300)
 
