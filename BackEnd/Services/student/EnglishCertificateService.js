@@ -1,7 +1,7 @@
 const EnglishCertificate = require('../../../Database/SaveToMongo/models/EnglishCertificate');
 
-const addCertificate = async ({ studentId, type, imageUrl }) => {
-  const newCert = new EnglishCertificate({ studentId, type, imageUrl });
+const addCertificate = async ({ studentId, type, score, imageUrl }) => {
+  const newCert = new EnglishCertificate({ studentId, type, score, imageUrl });
   return await newCert.save();
 };
 

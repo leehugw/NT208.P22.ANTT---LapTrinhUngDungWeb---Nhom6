@@ -2,12 +2,13 @@ const CertificateService = require('../../Services/student/EnglishCertificateSer
 
 const submitCertificate = async (req, res) => {
   try {
-    const { studentId, type, imageUrl } = req.body;
-    if (!studentId || !type || !imageUrl) {
+    const { studentId, type, score, imageUrl } = req.body;
+    if (!studentId || !type || !score || !imageUrl) {
       return res.status(400).json({ error: 'Thiếu dữ liệu đầu vào' });
     }
 
-    const cert = await CertificateService.addCertificate({ studentId, type, imageUrl });
+    const cert = await CertificateService.addCertificate({ studentId, type, score, imageUrl });
+    console.log("📦 BODY:", req.body);
     res.status(201).json(cert);
   } catch (err) {
     console.error(err);
