@@ -68,7 +68,7 @@ router.post('/conversation/:session_id/messages', chatController.addMessage); //
 router.get('/conversation/:session_id', chatController.getChatHistory); // Lấy lịch sử chat
 
 // Route để sinh viên truy cập vào chatbot
-router.get('/chatbot', authenticateToken, authorizeRoles('student'), (req, res) => {
+router.get('/chatbot', (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/UI_ChatBot/UI_ChatBot.html'));
 });
 
