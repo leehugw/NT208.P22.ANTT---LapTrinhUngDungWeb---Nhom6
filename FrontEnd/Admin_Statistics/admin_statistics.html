@@ -86,68 +86,92 @@
             <div class="col-md-12">
                 <h1 class="mb-4">Thống kê</h1>
 
-                <!-- Thống kê chatbot -->
+                <!-- Phần Thống kê Chatbot -->
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h3 class="card-title">Thống kê chatbot</h3>
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-robot text-primary me-2"></i>Thống kê Chatbot
+                        </h3>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h5>Số lượt truy cập</h5>
-                                    <p class="stat-value" id="homeVisitCount">0</p>
+                            <!-- 4 thống kê con -->
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card h-100 p-3 border rounded text-center">
+                                    <i class="fas fa-eye fs-4 text-info mb-2"></i>
+                                    <h6 class="mb-1">Lượt truy cập</h6>
+                                    <p class="stat-value mb-0 fw-bold fs-5" id="homeVisitCount">0</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h5>Tổng người dùng</h5>
-                                    <p class="stat-value">895</p>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card h-100 p-3 border rounded text-center">
+                                    <i class="fas fa-users fs-4 text-success mb-2"></i>
+                                    <h6 class="mb-1">Người dùng</h6>
+                                    <p class="stat-value mb-0 fw-bold fs-5" id="totalUsersCount">0</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h5>Số phiên trò chuyện</h5>
-                                    <p class="stat-value">895</p>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card h-100 p-3 border rounded text-center">
+                                    <i class="fas fa-comments fs-4 text-warning mb-2"></i>
+                                    <h6 class="mb-1">Phiên trò chuyện</h6>
+                                    <p class="stat-value mb-0 fw-bold fs-5">1,024</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="stat-item">
-                                    <h5>Thời gian trung bình mỗi phiên</h5>
-                                    <p class="stat-value">895</p>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card h-100 p-3 border rounded text-center">
+                                    <i class="fas fa-clock fs-4 text-danger mb-2"></i>
+                                    <h6 class="mb-1">Thời gian trung bình</h6>
+                                    <p class="stat-value mb-0 fw-bold fs-5">3.2 phút</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Phần Thống kê Chung -->
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h3 class="card-title">Thống kê chung</h3>
-
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <div class="px-3">
-                                    <h5 class="mb-3">Môn học phổ biến nhất</h5>
-                                    <p class="mb-4">Tỷ lệ đăng ký các môn học phổ biến.</p>
-                                    <div class="chart-container">
-                                        <canvas id="popularSubjectsChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="px-3">
-                                    <h5 class="mb-3">Số lượng tốt/phản hồi về chatbot và hệ thống</h5>
-                                    <!-- Feedback stats can go here -->
-                                </div>
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-chart-pie text-primary me-2"></i>Thống kê Chung
+                        </h3>
+                        <!-- Biểu đồ -->
+                        <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="chart-container bg-light p-4 rounded border">
+                            <h5 class="d-flex align-items-center">
+                                <i class="fas fa-book me-2 text-success"></i>
+                                Môn học phổ biến
+                            </h5>
+                            <canvas id="popularSubjectsChart" height="250"></canvas>
                             </div>
                         </div>
+                        </div>
+
+                        <!-- Bug section riêng -->
+                        <div class="row">
+                        <div class="col-12">
+                            <div class="bug-report-card text-center shadow-sm">
+                            <i class="fas fa-bug fs-1 text-danger mb-3"></i>
+                            <h3 class="stat-value fw-bold" id="bugCount">0</h3>
+                            <p class="text-muted mb-0">Báo cáo lỗi hệ thống</p>
+                            </div>
+                        </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Xu hướng GPA trung bình theo năm học -->
+                <!-- Phần Xu hướng GPA -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Xu hướng GPA trung bình theo học kỳ</h5>
-                        <canvas id="gpaTrendChart" height="200"></canvas>
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-chart-line text-primary me-2"></i>Xu hướng GPA Trung bình
+                        </h3>
+                        <div class="chart-container bg-light p-4 rounded border">
+                            <h5 class="d-flex align-items-center mb-3">
+                                <i class="fas fa-graduation-cap me-2 text-info"></i>
+                                GPA theo học kỳ
+                            </h5>
+                            <canvas id="gpaTrendChart" height="250"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
