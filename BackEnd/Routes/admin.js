@@ -15,6 +15,7 @@ const LecturerAbnormalDetectionController = require('../Controllers/lecturer/det
 const { authorize } = require('passport');
 const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
 const Feedback = require('../../Database/SaveToMongo/models/Feedback');
+const { getTotalUsers } = require('../Controllers/admin/UserStatisticController');
 
 router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
@@ -96,5 +97,8 @@ router.get('/bug-statistic', authenticateToken, authorizeRoles('admin'), async (
     res.status(500).json({ error: 'Lỗi server khi thống kê lỗi' });
   }
 });
+
+router.get('/total-users', authenticateToken, authorizeRoles('admin'), getTotalUsers);
+router.get('/sessions/stats', authenticateToken, authorizeRoles('admin'), adminChatController.getSessionStats);
 
 module.exports = router;

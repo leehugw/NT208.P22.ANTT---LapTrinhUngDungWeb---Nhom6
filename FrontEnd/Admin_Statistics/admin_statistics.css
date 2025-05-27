@@ -76,40 +76,71 @@ main.container {
     padding-bottom: 60px;
 }
 
+/* ===== STAT ITEMS ===== */
 .stat-item {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    height: 100%;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 5px;
 }
 
 .stat-value {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 0;
-    color: #3d67da;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
-.card {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    border: none;
+/* ===== CARD STYLES ===== */
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: none;
+  overflow: hidden;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stat-card.text-center {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.stat-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .card-title {
-    color: #3d67da;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .stat-item {
-        margin-bottom: 15px;
-    }
+.card-title i {
+  margin-right: 10px;
+  font-size: 1.2em;
 }
+
+
 
 #popularSubjectsContainer {
     display: flex;
@@ -121,18 +152,11 @@ main.container {
 #popularSubjectsChart {
     display: block;
     margin: 0 auto;
-    max-width: 500px;
-    max-height: 500px;
-    width: 100%;
-    height: 500px;
+    max-width: 100%;
+    height: 300px !important;
+    max-height: 300px;
 }
-@media (max-width: 576px) {
-    #popularSubjectsChart {
-        max-width: 100vw;
-        height: 320px;
-        max-height: 320px;
-    }
-}
+
 
 /* Giảm khoảng cách và đảm bảo chữ xuống dòng, căn giữa */
 #popularSubjectsContainer {
@@ -154,15 +178,6 @@ main.container {
     display: block;
 }
 
-/* Căn chỉnh container biểu đồ */
-.chart-container {
-    position: relative;
-    height: 350px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 15px;
-}
-
 /* Căn chỉnh tiêu đề và nội dung */
 .card-body h5 {
     margin-bottom: 15px;
@@ -172,4 +187,101 @@ main.container {
 .card-body p {
     margin-bottom: 20px;
     color: #666;
+}
+
+/* ===== BUG REPORT CARD ===== */
+.bug-report-card {
+  background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+  border-left: 4px solid #dc3545;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.bug-icon {
+  font-size: 2.5rem;
+  color: #dc3545;
+  margin-bottom: 15px;
+}
+
+/* ===== CHART CONTAINERS ===== */
+.chart-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.chart-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+}
+
+.chart-title i {
+  margin-right: 8px;
+  color: #3d67da;
+}
+
+/* ===== COLOR SCHEME ===== */
+.text-primary { color: #3d67da !important; }
+.text-success { color: #28a745 !important; }
+.text-info { color: #17a2b8 !important; }
+.text-warning { color: #ffc107 !important; }
+.text-danger { color: #dc3545 !important; }
+
+.bg-primary-light { background-color: #ebf2ff; }
+.bg-success-light { background-color: #e6ffed; }
+.bg-info-light { background-color: #e6f9ff; }
+.bg-warning-light { background-color: #fff8e6; }
+.bg-danger-light { background-color: #ffebee; }
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 992px) {
+    .chart-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #popularSubjectsChart {
+        max-width: 100%;
+        height: 300px !important;
+        max-height: 300px !important;
+    }
+
+    .chart-container .chart-legend {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    #popularSubjectsChart {
+        width: 100% !important;
+        height: 250px !important;
+    }
+
+    .chart-container {
+        padding: 10px !important;
+    }
+
+    .card-body h5,
+    .card-body p {
+        font-size: 1rem !important;
+    }
 }

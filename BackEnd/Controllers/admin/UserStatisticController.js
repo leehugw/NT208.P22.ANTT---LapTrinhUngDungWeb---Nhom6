@@ -1,4 +1,4 @@
-const User = require('../../Database/SaveToMongo/models/Users');
+const User = require('../../../Database/SaveToMongo/models/Users');
 
 exports.getTotalUsers = async (req, res) => {
   try {
