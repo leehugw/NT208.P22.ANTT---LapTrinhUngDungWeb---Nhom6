@@ -50,3 +50,19 @@ exports.getStudentConversations = async (req, res) => {
         });
     }
 };
+
+exports.getSessionStats = async (req, res) => {
+    try {
+        const stats = await sessionService.getSessionStats();
+        res.json({
+            success: true,
+            data: stats
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to get session stats',
+            error: err.message
+        });
+    }
+};

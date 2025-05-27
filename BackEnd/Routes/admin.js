@@ -99,5 +99,6 @@ router.get('/bug-statistic', authenticateToken, authorizeRoles('admin'), async (
 });
 
 router.get('/total-users', authenticateToken, authorizeRoles('admin'), getTotalUsers);
+router.get('/sessions/stats', authenticateToken, authorizeRoles('admin'), adminChatController.getSessionStats);
 
 module.exports = router;

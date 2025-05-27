@@ -43,6 +43,31 @@ class SessionService {
         return this._formatSessions(sessions, true);
     }
 
+    // Lấy số phiên và thời gian trung bình mỗi phiên (tính bằng phút)
+    async getSessionStats() {
+        const sessions = await ChatSession.find({})
+        .select('createdAt updatedAt')
+        .lean();
+
+        const count = sessions.length;
+        if (count === 0) return { count: 0, averageDurationMinutes: 0 };
+
+        // Tính tổng thời gian mỗi phiên (ms)
+        const totalDurationMs = sessions.reduce((acc, session) => {
+        const start = new Date(session.createdAt).getTime();
+        const end = new Date(session.updatedAt).getTime();
+        return acc + (end - start);
+        }, 0);
+
+        // Trung bình (phút)
+        const averageDurationMinutes = totalDurationMs / count / 1000 / 60;
+
+        return {
+        count,
+        averageDurationMinutes: Number(averageDurationMinutes.toFixed(2))
+        };
+    }
+
     // ----------- Private methods -----------
     _formatSessions(sessions, includeLastMessageTime = false) {
         return sessions.map(session => {

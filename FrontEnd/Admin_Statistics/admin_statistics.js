@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   fetchSemesterGPAStats();
   fetchBugStatistics();
   fetchTotalUsers();
+  fetchConversationsStatistics();
 
   // Menu toggle
   document.getElementById('menu-toggle').addEventListener('click', function() {
@@ -308,6 +309,34 @@ async function fetchSemesterGPAStats() {
   } catch (err) {
     console.error("Lỗi khi tải GPA:", err);
   }
+}
+
+async function fetchConversationsStatistics() {
+    try {
+        const response = await fetch('/api/admin/sessions/stats', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error('Response not OK:', response.status, await response.text());
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Session stats data:', data); // Add this to verify data
+        
+        document.getElementById('sessionCount').textContent = data.data.count; // Note the .data here
+        document.getElementById('averageSessionTime').textContent = 
+            `${data.data.averageDurationMinutes} phút`; // Add unit
+        
+    } catch (error) {
+        console.error('Error fetching session statistics:', error);
+        // Set default values or error message
+        document.getElementById('sessionCount').textContent = '0';
+        document.getElementById('averageSessionTime').textContent = '0 phút';
+    }
 }
 
 function renderGPAChart(data) {
