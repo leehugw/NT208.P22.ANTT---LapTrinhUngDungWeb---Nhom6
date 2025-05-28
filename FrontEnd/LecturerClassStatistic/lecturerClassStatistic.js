@@ -18,17 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const classId = params.get("class_id");
     const token = localStorage.getItem("token");
 
+    if (!classId) {
+        alert("Thiếu mã lớp trong URL!");
+        return;
+    }
+
     if (!token) {
         alert("Bạn cần đăng nhập lại.");
         window.location.href = "/";
         return;
     }
 
-    fetch(`/api/lecturer/classes/${classId}/statistics`, {
+    fetch(`/api/lecturer/classstatistic/data?class_id=${classId}`, {
         headers: { Authorization: `Bearer ${token}` }
     })
         .then(res => res.json())
         .then(result => {
+            console.log("📦 Kết quả trả về:", result);
             if (!result.success) throw new Error("Dữ liệu không hợp lệ");
             const stat = result.statistics;
 
@@ -37,20 +43,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 semester: {
                     gpa: stat.semester.map(s => s.gpa),
                     credits: stat.semester.map(s => s.credits),
-                    inputLang: stat.semester[0].inputLanguage,
-                    outputLang: stat.semester[0].outputLanguage
+                    inputLang: stat.semester?.[0]?.inputLanguage || {},
+                    outputLang: stat.semester?.[0]?.outputLanguage || {}
                 },
                 year: {
                     gpa: stat.year.map(y => y.gpa),
                     credits: stat.year.map(y => y.credits),
-                    inputLang: stat.year[0].inputLanguage,
-                    outputLang: stat.year[0].outputLanguage
+                    inputLang: stat.year?.[0]?.inputLanguage || {},
+                    outputLang: stat.year?.[0]?.outputLanguage || {}
                 },
                 all: {
-                    gpa: [stat.overall.gpa],
-                    credits: [stat.overall.credits],
-                    inputLang: stat.overall.inputLanguage,
-                    outputLang: stat.overall.outputLanguage
+                    gpa: [stat.overall?.gpa || 0],
+                    credits: [stat.overall?.credits || 0],
+                    inputLang: stat.overall?.inputLanguage || {},
+                    outputLang: stat.overall?.outputLanguage || {}
                 }
             };
 
@@ -157,7 +163,7 @@ function renderInitialCharts() {
             labels: ['<500', '500-600', '601-700', '701-800', '>800'],
             datasets: [{
                 label: 'Số lượng sinh viên',
-                data: window.data.semester.inputLang.toeic || [0, 0, 0, 0, 0],
+                data: window.data.semester.inputLang?.toeic || [0, 0, 0, 0, 0],
                 backgroundColor: ['#F87171', '#EF4444', '#DC2626', '#B91C1C', '#991B1B'],
                 barThickness: 15,
                 maxBarThickness: 30
@@ -185,7 +191,7 @@ function renderInitialCharts() {
             labels: ['<500', '500-600', '601-700', '701-800', '>800'],
             datasets: [{
                 label: 'Số lượng sinh viên',
-                data: window.data.semester.outputLang.toeic || [0, 0, 0, 0, 0],
+                data: window.data.semester.outputLang?.toeic || [0, 0, 0, 0, 0],
                 backgroundColor: ['#34D399', '#10B981', '#059669', '#047857', '#065F46'],
                 barThickness: 15,
                 maxBarThickness: 30
@@ -256,8 +262,8 @@ function updateCharts() {
 
 function updateLangCharts() {
     const timeFilter = document.getElementById("timeFilter").value;
-    const inputFilter = document.getElementById("inputLangFilter").value;
-    const outputFilter = document.getElementById("outputLangFilter").value;
+    const inputFilter = document.getElementById("inputLangFilter").value.toLowerCase();
+    const outputFilter = document.getElementById("outputLangFilter").value.toLowerCase();
 
     const labelsMap = {
         toeic: ['<500', '500-600', '601-700', '701-800', '>800'],
@@ -267,27 +273,25 @@ function updateLangCharts() {
         cambridge: ['<A2', 'A2-B1', 'B1-B2', 'B2-C1', 'C1-C2']
     };
 
-    // Lấy dữ liệu và kiểm tra giá trị hợp lệ
-    const inputData = window.data[timeFilter].inputLang[inputFilter] || [0, 0, 0, 0, 0];
-    const outputData = window.data[timeFilter].outputLang[outputFilter] || [0, 0, 0, 0, 0];
-    const inputValues = Object.values(inputData).map(val => Number(val) || 0);
-    const outputValues = Object.values(outputData).map(val => Number(val) || 0);
+    const inputLabels = labelsMap[inputFilter];
+    const outputLabels = labelsMap[outputFilter];
 
-    // Tính giá trị tối đa và giới hạn trục Y động
-    const maxInput = Math.max(...inputValues, 10); // Đảm bảo tối thiểu là 10
-    const maxOutput = Math.max(...outputValues, 10);
-    const inputMax = Math.ceil(maxInput / 5) * 5 + 5; // Làm tròn lên số chia hết cho 5 và cộng thêm 5
-    const outputMax = Math.ceil(maxOutput / 5) * 5 + 5;
+    const inputDataRaw = window.data[timeFilter].inputLang[inputFilter] || {};
+    const outputDataRaw = window.data[timeFilter].outputLang[outputFilter] || {};
 
-    // Cập nhật biểu đồ đầu vào
-    inputLangChart.data.labels = labelsMap[inputFilter];
+    const inputValues = inputLabels.map(label => Number(inputDataRaw[label]) || 0);
+    const outputValues = outputLabels.map(label => Number(outputDataRaw[label]) || 0);
+
+    const inputMax = Math.ceil(Math.max(...inputValues, 10) / 5) * 5 + 5;
+    const outputMax = Math.ceil(Math.max(...outputValues, 10) / 5) * 5 + 5;
+
+    inputLangChart.data.labels = inputLabels;
     inputLangChart.data.datasets[0].data = inputValues;
     inputLangChart.options.scales.y.max = inputMax;
-    inputLangChart.options.scales.y.ticks.stepSize = Math.ceil(inputMax / 5); // Điều chỉnh khoảng cách nhãn
+    inputLangChart.options.scales.y.ticks.stepSize = Math.ceil(inputMax / 5);
     inputLangChart.update();
 
-    // Cập nhật biểu đồ đầu ra
-    outputLangChart.data.labels = labelsMap[outputFilter];
+    outputLangChart.data.labels = outputLabels;
     outputLangChart.data.datasets[0].data = outputValues;
     outputLangChart.options.scales.y.max = outputMax;
     outputLangChart.options.scales.y.ticks.stepSize = Math.ceil(outputMax / 5);

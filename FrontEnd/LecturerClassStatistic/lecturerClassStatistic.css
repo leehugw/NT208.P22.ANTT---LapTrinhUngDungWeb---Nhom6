@@ -58,3 +58,37 @@
     max-height: 300px;
 }
 
+.footer {
+    background-color: #3D67BA;
+    color: white;
+  }
+  
+  .footer .form-control {
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+  
+  .footer a {
+    color: white;
+  }
+  
+  .footer .btn {
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+  
+  .footer-nav {
+    background-color: #3D67BA;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  /* Footer */
+.footer-nav {
+    background-color: #3D67BA;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Đặt giá trị z-index thấp hơn nút feedback */
+}
