@@ -37,7 +37,7 @@ const inputOutputSchema = new mongoose.Schema({
 }, { _id: false });
 
 const semesterStatSchema = new mongoose.Schema({
-    semesterId: Number,
+    semesterId: String,
     gpa: Number,
     credits: Number,
     inputLanguage: inputOutputSchema,
