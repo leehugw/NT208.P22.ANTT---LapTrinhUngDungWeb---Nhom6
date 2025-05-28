@@ -42,128 +42,142 @@ function checkTokenAndRedirect() {
     return token;
 }
 
-function getChatSessions() {
-    const sessions = JSON.parse(localStorage.getItem('chatSessions') || '[]');
-    // Lọc 7 ngày gần nhất
-    const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-    return sessions.filter(s => s.createdAt >= sevenDaysAgo);
-}
+let currentSessionId = null; // Biến toàn cục để lưu session_id
 
-// Lưu lại danh sách session vào localStorage
-function saveChatSessions(sessions) {
-    localStorage.setItem('chatSessions', JSON.stringify(sessions));
-}
 
-// Tạo session mới
-function createNewSession(firstMessage) {
-    const id = 'session_' + Date.now();
-    const title = firstMessage.length > 30 ? firstMessage.slice(0, 30) + '...' : firstMessage;
-    return {
-        id,
-        title,
-        createdAt: Date.now(),
-        messages: [
-            {
-                sender: 'user',
-                content: firstMessage,
-                timestamp: Date.now()
-            }
-        ]
-    };
-}
-
-// Thêm message vào session hiện tại
-function addMessageToSession(sessionId, sender, content) {
-    let sessions = getChatSessions();
-    let session = sessions.find(s => s.id === sessionId);
-    if (!session) return;
-    session.messages.push({
-        sender,
-        content,
-        timestamp: Date.now()
-    });
-    saveChatSessions(sessions);
-}
-
-// Lưu message (tạo session mới nếu cần)
-function saveMessage(sender, content) {
-    let sessions = getChatSessions();
-    let sessionId = localStorage.getItem('currentSessionId');
-    let session = sessions.find(s => s.id === sessionId);
-
-    if (!session) {
-        // Tạo session mới nếu chưa có
-        session = createNewSession(content);
-        sessions.unshift(session); // Đưa lên đầu
-        sessionId = session.id;
-        localStorage.setItem('currentSessionId', sessionId);
-    } else {
-        // Thêm message vào session hiện tại
-        session.messages.push({
-            sender,
-            content,
-            timestamp: Date.now()
-        });
-    }
-    saveChatSessions(sessions);
-}
-
+// UI_ChatBot.js
 function setInputEnabled(enabled) {
-    const input = document.getElementById('user-input');
-    const sendBtn = document.querySelector('.send-btn');
-    if (input) input.disabled = !enabled;
-    if (sendBtn) sendBtn.disabled = !enabled;
+    const inputField = document.getElementById('user-input');
+    const sendButton = document.querySelector('.send-btn');
+    if (inputField) {
+        inputField.disabled = !enabled;
+    }
+    if (sendButton) {
+        sendButton.disabled = !enabled;
+    }
+}
+// Tạo session mới
+// UI_ChatBot.js
+async function createNewSessionOnServer(firstMessage = '') {
+  const token = checkTokenAndRedirect();
+  if (!token) return null;
+
+  try {
+    console.log('Gửi yêu cầu tạo session:', { firstMessage, token }); // Debug
+    const res = await fetch('http://localhost:3000/api/student/chat-sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ firstMessage })
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`Lỗi khi tạo session: ${res.status} - ${errorData.error || res.statusText}`);
+    }
+
+    const data = await res.json();
+    console.log('Session được tạo:', data); // Debug
+    currentSessionId = data.session_id;
+    return data;
+  } catch (error) {
+    console.error('Lỗi tạo session:', error);
+    alert(`Không thể tạo phiên chat mới: ${error.message}`);
+    return null;
+  }
 }
 
 // Gửi tin nhắn khi người dùng gửi tin nhắn
-function sendMessage() {
-    const inputField = document.getElementById("user-input");
+// FrontEnd/UI_ChatBot/UI_ChatBot.js
+async function sendMessage() {
+    const inputField = document.getElementById('user-input');
     const message = inputField.value.trim();
-
     if (!message) return;
 
-    addMessage(message, 'user');  // Thêm tin nhắn của người dùng vào khung chat
-    saveMessage('user', message);
-    inputField.value = '';  // Xóa ô nhập sau khi gửi
+    const token = checkTokenAndRedirect();
+    if (!token) return;
 
+    console.log('Gửi tin nhắn:', { message, currentSessionId }); // Debug
+    addMessage(message, 'user');
+    inputField.value = '';
     setInputEnabled(false);
-    // Ẩn phần FAQ sau khi gửi
-    const faqSection = document.querySelector(".faq");
-    if (faqSection) {
-        faqSection.style.display = "none";
+
+    const faqElement = document.querySelector('.faq');
+    if (faqElement) {
+        faqElement.remove();
     }
 
+    try {
+        if (!currentSessionId) {
+            console.log('Tạo session mới vì currentSessionId rỗng'); // Debug
+            const sessionData = await createNewSessionOnServer(message);
+            if (!sessionData) {
+                setInputEnabled(true);
+                return;
+            }
+        }
 
-    // Không trả lời lại nữa sau khi người dùng gửi tin nhắn
-    // (Không thêm bất kỳ logic trả lời nào sau khi người dùng gửi tin nhắn)
-
-    fetch(`http://localhost:3000/api/student/chatbot-data`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            const botResponse = data.answer || "Xin lỗi, tôi không hiểu câu hỏi của bạn.";
-            addMessage(botResponse, 'bot'); // Thêm tin nhắn của bot vào khung chat
-            saveMessage('bot', botResponse);
-            setInputEnabled(true);
-        })
-        .catch((error) => {
-            console.error("Lỗi khi gọi API:", error);
-            const errorMsg = "Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.";
-            addMessage(errorMsg, 'bot');
-            saveMessage('bot', errorMsg);
-            setInputEnabled(true);
+        console.log('Gửi tin nhắn người dùng:', { sessionId: currentSessionId });
+        const userMessageRes = await fetch(`http://localhost:3000/api/student/chat-sessions/${currentSessionId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ message, sender: 'user' })
         });
+
+        if (!userMessageRes.ok) {
+            const errorData = await userMessageRes.json();
+            throw new Error(`Lỗi lưu tin nhắn người dùng: ${userMessageRes.status} - ${errorData.error}`);
+        }
+
+        console.log('Gọi API chatbot:', { message });
+        const botRes = await fetch(`http://localhost:3000/api/student/chatbot-data`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ message })
+        });
+
+        if (!botRes.ok) {
+            const errorData = await botRes.json();
+            throw new Error(`Lỗi từ API chatbot: ${botRes.status} - ${errorData.error}`);
+        }
+
+        const botData = await botRes.json();
+        console.log('Phản hồi từ chatbot:', botData); // Debug
+        const botResponse = botData.answer || 'Xin lỗi, tôi không hiểu câu hỏi của bạn.';
+        console.log('Tin nhắn bot sẽ hiển thị:', botResponse); // Debug
+        addMessage(botResponse, 'bot');
+
+        console.log('Lưu tin nhắn bot:', { botResponse, sessionId: currentSessionId });
+        const botMessageRes = await fetch(`http://localhost:3000/api/student/chat-sessions/${currentSessionId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ message: botResponse, sender: 'bot' })
+        });
+
+        if (!botMessageRes.ok) {
+            const errorData = await botMessageRes.json();
+            throw new Error(`Lỗi lưu tin nhắn bot: ${botMessageRes.status} - ${errorData.error}`);
+        }
+
+        setInputEnabled(true);
+    } catch (error) {
+        console.error('Lỗi khi gửi tin nhắn:', error);
+        addMessage(`Lỗi: ${error.message}`, 'bot'); // Hiển thị lỗi chi tiết hơn
+        setInputEnabled(true);
+    }
 }
 
-function handleBotReply(reply) {
-    // ...hiển thị reply lên giao diện...
-    saveMessage('bot', reply);
-}
 
 // Thêm tin nhắn vào khung chat
 function addMessage(text, sender) {
@@ -194,72 +208,79 @@ function toggleSidebar() {
     sidebar.style.transform = isOpen ? "translateX(-60px)" : "translateX(0px)";
 }
 
-function loadSessionToChatBox(sessionId) {
-    const sessions = getChatSessions();
-    const session = sessions.find(s => s.id === sessionId);
-    if (!session) return;
+async function loadSessionToChatBox(sessionId) {
+    const token = checkTokenAndRedirect();
+    if (!token) return;
 
-    // Xóa toàn bộ nội dung chatbox (bao gồm cả chào hỏi và FAQ)
+    currentSessionId = sessionId;
     const chatBox = document.querySelector('.chat-box');
-    if (chatBox) chatBox.innerHTML = '';
+    if (!chatBox) return;
 
-    // Render lại toàn bộ tin nhắn của session này
-    session.messages.forEach(item => {
-        addMessage(item.content, item.sender);
-    });
+    try {
+        const res = await fetch(`http://localhost:3000/api/student/chat-sessions/${sessionId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
 
-    // Đặt lại session hiện tại
-    localStorage.setItem('currentSessionId', sessionId);
-    chatBox.insertAdjacentHTML('beforeend', `
-        <div class="chat-input">
-            <input type="text" placeholder="Nhập gì đó..." id="user-input" />
-            <button class="send-btn" onclick="sendMessage()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
-                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-                </svg>
-            </button>
-        </div>
-    `);
-    // Đóng panel lịch sử
-    closeChatHistory();
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(`Lỗi khi tải session: ${res.status} - ${errorData.error || res.statusText}`);
+        }
+
+        const data = await res.json();
+        const session = data.data;
+
+        chatBox.innerHTML = '';
+        // Chỉ hiển thị FAQ nếu session không có tin nhắn
+        renderInputAndFAQ(session.messages.length === 0);
+
+        session.messages.forEach(item => {
+            addMessage(item.text, item.sender);
+        });
+
+        closeChatHistory();
+    } catch (error) {
+        console.error('Lỗi khi tải session:', error);
+        alert(`Không thể tải phiên chat: ${error.message}`);
+    }
 }
 
-function openChatHistory() {
-    const panel = document.getElementById('chat-history-panel');
-    const content = document.getElementById('chat-history-content');
-    const sessions = getChatSessions();
+async function openChatHistory() {
+  const token = checkTokenAndRedirect();
+  if (!token) return;
+
+  const panel = document.getElementById('chat-history-panel');
+  const content = document.getElementById('chat-history-content');
+
+  try {
+    const res = await fetch('http://localhost:3000/api/student/chat-sessions', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(`Lỗi khi tải lịch sử: ${res.status} - ${errorData.error || res.statusText}`);
+    }
+
+    const data = await res.json();
+    const sessions = data.data || [];
 
     if (sessions.length === 0) {
-        content.innerHTML = '<em>Chưa có lịch sử trò chuyện.</em>';
+      content.innerHTML = '<em>Chưa có lịch sử trò chuyện.</em>';
     } else {
-        content.innerHTML = sessions.map(s => `
-          <div class="chat-session-title" style="cursor:pointer; margin-bottom:10px; padding:8px; border-radius:6px; background:#f5f5f5;"
-          onclick="loadSessionToChatBox('${s.id}')">
-          <b>${s.title}</b><br>
-          <span style="font-size:12px;color:#888;">${new Date(s.createdAt).toLocaleString()}</span>
-          </div>
+      content.innerHTML = sessions.map(s => `
+        <div class="chat-session-title" style="cursor:pointer; margin-bottom:10px; padding:8px; border-radius:6px; background:#f5f5f5;"
+            onclick="loadSessionToChatBox('${s.session_id}')">
+            <b>${s.title || s.messages[0]?.text?.slice(0, 30) || 'Phiên trò chuyện'}</b><br>
+            <span style="font-size:12px;color:#888;">${s.created_at_formatted}</span>
+        </div>
       `).join('');
     }
     panel.style.display = 'block';
-}
-
-// Hiển thị tin nhắn của một session
-function showSessionMessages(sessionId) {
-    // Ẩn tất cả các session-messages khác
-    document.querySelectorAll('[id^="session-messages-"]').forEach(div => div.style.display = 'none');
-    const sessions = getChatSessions();
-    const session = sessions.find(s => s.id === sessionId);
-    const div = document.getElementById('session-messages-' + sessionId);
-    if (!session || !div) return;
-    div.innerHTML = session.messages.map(item => `
-        <div style="margin-bottom:10px;">
-            <span style="font-size:12px;color:#888;">${new Date(item.timestamp).toLocaleString()} - <b>${item.sender === 'user' ? 'Bạn' : 'Bot'}</b></span>
-            <div style="padding:6px 10px; background:${item.sender === 'user' ? '#e6f7ff' : '#f6ffe6'}; border-radius:6px; margin-top:2px;">
-                ${item.content}
-            </div>
-        </div>
-    `).join('');
-    div.style.display = 'block';
+  } catch (error) {
+    console.error('Lỗi khi tải lịch sử chat:', error);
+    content.innerHTML = `<em>Lỗi khi tải lịch sử: ${error.message}</em>`;
+    panel.style.display = 'block';
+  }
 }
 
 // Đóng panel
@@ -267,45 +288,80 @@ function closeChatHistory() {
     document.getElementById('chat-history-panel').style.display = 'none';
 }
 
-function rederInputAndFAQ() {
+// Render chỉ ô input
+function renderInput() {
     const chatBox = document.querySelector('.chat-box');
     if (!chatBox) return;
-    // Thêm phần FAQ và input vào cuối chatbox, KHÔNG xóa nội dung cũ
-    chatBox.insertAdjacentHTML('beforeend', `
-        <div class="faq">
-            <div class="divider"></div>
-            <p class="faq-title">Các câu hỏi thường gặp</p>
-            <div class="faq-buttons">
-                <button onclick="fillMessage(this)">Đăng ký môn thế nào?</button>
-                <button onclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
-                <button onclick="fillMessage(this)">Chính sách học bổng năm nay</button>
+    if (!chatBox.querySelector('.chat-input')) {
+        chatBox.insertAdjacentHTML('beforeend', `
+            <div class="chat-input">
+                <input type="text" placeholder="Nhập gì đó..." id="user-input" />
+                <button class="send-btn" onclick="sendMessage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+                        <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                    </svg>
+                </button>
             </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" placeholder="Nhập gì đó..." id="user-input" />
-            <button class="send-btn" onclick="sendMessage()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
-                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-                </svg>
-            </button>
-        </div>
-    `);
+        `);
+    }
 }
 
-function startNewChatSession() {
-    localStorage.removeItem('currentSessionId');
+// Render FAQ
+function renderFAQ() {
     const chatBox = document.querySelector('.chat-box');
-    if (chatBox) chatBox.innerHTML = '';
-    rederInputAndFAQ();
+    if (!chatBox) return;
+    if (!chatBox.querySelector('.faq')) {
+        chatBox.insertAdjacentHTML('beforeend', `
+            <div class="faq">
+                <div class="divider"></div>
+                <p class="faq-title">Các câu hỏi thường gặp</p>
+                <div class="faq-buttons">
+                    <button onclick="fillMessage(this)">Đăng ký môn thế nào?</button>
+                    <button onclick="fillMessage(this)">Tôi nên học môn gì tiếp theo?</button>
+                    <button onclick="fillMessage(this)">Chính sách học bổng năm nay</button>
+                </div>
+            </div>
+        `);
+    }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Luôn bắt đầu bằng một session mới khi vào trang
-    localStorage.removeItem('currentSessionId');
-    // Nếu muốn xóa luôn nội dung chatbox khi vào trang:
+// Kết hợp cả hai (thay thế rederInputAndFAQ)
+function renderInputAndFAQ(showFAQ = true) {
+    const chatBox = document.querySelector('.chat-box');
+    if (!chatBox) return;
+
+    // Luôn render input
+    renderInput();
+
+    // Chỉ render FAQ nếu showFAQ là true
+    if (showFAQ) {
+        renderFAQ();
+    }
+}
+
+async function startNewChatSession() {
+    const chatBox = document.querySelector('.chat-box');
+    if (!chatBox) return;
+
+    try {
+        // Tạo session mới trên server
+        const sessionData = await createNewSessionOnServer();
+        if (!sessionData) return;
+
+        // Xóa nội dung cũ và thêm input + FAQ
+        chatBox.innerHTML = '';
+        renderInputAndFAQ(true); // Hiển thị FAQ cho session mới
+    } catch (error) {
+        console.error('Lỗi khi bắt đầu session mới:', error);
+        alert('Không thể bắt đầu phiên chat mới. Vui lòng thử lại.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
     const chatBox = document.querySelector('.chat-box');
     if (chatBox) chatBox.innerHTML = '';
-    rederInputAndFAQ();
+    renderInputAndFAQ(true); // Hiển thị FAQ ban đầu
+    await startNewChatSession();
 });
 
 

@@ -14,25 +14,29 @@ const formatVietnameseTime = (date) => {
 };
 
 class ChatService {
-  async createSession(student_id) {
-      const session = new ChatSession({
-          student_id,
-          title: 'New Chat'
-      });
-      
-      const savedSession = await session.save();
-      
-      // Áp dụng format thời gian ngay khi tạo mới
-      return {
-          ...savedSession.toObject(),
-          created_at_formatted: formatVietnameseTime(savedSession.createdAt),
-          updated_at_formatted: formatVietnameseTime(savedSession.updatedAt),
-          messages: savedSession.messages.map(msg => ({
-              ...msg,
-              formatted_time: formatVietnameseTime(msg.timestamp)
-          }))
-      };
-  }
+  async createSession(student_id, firstMessage) {
+    const session = new ChatSession({
+        student_id,
+        title: 'New Chat',
+        messages: firstMessage ? [{
+            sender: 'user',
+            text: firstMessage,
+            timestamp: new Date()
+        }] : []
+    });
+
+    const savedSession = await session.save();
+
+    return {
+        ...savedSession.toObject(),
+        created_at_formatted: formatVietnameseTime(savedSession.createdAt),
+        updated_at_formatted: formatVietnameseTime(savedSession.updatedAt),
+        messages: savedSession.messages.map(msg => ({
+            ...msg,
+            formatted_time: formatVietnameseTime(msg.timestamp)
+        }))
+    };
+}
 
     async addMessage(session_id, student_id, sender, text) {
         const message_id = `msg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -53,6 +57,19 @@ class ChatService {
             { new: true }
         );
     }
+
+    async getAllSessions(student_id) {
+  const sessions = await ChatSession.find({ student_id }).lean();
+  return sessions.map(session => ({
+    ...session,
+    created_at_formatted: formatVietnameseTime(session.createdAt),
+    updated_at_formatted: formatVietnameseTime(session.updatedAt),
+    messages: session.messages.map(msg => ({
+      ...msg,
+      formatted_time: formatVietnameseTime(msg.timestamp)
+    }))
+  }));
+}
 
     async getChatHistory(session_id) {
         const session = await ChatSession.findOne({ session_id }).lean();
