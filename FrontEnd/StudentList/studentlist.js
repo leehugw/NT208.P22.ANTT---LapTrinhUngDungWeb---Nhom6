@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const studentTableBody = document.querySelector('tbody');
     const clearMssvButton = document.getElementById('clear-mssv');
     const mssvInput = document.getElementById('filter-mssv');
+    const resetFiltersButton = document.getElementById('reset-filters');
+    let initialFilters = null;
 
     function populateDropdown(id, items, label) {
         const select = document.getElementById(id);
@@ -22,10 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!res1.ok) throw new Error("Token hết hạn hoặc API lỗi");
             const { data: students, filters } = await res1.json();
 
-            // 2. Lấy danh sách class_id duy nhất
+            // 2. Lưu filter ban đầu nếu chưa có
+            if (!initialFilters && filters) {
+                initialFilters = filters;
+            }
+
+            // 3. Lấy danh sách class_id duy nhất
             const classIds = [...new Set(students.map(s => s.class_id).filter(Boolean))];
 
-            // 3. Gọi API abnormal cho từng class_id song song
+            // 4. Gọi API abnormal cho từng class_id song song
             const abnormalResults = await Promise.all(classIds.map(async classId => {
                 const res = await fetch(`/api/admin/abnormal/${classId}`, {
                     headers: { Authorization: `Bearer ${token}` }
@@ -35,20 +42,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 return json.data || [];
             }));
 
-            // 4. Gộp kết quả cảnh báo thành map student_id => {status, note}
+            // 5. Gộp kết quả cảnh báo thành map student_id => {status, note}
             const abnormalMap = new Map();
             abnormalResults.flat().forEach(s => {
                 abnormalMap.set(s.student_id, { status: s.status, note: s.note });
             });
 
-            // 5. Ghép cảnh báo vào sinh viên
+            // 6. Ghép cảnh báo vào sinh viên
             const mergedStudents = students.map(s => ({
                 ...s,
                 status: abnormalMap.get(s.student_id)?.status || 'Đang học',
                 note: abnormalMap.get(s.student_id)?.note || '-'
             }));
 
-            // 6. Render
+            // 7. Render
             studentCountElement.textContent = mergedStudents.length;
             studentTableBody.innerHTML = mergedStudents.map(s => `
                 <tr class="custom-row align-middle">
@@ -68,21 +75,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
                 <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-chart-line"></i></a></td>
                 </tr>
-`           ).join('');
+            `).join('');
 
-            if (filters) {
-                populateDropdown('filter-class', filters.classes, 'Lớp học');
-                populateDropdown('filter-major', filters.majors, 'Ngành học');
-                populateDropdown('filter-faculty', filters.faculties, 'Khoa');
-                populateDropdown('filter-status', filters.statuses, 'Trạng thái');
+            // 8. Cập nhật dropdown với initialFilters
+            if (initialFilters) {
+                populateDropdown('filter-class', initialFilters.classes, 'Lớp học');
+                populateDropdown('filter-major', initialFilters.majors, 'Ngành học');
+                populateDropdown('filter-faculty', initialFilters.faculties, 'Khoa');
+                populateDropdown('filter-status', initialFilters.statuses, 'Trạng thái');
             }
 
         } catch (err) {
             console.error('Lỗi tải danh sách sinh viên:', err);
             studentTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Lỗi tải dữ liệu</td></tr>';
+            // Vẫn hiển thị filter đầy đủ nếu có lỗi
+            if (initialFilters) {
+                populateDropdown('filter-class', initialFilters.classes, 'Lớp học');
+                populateDropdown('filter-major', initialFilters.majors, 'Ngành học');
+                populateDropdown('filter-faculty', initialFilters.faculties, 'Khoa');
+                populateDropdown('filter-status', initialFilters.statuses, 'Trạng thái');
+            }
         }
     }
-
 
     // Ban đầu load tất cả
     loadStudents();
@@ -108,6 +122,18 @@ document.addEventListener('DOMContentLoaded', () => {
     clearMssvButton.addEventListener('click', () => {
         mssvInput.value = ''; // Xóa input
         loadStudents(); // Load lại tất cả sinh viên
+    });
+
+    resetFiltersButton.addEventListener('click', () => {
+        // Xóa các input và select
+        mssvInput.value = '';
+        document.getElementById('filter-class').value = '';
+        document.getElementById('filter-major').value = '';
+        document.getElementById('filter-faculty').value = '';
+        document.getElementById('filter-status').value = '';
+
+        // Load lại danh sách gốc
+        loadStudents();
     });
 });
 
