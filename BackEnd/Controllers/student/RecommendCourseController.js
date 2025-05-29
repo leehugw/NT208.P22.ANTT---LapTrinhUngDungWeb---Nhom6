@@ -158,7 +158,6 @@ exports.getRecommendedCourses = async (req, res) => {
                 // if (totalCredits >= 14) break;
             }
         }
-        console.log("Recommended Courses:", recommendedCourses); // Debug
 
         return res.status(200).json({
             message: "Gợi ý môn học kỳ tiếp theo.",

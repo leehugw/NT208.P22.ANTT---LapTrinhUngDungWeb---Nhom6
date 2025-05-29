@@ -1,27 +1,27 @@
 body {
-    font-family: 'Robonto', sans-serif;
-  }
-  
-.color-text{
-  color:#3D67BA;
+  font-family: 'Robonto', sans-serif;
 }
-  .feedback-card {
-    max-width: 500px;
-    width: 100%;
-    border-radius: 15px;
-    background-color: #ffffff;
-  }
-  
-  .input-group-text {
-    background-color: #e9f0ff;
-  }
-  
-  .btn-primary {
-    background-color: #3D67BA;
-    border: none;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0f58c5;
-  }
-  
+
+.color-text {
+  color: #3D67BA !important;
+}
+
+.feedback-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+.input-group-text {
+  background-color: #e9f0ff;
+}
+
+.btn-primary {
+  background-color: #3D67BA;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0f58c5;
+}

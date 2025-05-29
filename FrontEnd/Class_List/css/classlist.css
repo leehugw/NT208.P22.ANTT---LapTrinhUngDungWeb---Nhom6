@@ -1,31 +1,3 @@
-.body {
-    font-family: 'Roboto', sans-serif;
-}
-
-.navbar-container .nav-link {
-    color: black;
-    transition: color 0.3s ease-in-out;
-}
-
-.navbar-container .nav-link:hover,
-.navbar-container .nav-link.active {
-    color: #3D67BA;
-}
-
-/* Đổi màu chữ khi hover vào dropdown */
-.navbar-container .dropdown-menu .dropdown-item:hover {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-}
-
-/* Đổi màu chữ và border của dropdown-toggle khi hover */
-.navbar-container .dropdown .btn-secondary:hover,
-.navbar-container .dropdown .btn-secondary:focus {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-}
-
 .background {
     background-color: #3D67BA;
 }
@@ -87,41 +59,7 @@ table {
     text-align: center;
 }
 
-.footer {
-    background-color: #3D67BA;
-    color: white;
-  }
-  
-  .footer .form-control {
-    border-radius: 0.25rem 0 0 0.25rem;
-  }
-  
-  .footer a {
-    color: white;
-  }
-  
-  .footer .btn {
-    border-radius: 0 0.25rem 0.25rem 0;
-  }
-  
-  .footer-nav {
-    background-color: #3D67BA;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-  
-  /* Footer */
-.footer-nav {
-    background-color: #3D67BA;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Đặt giá trị z-index thấp hơn nút feedback */
-}
-
+ 
 #feedbackBtn {
     position: fixed;  /* Đảm bảo nó luôn nằm trên màn hình */
     bottom: 150px;     /* Cách footer một khoảng (tuỳ chỉnh) */
@@ -129,20 +67,6 @@ table {
     z-index: 9999 !important;  /* Đảm bảo nó có z-index cao nhất */
     cursor: pointer; /* Thêm con trỏ pointer để người dùng biết là có thể click */
     
-}
-
-/* Footer - Chỉnh sửa lại footer */
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #3D67BA;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 14px;
-    z-index: 1; /* Đặt giá trị z-index thấp để footer ở dưới cùng */
 }
 
 /* Điều chỉnh lại các phần tử khác như navbar nếu cần */
@@ -157,5 +81,5 @@ footer {
   .text-uit-blue {
     color: #3d67ba !important;
     font-weight: bold;
-  }
+}
   

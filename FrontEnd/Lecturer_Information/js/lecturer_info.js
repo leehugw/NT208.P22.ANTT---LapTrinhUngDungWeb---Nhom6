@@ -30,7 +30,6 @@ function openFeedbackPopup() {
     };
 }
 
-
 function renderNavbar(type = "lecturer") {
     // type: "admin" hoặc "lecturer"
     const isAdmin = type === "admin";
@@ -99,6 +98,9 @@ function renderNavbar(type = "lecturer") {
         </nav>
     </header>
     `;
+
+
+
 }
 
 function attachNavbarEvents(token, role) {
@@ -126,6 +128,13 @@ function attachNavbarEvents(token, role) {
         });
     }
     if (role === "admin") {
+        const feedbackBtn = document.getElementById("feedbackBtn");
+        if (feedbackBtn) {
+            feedbackBtn.style.display = "none";
+        }
+                if (feedbackBtn) {
+            feedbackBtn.remove(); 
+        }
         document.querySelectorAll('.btn-admin-student').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -177,20 +186,6 @@ function attachNavbarEvents(token, role) {
                     window.location.href = '/';
                 } else {
                     window.location.href = `/api/admin/statistics`;
-                }
-            });
-        });
-
-        // Danh sách phản hồi
-        document.querySelectorAll('.btn-feedback').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const token = localStorage.getItem("token");
-                if (!token) {
-                    alert("Bạn chưa đăng nhập!");
-                    window.location.href = '/';
-                } else {
-                    window.location.href = `/api/admin/feedbacks`;
                 }
             });
         });
@@ -326,7 +321,9 @@ async function fetchLecturerProfile(token) {
         }
 
         let role = "lecturer";
-        if (data.type === "admin") role = "admin";
+        if (data.type === "admin"){
+            role = "admin"; 
+        } 
         else if (data.type === "lecturer") role = "lecturer";
 
          document.querySelector('header').outerHTML = renderNavbar(role);
