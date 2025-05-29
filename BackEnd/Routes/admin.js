@@ -16,10 +16,6 @@ const { authorize } = require('passport');
 const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
 const Feedback = require('../../Database/SaveToMongo/models/Feedback');
 const { getTotalUsers } = require('../Controllers/admin/UserStatisticController');
-const { getTotalSessions } = require('../Controllers/admin/GetAllChatSession');
-
-// Lấy tổng số phiên trò chuyện
-router.get('/total-chat-sessions', authenticateToken, authorizeRoles('admin'), getTotalSessions);
 
 router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
@@ -103,6 +99,8 @@ router.get('/bug-statistic', authenticateToken, authorizeRoles('admin'), async (
 });
 
 router.get('/total-users', authenticateToken, authorizeRoles('admin'), getTotalUsers);
+
+// lấy tổng số phiên trò chuyện và thời gian trung bình mỗi phiên
 router.get('/sessions/stats', authenticateToken, authorizeRoles('admin'), adminChatController.getSessionStats);
 
 module.exports = router;
