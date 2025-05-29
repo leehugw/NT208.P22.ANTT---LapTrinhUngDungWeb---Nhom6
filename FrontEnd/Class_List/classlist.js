@@ -170,8 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <td class="text-center">${escapeHTML(student.class_id || '-')}</td>
         <td class="text-center">${escapeHTML(student.major_name || '-')}</td>
         <td class="text-center">${escapeHTML(student.faculty_name || '-')}</td>
-        <td class="text-center"><a class="text" href="https://uit-chatbot.onrender.com/api/student/profile?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
-        <td class="text-center border-end"><a class="text" href="https://uit-chatbot.onrender.com/api/student/academicstatistic?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-chart-line"></i></a></td>
+        <td class="text-center"><a class="text" href="https://uit-chatbot-orno.onrender.com/api/student/profile?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
+        <td class="text-center border-end"><a class="text" href="https://uit-chatbot-orno.onrender.com/api/student/academicstatistic?student_id=${encodeURIComponent(student.student_id)}"><i class="fas fa-chart-line"></i></a></td>
     </tr>
 `;
                 });
