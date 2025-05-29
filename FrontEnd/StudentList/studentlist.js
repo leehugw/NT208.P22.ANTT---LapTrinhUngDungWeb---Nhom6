@@ -75,23 +75,24 @@ document.addEventListener('DOMContentLoaded', () => {
             // 6. Render
             studentCountElement.textContent = mergedStudents.length;
             studentTableBody.innerHTML = mergedStudents.map(s => `
-    <tr class="custom-row align-middle">
-        <td class="border-start">
-            <div class="d-flex align-items-center">
-                <img alt="Avatar ${escapeHTML(s.name)}" class="rounded-circle me-2" height="50"
-                    src="https://placehold.co/50x50" width="50" />
-                ${escapeHTML(s.name)}
-            </div>
-        </td>
-        <td class="text-center">${escapeHTML(s.student_id)}</td>
-        <td class="text-center">${escapeHTML(s.contact?.school_email || '-')}</td>
-        <td class="text-center">${escapeHTML(s.status)}</td>
-        <td class="text-center">${escapeHTML(s.class_id || '-')}</td>
-        <td class="text-center">${escapeHTML(s.major_id)}</td>
-        <td class="text-center">${escapeHTML(s.faculty_name)}</td>
-        ...
-    </tr>
-`).join('');
+                <tr class="custom-row align-middle">
+                <td class="border-start">
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle me-2" src="https://placehold.co/50x50" width="50" height="50">
+                        ${escapeHTML(s.name)}
+                    </div>
+                </td>
+                <td class="text-center">${escapeHTML(s.student_id)}</td>
+                <td class="text-center">${escapeHTML(s.contact?.school_email || '-')}</td>
+                <td class="text-center">${escapeHTML(s.status)}</td>
+                <td class="text-center">${s.note}</td>
+                <td class="text-center">${escapeHTML(s.class_id || '-')}</td>
+                <td class="text-center">${escapeHTML(s.major_id || '-')}</td>
+                <td class="text-center">${escapeHTML(s.faculty_name || '-')}</td>
+                <td class="text-center"><a class="text" href="http://localhost:3000/api/student/profile?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
+                <td class="text-center border-end"><a class="text" href="http://localhost:3000/api/student/academicstatistic?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-chart-line"></i></a></td>
+                </tr>
+`           ).join('');
 
             if (filters) {
                 populateDropdown('filter-class', filters.classes, 'Lớp học');
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (err) {
-            console.error('❌ Lỗi tải danh sách sinh viên:', err);
+            console.error('Lỗi tải danh sách sinh viên:', err);
             studentTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Lỗi tải dữ liệu</td></tr>';
         }
     }
