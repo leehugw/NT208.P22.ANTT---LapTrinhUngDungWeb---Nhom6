@@ -3,6 +3,7 @@ const Class = require('../../../Database/SaveToMongo/models/Classes');
 const StudentAcademic = require('../../../Database/SaveToMongo/models/StudentAcademic');
 const EnglishCertificate = require('../../../Database/SaveToMongo/models/EnglishCertificate');
 const ClassStatistic = require('../../../Database/SaveToMongo/models/ClassStatistic');
+const { getSemesterCredits } = require('../student/StudentAcademicService');
 
 class LecturerClassStatisticService {
     getSemesterNumber(semesterId) {
@@ -131,14 +132,21 @@ class LecturerClassStatisticService {
                 );
                 const gpaAvg = gpas.length ? (gpas.reduce((sum, g) => sum + g.semester_gpa, 0) / gpas.length).toFixed(2) : 0;
 
-                const active = studentAcademics.filter(s =>
-                    (s.semester_gpas || []).some(g => g.semester_id === semesterId)
-                );
-                const creditSum = active.reduce((sum, s) => {
-                    const semestersTaken = (s.semester_gpas || []).length || 1;
-                    return sum + (s.total_credits_earned || 0) / semestersTaken;
-                }, 0);
-                const creditAvg = active.length ? (creditSum / active.length).toFixed(2) : 0;
+                let totalCredits = 0;
+                let activeStudentCount = 0;
+                for (const studentId of studentIds) {
+                    try {
+                        const semesterCredits = await getSemesterCredits(studentId);
+                        const semesterData = semesterCredits.find(sem => sem.semester_id === semesterId);
+                        if (semesterData) {
+                            totalCredits += semesterData.total_credits || 0;
+                            activeStudentCount++;
+                        }
+                    } catch (err) {
+                        console.warn(`Không lấy được tín chỉ cho sinh viên ${studentId}: ${err.message}`);
+                    }
+                }
+                const creditAvg = activeStudentCount ? (totalCredits / activeStudentCount).toFixed(2) : "0.00";
 
                 const langStats = initLangStats();
                 certificates.forEach(cert => {

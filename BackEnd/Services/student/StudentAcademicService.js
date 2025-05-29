@@ -99,6 +99,7 @@ async function calculateStudentAcademic(student_id) {
         return {
             semester_id,
             semester_gpa: (data.totalCredits > 0 ? (data.weightedScore / data.totalCredits).toFixed(2) : "0.00"),
+            total_credits: data.totalCredits || 0,
             updatedAt: new Date()
         };
     });
@@ -176,4 +177,13 @@ async function updateStudentAcademic(student_id) {
     );
 }
 
-module.exports = { updateStudentAcademic };
+async function getSemesterCredits(student_id) {
+    const data = await calculateStudentAcademic(student_id);
+    return data.semester_gpas.map(sem => ({
+        semester_id: sem.semester_id,
+        total_credits: sem.total_credits,
+        semester_gpa: sem.semester_gpa
+    }));
+}
+
+module.exports = { updateStudentAcademic, getSemesterCredits };
