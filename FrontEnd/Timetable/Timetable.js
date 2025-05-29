@@ -199,6 +199,37 @@ function updateCreditDisplay() {
     }
 }
 
+function captureFullTimetable() {
+    const original = document.getElementById('timetableSection');
+
+    // Tạo div ẩn để clone
+    const cloneContainer = document.createElement('div');
+    cloneContainer.style.position = 'fixed';
+    cloneContainer.style.top = '-9999px';
+    cloneContainer.style.left = '-9999px';
+    cloneContainer.style.width = original.offsetWidth + 'px';
+    cloneContainer.style.background = 'white';
+    cloneContainer.appendChild(original.cloneNode(true));
+
+    document.body.appendChild(cloneContainer);
+
+    html2canvas(cloneContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = 'lich-hoc-full.png';
+        link.click();
+
+        document.body.removeChild(cloneContainer);
+    });
+}
+
+document.getElementById('saveTimetableBtn').addEventListener('click', captureFullTimetable);
+
+
+
+
 const dayMapping = {
     "Thứ Hai": 0,
     "Thứ Ba": 1,

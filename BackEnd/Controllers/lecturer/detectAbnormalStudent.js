@@ -1,4 +1,4 @@
-const { detectAbnormalStudentsByClass } = require('../../Services/lecturer/detectAbnormalStudents');
+const { detectAndSaveAbnormalStudentsByClass } = require('../../Services/lecturer/detectAbnormalStudents');
 
 const getAbnormalStudentsByClass = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ const getAbnormalStudentsByClass = async (req, res) => {
       return res.status(400).json({ message: 'Thiếu class_id' });
     }
 
-    const results = await detectAbnormalStudentsByClass(class_id);
+    const results = await detectAndSaveAbnormalStudentsByClass(class_id);
     return res.status(200).json({ data: results });
   } catch (error) {
     console.error('Lỗi khi phát hiện sinh viên bất thường:', error);
@@ -18,3 +18,4 @@ const getAbnormalStudentsByClass = async (req, res) => {
 module.exports = {
   getAbnormalStudentsByClass
 };
+

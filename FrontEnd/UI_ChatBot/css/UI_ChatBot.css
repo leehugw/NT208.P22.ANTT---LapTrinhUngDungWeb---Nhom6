@@ -10,14 +10,13 @@ body {
 /* Sidebar */
 .sidebar {
     position: fixed !important;
-    top: 100px;
+    top: 98px;
     left: 16px;
     width: 60px;
     background-color: #e0e0e0;
     padding: 12px 0;
     border-radius: 30px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-    z-index: 9999;
 }
 
 /* Sidebar menu */
@@ -260,6 +259,19 @@ body {
 }
 .text-uit-blue {
   color: #3D67BA !important; 
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 34px;
+        padding: 8px 0;
+        left: 8px;
+    }
+
+    .sidebar ul li a {
+        font-size: 16px;
+        padding: 2px;
+    }
 }
 
 /* Chỉ áp dụng cho navbar trong header-container */
