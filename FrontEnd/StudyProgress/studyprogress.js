@@ -99,7 +99,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/student/academicstatistic";
                 }
@@ -112,7 +112,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/student/schedule-optimize";
                 }
@@ -125,7 +125,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/student/english-certificate";
                 }
@@ -138,7 +138,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+                    window.location.href = "https://uit-chatbot.onrender.com/";  // Điều hướng đến trang đăng nhập
                 } else {
                     window.location.href = "/api/student/profile";
                 }
@@ -152,7 +152,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";  // Điều hướng đến trang đăng nhập
+                    window.location.href = "https://uit-chatbot.onrender.com/";  // Điều hướng đến trang đăng nhập
                 } else {
                     // Nếu có token, điều hướng đến chatbot
                     window.location.href = "/api/student/chatbot?token=" + token;  // Điều hướng đến route chatbot
@@ -171,7 +171,7 @@ function attachNavbarEvents(token, role) {
                 }
 
                 // Gửi token kèm theo khi truy cập route được bảo vệ
-                fetch('http://localhost:3000/api/student/stu_menu', {
+                fetch('https://uit-chatbot.onrender.com/api/student/stu_menu', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -277,7 +277,7 @@ function attachNavbarEvents(token, role) {
                 }
 
                 // Gửi token kèm theo khi truy cập route được bảo vệ
-                fetch('http://localhost:3000/api/admin/admin_menu', {
+                fetch('https://uit-chatbot.onrender.com/api/admin/admin_menu', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -301,7 +301,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/lecturer/profile";
                 }
@@ -314,7 +314,7 @@ function attachNavbarEvents(token, role) {
                 e.preventDefault();
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/lecturer/classlist";
                 }
@@ -331,7 +331,7 @@ function attachNavbarEvents(token, role) {
                 }
 
                 // Gửi token kèm theo khi truy cập route được bảo vệ
-                fetch('http://localhost:3000/api/lecturer/lec_menu', {
+                fetch('https://uit-chatbot.onrender.com/api/lecturer/lec_menu', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -354,7 +354,7 @@ function attachNavbarEvents(token, role) {
 
     if (!token) {
         alert("Vui lòng đăng nhập để xem thông tin");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://uit-chatbot.onrender.com/";
         return;
     }
 }
@@ -400,8 +400,8 @@ function StudentAcademicData(token) {
     // Kiểm tra nếu URL có query 
     if (urlParams.toString()) {
         const studentId = urlParams.get('student_id');
-        StudentAcademicDataUrl = `http://localhost:3000/api/student/student-academic-data?student_id=${studentId}`;
-        GroupSemesterDataUrl = `http://localhost:3000/api/student/group-by-semester-data?student_id=${studentId}`
+        StudentAcademicDataUrl = `https://uit-chatbot.onrender.com/api/student/student-academic-data?student_id=${studentId}`;
+        GroupSemesterDataUrl = `https://uit-chatbot.onrender.com/api/student/group-by-semester-data?student_id=${studentId}`
 
     } else {
         StudentAcademicDataUrl = `/api/student/student-academic-data`;

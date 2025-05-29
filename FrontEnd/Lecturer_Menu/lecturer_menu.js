@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!token) {
         alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://uit-chatbot.onrender.com/";
         return;
     }
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem("token");
             if (!token) {
                 alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                window.location.href = "http://localhost:3000/";
+                window.location.href = "https://uit-chatbot.onrender.com/";
             } else {
                 window.location.href = "/api/lecturer/profile";
             }
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             if (!token) {
                 alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                window.location.href = "http://localhost:3000/";
+                window.location.href = "https://uit-chatbot.onrender.com/";
             } else {
                 window.location.href = "/api/lecturer/classlist";
             }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Gửi token kèm theo khi truy cập route được bảo vệ
-            fetch('http://localhost:3000/api/lecturer/lec_menu', {
+            fetch('https://uit-chatbot.onrender.com/api/lecturer/lec_menu', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`

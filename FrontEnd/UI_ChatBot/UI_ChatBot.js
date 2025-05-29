@@ -4,7 +4,7 @@ function checkTokenAndRedirect() {
     const token = localStorage.getItem("token");
     if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://uit-chatbot.onrender.com/";
         return false;
     }
     return token;
@@ -32,7 +32,7 @@ async function createNewSessionOnServer(firstMessage = '') {
 
   try {
     console.log('Gửi yêu cầu tạo session:', { firstMessage, token }); // Debug
-    const res = await fetch('http://localhost:3000/api/student/chat-sessions', {
+    const res = await fetch('https://uit-chatbot.onrender.com/api/student/chat-sessions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ async function sendMessage() {
         }
 
         console.log('Gửi tin nhắn người dùng:', { sessionId: currentSessionId });
-        const userMessageRes = await fetch(`http://localhost:3000/api/student/chat-sessions/${currentSessionId}/messages`, {
+        const userMessageRes = await fetch(`https://uit-chatbot.onrender.com/api/student/chat-sessions/${currentSessionId}/messages`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ async function sendMessage() {
         }
 
         console.log('Gọi API chatbot:', { message });
-        const botRes = await fetch(`http://localhost:3000/api/student/chatbot-data`, {
+        const botRes = await fetch(`https://uit-chatbot.onrender.com/api/student/chatbot-data`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ async function sendMessage() {
         addMessage(botResponse, 'bot');
 
         console.log('Lưu tin nhắn bot:', { botResponse, sessionId: currentSessionId });
-        const botMessageRes = await fetch(`http://localhost:3000/api/student/chat-sessions/${currentSessionId}/messages`, {
+        const botMessageRes = await fetch(`https://uit-chatbot.onrender.com/api/student/chat-sessions/${currentSessionId}/messages`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ async function loadSessionToChatBox(sessionId) {
     if (!chatBox) return;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/student/chat-sessions/${sessionId}`, {
+        const res = await fetch(`https://uit-chatbot.onrender.com/api/student/chat-sessions/${sessionId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -220,7 +220,7 @@ async function openChatHistory() {
   const content = document.getElementById('chat-history-content');
 
   try {
-    const res = await fetch('http://localhost:3000/api/student/chat-sessions', {
+    const res = await fetch('https://uit-chatbot.onrender.com/api/student/chat-sessions', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
 

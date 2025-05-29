@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td class="text-center">${escapeHTML(l.email) ||"-" }</td>
         <td class="text-center">${escapeHTML(l.faculty) ||"-"}</td>
         <td class="text-center">
-            <a class="text" href="http://localhost:3000/api/lecturer/profile?lecturer_id=${escapeHTML(l.lecturer_id)}"><i class="fas fa-external-link-alt"></i></a>
+            <a class="text" href="https://uit-chatbot.onrender.com/api/lecturer/profile?lecturer_id=${escapeHTML(l.lecturer_id)}"><i class="fas fa-external-link-alt"></i></a>
         </td>
     </tr>
 `).join('');

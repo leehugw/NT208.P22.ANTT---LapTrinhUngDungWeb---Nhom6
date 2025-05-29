@@ -201,7 +201,7 @@ function attachNavbarEvents(token, role) {
                 }
 
                 // Gửi token kèm theo khi truy cập route được bảo vệ
-                fetch('http://localhost:3000/api/admin/admin_menu', {
+                fetch('https://uit-chatbot.onrender.com/api/admin/admin_menu', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -225,7 +225,7 @@ function attachNavbarEvents(token, role) {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/lecturer/profile";
                 }
@@ -238,7 +238,7 @@ function attachNavbarEvents(token, role) {
                 e.preventDefault();
                 if (!token) {
                     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-                    window.location.href = "http://localhost:3000/";
+                    window.location.href = "https://uit-chatbot.onrender.com/";
                 } else {
                     window.location.href = "/api/lecturer/classlist";
                 }
@@ -255,7 +255,7 @@ function attachNavbarEvents(token, role) {
                 }
 
                 // Gửi token kèm theo khi truy cập route được bảo vệ
-                fetch('http://localhost:3000/api/lecturer/lec_menu', {
+                fetch('https://uit-chatbot.onrender.com/api/lecturer/lec_menu', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -278,7 +278,7 @@ function attachNavbarEvents(token, role) {
 
     if (!token) {
         alert("Vui lòng đăng nhập để xem thông tin");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://uit-chatbot.onrender.com/";
         return;
     }
 }
@@ -290,10 +290,10 @@ async function fetchLecturerProfile(token) {
 
         if (urlParams.toString()) {
             const lecturerId = urlParams.get('lecturer_id');
-            LecturerProfileData = `http://localhost:3000/api/lecturer/profile-data?lecturer_id=${lecturerId}`;
+            LecturerProfileData = `https://uit-chatbot.onrender.com/api/lecturer/profile-data?lecturer_id=${lecturerId}`;
         }
         else {
-            LecturerProfileData = `http://localhost:3000/api/lecturer/profile-data`;
+            LecturerProfileData = `https://uit-chatbot.onrender.com/api/lecturer/profile-data`;
         }
 
         const token = localStorage.getItem("token");

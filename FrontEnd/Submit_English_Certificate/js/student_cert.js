@@ -151,7 +151,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (!token) {
         alert('Bạn chưa đăng nhập. Chuyển về trang chủ...');
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://uit-chatbot.onrender.com/";
         return;
     }
 

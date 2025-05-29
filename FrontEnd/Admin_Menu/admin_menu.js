@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
     
             // Gửi token kèm theo khi truy cập route được bảo vệ
-            fetch('http://localhost:3000/api/admin/admin_menu', {
+            fetch('https://uit-chatbot.onrender.com/api/admin/admin_menu', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
