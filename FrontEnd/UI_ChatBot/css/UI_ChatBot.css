@@ -10,7 +10,7 @@ body {
 /* Sidebar */
 .sidebar {
     position: fixed !important;
-    top: 98px;
+    top: 97px;
     left: 16px;
     width: 60px;
     background-color: #e0e0e0;
@@ -27,7 +27,7 @@ body {
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  margin: 9px 0;
 }
 
 .sidebar ul li a {
@@ -35,7 +35,7 @@ body {
   color: rgb(150, 143, 143);
   font-size: 24px;
   text-decoration: none;
-  padding: 4px;
+  padding: 3px;
   border-radius: 50%;
   background-color: #e0e0e0;
   transition: background-color 0.3s;
@@ -149,8 +149,8 @@ body {
 .chat-input {
   position: absolute;
   bottom: 10px;
-  left: 1;
-  right: 1;
+  left: 10px;
+  right: 10px;
   width: 96%;
   display: flex;
   align-items: center;
@@ -259,19 +259,6 @@ body {
 }
 .text-uit-blue {
   color: #3D67BA !important; 
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 34px;
-        padding: 8px 0;
-        left: 8px;
-    }
-
-    .sidebar ul li a {
-        font-size: 16px;
-        padding: 2px;
-    }
 }
 
 /* Chỉ áp dụng cho navbar trong header-container */
