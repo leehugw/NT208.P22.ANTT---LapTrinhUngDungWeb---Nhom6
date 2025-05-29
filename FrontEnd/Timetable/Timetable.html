@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Thời khóa biểu</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
-
-    <link href="/Timetable/css/timetablePC.css" rel="stylesheet">
-    <link href="/Timetable/css/timetablemobile.css" rel="stylesheet">
+    <link href="/Navbar/navbar_PC.css" rel="stylesheet">
+    <link href="/Navbar/navbar.css" rel="stylesheet">
+    <link href="/Navbar/navbar_mobile.css" rel="stylesheet">
     <link href="/Timetable/css/timetable.css" rel="stylesheet">
     <link href="/Timetable/css/Course_Rcmdation.css" rel="stylesheet">
 
@@ -37,7 +38,8 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item btn-student-info" role="button">Hồ sơ Sinh viên</a></li>
                         <li><a class="dropdown-item btn-student-progress" role="button">Tiến độ học tập</a></li>
-                        <li><a class="dropdown-item btn-student-english" role="button">Xác nhận chứng chỉ Anh Văn</a></li>
+                        <li><a class="dropdown-item btn-student-english" role="button">Xác nhận chứng chỉ Anh Văn</a>
+                        </li>
                         <li><a class="dropdown-item btn-student-schedule" role="button">Thời khóa biểu</a></li>
                         <li><a class="dropdown-item btn-student-chatbot" role="button">Chatbot</a></li>
                     </ul>
@@ -67,11 +69,16 @@
                 <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh viên</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ học tập</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận chứng chỉ Anh Văn</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa biểu</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot UIT</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh
+                    viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ
+                    học tập</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận
+                    chứng chỉ Anh Văn</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa
+                    biểu</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot
+                    UIT</a>
             </div>
         </nav>
     </header>
@@ -401,12 +408,21 @@
 
 
     <div class="container py-5" id="recommendation-container">
-  <div class="text-center mb-4">
-    <h2 class="fw-bold">📚 Gợi ý môn học cho học kỳ tới</h2>
-    <p class="text-muted">Hệ thống tự động dựa vào GPA, lịch sử học tập và chuyên ngành</p>
-  </div>
-  <div id="recommendation-result"></div>
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">📚 Gợi ý môn học cho học kỳ tới</h2>
+            <p class="text-muted">Hệ thống tự động dựa vào GPA, lịch sử học tập và chuyên ngành</p>
+        </div>
+        <div id="recommendation-result"></div>
+    </div>
+
+    <a onclick="openFeedbackPopup()" style="cursor: pointer;"
+        class="position-fixed bottom-0 end-0 m-3 btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow"
+        title="Gửi phản hồi" id="feedbackBtn">
+        <i class="fas fa-comment-dots fs-4 text-white"></i>
+    </a>
+    <script src="/Navbar/navbar.js"></script>
+    <script src="/Student_Menu/student_menu.js"></script>
     <script src="/Timetable/Timetable.js"></script>
 </body>
+
+</html>

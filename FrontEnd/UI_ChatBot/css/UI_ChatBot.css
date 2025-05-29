@@ -1,5 +1,4 @@
 body {
-  font-family: Arial, sans-serif;
   background-color: #ffffff;
   margin: 0;
   padding: 40px 0;
@@ -242,30 +241,6 @@ body {
   width: 100%;
 }
 
-/* Navbar container styles */
-.navbar-container .nav-link {
-    color: black;
-    transition: color 0.3s ease-in-out;
-
-}
-
-.navbar-container .nav-link:hover,
-.navbar-container .nav-link.active {
-    color: #3D67BA;
-}
-
-.navbar-container .dropdown-menu .dropdown-item:hover {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-}
-
-.navbar-container .dropdown .btn-secondary:hover,
-.navbar-container .dropdown .btn-secondary:focus {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-}
-
 /* Logout button */
 .logout-button {
     border: none;
@@ -276,50 +251,6 @@ body {
 
 .logout-button:hover {
     color: #3D67BA;
-}
-
-.footer {
-  background-color: #3D67BA;
-  color: white;
-}
-
-.footer .form-control {
-  border-radius: 0.25rem 0 0 0.25rem;
-}
-
-.footer a {
-  color: white;
-}
-
-.footer .btn {
-  border-radius: 0 0.25rem 0.25rem 0;
-}
-
-.footer-nav {
-  background-color: #3D67BA;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-.footer-nav a {
-  text-decoration: none;
-  color: white;
-}
-
-/* Footer luôn nằm dưới */
-footer {
-  position: absolute;
-  bottom: 0;
-  top: 6;
-  left: 0;
-  width: 100%;
-  background-color: #3D67BA;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 14px;
 }
 
 /* Logo và tiêu đề */

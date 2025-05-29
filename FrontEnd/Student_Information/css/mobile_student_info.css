@@ -3,12 +3,13 @@
         order: -1;
         margin-bottom: 20px;
     }
-    .logo-container img{
+
+    .logo-container img {
         width: 50px;
         height: 50px;
     }
 
-    .navbar-container{
+    .navbar-container {
         margin: 0;
         padding: auto;
     }
@@ -22,18 +23,23 @@
         color: #444B59;
         margin: auto;
     }
-    .font{
+
+    .font {
         font-size: 0.35em;
         padding: 0;
     }
+
     .container {
         padding: 10px;
     }
+
     .footer-nav a {
         margin-bottom: 5px;
     }
+
     .p-4.border.rounded.bg-light.shadow {
-        max-width: 75%; /* Giúp form không chiếm toàn bộ chiều ngang */
+        max-width: 75%;
+        /* Giúp form không chiếm toàn bộ chiều ngang */
         padding: 20px;
     }
 }
@@ -46,9 +52,18 @@
     background: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     display: none;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
 }
 
 #mobile-menu.open {
     display: block;
+    transform: translateX(0);
     /* Khi mở menu, nó sẽ hiện ra ngay */
+}
+
+#menu-toggle {
+    display: block;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

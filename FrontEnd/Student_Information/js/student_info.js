@@ -128,6 +128,13 @@ function attachNavbarEvents(token, role) {
 
     }
     else if (role === "admin") {
+                const feedbackBtn = document.getElementById("feedbackBtn");
+        if (feedbackBtn) {
+            feedbackBtn.style.display = "none";
+        }
+                if (feedbackBtn) {
+            feedbackBtn.remove(); 
+        }
         document.querySelectorAll('.btn-admin-student').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
