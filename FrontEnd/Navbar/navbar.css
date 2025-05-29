@@ -1,0 +1,67 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-container .nav-link {
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-container .nav-link:hover,
+.navbar-container .nav-link.active {
+    color: #3D67BA;
+}
+
+/* Đổi màu chữ khi hover vào dropdown */
+.navbar-container .dropdown-menu .dropdown-item:hover {
+    color: #3D67BA !important; /* Đảm bảo màu được áp dụng */
+    background-color: transparent !important; /* Loại bỏ màu nền mặc định */
+}
+
+/* Đổi màu chữ và border của dropdown-toggle khi hover */
+.navbar-container .dropdown .btn-secondary:hover,
+.navbar-container .dropdown .btn-secondary:focus {
+    color: #3D67BA !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.btn-primary {
+    background-color: #3D67BA !important;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #3059a5 !important;
+}
+
+.footer {
+    background-color: #3D67BA;
+    color: white;
+}
+
+.footer .form-control {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.footer a {
+    color: white;
+}
+
+.footer .btn {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.footer-nav {
+    background-color: #3D67BA;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: white;
+}
