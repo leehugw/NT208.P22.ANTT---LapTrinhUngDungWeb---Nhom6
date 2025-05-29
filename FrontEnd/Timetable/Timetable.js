@@ -202,30 +202,57 @@ function updateCreditDisplay() {
 function captureFullTimetable() {
     const original = document.getElementById('timetableSection');
 
-    // Tạo div ẩn để clone
+    // Clone phần tử gốc
+    const clone = original.cloneNode(true);
+
+    // Tạo div ẩn để chứa clone
     const cloneContainer = document.createElement('div');
     cloneContainer.style.position = 'fixed';
-    cloneContainer.style.top = '-9999px';
-    cloneContainer.style.left = '-9999px';
-    cloneContainer.style.width = original.offsetWidth + 'px';
-    cloneContainer.style.background = 'white';
-    cloneContainer.appendChild(original.cloneNode(true));
+    cloneContainer.style.top = '0';
+    cloneContainer.style.left = '0';
+    cloneContainer.style.zIndex = '-9999'; // ẩn
+    cloneContainer.style.backgroundColor = 'white';
+    cloneContainer.style.overflow = 'visible';
 
+    // Thêm clone vào container
+    cloneContainer.appendChild(clone);
     document.body.appendChild(cloneContainer);
 
-    html2canvas(cloneContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
+    // Đợi DOM render xong
+    setTimeout(() => {
+        const fullWidth = clone.scrollWidth;
+        const fullHeight = clone.scrollHeight;
 
-        const link = document.createElement('a');
-        link.href = imgData;
-        link.download = 'lich-hoc-full.png';
-        link.click();
+        // Set kích thước đủ rộng để tránh bị cắt
+        cloneContainer.style.width = fullWidth + 'px';
+        cloneContainer.style.height = fullHeight + 'px';
 
-        document.body.removeChild(cloneContainer);
-    });
+        html2canvas(cloneContainer, {
+            width: fullWidth,
+            height: fullHeight,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: fullWidth,
+            windowHeight: fullHeight,
+            scale: window.devicePixelRatio * 2,
+            useCORS: true
+        }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'lich-hoc-full.png';
+            link.click();
+
+            // Xóa phần clone
+            document.body.removeChild(cloneContainer);
+        });
+    }, 200);
 }
 
 document.getElementById('saveTimetableBtn').addEventListener('click', captureFullTimetable);
+
+
 
 
 

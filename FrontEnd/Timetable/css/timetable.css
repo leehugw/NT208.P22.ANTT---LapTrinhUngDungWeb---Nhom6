@@ -26,7 +26,7 @@
 }
 
 .scrollable-table thead tr:nth-child(2) th {
-    top: 40px; /* Đặt vị trí của hàng thứ hai, cách hàng đầu tiên một khoảng */
+    top: 0px; /* Đặt vị trí của hàng thứ hai, cách hàng đầu tiên một khoảng */
     z-index: 2;
 }
 
