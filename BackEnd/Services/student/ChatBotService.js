@@ -2,7 +2,7 @@ const url = 'http://localhost:11434/api/generate';
 
 const callQwen = async (question) => {
     const data = {
-        model: "qwen3:8b",
+        model: "qwen3:4b",
         prompt: question,
         stream: false
     };

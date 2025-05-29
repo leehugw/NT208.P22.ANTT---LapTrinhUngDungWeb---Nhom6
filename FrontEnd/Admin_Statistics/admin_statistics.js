@@ -328,14 +328,11 @@ async function fetchConversationsStatistics() {
         console.log('Session stats data:', data); // Add this to verify data
         
         document.getElementById('sessionCount').textContent = data.data.count; // Note the .data here
-        document.getElementById('averageSessionTime').textContent = 
-            `${data.data.averageDurationMinutes} phút`; // Add unit
         
     } catch (error) {
         console.error('Error fetching session statistics:', error);
         // Set default values or error message
         document.getElementById('sessionCount').textContent = '0';
-        document.getElementById('averageSessionTime').textContent = '0 phút';
     }
 }
 

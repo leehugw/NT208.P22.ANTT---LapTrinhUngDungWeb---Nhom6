@@ -25,7 +25,7 @@ const chatSessionSchema = new mongoose.Schema({
   student_id: {
     type: String,
     required: true,
-    ref: 'User'
+    ref: 'users'
   },
   messages: [messageSchema] // Embed messageSchema
 }, {

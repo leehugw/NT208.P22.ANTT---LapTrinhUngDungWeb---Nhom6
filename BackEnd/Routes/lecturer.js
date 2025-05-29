@@ -43,6 +43,6 @@ router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('lecturer'),
 router.get('/classstatistic', (req, res) => {
     res.sendFile(path.join(__dirname, '../../FrontEnd/LecturerClassStatistic/lecturerClassStatistic.html'));
 });
-router.get('/classes/:classId/statistics', authenticateToken, authorizeRoles('lecturer'), LecturerClassStatisticController.getClassStatisticByClassId);
+router.get('/classstatistic/data', authenticateToken, authorizeRoles('lecturer'), LecturerClassStatisticController.getClassStatisticByClassId);
 
 module.exports = router;

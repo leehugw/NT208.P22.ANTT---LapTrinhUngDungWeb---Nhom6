@@ -10,6 +10,10 @@ const chatController = require('../Controllers/student/studentChatController');
 const RecommendCourseController = require('../Controllers/student/RecommendCourseController');
 const CourseRecommendationController = require('../Controllers/student/CourseRecommendationController');
 const EnglishCertificateController = require('../Controllers/student/EnglishCertificateController');
+const { GetSession } = require('../Controllers/student/ChatBot_GetSession');
+const { AddNewSessions } = require('../Controllers/student/ChatBotNewSession');
+const { GetChatHistory } = require('../Controllers/student/ChatHistory');
+const { AddMessages } = require('../Controllers/student/ChatBot_addMess');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -80,5 +84,17 @@ router.post('/certificate', EnglishCertificateController.submitCertificate);
 
 // GET danh sách chứng chỉ đã nộp
 router.get('/certificate', EnglishCertificateController.getStudentCertificates);
+
+// Tạo session mới
+router.post('/chat-sessions', authenticateToken, AddNewSessions);
+
+// Lấy danh sách session
+router.get('/chat-sessions', authenticateToken, GetChatHistory);
+
+// Lấy chi tiết session
+router.get('/chat-sessions/:sessionId', authenticateToken, GetSession);
+
+// Thêm tin nhắn vào session
+router.post('/chat-sessions/:sessionId/messages', authenticateToken, AddMessages);
 
 module.exports = router;

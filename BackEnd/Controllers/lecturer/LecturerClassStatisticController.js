@@ -1,14 +1,20 @@
 const LecturerClassStatisticService = require('../../Services/lecturer/LecturerClassStatisticService');
-const ClassStatistic = require('../../../Database/SaveToMongo/models/ClassStatistic');
 
 exports.getClassStatisticByClassId = async (req, res) => {
     try {
-        const classCode = req.params.classId;
+        const classCode = req.query.class_id;
+        console.log("Thống kê lớp:", classCode);
+
+        if (!classCode) {
+            return res.status(400).json({ success: false, message: 'Thiếu mã lớp rồi' });
+        }
+
         const data = await LecturerClassStatisticService.getClassStatistics(classCode);
 
-        if (!data) {
-            return res.status(404).json({ success: false, message: 'Không tìm thấy thống kê lớp.' });
+        if (!data || !data.statistics) {
+            return res.status(404).json({ success: false, message: 'Không có dữ liệu thống kê' });
         }
+        await LecturerClassStatisticService.updateClassStats(classCode, data.statistics);
 
         res.status(200).json({
             success: true,
@@ -16,40 +22,28 @@ exports.getClassStatisticByClassId = async (req, res) => {
             statistics: data.statistics
         });
     } catch (err) {
-        console.error("🔥 Lỗi khi truy vấn MongoDB:", err);
-        res.status(500).json({ success: false, message: err.message });
+        console.error("Lỗi khi lấy thống kê:", err);
+        res.status(500).json({
+            success: false,
+            message: `Server lỗi: ${err.message}`
+        });
     }
 };
 
 exports.addOrUpdateClassStatistic = async (req, res) => {
     try {
-        const { classCode, statistics } = req.body;
-        if (!classCode || !statistics) {
-            return res.status(400).json({ success: false, message: 'Thiếu classCode hoặc statistics' });
+        const { classCode } = req.body;
+        if (!classCode) {
+            return res.status(400).json({ success: false, message: 'Thiếu mã lớp' });
         }
 
-        const existing = await ClassStatistic.findOne({ 'classInfo.classCode': classCode });
-        if (existing) {
-            // Cập nhật
-            existing.statistics = statistics;
-            await existing.save();
-            return res.json({ success: true, message: 'Đã cập nhật thống kê' });
-        } else {
-            // Tạo mới
-            const newStat = new ClassStatistic({
-                classInfo: {
-                    classCode,
-                    totalStudents: statistics.totalStudents || 0,
-                    startYear: statistics.startYear || 2022
-                },
-                statistics
-            });
+        const result = await LecturerClassStatisticService.getClassStatistics(classCode);
 
-            await newStat.save();
-            return res.json({ success: true, message: 'Đã tạo thống kê mới' });
-        }
+        await LecturerClassStatisticService.updateClassStats(classCode, result.statistics);
+
+        res.status(200).json({ success: true, message: 'Thống kê đã được cập nhật đầy đủ' });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, message: 'Lỗi server' });
+        console.error("Lỗi khi cập nhật MongoDB:", err.message);
+        res.status(500).json({ success: false, message: 'Server lỗi' });
     }
 };

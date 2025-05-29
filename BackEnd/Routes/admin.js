@@ -99,6 +99,8 @@ router.get('/bug-statistic', authenticateToken, authorizeRoles('admin'), async (
 });
 
 router.get('/total-users', authenticateToken, authorizeRoles('admin'), getTotalUsers);
+
+// lấy tổng số phiên trò chuyện và thời gian trung bình mỗi phiên
 router.get('/sessions/stats', authenticateToken, authorizeRoles('admin'), adminChatController.getSessionStats);
 
 module.exports = router;
