@@ -7,27 +7,43 @@ const AbnormalStudent = require('../../../Database/SaveToMongo/models/AbnormalSt
 const SIX_MONTHS_MS = 6 * 30 * 24 * 60 * 60 * 1000; // 6 tháng tính bằng ms
 
 async function detectAndSaveAbnormalStudentsByClass(class_id) {
-  // Kiểm tra xem có dữ liệu cập nhật trong 6 tháng gần đây không
   const now = Date.now();
   const sixMonthsAgo = new Date(now - SIX_MONTHS_MS);
 
-  // Tìm 1 bản ghi abnormal trong class này cập nhật gần nhất
-  const latestRecord = await AbnormalStudent.findOne({ class_id }).sort({ updatedAt: -1 });
-
+  // 1. Kiểm tra nếu đã có dữ liệu cập nhật trong 6 tháng
+  const latestRecord = await AbnormalStudent.findOne({ class_id }).sort({ updatedAt: -1 }).lean();
   if (latestRecord && latestRecord.updatedAt > sixMonthsAgo) {
-    // Dữ liệu mới, lấy từ db luôn, không tính lại
-    const cachedResults = await AbnormalStudent.find({ class_id });
-    return cachedResults;
+    return await AbnormalStudent.find({ class_id }).lean();
   }
 
-  // Nếu không có dữ liệu hoặc đã cũ, tính lại rồi lưu mới
+  // 2. Truy xuất dữ liệu đồng loạt
+  const students = await Student.find({ class_id }).lean();
+  if (students.length === 0) return [];
 
-  const students = await Student.find({ class_id });
-  const newestSemester = await Semester.findOne().sort({ start_time: -1 });
+  const studentIds = students.map(s => s.student_id);
+
+  const [newestSemester, academicList, enrollments] = await Promise.all([
+    Semester.findOne().sort({ start_time: -1 }).lean(),
+    StudentAcademic.find({ student_id: { $in: studentIds } }).lean(),
+    Enrollment.find({ student_id: { $in: studentIds } }).lean()
+  ]);
+
+  const academicMap = {};
+  academicList.forEach(a => { academicMap[a.student_id] = a; });
+
+  const enrollmentMap = {};
+  enrollments.forEach(e => {
+    if (e.semester_id === newestSemester.semester_id) {
+      enrollmentMap[e.student_id] = e;
+    }
+  });
+
   const results = [];
 
   for (const student of students) {
-    const academic = await StudentAcademic.findOne({ student_id: student.student_id });
+    const academic = academicMap[student.student_id];
+    const enrollmentLatest = enrollmentMap[student.student_id];
+
     if (!academic || !academic.semester_gpas?.length) {
       results.push({
         student_id: student.student_id,
@@ -40,22 +56,17 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
 
     const semester_gpas = academic.semester_gpas;
     const lastSemesterData = semester_gpas[semester_gpas.length - 1];
-    const lastSemesterId = lastSemesterData.semester_id;
     const lastGPA = lastSemesterData.semester_gpa ?? 0;
+    const lastSemesterId = lastSemesterData.semester_id;
     const cumulativeGPA = academic.cumulative_gpa ?? 0;
 
     const prevSemesterData = semester_gpas.length > 1 ? semester_gpas[semester_gpas.length - 2] : null;
     const prevGPA = prevSemesterData ? prevSemesterData.semester_gpa : null;
 
-    const enrollmentLatest = await Enrollment.findOne({
-      student_id: student.student_id,
-      semester_id: newestSemester.semester_id
-    });
-
     const creditsRegistered = enrollmentLatest ? enrollmentLatest.credits : 0;
 
-    let abnormalTypes = [];
-    let noteLines = [];
+    const abnormalTypes = [];
+    const noteLines = [];
 
     if (cumulativeGPA < 2.0) {
       abnormalTypes.push('low_cumulative_gpa');
@@ -77,20 +88,24 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
       noteLines.push('Không đăng ký học kỳ gần nhất');
     }
 
-    const abnormalStudentData = {
+    results.push({
       student_id: student.student_id,
       class_id: student.class_id,
       status: abnormalTypes.length > 0 ? "Cảnh báo" : "Đang học",
       note: noteLines.join('\n')
-    };
+    });
+  }
 
-    results.push(abnormalStudentData);
-
-    await AbnormalStudent.findOneAndUpdate(
-      { student_id: student.student_id },
-      abnormalStudentData,
-      { upsert: true, new: true }
-    );
+  // 3. Ghi dữ liệu đồng loạt vào database
+  const bulkOps = results.map(data => ({
+    updateOne: {
+      filter: { student_id: data.student_id },
+      update: { $set: data },
+      upsert: true
+    }
+  }));
+  if (bulkOps.length > 0) {
+    await AbnormalStudent.bulkWrite(bulkOps);
   }
 
   return results;
