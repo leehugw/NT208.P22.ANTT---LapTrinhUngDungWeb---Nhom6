@@ -48,11 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
             // Tạo mảng xu hướng GPA từ tất cả các học kỳ
             window.data.gpaTrend = window.data.semester.gpa.filter(g => typeof g === 'number' && !isNaN(g));
 
+            // Tính tỉ lệ sinh viên đạt ngoại ngữ
+            const totalStudents = result.classInfo.totalStudents || 0;
+            const studentsWithCertificates = [...new Set(stat.overall.certificates.map(cert => cert.studentId))].length; // Đếm sinh viên duy nhất
+            const languagePassRate = totalStudents > 0 ? ((studentsWithCertificates / totalStudents) * 100).toFixed(2) : "0.00";
+
             // Gán dữ liệu thô vào phần tử HTML (tổng SV, GPA, tín chỉ)
             document.querySelectorAll('.card p.text-3xl')[0].innerText = result.classInfo.totalStudents;
             document.querySelectorAll('.card p.text-3xl')[1].innerText = stat.overall.credits;
             document.querySelectorAll('.card p.text-3xl')[2].innerText = stat.overall.gpa;
-            document.querySelectorAll('.card p.text-3xl')[3].innerText = "Tạm ẩn";
+            document.querySelectorAll('.card p.text-3xl')[3].innerText = `${languagePassRate}%`;
 
             renderInitialCharts();
         })
