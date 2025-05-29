@@ -1,29 +1,3 @@
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-.navbar-container .nav-link {
-    color: black;
-    transition: color 0.3s ease-in-out;
-}
-
-.navbar-container .nav-link:hover,
-.navbar-container .nav-link.active {
-    color: #3D67BA;
-}
-
-.navbar-container .dropdown-menu .dropdown-item:hover {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-}
-
-.navbar-container .dropdown .btn-secondary:hover,
-.navbar-container .dropdown .btn-secondary:focus {
-    color: #3D67BA !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-}
-
 .background {
     background-color: #3D67BA;
 }

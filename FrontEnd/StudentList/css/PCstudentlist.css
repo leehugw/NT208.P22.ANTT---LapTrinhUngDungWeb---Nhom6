@@ -1,25 +1,4 @@
 @media (min-width: 768px) {
-    .navbar-container {
-        margin-top: -50px;
-    }
-
-    .logout-button {
-        margin-top: -50px;
-    }
-
-    .navbar {
-        height: 60px;
-    }
-
-    /* Thêm: Ẩn menu di động, hiển thị menu chính */
-    #mobile-menu {
-        display: none !important;
-    }
-
-    .navbar-nav {
-        display: flex !important;
-    }
-
     /* Thêm: Tối ưu table trên desktop */
     .table th, .table td {
         font-size: 1rem;

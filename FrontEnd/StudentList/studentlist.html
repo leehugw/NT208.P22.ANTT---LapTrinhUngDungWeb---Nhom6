@@ -15,9 +15,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link href="/FeedbackForm/feed.css" rel="stylesheet">
+    <link href="/Navbar/navbar_PC.css" rel="stylesheet">
+    <link href="/Navbar/navbar.css" rel="stylesheet">
+    <link href="/Navbar/navbar_mobile.css" rel="stylesheet">
     <link href="/StudentList/css/studentlist.css" rel="stylesheet">
     <link href="/StudentList/css/mobilestudentlist.css" rel="stylesheet">
     <link href="/StudentList/css/PCstudentlist.css" rel="stylesheet">
+    
 
 </head>
 
@@ -119,9 +123,6 @@
                 <select class="form-select custom-select-width" id="filter-major">
                     <option selected="">Ngành học</option>
                 </select>
-                <select class="form-select custom-select-width">
-                    <option selected="">Ghi chú</option>
-                </select>
                 <select class="form-select custom-select-width" id="filter-faculty">
                     <option selected="">Khoa</option>
                 </select>
@@ -167,6 +168,7 @@
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
+                            <td>-</td>
                             <td class="text-center">
                                 <a class="text" href="#">
                                     <i class="fas fa-external-link-alt"></i>
@@ -183,12 +185,8 @@
             </div>
         </div>
     </div>
-    <!-- Icon mở form -->
-    <a onclick="openFeedbackPopup()" style="cursor: pointer;"
-        class="position-fixed bottom-0 end-0 m-3 btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow"
-        title="Gửi phản hồi" id="feedbackBtn">
-        <i class="fas fa-comment-dots fs-4 text-white"></i>
-    </a>
+    <script src="/Navbar/navbar.js"></script>
+    <script src="/Admin_Menu/admin_menu.js"></script>
     <script src="/StudentList/studentlist.js"></script>
 </body>
 
