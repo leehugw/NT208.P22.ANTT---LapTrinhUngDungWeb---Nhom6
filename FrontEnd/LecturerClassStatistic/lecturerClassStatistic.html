@@ -23,32 +23,30 @@
 </head>
 
 <body>
-    <header class="bg-white shadow navbar fixed-top">
+    <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
+                <img alt="Logo" height="80" src="/Lecturer_Menu/logo.png" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
-                <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
+                <a class="nav-link mx-2 text-decoration-none btn-home" role="button">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
-                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
+                        Giảng viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Thống kê</a></li>
-                        <li><a class="dropdown-item" href="#">Theo dõi sinh viên</a></li>
-                        <li><a class="dropdown-item" href="#">Quản lý chatbot</a></li>
-                        <li><a class="dropdown-item" href="#">Xem thông tin giảng viên</a></li>
+                        <li><a class="dropdown-item btn-lecturer-classlist" role="button">Theo dõi lớp học</a></li>
+                        <li><a class="dropdown-item btn-lecturer-info" role="button">Hồ sơ Giảng viên</a></li>
                     </ul>
-
+                </div>
             </nav>
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button id="logout-button" class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
+            <button class="btn bg-white text-dar
+            k fw-bold rounded-0 ml-2 logout-button"><i
                     class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -58,20 +56,22 @@
                     <i class="fa-solid fa-x"></i>
                 </button>
             </div>
-            <a class="nav-link d-block text-decoration-none py-2 px-4" href="#home"><i
-                    class="fa-solid fa-house-chimney"></i>
-                Trang chủ</a>
-
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start btn-home" role="button">
+                <i class="fa-solid fa-house-chimney"></i> Trang chủ
+            </a>
             <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
-                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-                <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
+                data-bs-toggle="collapse" data-bs-target="#lecturerDropdown">
+                <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
-            <div class="collapse" id="studentDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Thống kê</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Theo dõi sinh viên</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Quản lý chatbot</a>
-                <a class="nav-link d-block text-decoration-none py-2 px-5" href="#">Xem thông tin giảng viên</a>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-classlist">Theo dõi lớp học</a>
             </div>
+            <div class="collapse" id="lecturerDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-info">Hồ sơ Giảng viên</a>
+            </div>
+            <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button">
+                <i class="fa-solid fa-sign-out"></i> Đăng xuất
+            </a>
         </nav>
     </header>
 
