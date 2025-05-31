@@ -23,7 +23,7 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
   const studentIds = students.map(s => s.student_id);
 
   const [newestSemester, academicList, enrollments] = await Promise.all([
-    Semester.findOne().sort({ start_time: -1 }).lean(),
+    Semester.findOne().sort({ semester_id: -1 }).lean(),
     StudentAcademic.find({ student_id: { $in: studentIds } }).lean(),
     Enrollment.find({ student_id: { $in: studentIds } }).lean()
   ]);
