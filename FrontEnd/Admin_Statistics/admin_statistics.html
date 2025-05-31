@@ -5,13 +5,14 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Menu Admin</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+
 
     <link href="/Navbar/navbar_PC.css" rel="stylesheet">
     <link href="/Navbar/navbar.css" rel="stylesheet">
@@ -32,14 +33,15 @@
                 <a class="nav-link mx-2 text-decoration-none btn-home" role="button">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
-                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: #3d67da;">
                         Admin
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item btn-admin-statistics" role="button">Thống kê</a></li>
                         <li><a class="dropdown-item btn-admin-student" role="button">Theo dõi sinh viên</a></li>
                         <li><a class="dropdown-item btn-admin-lecturer" role="button">Theo dõi giảng viên</a></li>
-                        <li><a class="dropdown-item btn-create-lecturer-account" role="button">Tạo tài khoản giảng viên</a></li>
+                        <li><a class="dropdown-item btn-create-lecturer-account" role="button">Tạo tài khoản giảng
+                                viên</a></li>
                         <li><a class="dropdown-item btn-feedback" role="button">Danh sách phản hồi</a></li>
                     </ul>
                 </div>
@@ -48,8 +50,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <button class="btn bg-white text-dar
-            k fw-bold rounded-0 ml-2 logout-button"><i
-                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            k fw-bold rounded-0 ml-2 logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -67,19 +68,24 @@
                 <i class="fa-solid fa-user"></i> Admin <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="adminDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-admin-statistics" role="button">Thống kê</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-admin-statistics"
+                    role="button">Thống kê</a>
             </div>
             <div class="collapse" id="adminDropdown">
-                <a class="btn-admin-student nav-link d-block text-decoration-none py-2 px-5 text-start" role="button">Theo dõi sinh viên</a>
+                <a class="btn-admin-student nav-link d-block text-decoration-none py-2 px-5 text-start"
+                    role="button">Theo dõi sinh viên</a>
             </div>
             <div class="collapse" id="adminDropdown">
-                <a class="btn-admin-lecturer nav-link d-block text-decoration-none py-2 px-5 text-start" role="button">Theo dõi giảng viên</a>
+                <a class="btn-admin-lecturer nav-link d-block text-decoration-none py-2 px-5 text-start"
+                    role="button">Theo dõi giảng viên</a>
             </div>
             <div class="collapse" id="adminDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-create-lecturer-account" role="button">Tạo tài khoản giảng viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-create-lecturer-account"
+                    role="button">Tạo tài khoản giảng viên</a>
             </div>
             <div class="collapse" id="adminDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-feedback" role="button">Danh sách phản hồi</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-feedback" role="button">Danh
+                    sách phản hồi</a>
             </div>
         </nav>
     </header>
@@ -91,9 +97,9 @@
                 <!-- Phần Thống kê Chatbot -->
                 <div class="card mb-4">
                     <div class="card-body">
-                    <h3 class="card-title mb-4 text-center">
-                        <i class="fas fa-robot text-primary me-2"></i>Thống kê Chatbot
-                    </h3>
+                        <h3 class="card-title mb-4 text-center">
+                            <i class="fas fa-robot text-primary me-2"></i>Thống kê Chatbot
+                        </h3>
                         <div class="row justify-content-center">
                             <!-- 3 thống kê con -->
                             <div class="col-md-3 col-6 mb-3">
@@ -124,31 +130,31 @@
                 <!-- Phần Thống kê Chung -->
                 <div class="card mb-4">
                     <div class="card-body">
-                    <h3 class="card-title mb-4 text-center">
-                        <i class="fas fa-robot text-primary me-2"></i>Thống kê Chatbot
-                    </h3>
+                        <h3 class="card-title mb-4 text-center">
+                            <i class="fas fa-robot text-primary me-2"></i>Thống kê Chatbot
+                        </h3>
                         <!-- Biểu đồ -->
                         <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="chart-container bg-light p-4 rounded border">
-                            <h5 class="d-flex align-items-center">
-                                <i class="fas fa-book me-2 text-success"></i>
-                                Môn học phổ biến
-                            </h5>
-                            <canvas id="popularSubjectsChart" height="250"></canvas>
+                            <div class="col-12">
+                                <div class="chart-container bg-light p-4 rounded border">
+                                    <h5 class="d-flex align-items-center">
+                                        <i class="fas fa-book me-2 text-success"></i>
+                                        Môn học phổ biến
+                                    </h5>
+                                    <canvas id="popularSubjectsChart" height="250"></canvas>
+                                </div>
                             </div>
-                        </div>
                         </div>
 
                         <!-- Bug section riêng -->
                         <div class="row">
-                        <div class="col-12">
-                            <div class="bug-report-card text-center shadow-sm">
-                            <i class="fas fa-bug fs-1 text-danger mb-3"></i>
-                            <h3 class="stat-value fw-bold" id="bugCount">0</h3>
-                            <p class="text-muted mb-0">Báo cáo lỗi hệ thống</p>
+                            <div class="col-12">
+                                <div class="bug-report-card text-center shadow-sm">
+                                    <i class="fas fa-bug fs-1 text-danger mb-3"></i>
+                                    <h3 class="stat-value fw-bold" id="bugCount">0</h3>
+                                    <p class="text-muted mb-0">Báo cáo lỗi hệ thống</p>
+                                </div>
                             </div>
-                        </div>
                         </div>
 
                     </div>
@@ -180,6 +186,8 @@
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/Navbar/navbar.js"></script>
     <script src="/Admin_Menu/admin_menu.js"></script>
     <script src="/Admin_Statistics/admin_statistics.js"></script>
