@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!res1.ok) throw new Error("Token hết hạn hoặc API lỗi");
             const { data: students, filters } = await res1.json();
+            console.log("Filters trả về từ server:", filters);
+
 
             // 2. Lưu filter ban đầu nếu chưa có
             if (!initialFilters && filters) {
@@ -54,12 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 status: abnormalMap.get(s.student_id)?.status || 'Đang học',
                 note: abnormalMap.get(s.student_id)?.note || '-'
             }));
-
-            const urlParams = new URLSearchParams(query);
-            const filterStatus = urlParams.get('status');
-            if (filterStatus) {
-                mergedStudents = mergedStudents.filter(s => s.status === filterStatus);
-            }
 
             // 7. Render
             studentCountElement.textContent = mergedStudents.length;
