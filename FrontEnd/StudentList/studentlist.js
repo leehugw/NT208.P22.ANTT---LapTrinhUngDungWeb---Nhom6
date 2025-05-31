@@ -55,11 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 note: abnormalMap.get(s.student_id)?.note || '-'
             }));
 
-            const statusFilter = req.query.status;
-
-            if (statusFilter) {
-                mergedStudents = mergedStudents.filter(s => s.status === statusFilter);
+            const urlParams = new URLSearchParams(query);
+            const filterStatus = urlParams.get('status');
+            if (filterStatus) {
+                mergedStudents = mergedStudents.filter(s => s.status === filterStatus);
             }
+
             // 7. Render
             studentCountElement.textContent = mergedStudents.length;
             studentTableBody.innerHTML = mergedStudents.map(s => `
