@@ -34,7 +34,6 @@ const getAllStudentsForAdmin = async (req, res) => {
     const classNames = [...new Set(enrichedStudents.map(s => s.class_id).filter(Boolean))];
     const majorIds = [...new Set(enrichedStudents.map(s => s.major_id).filter(Boolean))];
     const facultyNames = [...new Set(enrichedStudents.map(s => s.faculty_name).filter(Boolean))];
-    const statuses = ["Đang học", "Cảnh báo"];
 
     res.json({
       success: true,
@@ -43,7 +42,6 @@ const getAllStudentsForAdmin = async (req, res) => {
         classes: classNames,
         majors: majorIds,
         faculties: facultyNames,
-        statuses: statuses
       }
     });
 

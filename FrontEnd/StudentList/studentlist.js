@@ -49,12 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // 6. Ghép cảnh báo vào sinh viên
-            const mergedStudents = students.map(s => ({
+            let mergedStudents = students.map(s => ({
                 ...s,
                 status: abnormalMap.get(s.student_id)?.status || 'Đang học',
                 note: abnormalMap.get(s.student_id)?.note || '-'
             }));
 
+            const statusFilter = req.query.status;
+
+            if (statusFilter) {
+                mergedStudents = mergedStudents.filter(s => s.status === statusFilter);
+            }
             // 7. Render
             studentCountElement.textContent = mergedStudents.length;
             studentTableBody.innerHTML = mergedStudents.map(s => `

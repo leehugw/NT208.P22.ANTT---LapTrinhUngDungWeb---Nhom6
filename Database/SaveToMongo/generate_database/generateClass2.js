@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const path = require('path');
 
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 
 const Student = require('../models/Student');
 const Lecturer = require('../models/Lecturer');
