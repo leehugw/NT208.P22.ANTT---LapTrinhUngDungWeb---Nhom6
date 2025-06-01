@@ -12,8 +12,8 @@ const StudentAcademicSchema = new mongoose.Schema({
   // GPA từng học kỳ (mảng)
   semester_gpas: [
     {
-      semester_id: String,
-      semester_gpa: Number
+      semester_id:{type: String},
+      semester_gpa: {type: Number}
     }
   ],
 

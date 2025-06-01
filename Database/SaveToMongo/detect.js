@@ -1,10 +1,16 @@
-const Student = require('../../../Database/SaveToMongo/models/Student');
-const StudentAcademic = require('../../../Database/SaveToMongo/models/StudentAcademic');
-const Semester = require('../../../Database/SaveToMongo/models/Semester');
-const Enrollment = require('../../../Database/SaveToMongo/models/Enrollment');
-const AbnormalStudent = require('../../../Database/SaveToMongo/models/AbnormalStudent');
+const path = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-const SIX_MONTHS_MS = 6 * 30 * 24 * 60 * 60 * 1000; // 6 tháng tính bằng ms
+const Semester = require("./models/Semester");
+const Student = require('./models/Student');
+const StudentAcademic = require('./models/StudentAcademic');
+const Enrollment = require('./models/Enrollment');
+const AbnormalStudent = require('./models/AbnormalStudent');
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose event: connected');
+});
 
 function parseSemesterId(id) {
   // id dạng "HK120232024"
@@ -25,18 +31,14 @@ function compareSemesterId(a, b) {
   return sa.term - sb.term;
 }
 
-async function detectAndSaveAbnormalStudentsByClass(class_id) {
-  const now = Date.now();
-  const sixMonthsAgo = new Date(now - SIX_MONTHS_MS);
+const SIX_MONTHS_MS = 6 * 30 * 24 * 60 * 60 * 1000; // 6 tháng tính bằng ms
 
-  // 1. Kiểm tra nếu đã có dữ liệu cập nhật trong 6 tháng
-  const latestRecord = await AbnormalStudent.findOne({ class_id }).sort({ updatedAt: -1 }).lean();
-  if (latestRecord && latestRecord.updatedAt > sixMonthsAgo) {
-    return await AbnormalStudent.find({ class_id }).lean();
-  }
+async function detectAbnormalStudentsByClass(class_id) {
+  console.log('--- Bắt đầu kiểm tra lớp:', class_id);
 
-  // 2. Truy xuất dữ liệu đồng loạt
+  // Truy xuất dữ liệu đồng loạt
   const students = await Student.find({ class_id }).lean();
+  console.log('Danh sách sinh viên trong lớp:', students.map(s => s.student_id));
   if (students.length === 0) return [];
 
   const studentIds = students.map(s => s.student_id);
@@ -47,10 +49,11 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
     Enrollment.find({ student_id: { $in: studentIds } }).lean()
   ]);
 
-  console.log('Newest semester:', newestSemester);
+  console.log('Học kỳ mới nhất:', newestSemester);
 
   const academicMap = {};
   academicList.forEach(a => { academicMap[a.student_id] = a; });
+  console.log('Bản đồ học tập:', academicMap);
 
   const enrollmentMap = {};
   enrollments.forEach(e => {
@@ -58,14 +61,18 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
       enrollmentMap[e.student_id] = e;
     }
   });
+  console.log('Bản đồ đăng ký học kỳ gần nhất:', enrollmentMap);
 
   const results = [];
 
   for (const student of students) {
+    console.log('----- Xử lý sinh viên:', student.student_id);
+
     const academic = academicMap[student.student_id];
     const enrollmentLatest = enrollmentMap[student.student_id];
 
     if (!academic || !academic.semester_gpas?.length) {
+      console.log('Chưa có dữ liệu học tập cho sinh viên này');
       results.push({
         student_id: student.student_id,
         class_id: student.class_id,
@@ -76,6 +83,7 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
     }
 
     const semester_gpas = academic.semester_gpas.sort((a, b) => compareSemesterId(a.semester_id, b.semester_id));
+    console.log(semester_gpas);
     const lastSemesterData = semester_gpas[semester_gpas.length - 1];
     const lastGPA = lastSemesterData.semester_gpa ?? 0;
     const lastSemesterId = lastSemesterData.semester_id;
@@ -109,29 +117,58 @@ async function detectAndSaveAbnormalStudentsByClass(class_id) {
       noteLines.push('Không đăng ký học kỳ gần nhất');
     }
 
+    const status = abnormalTypes.length > 0 ? "Cảnh báo" : "Đang học";
+    const note = noteLines.join('\n');
+
+    console.log(`Kết quả sinh viên ${student.student_id}:`, { status, note });
+
     results.push({
       student_id: student.student_id,
       class_id: student.class_id,
-      status: abnormalTypes.length > 0 ? "Cảnh báo" : "Đang học",
-      note: noteLines.join('\n')
+      status,
+      note
     });
   }
 
-  // 3. Ghi dữ liệu đồng loạt vào database
-  const bulkOps = results.map(data => ({
-    updateOne: {
-      filter: { student_id: data.student_id },
-      update: { $set: data },
-      upsert: true
-    }
-  }));
-  if (bulkOps.length > 0) {
-    await AbnormalStudent.bulkWrite(bulkOps);
-  }
-
+  console.log('--- Kết quả tổng thể:', results);
   return results;
 }
 
-module.exports = {
-  detectAndSaveAbnormalStudentsByClass
-};
+async function detectAllClasses() {
+  // Lấy danh sách tất cả class_id duy nhất trong Student
+  const classes = await Student.distinct('class_id');
+  console.log('Danh sách lớp cần kiểm tra:', classes);
+
+  for (const class_id of classes) {
+    console.log(`\n=== Xử lý lớp: ${class_id} ===`);
+    const results = await detectAbnormalStudentsByClass(class_id);
+    console.log(`Kết quả lớp ${class_id}:`, results);
+  }
+
+  console.log('Hoàn thành kiểm tra tất cả các lớp');
+}
+
+// Gọi hàm chạy kiểm tra toàn bộ các lớp
+detectAllClasses()
+  .then(() => console.log('Xử lý xong tất cả các lớp'))
+  .catch(err => console.error('Lỗi:', err));
+
+
+async function run() {
+  try {
+    console.log('Connecting to MongoDB...');
+    await mongoose.connect(process.env.DB_URI);
+
+    console.log('✅ MongoDB connected');
+
+    const newestSemester = await Semester.findOne().sort({ semester_id: -1 }).lean();
+    console.log('Tìm thấy học kỳ:', newestSemester);
+    detectAbnormalStudentsNoEnrollment();
+
+  } catch (err) {
+    console.error('❌ Lỗi:', err);
+  }
+  // await mongoose.disconnect(); // comment tạm để test
+}
+
+run();
