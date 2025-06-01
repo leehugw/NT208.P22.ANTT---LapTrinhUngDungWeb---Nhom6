@@ -5,7 +5,8 @@ const SemesterSchema = new mongoose.Schema({
   semester_name: { type: String, required: true, trim: true },
   start_date: { type: Date, required: true }, 
   end_date: { type: Date, required: true } 
-}, {collection: "semesters"}, { timestamps: true });
+}, { 
+  collection: "semesters"});
 
 const Semester = mongoose.model("Semester", SemesterSchema);
 

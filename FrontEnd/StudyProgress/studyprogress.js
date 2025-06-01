@@ -462,7 +462,7 @@ function StudentAcademicData(token) {
             const progressChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Đại Cương', 'Cơ Sở Ngành', 'Chuyên ngành', 'Tự Do'],
+                    labels: ['Đại Cương', 'Cơ Sở Ngành', 'Chuyên ngành', 'Tốt nghiệp', 'Tự Do'],
                     datasets: [
                         {
                             label: 'Tín chỉ đã hoàn thành',
@@ -470,6 +470,7 @@ function StudentAcademicData(token) {
                                 progressDetails.general_education,
                                 progressDetails.major_foundation,
                                 progressDetails.major_core,
+                                progressDetails.graduation_progress,
                                 progressDetails.elective_credits
                             ],
                             backgroundColor: '#80C1FE',
@@ -480,6 +481,7 @@ function StudentAcademicData(token) {
                                 requiredProgress.required_general_education,
                                 requiredProgress.required_major_foundation,
                                 requiredProgress.required_major_core,
+                                requiredProgress.required_graduation_project,
                                 requiredProgress.required_elective_credits
                             ],
                             backgroundColor: '#2B57D6',

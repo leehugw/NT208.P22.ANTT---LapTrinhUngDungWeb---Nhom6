@@ -3,17 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Tiến độ học tập</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Thống kê lớp học</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
 
     <link href="/FeedbackForm/feed.css" rel="stylesheet">
     <link href="/LecturerClassStatistic/lecturerClassStatistic.css" rel="stylesheet">
@@ -32,7 +28,7 @@
                 <a class="nav-link mx-2 text-decoration-none btn-home" role="button">Trang chủ</a>
                 <div class="dropdown mx-2">
                     <a class="btn btn-secondary dropdown-toggle bg-white text-dark border-0" href="#" role="button"
-                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #3d67da;">
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="color: #3d67da;">
                         Giảng viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -45,8 +41,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <button class="btn bg-white text-dar
-            k fw-bold rounded-0 ml-2 logout-button"><i
-                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            k fw-bold rounded-0 ml-2 logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -64,10 +59,12 @@
                 <i class="fa-solid fa-user"></i> Giảng viên <i class="fa-solid fa-chevron-down float-end"></i>
             </button>
             <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-classlist">Theo dõi lớp học</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-classlist">Theo dõi
+                    lớp học</a>
             </div>
             <div class="collapse" id="lecturerDropdown">
-                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-info">Hồ sơ Giảng viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 text-start btn-lecturer-info">Hồ sơ Giảng
+                    viên</a>
             </div>
             <a class="nav-link d-block text-decoration-none py-2 px-4 text-start logout-button">
                 <i class="fa-solid fa-sign-out"></i> Đăng xuất
@@ -162,14 +159,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
+    <footer
+        class="font-roboto footer-nav d-flex justify-content-between align-items-center px-3 py-2 text-light mt-auto">
         <a href="#" class="text-light text-decoration-none me-auto">Privacy Policy</a>
         <a href="#" class="text-light text-decoration-none d-flex align-items-center">
             <span class="me-1">Help</span>
             <i class="fas fa-question-circle"></i>
         </a>
     </footer>
-    <script src="/Navbar/navbar.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/Navbar/navbar.js"></script>
     <script src="/Lecturer_Menu/lecturer_menu.js"></script>
     <script src="/LecturerClassStatistic/lecturerClassStatistic.js"></script>
 </body>

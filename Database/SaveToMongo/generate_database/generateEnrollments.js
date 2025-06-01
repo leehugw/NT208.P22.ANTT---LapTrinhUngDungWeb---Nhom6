@@ -7,7 +7,7 @@ const Faculty = require("../models/Faculty");
 const TrainingProgram = require("../models/TrainingProgram");
 const path = require("path");
 
-require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
+require("dotenv").config({ path: path.resolve(__dirname, "../../../.env") });
 
 async function generateEnrollments() {
   try {
@@ -51,7 +51,7 @@ async function generateEnrollments() {
     };
 
     const sortSubjects = (subjectsToSort) => {
-      const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN'];
+      const typeOrder = ['CSN', 'CSNN', 'ĐC', 'CN', 'CNTC', 'TN', 'TTTN', 'CĐTN'];
       return subjectsToSort.sort((a, b) => {
         const typeCompare = typeOrder.indexOf(a.subject_type) - typeOrder.indexOf(b.subject_type);
         if (typeCompare !== 0) return typeCompare;
@@ -117,7 +117,7 @@ async function generateEnrollments() {
       const allLearnedSubjects = new Set();
 
       for (const semester of selectedSemesters) {
-        const shuffledSubjects = [...subjectsOfStudent].sort(() => 0.5 - Math.random());
+        const shuffledSubjects = [...subjectsOfStudent];
 
         const selectedSubjects = [];
         const classIds = [];
@@ -127,6 +127,7 @@ async function generateEnrollments() {
         for (const subject of shuffledSubjects) {
           if ((subject.theory_credits + subject.practice_credits) === 0) continue;
 
+          if (allLearnedSubjects.has(subject.subject_id)) continue;
           const prerequisitesRaw = subject.prerequisite_id || [];
           const prerequisites = prerequisitesRaw.filter(id => id.trim() !== '');
           const hasAllPrerequisites = prerequisites.length === 0 || prerequisites.every(prereqId => allLearnedSubjects.has(prereqId));

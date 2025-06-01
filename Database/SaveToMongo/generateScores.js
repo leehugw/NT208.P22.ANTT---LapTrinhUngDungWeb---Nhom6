@@ -5,7 +5,7 @@ const Enrollment = require("./models/Enrollment");
 const Score = require("./models/Score");
 
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../BackEnd/.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 // Kết nối MongoDB
 mongoose.connect(process.env.DB_URI, {})
