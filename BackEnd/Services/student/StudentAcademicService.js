@@ -27,6 +27,7 @@ async function calculateStudentAcademic(student_id) {
     const firstAttemptScores = {};
     const highestPassedScores = {};
 
+
     scores.forEach(score => {
         const scoreHP = parseFloat(score.score_HP);
         const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
@@ -106,7 +107,6 @@ async function calculateStudentAcademic(student_id) {
 
     // Tính tiến độ tốt nghiệp
     const passedScores = scores.filter(s => s.status === "Đậu");
-    const passedSubjects = subjects.filter(s => passedScores.some(ps => ps.subject_id === s.subject_id));
 
     const requiredCourses = new Set(major.required_courses);
     const progress = {
@@ -117,6 +117,9 @@ async function calculateStudentAcademic(student_id) {
         elective_credits: 0
     };
 
+    let majorCoreCredits = 0;
+    let extraMajorSubjects = [];
+
     passedScores.forEach(score => {
         const subject = subjects.find(s => s.subject_id === score.subject_id);
         if (!subject) return;
@@ -124,13 +127,30 @@ async function calculateStudentAcademic(student_id) {
         if (requiredCourses.has(subject.subject_id)) {
             switch (subject.subject_type) {
                 case "ĐC": progress.general_education += credits; break;
-                case "CN": case "CNTC": case "ĐA": progress.major_core += credits; break;
+                case "CN": case "CNTC": case "ĐA":
+                    if (majorCoreCredits < major.progress_details.required_major_core) {
+                        progress.major_core += credits;
+                        majorCoreCredits += credits;
+                    } else {
+                        // Môn CN dư ra khi đã đủ tín chỉ chuyên ngành
+                        extraMajorSubjects.push({ subject_id: subject.subject_id, credits });
+                    }
+                    break;
                 case "CSNN": case "CSN": progress.major_foundation += credits; break;
                 case "TTTN": case "TN": case "KLTN": case "CĐTN": progress.graduation_project += credits; break;
             }
         } else {
             progress.elective_credits += credits;
         }
+    });
+
+    extraMajorSubjects.slice(0, 3).forEach(subject => {
+        progress.graduation_project += subject.credits;
+    });
+
+    // Các môn chuyên ngành dư còn lại → cộng vào tự chọn
+    extraMajorSubjects.slice(3).forEach(subject => {
+        progress.elective_credits += subject.credits;
     });
 
     const limitedProgress = { ...progress };
