@@ -51,56 +51,62 @@ class LecturerClassStatisticService {
             });
 
             const getScoreBucket = (type, scoreStr) => {
-                if (!scoreStr || typeof scoreStr !== 'string') return '<unknown>';
+                if (!scoreStr || typeof scoreStr !== 'string') return null;
                 const scoreTrimmed = scoreStr.trim();
+                const score = parseFloat(scoreTrimmed.replace(/[^\d.]/g, ''));
 
                 if (type === 'toeic') {
-                    if (scoreTrimmed === '>800') return '>800';
-                    const score = parseFloat(scoreTrimmed);
-                    if (isNaN(score)) return '<unknown>';
-                    if (score < 500) return '<500';
-                    if (score <= 600) return '500-600';
-                    if (score <= 700) return '601-700';
-                    if (score <= 800) return '701-800';
-                    return '>800';
+                    if (['<500', '500-600', '601-700', '701-800', '>800'].includes(scoreTrimmed)) return scoreTrimmed;
+                    if (!isNaN(score)) {
+                        if (score < 500) return '<500';
+                        if (score <= 600) return '500-600';
+                        if (score <= 700) return '601-700';
+                        if (score <= 800) return '701-800';
+                        return '>800';
+                    }
                 }
+
                 if (type === 'toefl') {
-                    if (scoreTrimmed === '>110') return '>110';
-                    const score = parseFloat(scoreTrimmed);
-                    if (isNaN(score)) return '<unknown>';
-                    if (score < 42) return '<42';
-                    if (score <= 71) return '42-71';
-                    if (score <= 94) return '72-94';
-                    if (score <= 110) return '95-110';
-                    return '>110';
+                    if (['<42', '42-71', '72-94', '95-110', '>110'].includes(scoreTrimmed)) return scoreTrimmed;
+                    if (!isNaN(score)) {
+                        if (score < 42) return '<42';
+                        if (score <= 71) return '42-71';
+                        if (score <= 94) return '72-94';
+                        if (score <= 110) return '95-110';
+                        return '>110';
+                    }
                 }
+
                 if (type === 'ielts') {
-                    if (scoreTrimmed === '>7.5') return '>7.5';
-                    const score = parseFloat(scoreTrimmed);
-                    if (isNaN(score)) return '<unknown>';
-                    if (score < 4.5) return '<4.5';
-                    if (score <= 5.5) return '4.5-5.5';
-                    if (score <= 6.5) return '5.6-6.5';
-                    if (score <= 7.5) return '6.6-7.5';
-                    return '>7.5';
+                    if (['<4.5', '4.5-5.5', '5.6-6.5', '6.6-7.5', '>7.5'].includes(scoreTrimmed)) return scoreTrimmed;
+                    if (!isNaN(score)) {
+                        if (score < 4.5) return '<4.5';
+                        if (score <= 5.5) return '4.5-5.5';
+                        if (score <= 6.5) return '5.6-6.5';
+                        if (score <= 7.5) return '6.6-7.5';
+                        return '>7.5';
+                    }
                 }
+
                 if (type === 'vnu') {
-                    if (scoreTrimmed === '>210') return '>210';
-                    const score = parseFloat(scoreTrimmed);
-                    if (isNaN(score)) return '<unknown>';
-                    if (score < 120) return '<120';
-                    if (score <= 150) return '120-150';
-                    if (score <= 180) return '151-180';
-                    if (score <= 210) return '181-210';
-                    return '>210';
+                    if (['<120', '120-150', '151-180', '181-210', '>210'].includes(scoreTrimmed)) return scoreTrimmed;
+                    if (!isNaN(score)) {
+                        if (score < 120) return '<120';
+                        if (score <= 150) return '120-150';
+                        if (score <= 180) return '151-180';
+                        if (score <= 210) return '181-210';
+                        return '>210';
+                    }
                 }
+
                 if (type === 'cambridge') {
-                    const scoreUpper = scoreTrimmed.toUpperCase();
-                    const bucketLabels = ['<A2', 'A2-B1', 'B1-B2', 'B2-C1', 'C1-C2'];
-                    return bucketLabels.includes(scoreUpper) ? scoreUpper : '<unknown>';
+                    const upper = scoreTrimmed.toUpperCase();
+                    if (['<A2', 'A2-B1', 'B1-B2', 'B2-C1', 'C1-C2'].includes(upper)) return upper;
                 }
-                return '<unknown>';
+
+                return null;
             };
+
 
             const updateLangStats = (langStats, cert) => {
                 const type = cert.type?.toLowerCase();
