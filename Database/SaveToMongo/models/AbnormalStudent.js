@@ -6,6 +6,9 @@ const abnormalStudentSchema = new mongoose.Schema({
   status: { type: String, required: true }, // "Cảnh báo" hoặc "Đang học"
   note: { type: String },
   detect_date: { type: Date, default: Date.now },
+},{
+  collection: 'abnormalstudents',
+  timestamps: true
 });
 
 module.exports = mongoose.model('AbnormalStudent', abnormalStudentSchema);

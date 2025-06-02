@@ -64,7 +64,7 @@ router.get('/lecturers', (req, res) => {
 });
 router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAllLecturersForAdmin); //trả về file json để hiển thị
 
-router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('admin'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
+router.get('/abnormal', authenticateToken, authorizeRoles('admin'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
 
 // Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
 router.get('/create-lecturer-account', (req, res) => {

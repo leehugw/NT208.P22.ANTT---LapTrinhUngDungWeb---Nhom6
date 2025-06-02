@@ -14,6 +14,8 @@ const { GetSession } = require('../Controllers/student/ChatBot_GetSession');
 const { AddNewSessions } = require('../Controllers/student/ChatBotNewSession');
 const { GetChatHistory } = require('../Controllers/student/ChatHistory');
 const { AddMessages } = require('../Controllers/student/ChatBot_addMess');
+const detectAbnormalController = require('../Controllers/student/detectAbnormal');
+const notificationController = require('../Controllers/student/NotificationController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -43,7 +45,7 @@ router.get('/english-certificate', (req, res) => {
 });
 
 //Route hien thi cau hoi va tra loi chatbot
- router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
+router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
 
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
@@ -55,6 +57,8 @@ router.get('/schedule-optimize', (req, res) => {
 
     res.sendFile(pagePath);
 });
+
+router.get('/abnormal', authenticateToken, authorizeRoles('student'), detectAbnormalController.getAbnormalStudentsByStudentId);
 
 
 // Route để phục vụ trang HTML
@@ -77,7 +81,7 @@ router.get('/chatbot', (req, res) => {
 });
 
 // Route gợi ý môn học cho sinh viên
-router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses );
+router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses);
 
 // POST chứng chỉ Anh văn
 router.post('/certificate', EnglishCertificateController.submitCertificate);
@@ -96,5 +100,7 @@ router.get('/chat-sessions/:sessionId', authenticateToken, GetSession);
 
 // Thêm tin nhắn vào session
 router.post('/chat-sessions/:sessionId/messages', authenticateToken, AddMessages);
+
+router.put('/notifications/mark-read', authenticateToken, authorizeRoles('student'), notificationController.markNotificationsRead);
 
 module.exports = router;

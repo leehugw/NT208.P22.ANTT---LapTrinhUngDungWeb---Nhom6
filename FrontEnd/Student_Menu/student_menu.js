@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const urlToken = urlParams.get('token');
+    fetchNotificationsAndUpdateBadge();
 
     if (urlToken) {
         localStorage.setItem('token', urlToken); // hoặc sessionStorage nếu bạn thích
@@ -107,7 +108,116 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    document.querySelectorAll('.notification-button').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+                return window.location.href = "/";
+            } else {
+
+                fetch(`/api/student/abnormal`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error("Lấy thông báo thất bại!");
+                        return res.json();
+                    })
+                    .then(notifications => {
+                        const list = document.getElementById('notificationList');
+                        const badge = document.getElementById('notificationBadge');
+                        const isVisible = list.style.display === 'block';
+                        list.style.display = isVisible ? 'none' : 'block';
+
+                        if (!isVisible) {
+                            // Khi mở dropdown, ẩn badge vì coi như đã đọc
+                            badge.style.display = 'none';
+
+                            // Gọi API đánh dấu đã đọc
+                            fetch('/api/student/notifications/mark-read', {
+                                method: 'PUT',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`
+                                }
+                            }).then(res => {
+                                if (!res.ok) console.warn('Đánh dấu thông báo đã đọc thất bại');
+                                // Không cần xử lý gì thêm ở client
+                            }).catch(console.error);
+                        }
+
+                        if (!notifications.data || notifications.data.length === 0) {
+                            list.innerHTML = '<div style="padding:10px; text-align:center; color:#888;">Không có thông báo nào.</div>';
+                            badge.style.display = 'none'; // ẩn badge
+                            return;
+                        }
+
+                        list.innerHTML = ''; // xóa nội dung cũ
+                        notifications.data.forEach(noti => {
+                            const div = document.createElement('div');
+                            div.style.padding = '8px';
+                            div.style.borderBottom = '1px solid #eee';
+                            const noteText = noti.note ? noti.note.replace(/\n/g, '<br>') : '(Không có nội dung)';
+                            const timeText = new Date(noti.updatedAt).toLocaleString();
+
+                            div.innerHTML = `
+                        <div>${noteText}</div>
+                        <small style="color:#666;">${timeText}</small>
+                    `;
+                            list.appendChild(div);
+                        });
+
+                        badge.textContent = notifications.data.length;
+                    })
+                    .catch(err => {
+                        alert(err.message);
+                        console.error(err);
+                    });
+            }
+
+        });
+    });
+
 });
+
+function fetchNotificationsAndUpdateBadge() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    fetch(`/api/student/abnormal`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Lấy thông báo thất bại!");
+            return res.json();
+        })
+       .then(notifications => {
+    const badge = document.getElementById('notificationBadge');
+    if (!notifications.data || notifications.data.length === 0) {
+        badge.style.display = 'none';
+        return;
+    }
+
+    // Tính số thông báo chưa đọc
+    const unreadCount = notifications.data.filter(n => !n.read).length;
+
+    if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.style.display = 'inline-block';
+    } else {
+        badge.style.display = 'none';
+    }
+})
+
+        .catch(err => {
+            console.error("Lỗi lấy thông báo:", err);
+        });
+}
 
 
 function openFeedbackPopup() {

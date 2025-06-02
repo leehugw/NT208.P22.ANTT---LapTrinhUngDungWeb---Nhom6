@@ -2,12 +2,12 @@ const { detectAndSaveAbnormalStudentsByClass } = require('../../Services/lecture
 
 const getAbnormalStudentsByClass = async (req, res) => {
   try {
-    const class_id = req.params.class_id;
+    const class_id = req.query.classId;
     if (!class_id) {
       return res.status(400).json({ message: 'Thiếu class_id' });
     }
 
-    const results = await detectAndSaveAbnormalStudentsByClass(class_id);
+    const results = await detectAndSaveAbnormalStudentsByClass({class_id});
     return res.status(200).json({ data: results });
   } catch (error) {
     console.error('Lỗi khi phát hiện sinh viên bất thường:', error);

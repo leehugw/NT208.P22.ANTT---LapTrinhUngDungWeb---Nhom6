@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 4. Gọi API abnormal cho từng class_id song song
             const abnormalResults = await Promise.all(classIds.map(async classId => {
-                const res = await fetch(`/api/admin/abnormal/${classId}`, {
+                const res = await fetch(`/api/admin/abnormal?classId=${classId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (!res.ok) return [];
@@ -50,11 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 abnormalMap.set(s.student_id, { status: s.status, note: s.note });
             });
 
+
             // 6. Ghép cảnh báo vào sinh viên
             let mergedStudents = students.map(s => ({
                 ...s,
                 status: abnormalMap.get(s.student_id)?.status || 'Đang học',
-                note: abnormalMap.get(s.student_id)?.note || '-'
+                note: (abnormalMap.get(s.student_id)?.note || "").replace(/\n/g, "<br>")
             }));
 
             // 7. Render

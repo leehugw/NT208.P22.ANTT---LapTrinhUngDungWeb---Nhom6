@@ -17,7 +17,8 @@
     <link href="/Navbar/navbar_PC.css" rel="stylesheet">
     <link href="/Navbar/navbar.css" rel="stylesheet">
     <link href="/Navbar/navbar_mobile.css" rel="stylesheet">
-    <link href="stu_menu.css" rel="stylesheet">
+    <link href="/Student_Menu/stu_menu.css" rel="stylesheet">
+    <link href="/Student_Menu/notification.css" rel="stylesheet">
 
 </head>
 
@@ -47,8 +48,26 @@
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn bg-white text-dar
-            k fw-bold rounded-0 ml-2 logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0">
+                <button class="btn btn-link text-dark position-relative notification-button" title="Thông báo">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span id="notificationBadge"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+                </button>
+
+                <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+
+
+
+            <!-- Hộp hiện thông báo -->
+            <div id="notificationList"
+                style="position:absolute; top:40px; right:0; width:300px; max-height:400px; overflow-y:auto; background:#fff; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index:1000;">
+                <!-- Thông báo sẽ được chèn vào đây -->
+            </div>
+
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
