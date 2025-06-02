@@ -4,11 +4,14 @@ const AbnormalStudent = require('../../../Database/SaveToMongo/models/AbnormalSt
 
 const getAllStudentsForAdmin = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+
     if (req.user.role !== 'admin') {
       return res.status(403).json({ success: false, message: 'Không có quyền truy cập' });
     }
 
-    // Lấy faculties và map major -> faculty
     const faculties = await Faculty.find().select('faculty_name majors');
     const majorToFacultyMap = new Map();
     faculties.forEach(fac => {
@@ -17,7 +20,6 @@ const getAllStudentsForAdmin = async (req, res) => {
       });
     });
 
-    // Build query filter cho students
     const query = {};
     if (req.query.student_id) query.student_id = { $regex: req.query.student_id, $options: 'i' };
     if (req.query.class_id) query.class_id = req.query.class_id;
@@ -27,17 +29,17 @@ const getAllStudentsForAdmin = async (req, res) => {
       if (faculty) query.major_id = { $in: faculty.majors };
     }
 
-    // Lọc theo status nếu có
     if (req.query.status) {
-      // Tìm student_id có status tương ứng trong AbnormalStudent
-      const abnormalStudents = await AbnormalStudent.find({ status: req.query.status }).select('student_id');
+      const abnormalStudents = await AbnormalStudent.find({ status: req.query.status });
       const studentIds = abnormalStudents.map(a => a.student_id);
 
       if (studentIds.length === 0) {
-        // Nếu không có student nào thỏa điều kiện status, trả về rỗng luôn
         return res.json({
           success: true,
           data: [],
+          total: 0,
+          page: 1,
+          pages: 0,
           filters: {
             classes: [],
             majors: [],
@@ -47,7 +49,6 @@ const getAllStudentsForAdmin = async (req, res) => {
         });
       }
 
-      // Nếu đã có filter student_id trước đó (ví dụ từ student_id regex), kết hợp filter
       if (query.student_id) {
         query.$and = [
           { student_id: query.student_id },
@@ -59,25 +60,43 @@ const getAllStudentsForAdmin = async (req, res) => {
       }
     }
 
-    // Lấy danh sách students với query đã build
-    const students = await Student.find(query).select('name student_id contact.school_email class_id major_id');
+    const [students, total] = await Promise.all([
+      Student.find(query)
+        .select('name student_id contact.school_email class_id major_id')
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Student.countDocuments(query)
+    ]);
 
-    const enrichedStudents = students.map(s => ({
-      ...s.toObject(),
-      faculty_name: majorToFacultyMap.get(s.major_id) || 'Không rõ'
-    }));
+    // Ghép dữ liệu trạng thái và ghi chú từ bảng AbnormalStudent
+    const abnormalMap = new Map();
+    const abnormalData = await AbnormalStudent.find({ student_id: { $in: students.map(s => s.student_id) } });
+    abnormalData.forEach(a => {
+      abnormalMap.set(a.student_id, { status: a.status, note: a.note });
+    });
 
-    // Lấy filter status từ bảng AbnormalStudent
+    const enrichedStudents = students.map(s => {
+      const abnormal = abnormalMap.get(s.student_id);
+      return {
+        ...s,
+        faculty_name: majorToFacultyMap.get(s.major_id) || 'Không rõ',
+        status: abnormal?.status || 'Đang học',
+        note: abnormal?.note || '-'
+      };
+    });
+
     const statuses = await AbnormalStudent.distinct('status');
-
     const classNames = [...new Set(enrichedStudents.map(s => s.class_id).filter(Boolean))];
     const majorIds = [...new Set(enrichedStudents.map(s => s.major_id).filter(Boolean))];
     const facultyNames = [...new Set(enrichedStudents.map(s => s.faculty_name).filter(Boolean))];
 
-    // Trả dữ liệu + filter
     return res.json({
       success: true,
       data: enrichedStudents,
+      total,
+      page,
+      pages: Math.ceil(total / limit),
       filters: {
         classes: classNames,
         majors: majorIds,
@@ -93,4 +112,3 @@ const getAllStudentsForAdmin = async (req, res) => {
 };
 
 module.exports = { getAllStudentsForAdmin };
-

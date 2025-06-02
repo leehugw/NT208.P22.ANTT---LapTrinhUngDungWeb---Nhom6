@@ -66,6 +66,16 @@ router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAll
 
 router.get('/abnormal', authenticateToken, authorizeRoles('admin'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
 
+router.get('/abnormal/all', authenticateToken, authorizeRoles('admin'), async (req, res) => {
+    try {
+        const abnormalStudents = await AbnormalStudent.find().select('student_id status note');
+        res.json(abnormalStudents);
+    } catch (err) {
+        console.error('Error fetching all abnormal students:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
 router.get('/create-lecturer-account', (req, res) => {
   const pagePath = path.join(__dirname, '../../FrontEnd/Admin_Create_Lecturer_Accounts/admin_create_accounts.html');
