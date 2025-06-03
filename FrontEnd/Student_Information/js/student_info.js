@@ -646,9 +646,12 @@ function renderNavbar(type = "student") {
                 style="position:absolute; top:40px; right:0; width:300px; max-height:400px; overflow-y:auto; background:#fff; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index:1000;">
                 <!-- Thông báo sẽ được chèn vào đây -->
             </div>`: ``}
-            <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
-                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
-                </button>
+${(isAdmin || isLecturer) ? `
+    <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
+        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+    </button>
+` : ``}
+
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
