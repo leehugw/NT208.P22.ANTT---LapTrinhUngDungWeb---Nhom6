@@ -9,14 +9,17 @@ const getAbnormalStudentsByStudentId = async (req, res) => {
     }
 
     const notification = await Notification.findOne({ student_id });
-    const results = await detectAndSaveAbnormalStudentsByClass({student_id});
-    const isRead = notification?.read || false;
+    const results = await detectAndSaveAbnormalStudentsByClass({ student_id });
+    const lastReadAt = notification?.updatedAt || new Date(0); // nếu chưa từng đọc, dùng ngày 0
 
-    const merged = results.map(r => ({
-      note: r.note,
-      updatedAt: r.updatedAt,
-      read: isRead
-    }));
+    const merged = results.map(r => {
+      const wasUpdated = new Date(r.updatedAt) > new Date(lastReadAt);
+      return {
+        note: r.note,
+        updatedAt: r.updatedAt,
+        read: !wasUpdated // nếu có cập nhật mới => chưa đọc
+      };
+    });
 
     return res.status(200).json({ data: merged });
   } catch (error) {
