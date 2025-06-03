@@ -37,7 +37,7 @@ router.put("/update/scores", authenticateToken, authorizeRoles('lecturer'), Lect
 // Route API để lấy dữ liệu profile
 router.get('/profile-data', authenticateToken, authorizeRoles('lecturer', 'admin'), LecturerInformationController.getProfile);
 
-router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('lecturer'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
+router.get('/abnormal', authenticateToken, authorizeRoles('lecturer'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
 
 // Route API để lấy dữ liệu thống kê lớp
 router.get('/classstatistic', (req, res) => {

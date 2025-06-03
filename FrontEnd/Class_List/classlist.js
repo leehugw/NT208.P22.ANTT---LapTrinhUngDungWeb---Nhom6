@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (studentData.isAdvisorClass) {
                 statusSelect.disabled = false;
-                const abnormalRes = await fetch(`/api/lecturer/abnormal/${classId}`, {
+                const abnormalRes = await fetch(`/api/lecturer/abnormal?classId=${classId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const abnormalData = await abnormalRes.json();
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <td class="text-center">${escapeHTML(student.student_id)}</td>
         <td class="text-center">${escapeHTML(student.school_email)}</td>
         <td class="text-center">${escapeHTML(statusText)}</td>
-        <td class="text-center">${noteText}</td> <!-- Nếu noteText có thể chứa HTML, hãy escape hoặc chỉ cho phép một số thẻ -->
+        <td class="text-center">${noteText}</td>
         <td class="text-center">${escapeHTML(student.class_id || '-')}</td>
         <td class="text-center">${escapeHTML(student.major_name || '-')}</td>
         <td class="text-center">${escapeHTML(student.faculty_name || '-')}</td>
