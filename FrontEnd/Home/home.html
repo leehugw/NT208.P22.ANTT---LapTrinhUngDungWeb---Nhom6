@@ -1,4 +1,5 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="vi">
 
 <head>
     <meta charset="utf-8" />
@@ -6,11 +7,14 @@
     <meta name="description"
         content="Hệ thống chatbot tư vấn UIT - Trang web hỗ trợ sinh viên trong việc quản lý tiến trình học tập, tra cứu thông tin, và sử dụng chatbot để nhận tư vấn nhanh chóng!">
     <title>Hệ Thống ChatBot UIT</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" media="print"
+        onload="this.media='all'">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"
+        media="print" onload="this.media='all'">
 
 
     <link href="/Home/PChome.css" rel="stylesheet" media="print" onload="this.media='all'">
@@ -19,9 +23,9 @@
     <noscript>
         <link rel="stylesheet" href="/Home/home.css">
     </noscript>
-    <link href="/Navbar/navbar_PC.css" rel="stylesheet">
-    <link href="/Navbar/navbar.css" rel="stylesheet">
-    <link href="/Navbar/navbar_mobile.css" rel="stylesheet">
+    <link href="/Navbar/navbar_PC.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="/Navbar/navbar.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="/Navbar/navbar_mobile.css" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="/FeedbackForm/feed.css" rel="stylesheet" media="print" onload="this.media='all'">
 
     <meta name="google-site-verification" content="NM6NcZQmCOK2XlFhvG0f7B5r5TspBfnS8tFEpNwzMJA" />
@@ -32,7 +36,7 @@
     <header class="bg-white shadow navbar fixed-top">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
             <div class="d-none d-md-flex align-items-center logo-container">
-                <img alt="Logo" height="80" src="/Home/css/logo.png" width="80">
+                <img alt="Logo" height="80" src="/Home/css/logo.webp" width="80">
             </div>
             <nav class=" d-none d-md-flex navbar-container align-items-center mx-auto">
                 <a class="nav-link mx-2 text-decoration-none" href="#home">Trang chủ</a>
@@ -41,7 +45,7 @@
                 <a class="nav-link mx-2 text-decoration-none" href="#howitworks">Cách hoạt động</a>
                 <a class="nav-link mx-2 text-decoration-none" href="#contact">Liên hệ</a>
             </nav>
-            <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
+            <button class="d-md-none btn btn-link text-dark" id="menu-toggle" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
             <a href="/auth/google" class="btn text-white fw-bold rounded-0 ml-2" style="background-color: #3D67BA;"
@@ -85,7 +89,7 @@
                 </div>
                 <div class="col-md-6 chatbot-image">
                     <img alt="Chatbot illustration" class="img-fluid" width="450px" height="450px"
-                        src="/Home/css/logo.png" fetchpriority="high" />
+                        src="/Home/css/logo.webp" fetchpriority="high" />
                 </div>
             </div>
         </div>
@@ -110,7 +114,7 @@
                         <div class="chat-container">
                             <div class="d-flex align-items-end justify-content-end mb-2">
                                 <div class="font position-relative d-inline-block p-3">
-                                    <img src="/Home/css/chat_user_1.png" alt="Chat message 1" class="img-fluid"
+                                    <img src="/Home/css/chat_user_1.webp" alt="Chat message 1" class="img-fluid"
                                         style="width: 100%; height: auto;">
                                     <p class="position-absolute top-50 start-50 translate-middle text-dark p-3" ;
                                         style="width: 90%;">
@@ -122,7 +126,7 @@
                                 <img src="/Home/css/avatar_user.png" alt="User icon" class="icon">
                             </div>
                             <div class="d-flex align-items-end justify-content-start mb-2">
-                                <img src="/Home/css/logo.png" alt="Chatbot icon" class="icon">
+                                <img src="/Home/css/logo.webp" alt="Chatbot icon" class="icon">
                                 <div class="position-relative d-inline-block p-3">
                                     <img src="/Home/css/chat_bot_1.png" alt="Chatbot icon" class="img-fluid "
                                         style="width: 100%; height: 100%">
@@ -137,7 +141,7 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-end mb-2">
                                 <div class="position-relative d-inline-block p-3">
-                                    <img src="/Home/css/chat_user_2.png" alt="Chat message 1"
+                                    <img src="/Home/css/chat_user_2.webp" alt="Chat message 1"
                                         class="img-fluid mobile-img" style="width: 100%">
                                     <p class="font position-absolute top-50 start-50 translate-middle text-dark p-3" ;
                                         style="width: 90%;">
@@ -149,7 +153,7 @@
                                 <img src="/Home/css/avatar_user.png" alt="User icon" class="icon">
                             </div>
                             <div class="d-flex align-items-end mb-4">
-                                <img src="/Home/css/logo.png" alt="Chatbot icon" class="icon">
+                                <img src="/Home/css/logo.webp" alt="Chatbot icon" class="icon">
                                 <div class="position-relative d-inline-block p-3">
                                     <img src="/Home/css/chat_bot_2.png" alt="Chatbot icon" class="img-fluid mobile-img"
                                         style="width: 100%">
@@ -182,7 +186,7 @@
                                 xác,
                                 tiện lợi trên nhiều nền tảng.</p>
                         </div>
-                        <img src="/Home/css/card.png" alt="Card">
+                        <img src="/Home/css/card.webp" alt="Card">
                     </div>
                     <div class="cardabout">
                         <div class="cardabout-content">
@@ -190,7 +194,7 @@
                             <p>Chúng tôi hướng đến việc tạo ra một trợ lý ảo đáng tin cậy, giúp sinh viên tiết kiệm thời
                                 gian, nắm bắt thông tin kịp thời và hỗ trợ học tập hiệu quả. </p>
                         </div>
-                        <img src="/Home/css/card.png" alt="Card">
+                        <img src="/Home/css/card.webp" alt="Card">
                     </div>
                     <div class="cardabout">
                         <div class="cardabout-content">
@@ -199,7 +203,7 @@
                                 học
                                 tập, sự kiện, hành chính và hơn thế nữa.</p>
                         </div>
-                        <img src="/Home/css/card.png" alt="Card">
+                        <img src="/Home/css/card.webp" alt="Card">
                     </div>
                 </div>
             </div>
@@ -211,21 +215,21 @@
             <hr>
             <div class="service-container d-flex flex-column flex-md-row justify-content-between align-items-start">
                 <div class="service-card mb-5">
-                    <img src="/Home/css/support.png" alt="Support Image">
+                    <img src="/Home/css/support.webp" alt="Support Image">
                     <h3 class="h5 fw-bold mt-3">Hỗ Trợ 24/7</h3>
                     <hr>
                     <p>Luôn sẵn sàng hỗ trợ bất cứ lúc nào, giúp bạn dễ dàng tra cứu thông tin, nâng cao hiệu suất học
                         tập và đảm bảo không bỏ lỡ thông tin quan trọng.</p>
                 </div>
                 <div class="service-card mb-5">
-                    <img src="/Home/css/response.png" alt="Response Image">
+                    <img src="/Home/css/response.webp" alt="Response Image">
                     <h3 class="h5 fw-bold mt-3">Phản Hồi Tức Thì</h3>
                     <hr>
                     <p>Trả lời nhanh trong vài giây, giảm thời gian chờ đợi và tối ưu hóa trải nghiệm tương tác của bạn.
                     </p>
                 </div>
                 <div class="service-card mb-5">
-                    <img src="/Home/css/settings.png" alt="Settings Image">
+                    <img src="/Home/css/settings.webp" alt="Settings Image">
                     <h3 class="h5 fw-bold mt-3">Tương Tác Cá Nhân Hóa</h3>
                     <hr>
                     <p>Tự động điều chỉnh theo nhu cầu của bạn, mang đến trải nghiệm tư vấn phù hợp với sở thích và yêu
@@ -251,7 +255,7 @@
             <div class="row g-md-5">
                 <div class="col-12 col-md-6 d-flex justify-content-center">
                     <div class="step">
-                        <img alt="Step 1 background image" height="150" src="/Home/css/Card_Step1.png" width="250" />
+                        <img alt="Step 1 background image" height="150" src="/Home/css/Card_Step1.webp" width="250" />
                         <h3 class="h5">
                             Nhập câu hỏi
                         </h3>
@@ -262,7 +266,7 @@
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center align-items-end" style="margin-top: 50px;">
                     <div class="step">
-                        <img alt="Step 2 background image" height="150" src="/Home/css/Card_Step2.png" width="250" />
+                        <img alt="Step 2 background image" height="150" src="/Home/css/Card_Step2.webp" width="250" />
                         <h3 class="h5">
                             Phân tích &amp; xử lý
                         </h3>
@@ -273,7 +277,7 @@
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center">
                     <div class="step">
-                        <img alt="Step 3 background image" height="150" src="/Home/css/Card_Step3.png" width="250" />
+                        <img alt="Step 3 background image" height="150" src="/Home/css/Card_Step3.webp" width="250" />
                         <h3 class="h5">
                             Trả lời nhanh chóng
                         </h3>
@@ -284,7 +288,7 @@
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center align-items-end" style="margin-top: 40px;">
                     <div class="step">
-                        <img alt="Step 4 background image" height="150" src="/Home/css/Card_Step4.png" width="250" />
+                        <img alt="Step 4 background image" height="150" src="/Home/css/Card_Step4.webp" width="250" />
                         <h3 class="h5">
                             Cập nhật liên tục
                         </h3>
@@ -302,7 +306,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 mb-3">
-                    <h5>Platform</h5>
+                    <h3>Platform</h3>
                     <ul class="list-unstyled">
                         <li>WhatsApp Chatbot</li>
                         <li>Facebook Messenger</li>
@@ -311,7 +315,7 @@
                     </ul>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <h5>Solution</h5>
+                    <h3>Solution</h3>
                     <ul class="list-unstyled">
                         <li>Conversational Sales</li>
                         <li>Conversational Marketing</li>
@@ -320,16 +324,24 @@
                     </ul>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <h5>Join a Newsletter</h5>
+                    <h3>Join a Newsletter</h3>
                     <form class="d-flex mb-3">
                         <input type="email" class="form-control" placeholder="Enter Your Email">
                         <button type="submit" class="btn btn-light text-dark">Subscribe</button>
                     </form>
                     <div class="d-flex">
-                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com" class="me-3" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com" class="me-3" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://facebook.com" class="me-3" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://linkedin.com" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -359,7 +371,7 @@
         <i class="fas fa-comment-dots fs-4 text-white"></i>
     </a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/Navbar/navbar.js"></script>
-    <script src="/Home/home.js"></script>
+    <script src="/Navbar/navbar.js" defer></script>
+    <script src="/Home/home.js" defer></script>
 
 </html>
