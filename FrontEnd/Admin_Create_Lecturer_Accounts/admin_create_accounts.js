@@ -8,8 +8,7 @@ document.getElementById('createLecturerForm').addEventListener('submit', async f
         birthdate: document.getElementById('birthdate').value,
         birthplace: document.getElementById('birthplace').value,
         faculty: document.getElementById('faculty').value,
-        className: document.getElementById('className').value,
-        role: document.getElementById('role').value
+        class_id: document.getElementById('className').value
     };
     try {
         const res = await fetch(`${window.location.origin}/api/admin/lecturers`, {
