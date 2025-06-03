@@ -45,7 +45,7 @@ router.get('/english-certificate', (req, res) => {
 });
 
 //Route hien thi cau hoi va tra loi chatbot
-router.post('/chatbot-data', HandleChatRequestController.handleChatRequest);
+ router.post('/chatbot-data', authenticateToken, HandleChatRequestController.handleChatRequest);
 
 
 // API hợp nhất: tạo lịch học tối ưu từ dữ liệu và file Excel
