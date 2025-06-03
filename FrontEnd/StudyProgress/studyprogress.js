@@ -11,6 +11,8 @@ function renderNavbar(type = "student") {
     // type: "student", "admin", hoặc "lecturer"
     const isAdmin = type === "admin";
     const isLecturer = type === "lecturer";
+        const isStudent = type === "student";
+
     return `
     <header class="bg-white shadow navbar fixed-top font-roboto">
         <div class="container d-flex justify-content-between align-items-center py-2 px-6">
@@ -48,9 +50,32 @@ function renderNavbar(type = "student") {
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất
-            </button>
+            ${isStudent ? `
+            <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0">
+                <button class="btn btn-link text-dark position-relative notification-button" title="Thông báo">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span id="notificationBadge"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;"></span>
+                </button>
+
+                <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+
+
+
+            <!-- Hộp hiện thông báo -->
+            <div id="notificationList"
+                style="position:absolute; top:40px; right:0; width:300px; max-height:400px; overflow-y:auto; background:#fff; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index:1000;">
+                <!-- Thông báo sẽ được chèn vào đây -->
+            </div>`: ``}
+${(isAdmin || isLecturer) ? `
+    <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
+        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+    </button>
+` : ``}
+
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
             style="width: 75%; height: 100%; display: none;">
@@ -90,8 +115,32 @@ function renderNavbar(type = "student") {
     `;
 }
 
-
 function attachNavbarEvents(token, role) {
+    fetchNotificationsAndUpdateBadge();
+
+    const logoutButton = document.querySelector('.logout-button');
+
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        menu.style.display = 'block';
+        setTimeout(function () {
+            menu.classList.add('open');
+        }, 10);
+    });
+    document.getElementById('menu-close').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        menu.classList.remove('open');
+        setTimeout(function () {
+            menu.style.display = 'none';
+        }, 300);
+    });
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = '/';
+        });
+    }
     if (role === "student") {
         document.querySelectorAll(".btn-student-progress").forEach(el => {
             el.addEventListener("click", function (e) {
@@ -187,15 +236,86 @@ function attachNavbarEvents(token, role) {
                 });
             });
         });
+        document.querySelectorAll('.notification-button').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
+                    return window.location.href = "/";
+                } else {
+
+                    fetch(`/api/student/abnormal`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error("Lấy thông báo thất bại!");
+                            return res.json();
+                        })
+                        .then(notifications => {
+                            const list = document.getElementById('notificationList');
+                            const badge = document.getElementById('notificationBadge');
+                            const isVisible = list.style.display === 'block';
+                            list.style.display = isVisible ? 'none' : 'block';
+
+                            if (!isVisible) {
+                                // Khi mở dropdown, ẩn badge vì coi như đã đọc
+                                badge.style.display = 'none';
+
+                                // Gọi API đánh dấu đã đọc
+                                fetch('/api/student/notifications/mark-read', {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Authorization': `Bearer ${token}`
+                                    }
+                                }).then(res => {
+                                    if (!res.ok) console.warn('Đánh dấu thông báo đã đọc thất bại');
+                                    // Không cần xử lý gì thêm ở client
+                                }).catch(console.error);
+                            }
+
+                            if (!notifications.data || notifications.data.length === 0) {
+                                list.innerHTML = '<div style="padding:10px; text-align:center; color:#888;">Không có thông báo nào.</div>';
+                                badge.style.display = 'none'; // ẩn badge
+                                return;
+                            }
+
+                            list.innerHTML = ''; // xóa nội dung cũ
+                            notifications.data.forEach(noti => {
+                                const div = document.createElement('div');
+                                div.style.padding = '8px';
+                                div.style.borderBottom = '1px solid #eee';
+                                const noteText = noti.note ? noti.note.replace(/\n/g, '<br>') : '(Không có nội dung)';
+                                const timeText = new Date(noti.updatedAt).toLocaleString();
+
+                                div.innerHTML = `
+                        <div>${noteText}</div>
+                        <small style="color:#666;">${timeText}</small>
+                    `;
+                                list.appendChild(div);
+                            });
+
+                            badge.textContent = notifications.data.length;
+                        })
+                        .catch(err => {
+                            alert(err.message);
+                            console.error(err);
+                        });
+                }
+
+            });
+        });
 
     }
     else if (role === "admin") {
-                const feedbackBtn = document.getElementById("feedbackBtn");
+        const feedbackBtn = document.getElementById("feedbackBtn");
         if (feedbackBtn) {
             feedbackBtn.style.display = "none";
         }
-                if (feedbackBtn) {
-            feedbackBtn.remove(); 
+        if (feedbackBtn) {
+            feedbackBtn.remove();
         }
         document.querySelectorAll('.btn-admin-student').forEach(btn => {
             btn.addEventListener('click', function (e) {
@@ -347,6 +467,7 @@ function attachNavbarEvents(token, role) {
                 });
             });
         });
+
     }
 
 
@@ -358,6 +479,43 @@ function attachNavbarEvents(token, role) {
         return;
     }
 }
+
+function fetchNotificationsAndUpdateBadge() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    fetch(`/api/student/abnormal`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Lấy thông báo thất bại!");
+            return res.json();
+        })
+        .then(notifications => {
+            const badge = document.getElementById('notificationBadge');
+            if (!notifications.data || notifications.data.length === 0) {
+                badge.style.display = 'none';
+                return;
+            }
+
+            // Tính số thông báo chưa đọc
+            const unreadCount = notifications.data.filter(n => !n.read).length;
+
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        })
+
+        .catch(err => {
+            console.error("Lỗi lấy thông báo:", err);
+        });
+}
+
 
 function openFeedbackPopup() {
     if (document.getElementById('feedbackPopup')) {

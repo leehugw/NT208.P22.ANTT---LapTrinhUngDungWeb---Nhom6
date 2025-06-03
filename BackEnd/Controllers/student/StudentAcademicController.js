@@ -54,6 +54,7 @@ const updateStudentAcademicController = async (req, res) => {
         return res.status(200).json({
             user_gmail: user.username,
             student_name: student.name,
+            class_id: student.class_id,
             has_english_certificate: student.has_english_certificate,
             required_progress_details: major.progress_details,
             type: userRole,

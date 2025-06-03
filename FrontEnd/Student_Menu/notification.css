@@ -1,0 +1,54 @@
+@media (min-width: 768px) {
+    .notification-button{
+      margin-top: -50px;}
+
+}
+
+.notification-button {
+  position: relative; /* để dropdown căn chỉnh theo nút */
+  cursor: pointer;
+}
+
+#notificationBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  font-size: 0.75rem;
+  padding: 0.25em 0.4em;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+}
+
+#notificationList {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  display: none; /* ẩn mặc định */
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+#notificationList div {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+#notificationList div:last-child {
+  border-bottom: none;
+}
+
+#notificationList small {
+  color: #666;
+  font-size: 0.8rem;
+}
