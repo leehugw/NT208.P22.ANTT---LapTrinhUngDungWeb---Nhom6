@@ -30,6 +30,7 @@ app.use('/auth', authRoutes);
 // Serve static files
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
+app.use(express.static('public'));
 
 // Serve role-based menus
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
