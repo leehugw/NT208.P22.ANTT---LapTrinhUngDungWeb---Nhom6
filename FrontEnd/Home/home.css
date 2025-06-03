@@ -6,14 +6,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Font Awesome 6 Brands';
-  font-style: normal;
-  font-weight: 400;
-  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2') format('woff2');
-  font-display: swap;
-}
-
 .background-banner {
     background-image: url("css/background.png");
     background-size: cover;
