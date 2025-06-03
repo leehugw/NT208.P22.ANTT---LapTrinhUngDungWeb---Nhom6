@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const urlToken = urlParams.get('token');
-    fetchNotificationsAndUpdateBadge();
 
     if (urlToken) {
         localStorage.setItem('token', urlToken); // hoặc sessionStorage nếu bạn thích
@@ -180,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
     });
+    fetchNotificationsAndUpdateBadge();
 
 });
 

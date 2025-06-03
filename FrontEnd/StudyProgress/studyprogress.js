@@ -55,7 +55,7 @@ function renderNavbar(type = "student") {
                 <button class="btn btn-link text-dark position-relative notification-button" title="Thông báo">
                     <i class="fas fa-bell fa-lg"></i>
                     <span id="notificationBadge"
-                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;"></span>
                 </button>
 
                 <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
