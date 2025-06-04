@@ -5,7 +5,7 @@ const Enrollment = require("./models/Enrollment");
 const Score = require("./models/Score");
 
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Kết nối MongoDB
 mongoose.connect(process.env.DB_URI, {})
@@ -53,6 +53,21 @@ async function generateScores() {
     const specialSubjects = new Set(["PE231", "PE232", "PE012"]);
     const scores = [];
 
+    // Tạo index lịch sử điểm theo sinh viên
+    const existingScoresByStudent = {};
+    const existingScores = await Score.find({}, { student_id: 1, subject_id: 1, semester_num: 1, status: 1 });
+
+    for (const s of existingScores) {
+      if (!existingScoresByStudent[s.student_id]) {
+        existingScoresByStudent[s.student_id] = [];
+      }
+      existingScoresByStudent[s.student_id].push({
+        subject_id: s.subject_id,
+        semester_num: parseInt(s.semester_num),
+        status: s.status
+      });
+    }
+
     // Xử lý từng enrollment
     for (const enrollment of enrollments) {
       const studentId = enrollment.student_id;
@@ -90,7 +105,15 @@ async function generateScores() {
         const isEnglish = subjectId.toUpperCase().includes("ENG");
         const isExempt = isEnglish && student.has_english_certificate;
         const isSpecial = specialSubjects.has(subjectId);
+        // Tính lại isRetaken đúng nghĩa học lại (đã từng học trước đó)
         let isRetaken = false;
+        const prevScores = existingScoresByStudent[studentId] || [];
+        const alreadyFailed = prevScores.some(ps =>
+          ps.subject_id === subjectId &&
+          ps.semester_num < semesterNum &&
+          ps.status === "Rớt"
+        );
+        isRetaken = alreadyFailed;
 
         // Tạo điểm số
         let scoreQT, scoreGK, scoreTH, scoreCK, scoreHP, status;
@@ -128,7 +151,6 @@ async function generateScores() {
             
             status = avg >= 5.0 ? "Đậu" : "Rớt";
             scoreHP = status !== "None" ? avg.toFixed(1) : null;
-            isRetaken = avg < 5.0 && status === "Rớt";
           }
         }
 
