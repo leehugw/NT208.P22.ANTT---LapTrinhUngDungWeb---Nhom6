@@ -65,33 +65,26 @@ async function calculateStudentAcademic(student_id) {
         }
     });
 
-    Object.values(firstAttemptScores).forEach(score => {
-        const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
-        if (!subject) {
-            return;
-        }
-
-        const credits = subject.theory_credits + subject.practice_credits;
-        const scoreHP = parseFloat(score.score_HP);
-
-        totalCreditsAttempted += credits;
-        totalWeightedScoreWithoutRetakes += scoreHP * credits;
-    });
-
     Object.values(highestPassedScores).forEach(score => {
         const subject = subjects.find(s => String(s.subject_id) === String(score.subject_id));
         if (!subject) return;
 
         const credits = subject.theory_credits + subject.practice_credits;
+
+        // Kiểm tra điểm hợp lệ (>=5 hoặc Miễn)
         const scoreHP = parseFloat(score.score_HP);
+        const isPassed = (!isNaN(scoreHP) && scoreHP >= 5) || score.score_HP === "Miễn";
 
-        totalCreditsEarned += credits;
+        if (isPassed) {
+            totalCreditsEarned += credits;
 
-        if (score.score_HP !== "Miễn") {
-            totalCreditsEarnedExcludingExemptions += credits;
-            totalWeightedScore += scoreHP * credits;
+            if (score.score_HP !== "Miễn") {
+                totalCreditsEarnedExcludingExemptions += credits;
+                totalWeightedScore += scoreHP * credits;
+            }
         }
     });
+
 
     const gpa = totalCreditsAttempted > 0 ? (totalWeightedScoreWithoutRetakes / totalCreditsAttempted).toFixed(2) : "0.00";
     const cumulative_gpa = totalCreditsEarned > 0 ? (totalWeightedScore / totalCreditsEarnedExcludingExemptions).toFixed(2) : "0.00";
