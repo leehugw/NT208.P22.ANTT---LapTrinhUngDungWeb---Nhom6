@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /*/
 Disallow: /.env
 Sitemap: https://uit-chatbot-orno.onrender.com/sitemap.xml
