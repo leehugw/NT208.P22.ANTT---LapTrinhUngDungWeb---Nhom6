@@ -1,4 +1,10 @@
 @media (max-width: 767px) {
+    #login-button {
+        margin-left: 10px;
+    }
+    #login-daa-btn {
+        margin-left: 10px;
+    }
     .info-box {
         position: relative;
         background-color: #fff;

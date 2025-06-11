@@ -100,7 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="text-center">${escapeHTML(s.class_id || '-')}</td>
                     <td class="text-center">${escapeHTML(s.major_id || '-')}</td>
                     <td class="text-center">${escapeHTML(s.faculty_name || '-')}</td>
-                    <td class="text-center"><a class="text" href="/api/student/profile?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-external-link-alt"></i></a></td>
+                    <td class="text-center">
+                        <a class="text" href="/Student_Information/student_info.html?student_id=${encodeURIComponent(s.student_id)}">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td> 
                     <td class="text-center border-end"><a class="text" href="/api/student/academicstatistic?student_id=${encodeURIComponent(s.student_id)}"><i class="fas fa-chart-line"></i></a></td>
                 </tr>
             `).join('');
