@@ -4,6 +4,7 @@ const cheerio = require("cheerio");
 const Student = require("../../../Database/SaveToMongo/models/Student");
 const Score = require("../../../Database/SaveToMongo/models/Score");
 const User = require("../../../Database/SaveToMongo/models/Users");
+const Enrollment = require("../../../Database/SaveToMongo/models/Enrollment");
 
 // Truyền profileHtml là html lấy được từ puppeteer
 function parseProfileInfo(profileHtml) {
@@ -296,6 +297,36 @@ function parseStudyResultTable(html, student_id) {
   };
 }
 
+async function saveEnrollmentsFromScores(student_id, scores) {
+  // Gom các học kỳ
+  const semesterMap = {};
+
+  scores.forEach(score => {
+    const { semester_id, subject_id, credits, class_id } = score;
+    if (!semesterMap[semester_id]) {
+      semesterMap[semester_id] = {
+        student_id,
+        semester_id,
+        subject_ids: [],
+        class_ids: [],
+        credits: 0,
+      };
+    }
+    semesterMap[semester_id].subject_ids.push(subject_id);
+    semesterMap[semester_id].class_ids.push(class_id); // class_id phải parse từ bảng điểm nhé!
+    semesterMap[semester_id].credits += credits || 0;
+  });
+
+  // Lưu từng enrollment
+  for (const enrollment of Object.values(semesterMap)) {
+    await Enrollment.updateOne(
+      { student_id: enrollment.student_id, semester_id: enrollment.semester_id },
+      { $set: enrollment },
+      { upsert: true }
+    );
+  }
+}
+
 exports.crawlAll = async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
@@ -347,6 +378,7 @@ exports.crawlAll = async () => {
   }
   // Chờ bảng điểm tải xong
   const resultTable = parseStudyResultTable(scoresHtml, student_id);
+  await saveEnrollmentsFromScores(student_id, resultTable.scores);
 
   // Kiểm tra chứng chỉ tiếng Anh
 const hasEnglishCert = resultTable.scores.some(
