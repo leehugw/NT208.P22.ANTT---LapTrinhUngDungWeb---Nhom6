@@ -1,3 +1,5 @@
+// BackEnd\Routes\student.js
+
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -16,6 +18,7 @@ const { GetChatHistory } = require('../Controllers/student/ChatHistory');
 const { AddMessages } = require('../Controllers/student/ChatBot_addMess');
 const detectAbnormalController = require('../Controllers/student/detectAbnormal');
 const notificationController = require('../Controllers/student/NotificationController');
+const CrawlController = require('../Controllers/student/CrawlController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -102,5 +105,8 @@ router.get('/chat-sessions/:sessionId', authenticateToken, GetSession);
 router.post('/chat-sessions/:sessionId/messages', authenticateToken, AddMessages);
 
 router.put('/notifications/mark-read', authenticateToken, authorizeRoles('student'), notificationController.markNotificationsRead);
+
+// API crawl student info & scores
+router.get('/crawl', CrawlController.crawlStudentInfo);
 
 module.exports = router;

@@ -1,9 +1,13 @@
+// BackEnd\server.js
 require('dotenv').config();
 
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const jwt = require('jsonwebtoken');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
 
 // Kết nối database
 const connectDB = require('../Database/connectDB');
@@ -11,7 +15,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: 'https://uit-chatbot-orno.onrender.com/',
+  origin: 'http://localhost:3000/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
