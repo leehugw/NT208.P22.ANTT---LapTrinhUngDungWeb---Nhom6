@@ -20,7 +20,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ❗ Chỉ dùng đúng 1 lần middleware body-parser tích hợp của Express
+// Chỉ dùng đúng 1 lần middleware body-parser tích hợp của Express
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 

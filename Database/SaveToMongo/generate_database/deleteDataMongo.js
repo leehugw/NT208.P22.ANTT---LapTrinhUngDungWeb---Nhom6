@@ -8,7 +8,7 @@ const deleteData = async () => {
         await mongoose.connect(process.env.DB_URI, {});
         console.log('✅ MongoDB connected');
         const db = mongoose.connection.db; // Lấy kết nối trực tiếp tới database
-        const collection = db.collection("abnormalstudents"); // Truy cập collection
+        const collection = db.collection("classes"); // Truy cập collection
 
         // Xóa tất cả documents trong collection
         const result = await collection.deleteMany({});
