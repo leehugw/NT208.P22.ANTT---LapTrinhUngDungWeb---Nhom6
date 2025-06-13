@@ -1,24 +1,14 @@
 const mongoose = require('mongoose');
 const path = require('path');
 
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 
 const Student = require('../models/Student');
 const Lecturer = require('../models/Lecturer');
 
-const getLecturerIdByClassId = async (class_id) => {
-  // Tìm giảng viên có class_id trùng lớp
-  const lecturers = await Lecturer.find({ class_id: class_id });
-  
-  if (lecturers.length === 0) {
-    // Nếu không có giảng viên nào theo lớp, lấy ngẫu nhiên 1 giảng viên bất kỳ
-    const allLecturers = await Lecturer.find({});
-    if (allLecturers.length === 0) throw new Error("❌ Không có giảng viên.");
-    return allLecturers[Math.floor(Math.random() * allLecturers.length)].lecturer_id;
-  }
-
-  // Lấy ngẫu nhiên 1 giảng viên trong số giảng viên có class_id này
-  return lecturers[Math.floor(Math.random() * lecturers.length)].lecturer_id;
+const getAdvisorLecturerId = async (class_id) => {
+  const lecturer = await Lecturer.findOne({ class_id });
+  return lecturer ? lecturer.lecturer_id : null;
 };
 
 const generateClassesDirectly = async () => {
@@ -38,20 +28,25 @@ const generateClassesDirectly = async () => {
     }
 
     const classesCollection = mongoose.connection.db.collection('classes');
-
-    // Tạo mảng các lớp mới
     const newClasses = [];
-    for (const [class_id, studentSet] of classMap.entries()) {
-      const lecturer_id = await getLecturerIdByClassId(class_id);
 
-      newClasses.push({
+    for (const [class_id, studentSet] of classMap.entries()) {
+      const lecturer_id = await getAdvisorLecturerId(class_id);
+
+      const classData = {
         class_id,
-        lecturer_id,
-        students: Array.from(studentSet)
-      });
+        students: Array.from(studentSet),
+      };
+
+      if (lecturer_id) {
+        classData.lecturer_id = lecturer_id;
+      } else {
+        console.warn(`⚠️ Không tìm thấy giảng viên cố vấn cho lớp ${class_id}`);
+      }
+
+      newClasses.push(classData);
     }
 
-    // Thêm đồng loạt vào collection 'classes'
     if (newClasses.length > 0) {
       await classesCollection.insertMany(newClasses);
       console.log(`✅ Đã thêm ${newClasses.length} lớp mới`);
@@ -67,4 +62,3 @@ const generateClassesDirectly = async () => {
 };
 
 generateClassesDirectly();
-

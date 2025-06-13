@@ -4,6 +4,10 @@ const Semester = require('../../../Database/SaveToMongo/models/Semester');
 const Student = require('../../../Database/SaveToMongo/models/Student');
 const Faculty = require('../../../Database/SaveToMongo/models/Faculty');
 const TrainingProgram = require('../../../Database/SaveToMongo/models/TrainingProgram');
+const AcademicProgress = require('../../../Database/SaveToMongo/models/StudentAcademic')
+const Lecturer = require('../../../Database/SaveToMongo/models/Lecturer');
+const Enrollment = require('../../../Database/SaveToMongo/models/Enrollment')
+
 
 exports.getSemestersByLecturer = async (lecturerId) => {
   const classList = await Class.find({ lecturer_id: String(lecturerId) });
@@ -13,42 +17,43 @@ exports.getSemestersByLecturer = async (lecturerId) => {
 };
 
 exports.getClasses = async (lecturerId, semesterId) => {
-  let classes;
+  const lecturer = await Lecturer.findOne({ lecturer_id: lecturerId });
 
+  if (!lecturer) {
+    return []; // Không tìm thấy giảng viên
+  }
+
+  let teachingClasses = [];
   if (semesterId) {
-    // Nếu có semesterId, lấy lớp giảng viên dạy trong học kỳ đó
-    const teachingClasses = await Class.find({
+    teachingClasses = await Class.find({
       lecturer_id: lecturerId,
       semester_id: semesterId
     });
-
-    // Lấy lớp mà giảng viên là cố vấn (không cần học kỳ)
-    const advisingClasses = await Class.find({
-      advisorLecturerId: lecturerId
-    });
-
-    // Gộp lại và loại trùng
-    const classMap = {};
-    [...teachingClasses, ...advisingClasses].forEach(cls => {
-      classMap[cls.class_id] = cls;
-    });
-
-    classes = Object.values(classMap);
   } else {
-    // Nếu không có semesterId, lấy tất cả lớp mà giảng viên tham gia (dạy hoặc cố vấn)
-    classes = await Class.find({
-      $or: [
-        { lecturer_id: lecturerId },
-        { advisorLecturerId: lecturerId }
-      ]
-    });
+    teachingClasses = await Class.find({ lecturer_id: lecturerId });
   }
 
-  return classes;
+  let advisingClasses = [];
+  if (lecturer.class_id) {
+    const advisorClass = await Class.findOne({ class_id: lecturer.class_id });
+    if (advisorClass) {
+      advisingClasses.push(advisorClass);
+    }
+  }
+
+  // Gộp lại, loại trùng
+  const classMap = new Map();
+  [...teachingClasses, ...advisingClasses].forEach(cls => {
+    classMap.set(cls.class_id, cls);
+  });
+
+  return Array.from(classMap.values());
 };
 
+exports.getStudentsByClass = async (classId, semesterId = null) => {
+  let studentIds;
+  let students;
 
-exports.getStudentsByClass = async (classId) => {
   const classData = await Class.findOne({ class_id: classId });
 
   // Check nếu là lớp chủ nhiệm
@@ -66,7 +71,7 @@ exports.getStudentsByClass = async (classId) => {
     const major = program.majors.find(m => m.major_id === students[0].major_id);
     if (!major) return null;
 
-    let faculty = null; 
+    let faculty = null;
 
     if (students[0].major_id) {
       // Tìm tất cả các khoa có chứa major_id của sinh viên
@@ -80,18 +85,66 @@ exports.getStudentsByClass = async (classId) => {
       faculty = faculties[0];
     }
 
-    return {
-      isAdvisorClass: true,
-      students: students.map(student => ({
+    const studentIds = students.map(s => s.student_id);
+    const academicRecords = await AcademicProgress.find({ student_id: { $in: studentIds } });
+
+    // Nếu chưa truyền semesterId → lấy học kỳ hiện tại
+    let activeSemesterId = semesterId;
+    if (!semesterId) {
+      const today = new Date();
+      const allSemesters = await Semester.find({});
+      const activeSemester = allSemesters.find(s => {
+        const start = new Date(s.start_date);
+        const end = new Date(s.end_date);
+        return start <= today && end >= today;
+      });
+
+      if (activeSemester) activeSemesterId = activeSemester.semester_id;
+    }
+
+    // Lấy số tín chỉ đăng ký học kỳ hiện tại nếu có
+    const enrollmentRecords = activeSemesterId
+      ? await Enrollment.find({ student_id: { $in: studentIds }, semester_id: activeSemesterId })
+      : [];
+
+    const studentsWithStats = students.map(student => {
+      const academic = academicRecords.find(a => a.student_id === student.student_id);
+      const enrollment = enrollmentRecords.find(e => e.student_id === student.student_id);
+
+      const semesterGpas = academic?.semester_gpas || [];
+      const sortedSemesters = [...semesterGpas].sort((a, b) => b.semester_id.localeCompare(a.semester_id));
+      const currentGpa = sortedSemesters[0]?.semester_gpa ?? null;
+      const previousGpa = sortedSemesters[1]?.semester_gpa ?? null;
+
+      const gpa_diff = (currentGpa != null && previousGpa != null)
+        ? (currentGpa - previousGpa).toFixed(2)
+        : null;
+
+      const studentInfo = {
         student_id: student.student_id,
         name: student.name,
         school_email: student.contact?.school_email || "",
         class_id: student.class_id,
         major_name: major?.major_name || "N/A",
-        faculty_name: faculty?.faculty_name || "N/A"
-      }))
+        faculty_name: faculty?.faculty_name || "N/A",
+        gpa: academic?.gpa ?? null,
+        credits: academic?.total_credits_earned ?? 0,
+        gpa_diff: gpa_diff
+      };
+
+      if (activeSemesterId) {
+        studentInfo.credits_this_semester = enrollment?.credits ?? 0;
+        studentInfo.semester_id = activeSemesterId;
+      }
+
+      return studentInfo;
+    });
+
+    return {
+      isAdvisorClass: true,
+      students: studentsWithStats
     };
-    
+
   }
   else {
     // Lớp học phần → giữ nguyên logic cũ
@@ -151,7 +204,7 @@ exports.getStudentsByClass = async (classId) => {
           status: score.status || "None"
         };
       })
-    };    
+    };
   }
 };
 

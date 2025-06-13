@@ -27,17 +27,23 @@ async function createLecturerAccount(data) {
         birthdate: data.birthdate,
         birthplace: data.birthplace,
         faculty: data.faculty,
-        className: data.className,
+        faculty_id: data.faculty,
+        class_id: data.class_id,
         email: data.username,
     });
-    await lecturer.save();
-
-    const user = new User({
-        username: data.username,
-        role: "lecturer",
-        lecturer_id: lecturer_id
-    });
-    await user.save();
+    try {
+        await lecturer.save();
+        const user = new User({
+            username: data.username,
+            role: "lecturer",
+            lecturer_id: lecturer_id
+        });
+        await user.save();
+        return { success: true, lecturer_id };
+    } catch (err) {
+        // Xử lý lỗi trùng hoặc thiếu trường
+        throw new Error(err.message);
+    }
 }
 
 module.exports = { createLecturerAccount };

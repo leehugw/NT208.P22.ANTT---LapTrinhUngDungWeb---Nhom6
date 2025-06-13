@@ -45,7 +45,7 @@ const callQwen = async (question, stu_id) => {
                 const prompt = `Nhận xét chi tiết bằng tiếng Việt về điểm trung bình của sinh viên (mã ${student_id}) dựa trên các điểm sau: QT: ${averages.score_QT}, GK: ${averages.score_GK}, TH: ${averages.score_TH}, CK: ${averages.score_CK}, HP: ${averages.score_HP}. Gợi ý cải thiện rõ ràng, kĩ càng nếu điểm trung bình dưới 7.0.`;
 
                 const response = await fetch(url, {
-method: 'POST',
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ model: 'qwen3:4b', prompt, stream: false })
                 });

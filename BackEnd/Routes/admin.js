@@ -1,4 +1,4 @@
-// routes/admin.js
+// BackEnd\Routes\admin.js
 const express = require('express');
 const path = require('path');
 const router = express.Router();
@@ -16,6 +16,7 @@ const { authorize } = require('passport');
 const { fetchSemesterGPAStatistics } = require('../Controllers/admin/GPAStatisticsController');
 const Feedback = require('../../Database/SaveToMongo/models/Feedback');
 const { getTotalUsers } = require('../Controllers/admin/UserStatisticController');
+const AbnormalStudent = require('../../Database/SaveToMongo/models/AbnormalStudent');
 
 router.get('/semester-gpa-statistics', authenticateToken, authorizeRoles('admin'), fetchSemesterGPAStatistics);
 
@@ -64,7 +65,16 @@ router.get('/lecturers', (req, res) => {
 });
 router.get('/lecturers-data', authenticateToken, authorizeRoles('admin'), getAllLecturersForAdmin); //trả về file json để hiển thị
 
-router.get('/abnormal/:class_id', authenticateToken, authorizeRoles('admin'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
+router.get('/abnormal', authenticateToken, authorizeRoles('admin'), LecturerAbnormalDetectionController.getAbnormalStudentsByClass);
+router.get('/abnormal/all', authenticateToken, authorizeRoles('admin'), async (req, res) => {
+    try {
+        const abnormalStudents = await AbnormalStudent.find().select('student_id status note');
+        res.json(abnormalStudents);
+    } catch (err) {
+        console.error('Error fetching all abnormal students:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 // Route trả về giao diện tạo tài khoản giảng viên (không cần middleware nếu chỉ là file tĩnh)
 router.get('/create-lecturer-account', (req, res) => {

@@ -3,15 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Hồ sơ Sinh viên</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Nộp chứng chỉ</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link href="/FeedbackForm/feed.css" rel="stylesheet">
     <link href="/Submit_English_Certificate/css/student_cert.css" rel="stylesheet">
@@ -19,6 +17,7 @@
     <link href="/Navbar/navbar_PC.css" rel="stylesheet">
     <link href="/Navbar/navbar.css" rel="stylesheet">
     <link href="/Navbar/navbar_mobile.css" rel="stylesheet">
+    <link href="/Student_Menu/notification.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,8 +46,25 @@
             <button class="d-md-none btn btn-link text-dark" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="btn bg-white text-dark fw-bold rounded-0 ml-2 logout-button"><i
-                    class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+           <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0">
+                <button class="btn btn-link text-dark position-relative notification-button" title="Thông báo">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span id="notificationBadge"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger " style="display: none;"></span>
+                </button>
+
+                <button class="btn bg-white text-dark fw-bold rounded-0 logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+
+
+
+            <!-- Hộp hiện thông báo -->
+            <div id="notificationList"
+                style="position:absolute; top:40px; right:0; width:300px; max-height:400px; overflow-y:auto; background:#fff; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index:1000;">
+                <!-- Thông báo sẽ được chèn vào đây -->
+            </div>
 
         </div>
         <nav class="fixed-top bg-white shadow-lg navbar-container" id="mobile-menu"
@@ -60,24 +76,24 @@
                 </button>
             </div>
             <a class="nav-link d-block text-decoration-none py-2 px-4 btn-home" role="button"><i
-                class="fa-solid fa-house-chimney"></i>
-            Trang chủ</a>
-        <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
-            data-bs-toggle="collapse" data-bs-target="#studentDropdown">
-            <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
-        </button>
-        <div class="collapse" id="studentDropdown">
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh
-                viên</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ
-                học tập</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận
-                chứng chỉ Anh Văn</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa
-                biểu</a>
-            <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot
-                UIT</a>
-        </div>
+                    class="fa-solid fa-house-chimney"></i>
+                Trang chủ</a>
+            <button class="nav-link d-block text-decoration-none py-2 px-4 btn text-start w-100"
+                data-bs-toggle="collapse" data-bs-target="#studentDropdown">
+                <i class="fa-solid fa-user"></i> Sinh viên <i class="fa-solid fa-chevron-down float-end"></i>
+            </button>
+            <div class="collapse" id="studentDropdown">
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-info" role="button">Hồ sơ Sinh
+                    viên</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-progress" role="button">Tiến độ
+                    học tập</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-english" role="button">Xác nhận
+                    chứng chỉ Anh Văn</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-schedule" role="button">Thời khóa
+                    biểu</a>
+                <a class="nav-link d-block text-decoration-none py-2 px-5 btn-student-chatbot" role="button">ChatBot
+                    UIT</a>
+            </div>
         </nav>
     </header>
 
@@ -154,7 +170,7 @@
                         <div class="col-md-2">
                             <label class="form-label fw-semibold">Khoảng điểm *</label>
                             <select class="form-select" id="score" required>
-                                </select>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Ảnh chứng chỉ *</label>
@@ -199,6 +215,7 @@
         title="Gửi phản hồi" id="feedbackBtn">
         <i class="fas fa-comment-dots fs-4 text-white"></i>
     </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/Navbar/navbar.js"></script>
     <script src="/Student_Menu/student_menu.js"></script>
     <script src="/Submit_English_Certificate/js/student_cert.js"></script>

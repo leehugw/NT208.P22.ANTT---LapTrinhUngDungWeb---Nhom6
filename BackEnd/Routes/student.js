@@ -1,3 +1,5 @@
+// BackEnd\Routes\student.js
+
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -14,6 +16,9 @@ const { GetSession } = require('../Controllers/student/ChatBot_GetSession');
 const { AddNewSessions } = require('../Controllers/student/ChatBotNewSession');
 const { GetChatHistory } = require('../Controllers/student/ChatHistory');
 const { AddMessages } = require('../Controllers/student/ChatBot_addMess');
+const detectAbnormalController = require('../Controllers/student/detectAbnormal');
+const notificationController = require('../Controllers/student/NotificationController');
+const CrawlController = require('../Controllers/student/CrawlController');
 
 // Middleware để xác thực và phân quyền
 router.get('/stu_menu', authenticateToken, authorizeRoles('student'), (req, res) => {
@@ -56,6 +61,8 @@ router.get('/schedule-optimize', (req, res) => {
     res.sendFile(pagePath);
 });
 
+router.get('/abnormal', authenticateToken, authorizeRoles('student'), detectAbnormalController.getAbnormalStudentsByStudentId);
+
 
 // Route để phục vụ trang HTML
 router.get('/profile', (req, res) => {
@@ -77,7 +84,7 @@ router.get('/chatbot', (req, res) => {
 });
 
 // Route gợi ý môn học cho sinh viên
-router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses );
+router.get('/recommend-courses', authenticateToken, authorizeRoles('student'), RecommendCourseController.getRecommendedCourses);
 
 // POST chứng chỉ Anh văn
 router.post('/certificate', EnglishCertificateController.submitCertificate);
@@ -96,5 +103,10 @@ router.get('/chat-sessions/:sessionId', authenticateToken, GetSession);
 
 // Thêm tin nhắn vào session
 router.post('/chat-sessions/:sessionId/messages', authenticateToken, AddMessages);
+
+router.put('/notifications/mark-read', authenticateToken, authorizeRoles('student'), notificationController.markNotificationsRead);
+
+// API crawl student info & scores
+router.get('/crawl', CrawlController.crawlStudentInfo);
 
 module.exports = router;

@@ -70,3 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Khi nhấn nút đăng nhập DAA
+document.getElementById('login-daa-btn').onclick = function() {
+    window.location.href = '/api/student/crawl'; // đường dẫn này sẽ chạy luôn trên trình duyệt
+};

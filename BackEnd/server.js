@@ -1,9 +1,13 @@
+// BackEnd\server.js
 require('dotenv').config();
 
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const jwt = require('jsonwebtoken');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
 
 // Kết nối database
 const connectDB = require('../Database/connectDB');
@@ -11,12 +15,12 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://uit-chatbot-orno.onrender.com/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ❗ Chỉ dùng đúng 1 lần middleware body-parser tích hợp của Express
+// Chỉ dùng đúng 1 lần middleware body-parser tích hợp của Express
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
@@ -30,6 +34,7 @@ app.use('/auth', authRoutes);
 // Serve static files
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
+app.use(express.static('public'));
 
 // Serve role-based menus
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));

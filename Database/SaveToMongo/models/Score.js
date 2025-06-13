@@ -1,3 +1,4 @@
+// Database\SaveToMongo\models\Score.js
 const mongoose = require("mongoose");
 
 const ScoreSchema = new mongoose.Schema({

@@ -30,13 +30,22 @@ exports.getClasses = async (req, res) => {
 
 exports.getStudentsByClass = async (req, res) => {
   const { classId } = req.params;
+  const { semester_id } = req.query; // nếu có truy vấn thêm
+
   try {
-    const students = await scoreService.getStudentsByClass(classId);
-    res.json(students);
+    const studentsData = await scoreService.getStudentsByClass(classId, semester_id);
+
+    if (!studentsData) {
+      return res.status(404).json({ message: "Không tìm thấy lớp hoặc dữ liệu sinh viên" });
+    }
+
+    res.json(studentsData);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Lỗi khi lấy danh sách sinh viên:", err); // In ra lỗi
+    res.status(500).json({ message: "Lỗi máy chủ" });
   }
 };
+
 
 exports.updateScore = async (req, res) => {
   try {
