@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Gửi token kèm theo khi truy cập route được bảo vệ
-      fetch("https://uit-chatbot-orno.onrender.com/api/admin/admin_menu", {
+      fetch("https://chatbotuit.id.vn/api/admin/admin_menu", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

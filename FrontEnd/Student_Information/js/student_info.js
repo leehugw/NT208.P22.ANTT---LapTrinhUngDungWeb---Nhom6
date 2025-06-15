@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
-    window.location.href = "https://uit-chatbot-orno.onrender.com/";
+    window.location.href = "https://chatbotuit.id.vn/";
     return;
   }
 
@@ -24,7 +24,7 @@ async function fetchStudentProfile(token, student_id) {
   try {
     if (!token) {
       alert("Vui lòng đăng nhập để xem thông tin");
-      window.location.href = "https://uit-chatbot-orno.onrender.com/";
+      window.location.href = "https://chatbotuit.id.vn/";
       return;
     }
     const response = await fetch(
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Bạn chưa đăng nhập. Chuyển về trang chủ...");
-    window.location.href = "https://uit-chatbot-orno.onrender.com/";
+    window.location.href = "https://chatbotuit.id.vn/";
     return;
   }
 
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "https://uit-chatbot-orno.onrender.com/";
+        window.location.href = "https://chatbotuit.id.vn/";
       } else {
         window.location.href = "/api/student/academicstatistic";
       }
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "https://uit-chatbot-orno.onrender.com/";
+        window.location.href = "https://chatbotuit.id.vn/";
       } else {
         window.location.href = "/api/student/schedule-optimize";
       }
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "https://uit-chatbot-orno.onrender.com/";
+        window.location.href = "https://chatbotuit.id.vn/";
       } else {
         window.location.href = "/api/student/english-certificate";
       }
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "https://uit-chatbot-orno.onrender.com/";
+        window.location.href = "https://chatbotuit.id.vn/";
       } else {
         window.location.href = "/api/student/profile";
       }
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại!");
-        window.location.href = "https://uit-chatbot-orno.onrender.com/";
+        window.location.href = "https://chatbotuit.id.vn/";
       } else {
         window.location.href = "/api/student/chatbot?token=" + token;
       }
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return (window.location.href = "/");
       }
 
-      fetch("https://uit-chatbot-orno.onrender.com/api/student/stu_menu", {
+      fetch("https://chatbotuit.id.vn/api/student/stu_menu", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -217,12 +217,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             ${student.gpa_diff != null ? (student.gpa_diff > 0 ? '+' : '') + student.gpa_diff : '-'}
                         </td>
                         <td class="text-center">
-                            <a class="text" href="https://uit-chatbot-orno.onrender.com/api/student/profile?student_id=${encodeURIComponent(student.student_id)}">
+                            <a class="text" href="https://chatbotuit.id.vn/api/student/profile?student_id=${encodeURIComponent(student.student_id)}">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                         </td>
                         <td class="text-center border-end">
-                            <a class="text" href="https://uit-chatbot-orno.onrender.com/api/student/academicstatistic?student_id=${encodeURIComponent(student.student_id)}">
+                            <a class="text" href="https://chatbotuit.id.vn/api/student/academicstatistic?student_id=${encodeURIComponent(student.student_id)}">
                                 <i class="fas fa-chart-line"></i>
                             </a>
                         </td>

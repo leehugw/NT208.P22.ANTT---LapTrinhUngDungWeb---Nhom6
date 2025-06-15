@@ -10,7 +10,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://uit-chatbot-orno.onrender.com/api/auth/google/callback",
+  callbackURL: "https://chatbotuit.id.vn/api/auth/google/callback",
 }, async (accessToken, refreshToken, profile, done) => {
   const email = profile.emails[0].value;
   const googleId = profile.id;
