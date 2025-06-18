@@ -34,7 +34,19 @@ app.use('/auth', authRoutes);
 // Serve static files
 const frontendPath = path.join(__dirname, '../FrontEnd');
 app.use(express.static(frontendPath));
+
+// Serve static files for public directory
 app.use(express.static('public'));
+// --- Fix MIME type for sitemap.xml ---
+app.get('/sitemap.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
+// --- Fix MIME type for robots.txt ---
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.sendFile(path.join(__dirname, 'public', 'robots.txt'));
+});
 
 // Serve role-based menus
 app.use('/student/menu', express.static(path.join(__dirname, '../FrontEnd/Student_Menu')));
