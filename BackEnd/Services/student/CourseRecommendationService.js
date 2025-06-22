@@ -163,7 +163,7 @@ async function checkPrerequisites(courseIds, passedCourses) {
 
 //Tính toán mức độ khó của môn học dựa trên điểm trung bình
 async function calculateCourseDifficulty(courseIds) {
-    const scoresData = await Score.aggregate([
+     const scoresData = await Score.aggregate([
         { $match: { subject_id: { $in: courseIds } } },
         {
             $group: {
@@ -173,7 +173,14 @@ async function calculateCourseDifficulty(courseIds) {
                         $cond: [
                             { $eq: ["$score_HP", "Miễn"] },
                             10,
-                            { $toDouble: "$score_HP" }
+                            {
+                                $convert: {
+                                    input: "$score_HP",
+                                    to: "double",
+                                    onError: null,
+                                    onNull: null
+                                }
+                            }
                         ]
                     }
                 },

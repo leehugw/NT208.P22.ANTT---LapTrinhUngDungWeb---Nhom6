@@ -734,7 +734,7 @@ const token = localStorage.getItem('token');
 // Sau khi đã parse xong dữ liệu Excel
 async function sendToOptimizeSchedule(classList) {
     try {
-        
+        console.log("🔍 classList to be sent:", classList);
         const response = await fetch('/api/student/schedule-optimize-data', {
             method: 'POST',
             headers: {
