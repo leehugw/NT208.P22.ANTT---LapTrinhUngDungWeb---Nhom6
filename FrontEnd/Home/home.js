@@ -75,3 +75,27 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('login-daa-btn').onclick = function() {
     window.location.href = '/api/student/crawl'; // đường dẫn này sẽ chạy luôn trên trình duyệt
 };
+
+function openFeedbackPopup() {
+    if (document.getElementById('feedbackPopup')) {
+        document.getElementById('feedbackPopup').style.display = 'flex';
+        return;
+    }
+
+    fetch('/FeedbackForm/feedbackForm.html')
+        .then(res => res.text())
+        .then(html => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+
+            const script = document.createElement('script');
+            script.src = '/FeedbackForm/Feedback.js';
+            document.body.appendChild(script);
+        });
+
+    window.closeFeedbackForm = function () {
+        const popup = document.getElementById('feedbackPopup');
+        if (popup) popup.remove();
+    };
+}
