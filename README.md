@@ -2,25 +2,28 @@
 
 ---
 
-## 🤖 Chatbot UIT - Hỗ trợ Học tập
+## 🤖 UIT Chatbot - Trợ Lý Ảo Sinh Viên UIT     
 
 ---
 
 ### 📋 Mô tả
-**Chatbot UIT** là hệ thống hỗ trợ học tập trực tuyến, đóng vai trò chính là cung cấp thông tin, trả lời các câu hỏi cơ bản, đồng thời hỗ trợ quản lý học tập cho sinh viên, giảng viên và quản trị viên.  
-Mục tiêu dự án là nâng cao trải nghiệm người dùng, giúp việc quản lý và theo dõi tiến độ học tập trở nên thuận tiện và hiệu quả hơn.
+**UIT Chatbot** là hệ thống hỗ trợ học tập trực tuyến, đóng vai trò chính là cung cấp thông tin, trả lời các câu hỏi cơ bản, đồng thời hỗ trợ quản lý học tập cho sinh viên, giảng viên và quản trị viên.  
 
 ---
+### 📎 Liên kết liên quan
+- Link github: https://github.com/leehugw/NT208.P22.ANTT---LapTrinhUngDungWeb---Nhom6
+- Link phỏng vấn: https://drive.google.com/drive/folders/1A7zBmJWboaCbpEPWSTx2kR_WJhfrD_Pu
+- Link video demo tất cả chức năng: https://drive.google.com/drive/folders/1A7zBmJWboaCbpEPWSTx2kR_WJhfrD_Pu
 
+---
 ### 👥 Thành viên nhóm
 
-| Họ và Tên             | MSSV     |
-|-----------------------|----------|
-| Trần Thị Phương Linh  | 23520851 |
-| Võ Nguyễn Ngọc Thùy   | 23521561 |
-| Nguyễn Lê Hưng        | 23520567 |
-| Nguyễn Viết Khang     | 23520700 |
-| Hà Ngọc Ái Trinh      | 23521660 |
+| Họ và Tên             | MSSV     |             |
+|-----------------------|----------|------------ |
+| Trần Thị Phương Linh  | 23520851 | Nhóm trưởng |
+| Võ Nguyễn Ngọc Thùy   | 23521561 | Thành viên  |
+| Nguyễn Lê Hưng        | 23520567 | Thành viên  |
+| Nguyễn Viết Khang     | 23520700 | Thành viên  |
 
 ---
 
@@ -35,35 +38,36 @@ Mục tiêu dự án là nâng cao trải nghiệm người dùng, giúp việc 
 
 #### *2. Giảng viên (Lecturer)*
 
-##### Giảng viên bộ môn:
-- Nhập điểm cho sinh viên trong các môn học phụ trách.
-
 ##### Cố vấn học tập:
-- Theo dõi tổng quan kết quả học tập của sinh viên được cố vấn.
-- Theo dõi chứng chỉ Anh văn và các chứng chỉ khác (nếu có).
-- Hỗ trợ sinh viên qua việc theo dõi và tư vấn học tập.
+- Xem hồ sơ bản thân
+- Theo dõi tổng quan kết quả học tập của sinh viên được cố vấn (Sắp xếp sinh viên theo GPA tăng dần, giảm dần, chênh lệch điểm các kì, ...).
+- Theo dõi chứng chỉ Anh văn.
+- Theo dõi thông tin và chi tiết tiến độ học tập của sinh viên
 
 #### *3. Sinh viên (Student)*
+- Đăng nhập qua daa.
 - Tạo lịch học tối ưu, sắp xếp thời khóa biểu cho kỳ học tiếp theo.
 - Xem gợi ý môn học phù hợp dựa trên kết quả học tập.
-- Tra cứu thông tin học tập, điểm số và lịch học.
-
+- Tra cứu thông tin cá nhân, thông tin tiến độ học tập, điểm số lấy từ web trường.
+- Nộp chứng chỉ anh văn
+- Sử dụng chatbot hỗ trợ cung cấp thông tin.
 ---
 
 ### 🤖 Chatbot hỗ trợ
 - Giải đáp các câu hỏi, thông tin cơ bản liên quan đến học tập.
 - Được tích hợp trực tiếp trên giao diện web, giúp sinh viên nhanh chóng tìm kiếm thông tin cần thiết.
+- Đưa ra các phương pháp cải thiện điểm cho sinh viên.
 
 ---
 
 ### 🛠️ Công nghệ sử dụng
 
-| Thành phần  | Công nghệ                       |
-|-------------|--------------------------------|
+| Thành phần  | Công nghệ                        |
+|-------------|----------------------------------|
 | Frontend    | HTML, CSS, Bootstrap, JavaScript |
-| Backend     | Node.js với Express.js          |
-| Database    | MongoDB                        |
-| Chatbot     | Hugging Face                   |
+| Backend     | Node.js với Express.js           |
+| Database    | MongoDB                          |
+| Chatbot     | Ollama                           |
 
 ---
 ### 📫 Liên hệ
