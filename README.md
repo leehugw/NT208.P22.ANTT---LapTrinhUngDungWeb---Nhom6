@@ -12,7 +12,7 @@
 ---
 ### 📎 Liên kết liên quan
 - Link github: https://github.com/leehugw/NT208.P22.ANTT---LapTrinhUngDungWeb---Nhom6
-- Link phỏng vấn: https://drive.google.com/drive/folders/1A7zBmJWboaCbpEPWSTx2kR_WJhfrD_Pu
+- Link phỏng vấn: https://drive.google.com/drive/folders/1A7zBmJWboaCbpEPWSTx2kR_WJhfrD_Pu + https://www.tiktok.com/@bleen_38katrin/video/7519168412912798994?lang=en
 - Link video demo tất cả chức năng: https://drive.google.com/drive/folders/1A7zBmJWboaCbpEPWSTx2kR_WJhfrD_Pu
 
 ---
